@@ -31,7 +31,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-PluginInstall 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -156,12 +157,12 @@ func SetTitle()
 
         call append(line(".")+1, "\# Author: Feng") 
 
-        call append(line(".")+2, "\# Content: Todo...") 
+        call append(line(".")+2, "\# Content: ") 
 
-        "张鹏  原来的时间形式比较复杂，不喜欢，改变一下
+        "原来的时间形式比较复杂，不喜欢，改变一下
 
-        "call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
-        call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))
+        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        "call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))
 
         call append(line(".")+4, "\#########################################################################") 
 
@@ -177,11 +178,11 @@ func SetTitle()
 
         call append(line(".")+1, "    > Author: Feng") 
 
-        call append(line(".")+2, "    > Content: Todo...") 
+        call append(line(".")+2, "    > Content: ") 
 
         " 同样的 改变时间格式
-        "call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
-        call append(line(".")+3, "    > Created Time: ".strftime("%Y-%m-%d",localtime()))
+        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
+        "call append(line(".")+3, "    > Created Time: ".strftime("%Y-%m-%d",localtime()))
 
         call append(line(".")+4, " ************************************************************************/") 
 
@@ -193,9 +194,11 @@ func SetTitle()
 
         call append(line(".")+6, "#include <iostream>")
 
-        call append(line(".")+7, "using namespace std;")
+        call append(line(".")+7, "")
 
-        call append(line(".")+8, "")
+        call append(line(".")+8, "using namespace std;")
+
+        call append(line(".")+9, "")
 
     endif
 
@@ -223,8 +226,10 @@ func SetPythonTitle()
     call append(line(".")+1," ")
     call append(line(".")+2, "\# File Name: ".expand("%")) 
     call append(line(".")+3, "\# Author: Feng") 
-    call append(line(".")+4, "\# Content: Todo...") 
-    call append(line(".")+5, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))    
+    call append(line(".")+4, "\# Content: ") 
+	call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+    "call append(line(".")+5, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))    
+    autocmd BufNewFile * normal G
 endfunc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -283,16 +288,30 @@ func! CompileRunGcc()
     exec "w"
 
     if &filetype == 'c'
+		"先删除上次编译的执行文件"
+		if filereadable(expand("%<"))
+		    exec "!rm %<"
+		endif
 
         exec "!gcc % -o %<"
 
-        exec "! ./%<"
+		"如果编译成功了有了可执行文件才运行"
+		if filereadable(expand("%<"))
+            exec "! ./%<"
+		endif
 
     elseif &filetype == 'cpp'
+		"先删除上次编译的执行文件"
+		if filereadable(expand("%<"))
+		    exec "!rm %<"
+		endif
 
         exec "!g++ -std=c++11 % -o %<"
-
-        exec "! ./%<"
+		
+		"如果编译成功了有了可执行文件才运行"
+		if filereadable(expand("%<"))
+            exec "! ./%<"
+		endif
 
     elseif &filetype == 'java'
 
@@ -317,8 +336,10 @@ func! Rungdb()
     exec "w"
 
     exec "!g++ -std=c++11 % -g -o %<"
-
-    exec "!gdb ./%<"
+	"如果编译成功了有了可执行文件才调试"
+	if filereadable(expand("%<"))
+        exec "!gdb ./%<"
+	endif
 
 endfunc
 
@@ -362,7 +383,7 @@ set autowrite
 
 set ruler                   " 打开状态栏标尺
 
-set cursorline              " 突出显示当前行
+"set cursorline              " 突出显示当前行
 
 set magic                   " 设置魔术
 
@@ -660,3 +681,27 @@ if has("autocmd")
       \   exe "normal g`\"" |
       \ endif
 endif " has("autocmd")
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_min_num_of_chars_for_completion = 3 
+let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_complete_in_comments = 1
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" 比较喜欢用tab来选择补全...
+function! MyTabFunction ()
+    let line = getline('.')
+    let substr = strpart(line, -1, col('.')+1)
+    let substr = matchstr(substr, "[^ \t]*$")
+    if strlen(substr) == 0
+        return "\<tab>"
+    endif
+    return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+endfunction
+inoremap <tab> <c-r>=MyTabFunction()<cr>
+
+
+setlocal omnifunc=tern#Complete
+call tern#Enable()

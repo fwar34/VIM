@@ -226,9 +226,9 @@ func SetPythonTitle()
     call append(line(".")+1," ")
     call append(line(".")+2, "\# File Name: ".expand("%")) 
     call append(line(".")+3, "\# Author: Feng") 
-    call append(line(".")+4, "\# Content: ") 
-	call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+	call append(line(".")+4, "\# Created Time: ".strftime("%c"))
     "call append(line(".")+5, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))    
+    call append(line(".")+5, "\# Content: ") 
     autocmd BufNewFile * normal G
 endfunc
 

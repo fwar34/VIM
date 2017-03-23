@@ -156,13 +156,13 @@ func SetTitle()
         call append(line("."), "\# File Name: ".expand("%")) 
 
         call append(line(".")+1, "\# Author: Feng") 
-
-        call append(line(".")+2, "\# Content: ") 
-
         "原来的时间形式比较复杂，不喜欢，改变一下
 
-        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        call append(line(".")+2, "\# Created Time: ".strftime("%c")) 
         "call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))
+
+        call append(line(".")+3, "\# Content: ") 
+
 
         call append(line(".")+4, "\#########################################################################") 
 
@@ -177,12 +177,12 @@ func SetTitle()
         call append(line("."), "    > File Name: ".expand("%")) 
 
         call append(line(".")+1, "    > Author: Feng") 
-
-        call append(line(".")+2, "    > Content: ") 
-
         " 同样的 改变时间格式
-        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
+        call append(line(".")+2, "    > Created Time: ".strftime("%c")) 
         "call append(line(".")+3, "    > Created Time: ".strftime("%Y-%m-%d",localtime()))
+
+        call append(line(".")+3, "    > Content: ") 
+
 
         call append(line(".")+4, " ************************************************************************/") 
 
@@ -221,7 +221,7 @@ endfunc
 autocmd BufNewFile *py exec ":call SetPythonTitle()"
 
 func SetPythonTitle()
-    call setline(1,"#!/usr/bin/env python")
+    call setline(1,"#!/usr/bin/env python3")
     call append( line("."),"#-*- coding: utf-8 -*-" )
     call append(line(".")+1," ")
     call append(line(".")+2, "\# File Name: ".expand("%")) 
@@ -290,7 +290,7 @@ func! CompileRunGcc()
     if &filetype == 'c'
 		"先删除上次编译的执行文件"
 		if filereadable(expand("%<"))
-		    exec "!rm %<"
+		    silent exec "!rm %<"
 		endif
 
         exec "!gcc % -o %<"
@@ -303,7 +303,7 @@ func! CompileRunGcc()
     elseif &filetype == 'cpp'
 		"先删除上次编译的执行文件"
 		if filereadable(expand("%<"))
-		    exec "!rm %<"
+		    silent exec "!rm %<"
 		endif
 
         exec "!g++ -std=c++11 % -o %<"
@@ -322,6 +322,10 @@ func! CompileRunGcc()
     elseif &filetype == 'sh'
 
         :!./%
+		
+    elseif &filetype == 'python'
+		
+        exec "!python3 %"
 
     endif
 
@@ -703,5 +707,5 @@ endfunction
 inoremap <tab> <c-r>=MyTabFunction()<cr>
 
 
-setlocal omnifunc=tern#Complete
-call tern#Enable()
+""setlocal omnifunc=tern#Complete
+""call tern#Enable()

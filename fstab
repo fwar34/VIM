@@ -1,0 +1,16 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# /dev/sdb5
+UUID=3d78cc73-b14d-4fc8-82f6-4b655822fd6a	/         	ext4      	rw,relatime,data=ordered	0 1
+
+# /dev/sdb6
+UUID=371b1790-8876-43e3-a8e7-b919518a4103	none      	swap      	defaults  	0 0
+
+/dev/sda1 /media/sda1 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0
+/dev/sdb1 /media/sdb1 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0
+/dev/sdb5 /media/sdb5 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0
+/dev/sdb6 /media/sdb6 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0
+/dev/sdb7 /media/sdb7 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0
+/dev/sdb8 /media/sdb8 ntfs-3g rw,auto,async,iocharset=utf8,noatime 0 0

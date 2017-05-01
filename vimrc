@@ -69,7 +69,7 @@ set go=             " 不要图形按钮
 
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
 
-"syntax on           " 语法高亮  
+syntax on           " 语法高亮  
 
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 
@@ -413,7 +413,7 @@ set nocompatible
 
 " 语法高亮
 
-set syntax=on
+"set syntax=on
 
 " 去掉输入错误的提示声音
 
@@ -710,5 +710,8 @@ inoremap <tab> <c-r>=MyTabFunction()<cr>
 ""setlocal omnifunc=tern#Complete
 ""call tern#Enable()
 
-PS1='\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
+""PS1='\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
 
+"""hi comment ctermfg=6
+""hi comment ctermfg=blue
+hi comment ctermfg=green

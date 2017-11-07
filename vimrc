@@ -24,28 +24,28 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin(‘~/some/path/here‘)
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'marijnh/tern_for_vim'
+"Plugin 'VundleVim/Vundle.vim'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'marijnh/tern_for_vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+"call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
-let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
-let g:ycm_server_python_interpreter='/usr/bin/python'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
+"let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
+"let g:ycm_server_python_interpreter='/usr/bin/python'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -91,9 +91,9 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 
 set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
 
-set foldenable      " 允许折叠  
+"set foldenable      " 允许折叠  
 
-set foldmethod=manual   " 手动折叠  
+"set foldmethod=manual   " 手动折叠  
 
 "set background=dark "背景使用黑色 
 
@@ -111,7 +111,7 @@ endif
 
 " 设置配色方案
 
-"colorscheme murphy
+"colorscheme codeschool
 
 "字体 
 
@@ -237,13 +237,9 @@ endfunc
 "键盘命令
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
 nmap <leader>w :w!<cr>
 
 nmap <leader>f :find<cr>
-
 
 
 " 映射全选+复制 ctrl+a
@@ -437,11 +433,11 @@ set cindent
 
 " 不要用空格代替制表符
 
-set noexpandtab
+"set noexpandtab
 
 " 在行和段开始处使用制表符
 
-set smarttab
+"set smarttab
 
 " 历史记录数
 
@@ -712,6 +708,11 @@ inoremap <tab> <c-r>=MyTabFunction()<cr>
 
 ""PS1='\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
 
-"""hi comment ctermfg=6
+""hi comment ctermfg=6
 ""hi comment ctermfg=blue
-hi comment ctermfg=green
+""hi comment ctermfg=green
+
+
+" 设置配色方案
+set t_Co=256
+colorscheme codeschool

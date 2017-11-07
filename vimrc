@@ -248,7 +248,7 @@ map <C-A> ggVGY
 
 map! <C-A> <Esc>ggVGY
 
-map <F12> gg=G
+map <F12> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
 
 " 选中状态下 Ctrl+c 复制
 
@@ -256,7 +256,7 @@ vmap <C-c> "+y
 
 "去空行  
 
-nnoremap <F2> :g/^\s*$/d<CR> 
+"nnoremap <F2> :g/^\s*$/d<CR>
 
 "比较文件  
 

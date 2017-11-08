@@ -91,6 +91,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 
 set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
 
+set nofoldenable    "不许折叠
+
 "set foldenable      " 允许折叠  
 
 "set foldmethod=manual   " 手动折叠  
@@ -237,22 +239,26 @@ endfunc
 "键盘命令
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>w :w!<cr>
+""nmap <leader>w :w!<cr>
 
-nmap <leader>f :find<cr>
+""nmap <leader>f :find<cr>
+
+" C+]显示列表
+""map <C-]> :ts<cr>
 
 
 " 映射全选+复制 ctrl+a
 
-map <C-A> ggVGY
+""map <C-A> ggVGY
 
-map! <C-A> <Esc>ggVGY
+""map! <C-A> <Esc>ggVGY
 
-map <F12> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
+""map <F12> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
+map <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .
 
 " 选中状态下 Ctrl+c 复制
 
-vmap <C-c> "+y
+""vmap <C-c> "+y
 
 "去空行  
 
@@ -260,11 +266,11 @@ vmap <C-c> "+y
 
 "比较文件  
 
-nnoremap <C-F2> :vert diffsplit 
+""nnoremap <C-F2> :vert diffsplit 
 
 "新建标签  
 
-map <M-F2> :tabnew<CR>  
+""map <M-F2> :tabnew<CR>  
 
 "列出当前目录文件  
 
@@ -272,8 +278,8 @@ map <F3> :tabnew .<CR>
 
 "打开树状文件目录  
 
-map <C-F3> \be  
-:autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
+""map <C-F3> \be  
+"":autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
 
 "C，C++ 按F5编译运行
 
@@ -401,7 +407,6 @@ set foldmethod=indent
 
 set foldlevel=3 
 
-set foldenable              " 开始折叠
 
 " 不要使用vi的键盘模式，而是vim自己的
 
@@ -451,7 +456,7 @@ set noswapfile
 
 "搜索忽略大小写
 
-set ignorecase
+""set ignorecase
 
 "搜索逐字符高亮
 

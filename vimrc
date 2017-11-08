@@ -720,4 +720,7 @@ inoremap <tab> <c-r>=MyTabFunction()<cr>
 
 " 设置配色方案
 set t_Co=256
-colorscheme codeschool
+""colorscheme codeschool
+colorscheme wombat256
+""colorscheme morning
+""colorscheme torte

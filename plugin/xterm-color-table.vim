@@ -6,7 +6,7 @@
 "  (_/                       (______)               (_/
 "
 "                                                 guns <self@sungpae.com>
-
+"使用方法: 命令模式":Xt"
 " Version:  1.6
 " License:  MIT
 " Homepage: http://github.com/guns/xterm-color-table.vim

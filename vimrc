@@ -252,7 +252,7 @@ endfunc
 ""map <C-A> ggVGY
 
 ""map! <C-A> <Esc>ggVGY
-
+"编辑模式移动光标"
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>

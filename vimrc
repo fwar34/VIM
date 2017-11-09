@@ -253,6 +253,11 @@ endfunc
 
 ""map! <C-A> <Esc>ggVGY
 
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
 map <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files
 map <F7> :!cscope -Rbp -i cscope.files
 map <F9> :cs add cscope.out

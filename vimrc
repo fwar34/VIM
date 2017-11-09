@@ -253,7 +253,8 @@ endfunc
 
 ""map! <C-A> <Esc>ggVGY
 
-""map <F12> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
+map <F10> :!ctags -R .
+map <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
 map <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .
 
 " 选中状态下 Ctrl+c 复制

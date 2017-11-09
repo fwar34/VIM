@@ -2,7 +2,8 @@
 # File Name: cp.sh
 # Author: Feng
 # Created Time: Thu 09 Nov 2017 01:03:28 PM CST
-# Content: 
+# Content: ./cp.sh (push|pull) 必须在VIM目录执行
+#		  拷贝vim的配置到VIM目录，或者从VIM目录拷贝vim配置文件到用户目录
 #########################################################################
 #!/bin/bash
 

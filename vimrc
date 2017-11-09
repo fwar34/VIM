@@ -2,7 +2,7 @@
 " 额外添加了 ctags， YouCompleteMe等
 "  主要特点 
 
-"1.按F5可以直接编译并执行C、C++、java代码以及执行shell脚本，按“F8”可进行C、C++代码的调试
+"1.按F5可以直接编译并执行C、C++、java代码以及执行shell脚本，按“F4”可进行C、C++代码的调试
 "2.自动插入文件头 ，新建C、C++源文件时自动插入表头：包括文件名、作者、联系方式、建立时间等，读者可根据需求自行更改
 "3.映射“Ctrl + A”为全选并复制快捷键，方便复制代码
 "4.按“F2”可以直接消除代码中的空行
@@ -253,6 +253,10 @@ endfunc
 
 ""map! <C-A> <Esc>ggVGY
 
+map <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files
+map <F7> :!cscope -Rbp -i cscope.files
+map <F9> :cs add cscope.out
+
 map <F10> :!ctags -R .
 map <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
 map <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .
@@ -336,7 +340,7 @@ endfunc
 
 "C,C++的调试
 
-map <F8> :call Rungdb()<CR>
+	map <F4> :call Rungdb()<CR>
 
 func! Rungdb()
 
@@ -725,3 +729,13 @@ set t_Co=256
 colorscheme wombat256
 ""colorscheme morning
 ""colorscheme torte
+
+
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>

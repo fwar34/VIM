@@ -42,9 +42,17 @@ pull()
 	cp ./colors/codeschool.vim ~/.vim/colors/
 }
 
+if [ $# -eq 0 ]
+#if [ -z $1 ]
+then
+	echo "use ./cp.sh (push|pull)"
+	exit
+fi
+
 if [ $1 == "push" ]
 then
 	push
-else
+elif [ $1 == "pull" ]
+then
 	pull
 fi

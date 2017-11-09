@@ -55,4 +55,6 @@ then
 elif [ $1 == "pull" ]
 then
 	pull
+else
+	echo "use ./cp.sh (push|pull)"
 fi

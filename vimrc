@@ -252,11 +252,11 @@ endfunc
 ""map <C-A> ggVGY
 
 ""map! <C-A> <Esc>ggVGY
-"编辑模式移动光标"
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+"编辑模式移动光标,C-h和退格键冲突"
+""inoremap <C-h> <Left>
+""inoremap <C-j> <Down>
+""inoremap <C-k> <Up>
+""inoremap <C-l> <Right>
 
 map <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files
 map <F7> :!cscope -Rbq -i cscope.files

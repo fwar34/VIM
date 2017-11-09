@@ -253,10 +253,10 @@ endfunc
 
 ""map! <C-A> <Esc>ggVGY
 "编辑模式移动光标,C-h和退格键冲突"
-""inoremap <C-h> <Left>
-""inoremap <C-j> <Down>
-""inoremap <C-k> <Up>
-""inoremap <C-l> <Right>
+"inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 map <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files
 map <F7> :!cscope -Rbq -i cscope.files
@@ -573,23 +573,23 @@ au BufRead,BufNewFile *  setfiletype txt
 
 "自动补全
 
-:inoremap ( ()<ESC>i
+"":inoremap ( ()<ESC>i
 
-:inoremap ) <c-r>=ClosePair(')')<CR>
+"":inoremap ) <c-r>=ClosePair(')')<CR>
 
 "by Suzzz：  原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是OK的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种。只是补全，然后光标在左右括号中间。
 ":inoremap { {<CR>}<ESC>O
-:inoremap { {}<ESC>i
+"":inoremap { {}<ESC>i
 
-:inoremap } <c-r>=ClosePair('}')<CR>
+"":inoremap } <c-r>=ClosePair('}')<CR>
 
-:inoremap [ []<ESC>i
+"":inoremap [ []<ESC>i
 
-:inoremap ] <c-r>=ClosePair(']')<CR>
+"":inoremap ] <c-r>=ClosePair(']')<CR>
 
-:inoremap " ""<ESC>i
+"":inoremap " ""<ESC>i
 
-:inoremap ' ''<ESC>i
+"":inoremap ' ''<ESC>i
 
 function! ClosePair(char)
 

@@ -437,7 +437,7 @@ set confirm
 " 自动缩进
 
 set autoindent
-set smartindent    "智能的选择对起方式；
+"set smartindent    "智能的选择对起方式；
 " Tab键的宽度
 set tabstop=4
 " 统一缩进为4
@@ -445,6 +445,7 @@ set softtabstop=4
 set shiftwidth=4
 
 set cindent
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 
 " 不要用空格代替制表符
 
@@ -747,3 +748,4 @@ nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+

@@ -450,6 +450,9 @@ set cindent
 
 "set noexpandtab
 
+" 用空格代替制表符
+set expandtab
+
 " 在行和段开始处使用制表符
 
 "set smarttab

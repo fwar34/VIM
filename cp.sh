@@ -14,6 +14,10 @@ push()
 	cp ~/.vim/syntax/cpp.vim ./syntax/
 	cp ~/.vim/colors/wombat256.vim ./colors/
 	cp ~/.vim/colors/codeschool.vim ./colors/
+    if [ -f "~/.gitconfig" ]
+    then
+        cp ~/.gitconfig ./git/gitconfig
+    fi
 }
 
 pull()
@@ -40,6 +44,11 @@ pull()
 	cp ./syntax/cpp.vim ~/.vim/syntax/
 	cp ./colors/wombat256.vim ~/.vim/colors/
 	cp ./colors/codeschool.vim ~/.vim/colors/
+    if [ -f "~/.gitconfig" ]
+    then
+        cp ~/.gitconfig ~/.gitconfig.bak
+    fi
+    cp ./git/gitconfig ~/.gitconfig
 }
 
 if [ $# -eq 0 ]

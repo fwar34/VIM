@@ -99,7 +99,6 @@ set nofoldenable    "不许折叠
 
 "set background=dark "背景使用黑色 
 
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
 
 " 显示中文帮助
 
@@ -399,7 +398,7 @@ set autowrite
 
 set ruler                   " 打开状态栏标尺
 
-"set cursorline              " 突出显示当前行
+set cursorline              " 突出显示当前行
 
 set magic                   " 设置魔术
 
@@ -417,14 +416,6 @@ set foldmethod=indent
 
 set foldlevel=3 
 
-
-" 不要使用vi的键盘模式，而是vim自己的
-
-set nocompatible
-
-" 语法高亮
-
-"set syntax=on
 
 " 去掉输入错误的提示声音
 
@@ -445,11 +436,11 @@ set softtabstop=4
 set shiftwidth=4
 
 set cindent
-set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+"set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 
 " 不要用空格代替制表符
 
-"set noexpandtab
+set noexpandtab
 
 " 用空格代替制表符
 set expandtab

@@ -437,7 +437,7 @@ set confirm
 " 自动缩进
 
 set autoindent
-"set smartindent    "智能的选择对起方式；
+set smartindent    "智能的选择对起方式；
 " Tab键的宽度
 set tabstop=4
 " 统一缩进为4
@@ -456,7 +456,7 @@ set expandtab
 
 " 在行和段开始处使用制表符
 
-"set smarttab
+set smarttab
 
 " 历史记录数
 

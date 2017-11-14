@@ -434,9 +434,10 @@ set tabstop=4
 " 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
-
+set ruler
 set cindent
 "set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set cinoptions=g0
 
 " 不要用空格代替制表符
 

@@ -243,7 +243,8 @@ endfunc
 ""nmap <leader>f :find<cr>
 
 " C+]显示列表
-""map <C-]> :ts<cr>
+"map <C-]> :ts<CR>
+map <C-]> g<C-]>
 
 
 " 映射全选+复制 ctrl+a
@@ -253,12 +254,13 @@ endfunc
 ""map! <C-A> <Esc>ggVGY
 "编辑模式移动光标,C-h和退格键冲突"
 "inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
+"inoremap <C-j> <Down>
+"inoremap <C-k> <Up>
+"inoremap <C-l> <Right>
 
 map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
-"map <silent> <F7> :!cscope -Rbq -i cscope.files
+"map <F2> :ls<CR>
+map <C-l> :ls<CR>
 "map <silent> <F9> :cs add cscope.out
 
 map <silent> <F10> :!ctags -R .<CR><CR>

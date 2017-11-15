@@ -257,7 +257,8 @@ map <C-]> g<C-]>
 "inoremap <C-j> <Down>
 "inoremap <C-k> <Up>
 "inoremap <C-l> <Right>
-
+"9定位到行尾
+map 9 $
 map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 map <C-l> :ls<CR>

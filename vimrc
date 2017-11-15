@@ -257,13 +257,13 @@ inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
-map <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files
-map <F7> :!cscope -Rbq -i cscope.files
-map <F9> :cs add cscope.out
+map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
+"map <silent> <F7> :!cscope -Rbq -i cscope.files
+"map <silent> <F9> :cs add cscope.out
 
-map <F10> :!ctags -R .
-map <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .
-map <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .
+map <silent> <F10> :!ctags -R .<CR><CR>
+map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
+map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .<CR><CR>
 
 " 选中状态下 Ctrl+c 复制
 
@@ -434,10 +434,9 @@ set tabstop=4
 " 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
-set ruler
 set cindent
 "set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
-set cinoptions=g0
+set cinoptions+=g0,(1s,:0
 
 " 不要用空格代替制表符
 

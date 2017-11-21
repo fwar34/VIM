@@ -258,7 +258,11 @@ map <C-]> g<C-]>
 "inoremap <C-k> <Up>
 "inoremap <C-l> <Right>
 "map <F1> :
-map <C-k> :
+"map <C-k> :
+map <Space> :
+"映射命令行模式C-k到:
+"cmap <C-k> :
+"omap <C-k> :
 map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 map <C-l> :ls<CR>

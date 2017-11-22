@@ -14,6 +14,8 @@ push()
 	cp ~/.vim/syntax/cpp.vim ./syntax/
 	cp ~/.vim/colors/wombat256.vim ./colors/
 	cp ~/.vim/colors/codeschool.vim ./colors/
+    cp ~/.vim/doc/taglist.txt ./doc/
+    cp ~/.vim/plugin/taglist.vim ./plugin/
     if [ -f ~/.gitconfig ]
     then
         cp ~/.gitconfig ./git/gitconfig
@@ -35,15 +37,29 @@ pull()
 		then
 			mkdir -p ~/.vim/colors
 		fi
+
+		if [ ! -d ~/.vim/doc ]
+		then
+			mkdir -p ~/.vim/doc
+		fi
+
+		if [ ! -d ~/.vim/plugin ]
+		then
+			mkdir -p ~/.vim/plugin
+		fi
 	else
 		mkdir -p ~/.vim/syntax
 		mkdir -p ~/.vim/colors
+        mkdir -p ~/.vim/doc
+        mkdir -p ~/.vim/plugin
 	fi
 
 	cp ./syntax/c.vim ~/.vim/syntax/
 	cp ./syntax/cpp.vim ~/.vim/syntax/
 	cp ./colors/wombat256.vim ~/.vim/colors/
 	cp ./colors/codeschool.vim ~/.vim/colors/
+    cp ./doc/taglist.txt ~/.vim/doc/
+    cp ./plugin/taglist.vim ~/.vim/plugin/
     if [ -f ~/.gitconfig ]
     then
         cp ~/.gitconfig ~/.gitconfig.bak

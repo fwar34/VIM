@@ -263,8 +263,19 @@ map <Space> :
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :
-map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
+"如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
+set tags=tags
+set autochdir 
+
+"在/usr/include和/tang/include中执行（sudo）cscope -Rbq
+map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out /usr/include/cscope.out /usr/include<CR>:cs add /tang/include/cscope.out /tang/include<CR>
 "map <F2> :ls<CR>
+"若要加入系统函数或全局变量的tag标签，则需执行：
+map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --fields=+S -R -f ~/.vim/systags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --fields=+lS -R -f ~/.vim/tangtags /tang/include<CR>:set tags+=~/.vim/systags<CR>:set tags+=~/.vim/tangtags<CR>
+"并且在~/.vimrc中添加（亦可用上面描述的手动加入的方式）：
+set tags+=~/.vim/systags
+set tags+=~/.vim/tangtags
+
 map <C-l> :ls<CR>
 "map <silent> <F9> :cs add cscope.out
 
@@ -637,11 +648,6 @@ let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
 
 ""let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
 
-"设置tags  
-
-set tags=tags  
-
-"set autochdir 
 
 
 

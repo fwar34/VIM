@@ -14,7 +14,12 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 
-
+let mapleader = ","
+"let mapleader = "\<Space>"
+"
+"a.vim .cpp和.h之间切换，:A
+"如果cpp没有。h文件的话不切换
+let g:alternateNonDefaultAlternate=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大
@@ -393,7 +398,7 @@ autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 
 "代码补全 
 
-set completeopt=preview,menu 
+set completeopt=longest,preview,menu 
 
 "允许插件  
 
@@ -675,6 +680,8 @@ let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
 
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
+"设置显示标签列表子窗口的快捷键。速记：taglist
+nnoremap <Leader>tl :TlistToggle<CR> 
 
 " minibufexpl插件的一般设置
 

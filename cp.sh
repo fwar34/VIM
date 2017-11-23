@@ -83,6 +83,9 @@ pull()
     cp ./after/ftplugin/* ~/.vim/after/ftplugin/
     cp ./autoload/omni/common/* ~/.vim/autoload/omni/common/
     cp ./autoload/omni/cpp/* ~/.vim/autoload/omni/cpp/
+    cp ./plugin/a.vim ~/.vim/plugin/
+    cp ./autoload/a.vim ~/.vim/autoload/
+    cp ./doc/alternate.txt ~/.vim/doc/
     if [ -f ~/.gitconfig ]
     then
         cp ~/.gitconfig ~/.gitconfig.bak

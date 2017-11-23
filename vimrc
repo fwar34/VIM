@@ -283,8 +283,14 @@ set tags+=~/.vim/systags
 set tags+=~/.vim/tangtags
 
 map <C-l> :ls<CR>
-nnoremap <Leader>l :ls<CR> 
+nnoremap <Leader>l :ls<CR>
 map <Leader>w <C-w>
+"imap .<Space> <C-n>
+imap <Space>i <C-n>
+nnoremap <Leader>f <C-f>
+nnoremap <Leader>b <C-b>
+nnoremap <Leader>d <C-d>
+nnoremap <Leader>u <C-u>
 "map <silent> <F9> :cs add cscope.out
 
 map <silent> <F10> :!ctags -R .<CR><CR>

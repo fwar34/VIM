@@ -14,7 +14,7 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 
-let mapleader = ","
+let mapleader = "."
 "let mapleader = "\<Space>"
 "
 "a.vim .cpp和.h之间切换，:A
@@ -283,6 +283,8 @@ set tags+=~/.vim/systags
 set tags+=~/.vim/tangtags
 
 map <C-l> :ls<CR>
+nnoremap <Leader>l :ls<CR> 
+map <Leader>w <C-w>
 "map <silent> <F9> :cs add cscope.out
 
 map <silent> <F10> :!ctags -R .<CR><CR>

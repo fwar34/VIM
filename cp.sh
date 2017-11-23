@@ -16,6 +16,7 @@ push()
 	cp ~/.vim/colors/codeschool.vim ./colors/
     cp ~/.vim/doc/taglist.txt ./doc/
     cp ~/.vim/plugin/taglist.vim ./plugin/
+    cp ~/.vim/after/ftplugin/* ./after/ftplugin/
     if [ -f ~/.gitconfig ]
     then
         cp ~/.gitconfig ./git/gitconfig
@@ -47,11 +48,29 @@ pull()
 		then
 			mkdir -p ~/.vim/plugin
 		fi
+
+        if [ ! -d ~/.vim/after/ftplugin ]
+        then
+            mkdir -p ~/.vim/after/ftplugin
+        fi
+
+        if [ ! -d ~/.vim/autoload/omni/cpp ]
+        then
+            mkdir -p ~/.vim/autoload/omni/cpp
+        fi
+
+        if [ ! -d ~/.vim/autoload/omni/common ]
+        then
+            mkdir -p ~/.vim/autoload/omni/common
+        fi
 	else
 		mkdir -p ~/.vim/syntax
 		mkdir -p ~/.vim/colors
         mkdir -p ~/.vim/doc
         mkdir -p ~/.vim/plugin
+        mkdir -p ~/.vim/after/ftplugin
+        mkdir -p ~/.vim/autoload/omni/common
+        mkdir -p ~/.vim/autoload/omni/cpp
 	fi
 
 	cp ./syntax/c.vim ~/.vim/syntax/
@@ -59,7 +78,11 @@ pull()
 	cp ./colors/wombat256.vim ~/.vim/colors/
 	cp ./colors/codeschool.vim ~/.vim/colors/
     cp ./doc/taglist.txt ~/.vim/doc/
+    cp ./doc/omnicppcomplete.txt ~/.vim/doc/
     cp ./plugin/taglist.vim ~/.vim/plugin/
+    cp ./after/ftplugin/* ~/.vim/after/ftplugin/
+    cp ./autoload/omni/common/* ~/.vim/autoload/omni/common/
+    cp ./autoload/omni/cpp/* ~/.vim/autoload/omni/cpp/
     if [ -f ~/.gitconfig ]
     then
         cp ~/.gitconfig ~/.gitconfig.bak

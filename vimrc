@@ -714,11 +714,11 @@ filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "cd /tang/include/
-nmap <Leader><F10> :ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags<CR>
+nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags<CR>
 "cd到对应的c++目录后打开vi生成stdcpp.tags (例如/usr/include/c++/4.8)
-nmap <Leader><F11> :ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags<CR>
+nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags<CR>
 "cd /usr/include/
-nmap <Leader><F12> :ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags
+nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags
 " 引入 C++ 标准库 tags
 set tags+=~/.tags/stdcpp.tags
 set tags+=~/.tags/sys.tags

@@ -13,6 +13,10 @@
 "9. []、{}、()、""、‘ ‘等都自动补全   --- 如果需要{}做函数形式的补全（右括号自动换行，加一个空行，光标定位到空行，可以看下面的修改提示）
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
+" 让配置变更立即生效
+"autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" vim 自身命令行模式智能补全
+set wildmenu
 
 let mapleader = ";"
 "let mapleader = "\<Space>"
@@ -46,6 +50,8 @@ Plugin 'vim-scripts/tagbar'
 "前面介绍的主题风格对状态栏不起作用，需要借助插件
 "Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc
 Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+"vimdoc中文
+Plugin 'https://github.com/yianwillis/vimcdoc.git'
 Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "上图中 STL 容器模板类 unordered\_multimap 并未高亮，对滴，vim 对 C++
 "语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
@@ -53,7 +59,15 @@ Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
 Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "书签可视化
-Plugin 'https://github.com/kshenoy/vim-signature.git'
+"Plugin 'https://github.com/kshenoy/vim-signature.git'
+Plugin 'vim-scripts/indexer.tar.gz'
+Plugin 'vim-scripts/DfrankUtil'
+Plugin 'vim-scripts/vimprj'
+"""""""""""""
+Plugin 'derekwyatt/vim-protodef'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fholgado/minibufexpl.vim'
+
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
 
@@ -65,12 +79,49 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
-"let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
-"let g:ycm_server_python_interpreter='/usr/bin/python'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" >>
+" 营造专注气氛
+"
+" 禁止光标闪烁
+set gcr=a:block-blinkon0
+"
+" 禁止显示滚动条
+set guioptions-=l
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
+"
+" 禁止显示菜单和工具条
+set guioptions-=m
+set guioptions-=T
+"
+" 将外部命令 wmctrl 控制窗口最大化的命令行参数封装成一个 vim 的函数
+fun! ToggleFullscreen()
+  call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
+endf
+" 全屏开/关快捷键
+map <silent> <F11> :call ToggleFullscreen()<CR>
+"" 启动 vim 时自动全屏
+"autocmd VimEnter * call ToggleFullscreen()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置插件 indexer 调用 ctags 的参数
+" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
+" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
+let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+
+" 正向遍历同名标签
+nmap <Leader>tn :tnext<CR>
+" 反向遍历同名标签
+nmap <Leader>tp :tprevious<CR>
+"
+" 基于语义的代码导航
+"
+nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+" 只能是 #include 或已打开的文件
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
 """"""""""""" By  ma6174""""""""""""""""""""
 
@@ -303,10 +354,11 @@ set tags+=~/.vim/tangtags
 
 map <C-l> :ls<CR>
 nnoremap <Leader>l :ls<CR>
-map <Leader>w <C-w>
+map <Leader>w <C-w><C-w>
 nmap <Leader>6 <C-^>
 "imap .<Space> <C-n>
-imap ;c <C-n>
+imap <Leader>; <C-n>
+nnoremap <Leader>m %
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>
 nnoremap <Leader>d <C-d>
@@ -737,6 +789,9 @@ let g:SignatureMap = {
 " Tag list (ctags) 
 
 """""""""""""""""""""""""""""""" 
+"" 引入 C++ 标准库 tags
+"set tags+=/data/misc/software/app/vim/stdcpp.tags
+"set tags+=/data/misc/software/app/vim/sys.tags
 
 let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
 
@@ -828,14 +883,33 @@ if has("autocmd")
       \ endif
 endif " has("autocmd")
 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
+let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
+let g:ycm_server_python_interpreter='/usr/bin/python'
+"" 补全功能在注释中同样有效
+let g:ycm_complete_in_comments=1
 let g:ycm_min_num_of_chars_for_completion = 3 
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_complete_in_comments = 1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" 开启 YCM 标签补全引擎
+let g:ycm_collect_identifiers_from_tags_files=0
+"YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
+inoremap <leader>; <C-x><C-o>
+"
+" 补全内容不以分割子窗口形式出现，只显示补全列表
+set completeopt-=preview
+"
+" 从第一个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=1
+"
+" 禁止缓存匹配项，每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+"
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+
 " 比较喜欢用tab来选择补全...
 function! MyTabFunction ()
     let line = getline('.')
@@ -848,6 +922,10 @@ function! MyTabFunction ()
 endfunction
 inoremap <tab> <c-r>=MyTabFunction()<cr>
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Omni
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 ""setlocal omnifunc=tern#Complete
 ""call tern#Enable()
@@ -866,6 +944,57 @@ colorscheme wombat256
 ""colorscheme morning
 ""colorscheme torte
 
+" 成员函数的实现顺序与声明顺序一致
+let g:disable_protodef_sorting=1
+
+" <<
+"
+" >>
+" 工程文件浏览
+"
+" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
+nmap <Leader>fl :NERDTreeToggle<CR>
+" 设置 NERDTree 子窗口宽度
+let NERDTreeWinSize=22
+" 设置 NERDTree 子窗口位置
+let NERDTreeWinPos="right"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
+"
+" <<
+"
+" >>
+" 多文档编辑
+"  
+" 显示/隐藏 MiniBufExplorer 窗口
+map <Leader>bl :MBEToggle<cr>
+"
+" buffer 切换快捷键
+map <C-Tab> :MBEbn<cr>
+map <C-S-Tab> :MBEbp<cr>
+" <<
+"
+" >>
+" 环境恢复
+"
+" 设置环境保存项
+set sessionoptions="blank,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
+"
+" 保存 undo 历史。必须先行创建 .undo_history/
+set undodir=~/.undo_history/
+set undofile
+"
+" 保存快捷键
+"map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
+map <leader>ss :mksession! my.vim<cr>
+"
+" 恢复快捷键
+"map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
+map <leader>rs :source my.vim<cr>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>

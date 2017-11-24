@@ -105,7 +105,7 @@ fun! ToggleFullscreen()
   call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")
 endf
 " 全屏开/关快捷键
-map <silent> <F11> :call ToggleFullscreen()<CR>
+"map <silent> <F11> :call ToggleFullscreen()<CR>
 "" 启动 vim 时自动全屏
 "autocmd VimEnter * call ToggleFullscreen()
 
@@ -364,9 +364,9 @@ nnoremap <Leader>u <C-u>
 "map <silent> <F9> :cs add cscope.out
 
 map <silent> <F10> :!ctags -R .<CR><CR>
-map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
+"map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
+map <silent> <F11> :!ctags -R --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q .<CR><CR>
 map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .<CR><CR>
-
 " 选中状态下 Ctrl+c 复制
 
 ""vmap <C-c> "+y

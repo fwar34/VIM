@@ -286,8 +286,9 @@ set tags+=~/.vim/tangtags
 map <C-l> :ls<CR>
 nnoremap <Leader>l :ls<CR>
 map <Leader>w <C-w>
+nmap <Leader>6 <C-^>
 "imap .<Space> <C-n>
-imap <Space>i <C-n>
+imap ;c <C-n>
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>
 nnoremap <Leader>d <C-d>

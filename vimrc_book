@@ -2,7 +2,7 @@
 " 额外添加了 ctags， YouCompleteMe等
 "  主要特点 
 
-"1.按F5可以直接编译并执行C、C++、java代码以及执行shell脚本，按“F8”可进行C、C++代码的调试
+"1.按F5可以直接编译并执行C、C++、java代码以及执行shell脚本，按“F4”可进行C、C++代码的调试
 "2.自动插入文件头 ，新建C、C++源文件时自动插入表头：包括文件名、作者、联系方式、建立时间等，读者可根据需求自行更改
 "3.映射“Ctrl + A”为全选并复制快捷键，方便复制代码
 "4.按“F2”可以直接消除代码中的空行
@@ -14,7 +14,13 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 
-
+let mapleader = ";"
+"let mapleader = "\<Space>"
+"
+"a.vim .cpp和.h之间切换，:A
+"如果cpp没有。h文件的话不切换
+let g:alternateNonDefaultAlternate=1
+nmap <Leader>a :A<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大
@@ -31,8 +37,25 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'marijnh/tern_for_vim'
+Plugin 'fwar34/vim-color-wombat256'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/tagbar'
+"前面介绍的主题风格对状态栏不起作用，需要借助插件
+"Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc
+Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+Plugin 'https://github.com/altercation/vim-colors-solarized.git'
+"上图中 STL 容器模板类 unordered\_multimap 并未高亮，对滴，vim 对 C++
+"语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
+"vim-cpp-enhanced-highlight
+"Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
+"书签可视化
+Plugin 'https://github.com/kshenoy/vim-signature.git'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'marijnh/tern_for_vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -43,9 +66,9 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
-let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
-let g:ycm_server_python_interpreter='/usr/bin/python'
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
+"let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
+"let g:ycm_server_python_interpreter='/usr/bin/python'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -61,7 +84,7 @@ let g:ycm_server_python_interpreter='/usr/bin/python'
 
 "set lines=40 columns=155    " 设定窗口大小  
 
-"set number              " 显示行号  
+set number              " 显示行号  
 
 set go=             " 不要图形按钮  
 
@@ -69,7 +92,7 @@ set go=             " 不要图形按钮
 
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
 
-"syntax on           " 语法高亮  
+syntax on           " 语法高亮  
 
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 
@@ -91,13 +114,14 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 
 set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
 
-set foldenable      " 允许折叠  
+set nofoldenable    "不许折叠
 
-set foldmethod=manual   " 手动折叠  
+"set foldenable      " 允许折叠  
+
+"set foldmethod=manual   " 手动折叠  
 
 "set background=dark "背景使用黑色 
 
-set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
 
 " 显示中文帮助
 
@@ -111,7 +135,7 @@ endif
 
 " 设置配色方案
 
-"colorscheme murphy
+"colorscheme codeschool
 
 "字体 
 
@@ -156,13 +180,13 @@ func SetTitle()
         call append(line("."), "\# File Name: ".expand("%")) 
 
         call append(line(".")+1, "\# Author: Feng") 
-
-        call append(line(".")+2, "\# Content: ") 
-
         "原来的时间形式比较复杂，不喜欢，改变一下
 
-        call append(line(".")+3, "\# Created Time: ".strftime("%c")) 
+        call append(line(".")+2, "\# Created Time: ".strftime("%c")) 
         "call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))
+
+        call append(line(".")+3, "\# Content: ") 
+
 
         call append(line(".")+4, "\#########################################################################") 
 
@@ -177,12 +201,12 @@ func SetTitle()
         call append(line("."), "    > File Name: ".expand("%")) 
 
         call append(line(".")+1, "    > Author: Feng") 
-
-        call append(line(".")+2, "    > Content: ") 
-
         " 同样的 改变时间格式
-        call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
+        call append(line(".")+2, "    > Created Time: ".strftime("%c")) 
         "call append(line(".")+3, "    > Created Time: ".strftime("%Y-%m-%d",localtime()))
+
+        call append(line(".")+3, "    > Content: ") 
+
 
         call append(line(".")+4, " ************************************************************************/") 
 
@@ -226,9 +250,9 @@ func SetPythonTitle()
     call append(line(".")+1," ")
     call append(line(".")+2, "\# File Name: ".expand("%")) 
     call append(line(".")+3, "\# Author: Feng") 
-    call append(line(".")+4, "\# Content: ") 
-	call append(line(".")+3, "\# Created Time: ".strftime("%c"))
+	call append(line(".")+4, "\# Created Time: ".strftime("%c"))
     "call append(line(".")+5, "\# Created Time: ".strftime("%Y-%m-%d",localtime()))    
+    call append(line(".")+5, "\# Content: ") 
     autocmd BufNewFile * normal G
 endfunc
 
@@ -237,38 +261,77 @@ endfunc
 "键盘命令
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""nmap <leader>w :w!<cr>
 
+""nmap <leader>f :find<cr>
 
-
-nmap <leader>w :w!<cr>
-
-nmap <leader>f :find<cr>
-
+" C+]显示列表
+"map <C-]> :ts<CR>
+map <C-]> g<C-]>
+nnoremap <Leader>j g<C-]>
 
 
 " 映射全选+复制 ctrl+a
 
-map <C-A> ggVGY
+""map <C-A> ggVGY
 
-map! <C-A> <Esc>ggVGY
+""map! <C-A> <Esc>ggVGY
+"编辑模式移动光标,C-h和退格键冲突"
+"inoremap <C-h> <Left>
+"inoremap <C-j> <Down>
+"inoremap <C-k> <Up>
+"inoremap <C-l> <Right>
+"map <F1> :
+"map <C-k> :
+map <Space> :
+map <F7> :set tags+=
+"映射命令行模式C-k到:
+"cmap <C-k> :
+"omap <C-k> :
+"如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
+set tags=tags
+set autochdir 
 
-map <F12> gg=G
+"在/usr/include中执行cscope -Rbq -f ~/.vim/sys.out和/tang/include中执行cscope -Rbq -f ~/.vim/tang.out
+map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
+"map <F2> :ls<CR>
+"若要加入系统函数或全局变量的tag标签，则需执行：
+map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.vim/tangtags /tang/include<CR>:set tags+=~/.vim/systags<CR>:set tags+=~/.vim/tangtags<CR>
+"并且在~/.vimrc中添加（亦可用上面描述的手动加入的方式）：
+set tags+=~/.vim/systags
+set tags+=~/.vim/tangtags
+
+map <C-l> :ls<CR>
+nnoremap <Leader>l :ls<CR>
+map <Leader>w <C-w>
+nmap <Leader>6 <C-^>
+"imap .<Space> <C-n>
+imap ;c <C-n>
+nnoremap <Leader>f <C-f>
+nnoremap <Leader>b <C-b>
+nnoremap <Leader>d <C-d>
+nnoremap <Leader>u <C-u>
+"map <silent> <F9> :cs add cscope.out
+
+map <silent> <F10> :!ctags -R .<CR><CR>
+map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
+map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .<CR><CR>
 
 " 选中状态下 Ctrl+c 复制
 
-vmap <C-c> "+y
+""vmap <C-c> "+y
 
 "去空行  
 
-nnoremap <F2> :g/^\s*$/d<CR> 
+"nnoremap <F2> :g/^\s*$/d<CR>
 
 "比较文件  
 
-nnoremap <C-F2> :vert diffsplit 
+""nnoremap <C-F2> :vert diffsplit 
 
 "新建标签  
 
-map <M-F2> :tabnew<CR>  
+""map <M-F2> :tabnew<CR>  
 
 "列出当前目录文件  
 
@@ -276,8 +339,8 @@ map <F3> :tabnew .<CR>
 
 "打开树状文件目录  
 
-map <C-F3> \be  
-:autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
+""map <C-F3> \be  
+"":autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
 
 "C，C++ 按F5编译运行
 
@@ -290,7 +353,7 @@ func! CompileRunGcc()
     if &filetype == 'c'
 		"先删除上次编译的执行文件"
 		if filereadable(expand("%<"))
-		    exec "!rm %<"
+		    silent exec "!rm %<"
 		endif
 
         exec "!gcc % -o %<"
@@ -303,7 +366,7 @@ func! CompileRunGcc()
     elseif &filetype == 'cpp'
 		"先删除上次编译的执行文件"
 		if filereadable(expand("%<"))
-		    exec "!rm %<"
+		    silent exec "!rm %<"
 		endif
 
         exec "!g++ -std=c++11 % -o %<"
@@ -333,7 +396,7 @@ endfunc
 
 "C,C++的调试
 
-map <F8> :call Rungdb()<CR>
+	map <F4> :call Rungdb()<CR>
 
 func! Rungdb()
 
@@ -363,7 +426,7 @@ autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 
 "代码补全 
 
-set completeopt=preview,menu 
+set completeopt=longest,preview,menu 
 
 "允许插件  
 
@@ -387,7 +450,7 @@ set autowrite
 
 set ruler                   " 打开状态栏标尺
 
-"set cursorline              " 突出显示当前行
+set cursorline              " 突出显示当前行
 
 set magic                   " 设置魔术
 
@@ -405,15 +468,6 @@ set foldmethod=indent
 
 set foldlevel=3 
 
-set foldenable              " 开始折叠
-
-" 不要使用vi的键盘模式，而是vim自己的
-
-set nocompatible
-
-" 语法高亮
-
-set syntax=on
 
 " 去掉输入错误的提示声音
 
@@ -432,12 +486,16 @@ set tabstop=4
 " 统一缩进为4
 set softtabstop=4
 set shiftwidth=4
-
 set cindent
+"set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
+set cinoptions+=g0,(1s,:0
 
 " 不要用空格代替制表符
 
 set noexpandtab
+
+" 用空格代替制表符
+set expandtab
 
 " 在行和段开始处使用制表符
 
@@ -455,7 +513,7 @@ set noswapfile
 
 "搜索忽略大小写
 
-set ignorecase
+""set ignorecase
 
 "搜索逐字符高亮
 
@@ -562,23 +620,23 @@ au BufRead,BufNewFile *  setfiletype txt
 
 "自动补全
 
-:inoremap ( ()<ESC>i
+"":inoremap ( ()<ESC>i
 
-:inoremap ) <c-r>=ClosePair(')')<CR>
+"":inoremap ) <c-r>=ClosePair(')')<CR>
 
 "by Suzzz：  原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是OK的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种。只是补全，然后光标在左右括号中间。
 ":inoremap { {<CR>}<ESC>O
-:inoremap { {}<ESC>i
+"":inoremap { {}<ESC>i
 
-:inoremap } <c-r>=ClosePair('}')<CR>
+"":inoremap } <c-r>=ClosePair('}')<CR>
 
-:inoremap [ []<ESC>i
+"":inoremap [ []<ESC>i
 
-:inoremap ] <c-r>=ClosePair(']')<CR>
+"":inoremap ] <c-r>=ClosePair(']')<CR>
 
-:inoremap " ""<ESC>i
+"":inoremap " ""<ESC>i
 
-:inoremap ' ''<ESC>i
+"":inoremap ' ''<ESC>i
 
 function! ClosePair(char)
 
@@ -624,13 +682,45 @@ let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
 
 ""let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
 
-"设置tags  
 
-set tags=tags  
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"set autochdir 
+" Powerline设置
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置状态栏主题风格
+let g:Powerline_colorscheme='solarized256'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"可视化书签vim-signature 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
 
 
+" 设置状态栏主题风格
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -655,7 +745,58 @@ let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
 
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
+"设置显示标签列表子窗口的快捷键。速记：taglist
+nnoremap <Leader>tl :TlistToggle<CR> 
 
+"""""""""""""""""""""""""""""" 
+
+" Tagbar(ctags) 
+
+"""""""""""""""""""""""""""""""" 
+" 设置 tagbar 子窗口的位置出现在主编辑区的左边 
+let tagbar_left=1 
+" " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
+nnoremap <Leader>tb :TagbarToggle<CR> 
+" " 设置标签子窗口的宽度 
+let tagbar_width=32 
+" " tagbar 子窗口中不显示冗余帮助信息 
+let g:tagbar_compact=1
+" 设置 ctags 对哪些代码标识符生成标签
+let g:tagbar_type_cpp = {
+    \ 'kinds' : [
+         \ 'c:classes:0:1',
+         \ 'd:macros:0:1',
+         \ 'e:enumerators:0:0', 
+         \ 'f:functions:0:1',
+         \ 'g:enumeration:0:1',
+         \ 'l:local:0:1',
+         \ 'm:members:0:1',
+         \ 'n:namespaces:0:1',
+         \ 'p:functions_prototypes:0:1',
+         \ 's:structs:0:1',
+         \ 't:typedefs:0:1',
+         \ 'u:unions:0:1',
+         \ 'v:global:0:1',
+         \ 'x:external:0:1'
+     \ ],
+     \ 'sro'        : '::',
+     \ 'kind2scope' : {
+         \ 'g' : 'enum',
+         \ 'n' : 'namespace',
+         \ 'c' : 'class',
+         \ 's' : 'struct',
+         \ 'u' : 'union'
+     \ },
+     \ 'scope2kind' : {
+         \ 'enum'      : 'g',
+         \ 'namespace' : 'n',
+         \ 'class'     : 'c',
+         \ 'struct'    : 's',
+         \ 'union'     : 'u'
+     \ }
+     \ }
+
+""""""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
 
 let g:miniBufExplMapWindowNavVim = 1
@@ -675,11 +816,12 @@ let g:miniBufExplModSelTarget = 1
 
 " 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
 if has("autocmd")
-   autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby set number
-   autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
-   autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-   autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-   autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
+"   autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,sh set number
+"   autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
+"   autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
+"   autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
+"   autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
+"   打开文件时定位到上次退出的光标位置
    autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
@@ -709,3 +851,28 @@ inoremap <tab> <c-r>=MyTabFunction()<cr>
 
 ""setlocal omnifunc=tern#Complete
 ""call tern#Enable()
+
+""PS1='\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
+
+""hi comment ctermfg=6
+""hi comment ctermfg=blue
+""hi comment ctermfg=green
+
+
+" 设置配色方案
+set t_Co=256
+""colorscheme codeschool
+colorscheme wombat256
+""colorscheme morning
+""colorscheme torte
+
+
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+

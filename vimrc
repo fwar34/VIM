@@ -30,13 +30,30 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin(‘~/some/path/here‘)
 
 " let Vundle manage Vundle, required
-"Plugin 'VundleVim/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'fwar34/vim-color-wombat256'
+Plugin 'vim-scripts/a.vim'
+Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/OmniCppComplete'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/tagbar'
+"前面介绍的主题风格对状态栏不起作用，需要借助插件
+"Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc
+Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+Plugin 'https://github.com/altercation/vim-colors-solarized.git'
+"上图中 STL 容器模板类 unordered\_multimap 并未高亮，对滴，vim 对 C++
+"语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
+"vim-cpp-enhanced-highlight
+"Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
+"书签可视化
+Plugin 'https://github.com/kshenoy/vim-signature.git'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
 
@@ -44,7 +61,7 @@ filetype off                  " required
 " Keep Plugin commands between vundle#begin/end.
 
 " All of your Plugins must be added before the following line
-"call vundle#end()            " required
+call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -251,6 +268,7 @@ endfunc
 " C+]显示列表
 "map <C-]> :ts<CR>
 map <C-]> g<C-]>
+nnoremap <Leader>j g<C-]>
 
 
 " 映射全选+复制 ctrl+a
@@ -665,7 +683,44 @@ let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树
 ""let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Powerline设置
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 设置状态栏主题风格
+let g:Powerline_colorscheme='solarized256'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"可视化书签vim-signature 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
+
+
+" 设置状态栏主题风格
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -693,6 +748,55 @@ let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 "设置显示标签列表子窗口的快捷键。速记：taglist
 nnoremap <Leader>tl :TlistToggle<CR> 
 
+"""""""""""""""""""""""""""""" 
+
+" Tagbar(ctags) 
+
+"""""""""""""""""""""""""""""""" 
+" 设置 tagbar 子窗口的位置出现在主编辑区的左边 
+let tagbar_left=1 
+" " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
+nnoremap <Leader>tb :TagbarToggle<CR> 
+" " 设置标签子窗口的宽度 
+let tagbar_width=32 
+" " tagbar 子窗口中不显示冗余帮助信息 
+let g:tagbar_compact=1
+" 设置 ctags 对哪些代码标识符生成标签
+let g:tagbar_type_cpp = {
+    \ 'kinds' : [
+         \ 'c:classes:0:1',
+         \ 'd:macros:0:1',
+         \ 'e:enumerators:0:0', 
+         \ 'f:functions:0:1',
+         \ 'g:enumeration:0:1',
+         \ 'l:local:0:1',
+         \ 'm:members:0:1',
+         \ 'n:namespaces:0:1',
+         \ 'p:functions_prototypes:0:1',
+         \ 's:structs:0:1',
+         \ 't:typedefs:0:1',
+         \ 'u:unions:0:1',
+         \ 'v:global:0:1',
+         \ 'x:external:0:1'
+     \ ],
+     \ 'sro'        : '::',
+     \ 'kind2scope' : {
+         \ 'g' : 'enum',
+         \ 'n' : 'namespace',
+         \ 'c' : 'class',
+         \ 's' : 'struct',
+         \ 'u' : 'union'
+     \ },
+     \ 'scope2kind' : {
+         \ 'enum'      : 'g',
+         \ 'namespace' : 'n',
+         \ 'class'     : 'c',
+         \ 'struct'    : 's',
+         \ 'union'     : 'u'
+     \ }
+     \ }
+
+""""""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
 
 let g:miniBufExplMapWindowNavVim = 1

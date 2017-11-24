@@ -14,12 +14,13 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 
-let mapleader = "."
+let mapleader = ";"
 "let mapleader = "\<Space>"
 "
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有。h文件的话不切换
 let g:alternateNonDefaultAlternate=1
+nmap <Leader>a :A<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大

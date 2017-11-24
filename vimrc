@@ -68,6 +68,8 @@ Plugin 'derekwyatt/vim-protodef'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 
+Plugin 'https://github.com/scrooloose/nerdcommenter.git'
+
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
 
@@ -346,11 +348,6 @@ set autochdir
 "在/usr/include中执行cscope -Rbq -f ~/.vim/sys.out和/tang/include中执行cscope -Rbq -f ~/.vim/tang.out
 map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
 "map <F2> :ls<CR>
-"若要加入系统函数或全局变量的tag标签，则需执行：
-map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.vim/systags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.vim/tangtags /tang/include<CR>:set tags+=~/.vim/systags<CR>:set tags+=~/.vim/tangtags<CR>
-"并且在~/.vimrc中添加（亦可用上面描述的手动加入的方式）：
-set tags+=~/.vim/systags
-set tags+=~/.vim/tangtags
 
 map <C-l> :ls<CR>
 nnoremap <Leader>l :ls<CR>
@@ -715,6 +712,22 @@ set completeopt=longest,menu
 " CTags的设定  
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"cd /tang/include/
+nmap <Leader><F10> :ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags<CR>
+"cd到对应的c++目录后打开vi生成stdcpp.tags (例如/usr/include/c++/4.8)
+nmap <Leader><F11> :ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags<CR>
+"cd /usr/include/
+nmap <Leader><F12> :ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags
+" 引入 C++ 标准库 tags
+set tags+=~/.tags/stdcpp.tags
+set tags+=~/.tags/sys.tags
+set tags+=~/.vim/tang.tags
+"
+"若要加入系统函数或全局变量的tag标签，则需执行：
+"map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
+"并且在~/.vimrc中添加（亦可用上面描述的手动加入的方式）：
+
+"map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
 
 let Tlist_Sort_Type ="name"    " 按照名称排序  
 
@@ -789,9 +802,6 @@ let g:SignatureMap = {
 " Tag list (ctags) 
 
 """""""""""""""""""""""""""""""" 
-"" 引入 C++ 标准库 tags
-"set tags+=/data/misc/software/app/vim/stdcpp.tags
-"set tags+=/data/misc/software/app/vim/sys.tags
 
 let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
 
@@ -896,7 +906,7 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=0
 "YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader>; <C-x><C-o>
+inoremap <leader><Tab> <C-x><C-o>
 "
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview

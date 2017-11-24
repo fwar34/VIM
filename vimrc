@@ -44,6 +44,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fwar34/vim-color-wombat256'
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/c.vim'
+"echofunc可以在命令行中提示当前输入函数的原型
+Plugin 'vim-scripts/echofunc.vim'
 Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/tagbar'
@@ -64,7 +66,6 @@ Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
 """""""""""""
-Plugin 'derekwyatt/vim-protodef'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 
@@ -121,9 +122,9 @@ nmap <Leader>tp :tprevious<CR>
 "
 " 基于语义的代码导航
 "
-nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+"nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+"nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
 """"""""""""" By  ma6174""""""""""""""""""""
 
@@ -705,7 +706,7 @@ filetype plugin indent on
 
 "打开文件类型检测, 加了这句才可以用智能补全
 
-set completeopt=longest,menu
+"set completeopt=longest,menu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -936,6 +937,18 @@ inoremap <tab> <c-r>=MyTabFunction()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Omni
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"set completeopt=menu,menuone " 关掉智能补全时的预览窗口
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
+let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
+let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
+"let OmniCpp_DefaultNamespaces=["std"]
+let OmniCpp_ShowScopeInAbbr=1 " show scope in abbreviation and remove the last column
+let OmniCpp_ShowAccess=1
 
 ""setlocal omnifunc=tern#Complete
 ""call tern#Enable()
@@ -984,8 +997,8 @@ let NERDTreeAutoDeleteBuffer=1
 map <Leader>bl :MBEToggle<cr>
 "
 " buffer 切换快捷键
-map <C-Tab> :MBEbn<cr>
-map <C-S-Tab> :MBEbp<cr>
+map <Leader>bn :MBEbn<cr>
+map <Leader>bp :MBEbp<cr>
 " <<
 "
 " >>

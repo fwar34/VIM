@@ -22,8 +22,15 @@ set autochdir
 " vim 自身命令行模式智能补全
 set wildmenu
 
-let mapleader = ";"
-"let mapleader = "\<Space>"
+" 修改leader键
+let mapleader = "\<space>"
+let g:mapleader ="\<space>"
+" ii 替换 Esc
+inoremap ii <Esc>
+" 将 ; 绑定到 : 用于快速进入命令行
+nnoremap ; :
+nnoremap <Leader>w :w<CR>
+"let mapleader = ";"
 "
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有。h文件的话不切换
@@ -48,6 +55,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fwar34/vim-color-wombat256'
 Plugin 'vim-scripts/a.vim'
 Plugin 'vim-scripts/c.vim'
+Plugin 'vim-scripts/AutoComplPop'
 "echofunc可以在命令行中提示当前输入函数的原型
 Plugin 'vim-scripts/echofunc.vim'
 Plugin 'vim-scripts/OmniCppComplete'
@@ -64,12 +72,42 @@ Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "vim-cpp-enhanced-highlight
 "Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
 Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
+"STL\C++14等的C++语法高亮
+Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
 "Plugin 'https://github.com/kshenoy/vim-signature.git'
+"
+"i ##### 周期性针对这个工程自动生成标签文件，并通知 vim 引人该标签文件
+" Plugin 'vim-scripts/indexer.tar.gz'
+" 如果出问题了则使用：
+" cd ~/.vim/bundle/
+" git clone git@github.com:vim-scripts/indexer.tar.gz
+" indexer 使用 ctags 5.8.1
+" wget http://dfrank.ru/uploaded_files/ctags/ctags-5.8.1.tar.gz
+" 来自 ：http://dfrank.ru/ctags581/en.html
+" 依赖项
+" Bundle 'DfrankUtil'
+" Bundle 'vimprj'
+" indexer 还有个自己的配置文件，用于设定各个工程的根目录路径，配置文件位于
+" ~/.indexer_files，内容可以设定为：
+" 设置插件 indexer 调用 ctags 的参数
+" 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
+" 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
+" let
+" g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
+" --fields=+iaSl --extra=+q"
+" --------------- ~/.indexer_files ---------------
+"  [foo]
+"  /data/workplace/foo/src/
+"  [bar]
+" /data/workplace/bar/src/
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
-"""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+"###### 多语言语法检查    
+Plugin 'scrooloose/syntastic'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 
@@ -87,6 +125,41 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ###### 多语言语法检查   
+set statusline+=%#warningmsg#                                                                                                                
+set statusline+=%{SyntasticStatuslineFlag()}                                                                                                 
+set statusline+=%* 
+" 检测到错误和警告时的标志
+let g:syntastic_error_symbol='✘✘'                                                                                                            
+let g:syntastic_warning_symbol='➤➤'                                                                                                          
+let g:syntastic_check_on_open=1                                                                                                              
+let g:syntastic_check_on_wq=0                                                                                                                
+let g:syntastic_enable_highlighting=1
+" 使用pyflakes,速度比pylint快
+" 需要安装 pep8 或者 pyflakes，使用pip安装
+",pep8是python的格式检测神器，建议安装。 
+let g:syntastic_python_checkers=['pep8', 'pyflakes']                                                                                         
+let g:syntastic_python_pep8_args='--ignore=E501,E225'
+" 修改高亮的背景色, 适应主题 
+highlight SyntasticErrorSign guifg=white guibg=black 
+" to see error location list
+let g:syntastic_always_populate_loc_list = 0                                                                                                 
+let g:syntastic_auto_loc_list = 0                                                                                                            
+let g:syntastic_loc_list_height = 5                                                                                                          
+function! ToggleErrors()                                                                                                                     
+    let old_last_winnr = winnr('$')                                                                                                          
+    lclose                                                                                                                                   
+    if old_last_winnr == winnr('$')                                                                                                          
+        " Nothing was closed, open syntastic error location panel                                                                            
+        Errors                                                                                                                               
+    endif                                                                                                                                    
+endfunction                                                                                                                                  
+nnoremap <Leader>s :call ToggleErrors()<cr> 
+" 跳转到下一个/上一个错误处 
+nnoremap <Leader>sn :lnext<cr>                                                                                                               
+nnoremap <Leader>sp :lprevious<cr>
+" 关闭 某一语言的（如C/C++） 的语法检测                                                                        
+" let g:syntastic_ignore_files=[".*\.c$", ".*\.h$", ".*\.cpp", ".*\.hpp"]
 
 " >>
 " 营造专注气氛
@@ -341,7 +414,7 @@ nnoremap <Leader>j g<C-]>
 "inoremap <C-l> <Right>
 "map <F1> :
 "map <C-k> :
-map <Space> :
+"map <Space> :
 map <F7> :set tags+=
 "映射命令行模式C-k到:
 "cmap <C-k> :
@@ -353,11 +426,13 @@ map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -n
 
 map <C-l> :ls<CR>
 "nnoremap <Leader>l :ls<CR>
-nnoremap <Leader>; :ls<CR>
+nnoremap <Leader><Space> :ls<CR>
+"nnoremap <Leader>; :ls<CR>
 map <Leader>w <C-w><C-w>
 nmap <Leader>6 <C-^>
 "imap .<Space> <C-n>
-imap <Leader>; <C-n>
+imap <Leader><Space> <C-n>
+"imap <Leader>; <C-n>
 nnoremap <Leader>m %
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>

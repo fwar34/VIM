@@ -714,16 +714,16 @@ filetype plugin indent on
 " CTags的设定  
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"cd /tang/include/
-nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags<CR>
-"cd到对应的c++目录后打开vi生成stdcpp.tags (例如/usr/include/c++/4.8)
-nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags<CR>
 "cd /usr/include/
-nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags<CR>
-" 引入 C++ 标准库 tags
-set tags+=~/.tags/stdcpp.tags
-set tags+=~/.tags/sys.tags
+nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags .<CR>
+"cd到对应的c++目录后打开vi生成stdcpp.tags (例如/usr/include/c++/4.8)
+nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags .<CR>
+"cd /tang/include/
+nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags .<CR>
+
 set tags+=~/.tags/tang.tags
+" 引入 C++ 标准库 tags
+nmap <Leader><F9> :set tags+=~/.tags/stdcpp.tags<CR>:set tags+=~/.tags/sys.tags<CR>
 "
 "若要加入系统函数或全局变量的tag标签，则需执行：
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
@@ -977,9 +977,9 @@ let g:disable_protodef_sorting=1
 " 工程文件浏览
 "
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nmap <Leader>fl :NERDTreeToggle<CR>
+nmap <Leader>ne :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=22
+let NERDTreeWinSize=25
 " 设置 NERDTree 子窗口位置
 let NERDTreeWinPos="right"
 " 显示隐藏文件
@@ -995,11 +995,11 @@ let NERDTreeAutoDeleteBuffer=1
 " 多文档编辑
 "  
 " 显示/隐藏 MiniBufExplorer 窗口
-map <Leader>bl :MBEToggle<cr>
+map <Leader>mb :MBEToggle<cr>
 "
 " buffer 切换快捷键
-map <Leader>bn :MBEbn<cr>
-map <Leader>bp :MBEbp<cr>
+map <Leader>mn :MBEbn<cr>
+map <Leader>mp :MBEbp<cr>
 " <<
 "
 " >>

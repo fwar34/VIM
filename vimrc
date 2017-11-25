@@ -720,8 +720,8 @@ filetype plugin indent on
 "cd 到/usr/include执行(sudo)
 "nmap <Leader><F10> :!sudo ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f sys.tags .<CR>
 "根据系统c++版本修改对应的路径 (例如/usr/include/c++/4.8)
-nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags /usr/include/c++/4.8<CR>
-"nmap <Leader><F11> :!sudo ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f stdcpp.tags .<CR>
+"nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags /usr/include/c++/4.8<CR>
+nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags 
 "/tang/include/
 nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
 

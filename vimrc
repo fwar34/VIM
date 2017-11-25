@@ -15,6 +15,10 @@
 
 " 让配置变更立即生效
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
+"如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
+set tags=tags
+set autochdir 
+
 " vim 自身命令行模式智能补全
 set wildmenu
 
@@ -59,7 +63,7 @@ Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
 "vim-cpp-enhanced-highlight
 "Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
-Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
+Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
 "书签可视化
 "Plugin 'https://github.com/kshenoy/vim-signature.git'
 Plugin 'vim-scripts/indexer.tar.gz'
@@ -342,9 +346,6 @@ map <F7> :set tags+=
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :
-"如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
-set tags=tags
-set autochdir 
 
 "在/usr/include中执行cscope -Rbq -f ~/.vim/sys.out和/tang/include中执行cscope -Rbq -f ~/.vim/tang.out
 map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
@@ -722,7 +723,7 @@ nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull
 " 引入 C++ 标准库 tags
 set tags+=~/.tags/stdcpp.tags
 set tags+=~/.tags/sys.tags
-set tags+=~/.vim/tang.tags
+set tags+=~/.tags/tang.tags
 "
 "若要加入系统函数或全局变量的tag标签，则需执行：
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>

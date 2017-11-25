@@ -352,7 +352,8 @@ map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -n
 "map <F2> :ls<CR>
 
 map <C-l> :ls<CR>
-nnoremap <Leader>l :ls<CR>
+"nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>; :ls<CR>
 map <Leader>w <C-w><C-w>
 nmap <Leader>6 <C-^>
 "imap .<Space> <C-n>
@@ -367,7 +368,7 @@ nnoremap <Leader>u <C-u>
 map <silent> <F10> :!ctags -R .<CR><CR>
 "map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
 map <silent> <F11> :!ctags -R --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q .<CR><CR>
-map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+aiKSz --extra=+q .<CR><CR>
+map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+lpx --fields=+ailKSz --extra=+q .<CR><CR>
 " 选中状态下 Ctrl+c 复制
 
 ""vmap <C-c> "+y
@@ -714,16 +715,21 @@ filetype plugin indent on
 " CTags的设定  
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"cd /usr/include/
-nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags .<CR>
-"cd到对应的c++目录后打开vi生成stdcpp.tags (例如/usr/include/c++/4.8)
-nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags .<CR>
-"cd /tang/include/
-nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags .<CR>
+"/usr/include/ /usr/local/include
+"nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>
+"cd 到/usr/include执行(sudo)
+"nmap <Leader><F10> :!sudo ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f sys.tags .<CR>
+"根据系统c++版本修改对应的路径 (例如/usr/include/c++/4.8)
+nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags /usr/include/c++/4.8<CR>
+"nmap <Leader><F11> :!sudo ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f stdcpp.tags .<CR>
+"/tang/include/
+nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
 
 set tags+=~/.tags/tang.tags
+set tags+=~/.tags/stdcpp.tags
 " 引入 C++ 标准库 tags
-nmap <Leader><F9> :set tags+=~/.tags/stdcpp.tags<CR>:set tags+=~/.tags/sys.tags<CR>
+"nmap <Leader><F9> :set tags+=/usr/include/c++/4.8/stdcpp.tags<CR>:set tags+=/usr/include/sys.tags<CR>
+"nmap <Leader><F9>:set tags+=~/.tags/stdcpp.tags<CR>
 "
 "若要加入系统函数或全局变量的tag标签，则需执行：
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>

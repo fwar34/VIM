@@ -23,14 +23,15 @@ set autochdir
 set wildmenu
 
 " 修改leader键
-let mapleader = "\<space>"
-let g:mapleader ="\<space>"
+"let mapleader = "\<space>"
+"let g:mapleader ="\<space>"
 " ii 替换 Esc
 inoremap ii <Esc>
 " 将 ; 绑定到 : 用于快速进入命令行
-nnoremap ; :
-nnoremap <Leader>w :w<CR>
-"let mapleader = ";"
+"nnoremap ; :
+nnoremap <Space> :
+let mapleader = ";"
+let g:mapleader = ";"
 "
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有。h文件的话不切换
@@ -54,7 +55,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'fwar34/vim-color-wombat256'
 Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/c.vim'
+"Plugin 'vim-scripts/c.vim'
 Plugin 'vim-scripts/AutoComplPop'
 "echofunc可以在命令行中提示当前输入函数的原型
 Plugin 'vim-scripts/echofunc.vim'
@@ -421,19 +422,18 @@ map <F7> :set tags+=
 "omap <C-k> :
 
 "在/usr/include中执行cscope -Rbq -f ~/.vim/sys.out和/tang/include中执行cscope -Rbq -f ~/.vim/tang.out
-map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
+"map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
+map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
 map <C-l> :ls<CR>
 "nnoremap <Leader>l :ls<CR>
 nnoremap <Leader><Space> :ls<CR>
-"nnoremap <Leader>; :ls<CR>
+nnoremap ;; :ls<CR>
+imap ;; <C-n>
 map <Leader>w <C-w><C-w>
 nmap <Leader>6 <C-^>
-"imap .<Space> <C-n>
-imap <Leader><Space> <C-n>
-"imap <Leader>; <C-n>
-nnoremap <Leader>m %
+nnoremap <Leader>mm %
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>
 nnoremap <Leader>d <C-d>
@@ -475,65 +475,65 @@ map <F5> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
 
-    exec "w"
+exec "w"
 
-    if &filetype == 'c'
-		"先删除上次编译的执行文件"
-		if filereadable(expand("%<"))
-		    silent exec "!rm %<"
-		endif
-
-        exec "!gcc % -o %<"
-
-		"如果编译成功了有了可执行文件才运行"
-		if filereadable(expand("%<"))
-            exec "! ./%<"
-		endif
-
-    elseif &filetype == 'cpp'
-		"先删除上次编译的执行文件"
-		if filereadable(expand("%<"))
-		    silent exec "!rm %<"
-		endif
-
-        exec "!g++ -std=c++11 % -o %<"
-		
-		"如果编译成功了有了可执行文件才运行"
-		if filereadable(expand("%<"))
-            exec "! ./%<"
-		endif
-
-    elseif &filetype == 'java'
-
-        exec "!javac %" 
-
-        exec "!java %<"
-
-    elseif &filetype == 'sh'
-
-        :!./%
-		
-    elseif &filetype == 'python'
-		
-        exec "!python3 %"
-
+if &filetype == 'c'
+    "先删除上次编译的执行文件"
+    if filereadable(expand("%<"))
+        silent exec "!rm %<"
     endif
+
+    exec "!gcc % -o %<"
+
+    "如果编译成功了有了可执行文件才运行"
+    if filereadable(expand("%<"))
+        exec "! ./%<"
+    endif
+
+elseif &filetype == 'cpp'
+    "先删除上次编译的执行文件"
+    if filereadable(expand("%<"))
+        silent exec "!rm %<"
+    endif
+
+    exec "!g++ -std=c++11 % -o %<"
+    
+    "如果编译成功了有了可执行文件才运行"
+    if filereadable(expand("%<"))
+        exec "! ./%<"
+    endif
+
+elseif &filetype == 'java'
+
+    exec "!javac %" 
+
+    exec "!java %<"
+
+elseif &filetype == 'sh'
+
+    :!./%
+    
+elseif &filetype == 'python'
+    
+    exec "!python3 %"
+
+endif
 
 endfunc
 
 "C,C++的调试
 
-	map <F4> :call Rungdb()<CR>
+map <F4> :call Rungdb()<CR>
 
 func! Rungdb()
 
-    exec "w"
+exec "w"
 
-    exec "!g++ -std=c++11 % -g -o %<"
-	"如果编译成功了有了可执行文件才调试"
-	if filereadable(expand("%<"))
-        exec "!gdb ./%<"
-	endif
+exec "!g++ -std=c++11 % -g -o %<"
+"如果编译成功了有了可执行文件才调试"
+if filereadable(expand("%<"))
+    exec "!gdb ./%<"
+endif
 
 endfunc
 
@@ -767,15 +767,15 @@ au BufRead,BufNewFile *  setfiletype txt
 
 function! ClosePair(char)
 
-    if getline('.')[col('.') - 1] == a:char
+if getline('.')[col('.') - 1] == a:char
 
-        return "\<Right>"
+    return "\<Right>"
 
-    else
+else
 
-        return a:char
+    return a:char
 
-    endif
+endif
 
 endfunction
 
@@ -844,28 +844,28 @@ let g:Powerline_colorscheme='solarized256'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:SignatureMap = {
-        \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "m-",
-        \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "mda",
-        \ 'PurgeMarkers'       :  "m<BS>",
-        \ 'GotoNextLineAlpha'  :  "']",
-        \ 'GotoPrevLineAlpha'  :  "'[",
-        \ 'GotoNextSpotAlpha'  :  "`]",
-        \ 'GotoPrevSpotAlpha'  :  "`[",
-        \ 'GotoNextLineByPos'  :  "]'",
-        \ 'GotoPrevLineByPos'  :  "['",
-        \ 'GotoNextSpotByPos'  :  "mn",
-        \ 'GotoPrevSpotByPos'  :  "mp",
-        \ 'GotoNextMarker'     :  "[+",
-        \ 'GotoPrevMarker'     :  "[-",
-        \ 'GotoNextMarkerAny'  :  "]=",
-        \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListLocalMarks'     :  "ms",
-        \ 'ListLocalMarkers'   :  "m?"
-        \ }
+    \ 'Leader'             :  "m",
+    \ 'PlaceNextMark'      :  "m,",
+    \ 'ToggleMarkAtLine'   :  "m.",
+    \ 'PurgeMarksAtLine'   :  "m-",
+    \ 'DeleteMark'         :  "dm",
+    \ 'PurgeMarks'         :  "mda",
+    \ 'PurgeMarkers'       :  "m<BS>",
+    \ 'GotoNextLineAlpha'  :  "']",
+    \ 'GotoPrevLineAlpha'  :  "'[",
+    \ 'GotoNextSpotAlpha'  :  "`]",
+    \ 'GotoPrevSpotAlpha'  :  "`[",
+    \ 'GotoNextLineByPos'  :  "]'",
+    \ 'GotoPrevLineByPos'  :  "['",
+    \ 'GotoNextSpotByPos'  :  "mn",
+    \ 'GotoPrevSpotByPos'  :  "mp",
+    \ 'GotoNextMarker'     :  "[+",
+    \ 'GotoPrevMarker'     :  "[-",
+    \ 'GotoNextMarkerAny'  :  "]=",
+    \ 'GotoPrevMarkerAny'  :  "[=",
+    \ 'ListLocalMarks'     :  "ms",
+    \ 'ListLocalMarkers'   :  "m?"
+    \ }
 
 
 " 设置状态栏主题风格
@@ -911,38 +911,38 @@ let tagbar_width=32
 let g:tagbar_compact=1
 " 设置 ctags 对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
-    \ 'kinds' : [
-         \ 'c:classes:0:1',
-         \ 'd:macros:0:1',
-         \ 'e:enumerators:0:0', 
-         \ 'f:functions:0:1',
-         \ 'g:enumeration:0:1',
-         \ 'l:local:0:1',
-         \ 'm:members:0:1',
-         \ 'n:namespaces:0:1',
-         \ 'p:functions_prototypes:0:1',
-         \ 's:structs:0:1',
-         \ 't:typedefs:0:1',
-         \ 'u:unions:0:1',
-         \ 'v:global:0:1',
-         \ 'x:external:0:1'
-     \ ],
-     \ 'sro'        : '::',
-     \ 'kind2scope' : {
-         \ 'g' : 'enum',
-         \ 'n' : 'namespace',
-         \ 'c' : 'class',
-         \ 's' : 'struct',
-         \ 'u' : 'union'
-     \ },
-     \ 'scope2kind' : {
-         \ 'enum'      : 'g',
-         \ 'namespace' : 'n',
-         \ 'class'     : 'c',
-         \ 'struct'    : 's',
-         \ 'union'     : 'u'
-     \ }
-     \ }
+\ 'kinds' : [
+     \ 'c:classes:0:1',
+     \ 'd:macros:0:1',
+     \ 'e:enumerators:0:0', 
+     \ 'f:functions:0:1',
+     \ 'g:enumeration:0:1',
+     \ 'l:local:0:1',
+     \ 'm:members:0:1',
+     \ 'n:namespaces:0:1',
+     \ 'p:functions_prototypes:0:1',
+     \ 's:structs:0:1',
+     \ 't:typedefs:0:1',
+     \ 'u:unions:0:1',
+     \ 'v:global:0:1',
+     \ 'x:external:0:1'
+ \ ],
+ \ 'sro'        : '::',
+ \ 'kind2scope' : {
+     \ 'g' : 'enum',
+     \ 'n' : 'namespace',
+     \ 'c' : 'class',
+     \ 's' : 'struct',
+     \ 'u' : 'union'
+ \ },
+ \ 'scope2kind' : {
+     \ 'enum'      : 'g',
+     \ 'namespace' : 'n',
+     \ 'class'     : 'c',
+     \ 'struct'    : 's',
+     \ 'union'     : 'u'
+ \ }
+ \ }
 
 """"""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
@@ -970,10 +970,10 @@ if has("autocmd")
 "   autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
 "   autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
 "   打开文件时定位到上次退出的光标位置
-   autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   exe "normal g`\"" |
+  \ endif
 endif " has("autocmd")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1005,13 +1005,13 @@ let g:ycm_seed_identifiers_with_syntax=1
 
 " 比较喜欢用tab来选择补全...
 function! MyTabFunction ()
-    let line = getline('.')
-    let substr = strpart(line, -1, col('.')+1)
-    let substr = matchstr(substr, "[^ \t]*$")
-    if strlen(substr) == 0
-        return "\<tab>"
-    endif
-    return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
+let line = getline('.')
+let substr = strpart(line, -1, col('.')+1)
+let substr = matchstr(substr, "[^ \t]*$")
+if strlen(substr) == 0
+    return "\<tab>"
+endif
+return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
 endfunction
 inoremap <tab> <c-r>=MyTabFunction()<cr>
 

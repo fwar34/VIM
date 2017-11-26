@@ -90,7 +90,7 @@ Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
 "Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
-Plugin 'https://github.com/kshenoy/vim-signature.git'
+"Plugin 'https://github.com/kshenoy/vim-signature.git'
 "
 "i ##### 周期性针对这个工程自动生成标签文件，并通知 vim 引人该标签文件
 " Plugin 'vim-scripts/indexer.tar.gz'
@@ -754,7 +754,6 @@ let g:Powerline_colorscheme='solarized256'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "可视化书签vim-signature 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自定义 vim-signature 快捷键
 let g:SignatureMap = {

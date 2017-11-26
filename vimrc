@@ -6,7 +6,7 @@
 "2.自动插入文件头 ，新建C、C++源文件时自动插入表头：包括文件名、作者、联系方式、建立时间等，读者可根据需求自行更改
 "3.映射“Ctrl + A”为全选并复制快捷键，方便复制代码
 "4.按“F2”可以直接消除代码中的空行
-"5.“F3”可列出当前目录文件，打开树状文件目录
+"5.“F4”可列出当前目录文件，打开树状文件目录
 "6. 支持鼠标选择、方向键移动
 "7. 代码高亮，自动缩进，显示行号，显示状态行
 ""按“Ctrl + P”可自动补全
@@ -163,6 +163,11 @@ nnoremap <Leader>sp :lprevious<cr>
 " 关闭 某一语言的（如C/C++） 的语法检测                                                                        
 " let g:syntastic_ignore_files=[".*\.c$", ".*\.h$", ".*\.cpp", ".*\.hpp"]
 
+""""""""""""""""""""""""""""""""""""""""""""
+"提示函数原型echofunc
+let g:EchoFuncKeyNext="<F2>"
+let g:EchoFuncKeyPrev="<F3>"
+""""""""""""""""""""""""""""""""""""""""""""""
 " >>
 " 营造专注气氛
 "
@@ -400,7 +405,7 @@ endfunc
 
 " C+]显示列表
 "map <C-]> :ts<CR>
-map <C-]> g<C-]>
+nnoremap <C-]> g<C-]>
 nnoremap <Leader>j g<C-]>
 
 
@@ -417,22 +422,22 @@ nnoremap <Leader>j g<C-]>
 "map <F1> :
 "map <C-k> :
 "map <Space> :
-map <F7> :set tags+=
+nnoremap <F7> :set tags+=
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :
 
 "在/usr/include中执行cscope -Rbq -f ~/.vim/sys.out和/tang/include中执行cscope -Rbq -f ~/.vim/tang.out
 "map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>:cs add ~/.vim/sys.out ~/.vim/<CR>:cs add ~/.vim/tang.out ~/.vim/<CR>
-map <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
+nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-map <C-l> :ls<CR>
+nnoremap <C-l> :ls<CR>
 "nnoremap <Leader>l :ls<CR>
 nnoremap <Leader><Space> :ls<CR>
 nnoremap ;; :ls<CR>
 imap ;; <C-n>
-map <Leader>w <C-w><C-w>
+nnoremap <Leader>w <C-w><C-w>
 nmap <Leader>6 <C-^>
 nnoremap <Leader>mm %
 nnoremap <Leader>f <C-f>
@@ -441,10 +446,10 @@ nnoremap <Leader>d <C-d>
 nnoremap <Leader>u <C-u>
 "map <silent> <F9> :cs add cscope.out
 
-map <silent> <F10> :!ctags -R .<CR><CR>
+nnoremap <silent> <F10> :!ctags -R .<CR><CR>
 "map <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<CR><CR>
-map <silent> <F11> :!ctags -R --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q .<CR><CR>
-map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+lpx --fields=+ailKSz --extra=+q .<CR><CR>
+nnoremap <silent> <F11> :!ctags -R --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q .<CR><CR>
+nnoremap <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+lpx --fields=+ailKSz --extra=+q .<CR><CR>
 " 选中状态下 Ctrl+c 复制
 
 ""vmap <C-c> "+y
@@ -463,7 +468,7 @@ map <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++
 
 "列出当前目录文件  
 
-map <F3> :tabnew .<CR>  
+nnoremap <F4> :tabnew .<CR>  
 
 "打开树状文件目录  
 
@@ -472,7 +477,7 @@ map <F3> :tabnew .<CR>
 
 "C，C++ 按F5编译运行
 
-map <F5> :call CompileRunGcc()<CR>
+nnoremap <F5> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
 
@@ -524,7 +529,7 @@ endfunc
 
 "C,C++的调试
 
-map <F4> :call Rungdb()<CR>
+"map <F4> :call Rungdb()<CR>
 
 func! Rungdb()
 
@@ -1059,7 +1064,7 @@ let g:disable_protodef_sorting=1
 " 工程文件浏览
 "
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nmap <Leader>ne :NERDTreeToggle<CR>
+nnoremap <Leader>ne :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
 let NERDTreeWinSize=25
 " 设置 NERDTree 子窗口位置
@@ -1077,11 +1082,11 @@ let NERDTreeAutoDeleteBuffer=1
 " 多文档编辑
 "  
 " 显示/隐藏 MiniBufExplorer 窗口
-map <Leader>mb :MBEToggle<cr>
+nnoremap <Leader>mb :MBEToggle<cr>
 "
 " buffer 切换快捷键
-map <Leader>mn :MBEbn<cr>
-map <Leader>mp :MBEbp<cr>
+nnoremap <Leader>mn :MBEbn<cr>
+nnoremap <Leader>mp :MBEbp<cr>
 " <<
 "
 " >>
@@ -1096,11 +1101,11 @@ set undofile
 "
 " 保存快捷键
 "map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
-map <leader>ss :mksession! my.vim<cr>
+nnoremap <leader>ss :mksession! my.vim<cr>
 "
 " 恢复快捷键
 "map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
-map <leader>rs :source my.vim<cr>
+nnoremap <leader>rs :source my.vim<cr>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>

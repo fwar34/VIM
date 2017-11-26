@@ -64,7 +64,7 @@ Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/tagbar'
 "前面介绍的主题风格对状态栏不起作用，需要借助插件
 "Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc
-Plugin 'https://github.com/Lokaltog/vim-powerline.git'
+"Plugin 'https://github.com/Lokaltog/vim-powerline.git'
 "vimdoc中文
 Plugin 'https://github.com/yianwillis/vimcdoc.git'
 Plugin 'https://github.com/altercation/vim-colors-solarized.git'
@@ -74,7 +74,7 @@ Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
 Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
-Plugin 'Mizuchi/STL-Syntax'
+"Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
 "Plugin 'https://github.com/kshenoy/vim-signature.git'
 "
@@ -107,11 +107,12 @@ Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "###### 多语言语法检查    
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 
+"doxygen
 Plugin 'https://github.com/scrooloose/nerdcommenter.git'
 
 "Plugin 'Valloric/YouCompleteMe'

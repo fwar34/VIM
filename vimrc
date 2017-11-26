@@ -32,7 +32,7 @@ let mapleader = ";"
 let g:mapleader = ";"
 "
 "a.vim .cpp和.h之间切换，:A
-"如果cpp没有。h文件的话不切换
+"如果cpp没有.h文件的话不切换
 let g:alternateNonDefaultAlternate=1
 nnoremap <Leader>a :A<CR>
 

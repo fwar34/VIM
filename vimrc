@@ -810,7 +810,7 @@ let g:disable_protodef_sorting=1
 " 工程文件浏览
 "
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nnoremap <Leader>db :NERDTreeToggle<CR>
+nnoremap <Leader>tt :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
 let NERDTreeWinSize=25
 " 设置 NERDTree 子窗口位置

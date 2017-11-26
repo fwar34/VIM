@@ -14,7 +14,7 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 " 让配置变更立即生效
-autocmd BufWritePost $MYVIMRC source $MYVIMRC
+"autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
 set tags=tags
 set autochdir 
@@ -212,7 +212,6 @@ endf
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 "let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-
 " 正向遍历同名标签
 nnoremap <Leader>tn :tnext<CR>
 " 反向遍历同名标签
@@ -243,10 +242,8 @@ set showcmd         " 输入的命令显示出来，看的清楚些
 "set whichwrap+=<,>,h,l   " 允许backspace和光标键跨越行边界(不建议)  
 "set scrolloff=3     " 光标移动到buffer的顶部和底部时保持3行距离  
 set novisualbell    " 不要闪烁(不明白)  
-
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
 set laststatus=1    " 启动显示状态行(1),总是显示状态行(2)  
-
 set nofoldenable    "不许折叠
 "set foldenable      " 允许折叠  
 "set foldmethod=manual   " 手动折叠  
@@ -259,16 +256,13 @@ if version >= 603
 endif
 
 " 设置配色方案
-
 "colorscheme codeschool
 
 "字体 
-
 "if (has("gui_running")) 
-
 "   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 
-
 "endif 
+
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
@@ -310,21 +304,17 @@ func SetTitle()
         call append(line(".")+7, "")
         call append(line(".")+8, "using namespace std;")
         call append(line(".")+9, "")
-
     endif
-
     if &filetype == 'c'
         call append(line(".")+6, "#include<stdio.h>")
         call append(line(".")+7, "")
     endif
-
     "新建文件后，自动定位到文件末尾
     autocmd BufNewFile * normal G
 
 endfunc 
 
 " Suzzz：  模仿上面，新建python文件时，添加文件头
-
 autocmd BufNewFile *py exec ":call SetPythonTitle()"
 
 func SetPythonTitle()
@@ -340,24 +330,16 @@ func SetPythonTitle()
 endfunc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "键盘命令
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""nnoremap <leader>w :w!<cr>
-
 ""nnoremap <leader>f :find<cr>
-
 " C+]显示列表
 "map <C-]> :ts<CR>
 nnoremap <C-]> g<C-]>
 nnoremap <Leader>j g<C-]>
-
-
 " 映射全选+复制 ctrl+a
-
 ""map <C-A> ggVGY
-
 ""map! <C-A> <Esc>ggVGY
 "编辑模式移动光标,C-h和退格键冲突"
 "inoremap <C-h> <Left>
@@ -394,19 +376,15 @@ nnoremap <Leader>u <C-u>
 nnoremap <silent> <F10> :!ctags -R .<CR><CR>
 nnoremap <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .<CR><CR>
 "nnoremap <silent> <F11> :!ctags -R --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q .<CR><CR>
-nnoremap <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+px --fields=+ailKSz --extra=+q .<CR><CR>
+nnoremap <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl --c++-kinds=+plx --fields=+ailKSz --extra=+q .<CR><CR>
 " 选中状态下 Ctrl+c 复制
 ""vmap <C-c> "+y
-
 "去空行  
 "nnoremap <F2> :g/^\s*$/d<CR>
-
 "比较文件  
-""nnoremap <C-F2> :vert diffsplit 
-
+"nnoremap <C-F2> :vert diffsplit 
 "新建标签  
 ""map <M-F2> :tabnew<CR>  
-
 "列出当前目录文件  
 nnoremap <F4> :tabnew .<CR>  
 
@@ -451,7 +429,6 @@ endfunc
 
 "C,C++的调试
 "map <F4> :call Rungdb()<CR>
-
 func! Rungdb()
 exec "w"
 exec "!g++ -std=c++11 % -g -o %<"
@@ -460,65 +437,40 @@ if filereadable(expand("%<"))
     exec "!gdb ./%<"
 endif
 endfunc
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""实用设置
+"实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置当文件被改动时自动载入
 set autoread
-
 " quickfix模式
 autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
-
 "代码补全 
 set completeopt=longest,preview,menu 
-
 "允许插件  
 filetype plugin on
-
 "共享剪贴板  
 set clipboard+=unnamed 
-
 "从不备份  
 set nobackup
-
 "make 运行
 :set makeprg=g++\ -Wall\ \ -std=c++11\ %
-
 "自动保存
 set autowrite
-
 set ruler                   " 打开状态栏标尺
-
 set cursorline              " 突出显示当前行
-
 set magic                   " 设置魔术
-
 set guioptions-=T           " 隐藏工具栏
-
 set guioptions-=m           " 隐藏菜单栏
-
 "set statusline=\ %<%F[%1*%M%*%n%R%H]%=\ %y\ %0(%{&fileformat}\ %{&encoding}\ %c:%l/%L%)\
-
 " 设置在状态行显示的信息
-
 set foldcolumn=0
-
 set foldmethod=indent 
-
 set foldlevel=3 
-
-
 " 去掉输入错误的提示声音
-
 set noeb
-
 " 在处理未保存或只读文件的时候，弹出确认
-
 set confirm
-
 " 自动缩进
-
 set autoindent
 set smartindent    "智能的选择对起方式；
 " Tab键的宽度
@@ -529,179 +481,98 @@ set shiftwidth=4
 set cindent
 "set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 set cinoptions+=g0,(1s,:0
-
 " 不要用空格代替制表符
-
 set noexpandtab
-
 " 用空格代替制表符
 set expandtab
-
 " 在行和段开始处使用制表符
-
 set smarttab
-
 " 历史记录数
-
 set history=1000
-
 "禁止生成临时文件
-
 set nobackup
-
 set noswapfile
-
 "搜索忽略大小写
-
 ""set ignorecase
-
 "搜索逐字符高亮
-
 set hlsearch
-
 set incsearch
-
 "行内替换
-
 set gdefault
-
 "编码设置
-
 set enc=utf-8
-
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
-
 "语言设置
-
 set langmenu=zh_CN.UTF-8
-
 set helplang=cn
-
 " 我的状态行显示的内容（包括文件类型和解码）
-
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-
 "set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-
 " 总是显示状态行
-
 set laststatus=2
-
 " 命令行（在状态行下）的高度，默认为1，这里是2
-
 set cmdheight=2
-
 " 侦测文件类型
-
 filetype on
-
 " 载入文件类型插件
-
 filetype plugin on
-
 " 为特定文件类型载入相关缩进文件
-
 filetype indent on
-
 " 保存全局变量
-
 set viminfo+=!
-
 " 带有如下符号的单词不要被换行分割
-
 set iskeyword+=_,$,@,%,#,-
-
 " 字符间插入的像素行数目
-
 set linespace=0
-
 " 增强模式中的命令行自动完成操作
-
 set wildmenu
-
 " 使回格键（backspace）正常处理indent, eol, start等
-
 set backspace=2
-
 " 允许backspace和光标键跨越行边界
-
 set whichwrap+=<,>,h,l
-
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-
 set mouse=a
-
 set selection=exclusive
-
 set selectmode=mouse,key
-
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
-
 set report=0
-
 " 在被分割的窗口间显示空白，便于阅读
-
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 " 高亮显示匹配的括号
-
 set showmatch
-
 " 匹配括号高亮的时间（单位是十分之一秒）
-
 set matchtime=1
-
 " 光标移动到buffer的顶部和底部时保持3行距离
-
 set scrolloff=3
-
 " 高亮显示普通txt文件（需要txt.vim脚本）
-
 au BufRead,BufNewFile *  setfiletype txt
 
 "自动补全
-
 "":inoremap ( ()<ESC>i
-
 "":inoremap ) <c-r>=ClosePair(')')<CR>
-
 "by Suzzz：  原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是OK的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种。只是补全，然后光标在左右括号中间。
 ":inoremap { {<CR>}<ESC>O
 "":inoremap { {}<ESC>i
-
 "":inoremap } <c-r>=ClosePair('}')<CR>
-
 "":inoremap [ []<ESC>i
-
 "":inoremap ] <c-r>=ClosePair(']')<CR>
-
 "":inoremap " ""<ESC>i
-
 "":inoremap ' ''<ESC>i
 
 function! ClosePair(char)
-
 if getline('.')[col('.') - 1] == a:char
-
     return "\<Right>"
-
 else
-
     return a:char
-
 endif
-
 endfunction
-
 filetype plugin indent on 
 
 "打开文件类型检测, 加了这句才可以用智能补全
-
 "set completeopt=longest,menu
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " CTags的设定  
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "/usr/include/ /usr/local/include
 "nnoremap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>
@@ -726,33 +597,20 @@ set tags+=~/.tags/stdcpp.tags
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
 
 let Tlist_Sort_Type ="name"    " 按照名称排序  
-
 let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
-
 let Tlist_Compart_Format = 1    " 压缩方式  
-
 let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
-
 let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
-
 let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
-
 ""autocmd FileType java set tags+=D:\tools\java\tags  
-
 ""autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
-
 ""let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " Powerline设置
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "可视化书签vim-signature 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自定义 vim-signature 快捷键
@@ -780,39 +638,22 @@ let g:SignatureMap = {
         \ 'ListLocalMarkers'   :  "m?"
         \ }
 
-
 " 设置状态栏主题风格
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"其他东东
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "默认打开Taglist 
-
 ""let Tlist_Auto_Open=1
-
 """""""""""""""""""""""""""""" 
-
 " Tag list (ctags) 
-
 """""""""""""""""""""""""""""""" 
-
 let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
-
 let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
-
 let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
-
 let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 "设置显示标签列表子窗口的快捷键。速记：taglist
 nnoremap <Leader>tl :TlistToggle<CR> 
 
 """""""""""""""""""""""""""""" 
-
 " Tagbar(ctags) 
-
 """""""""""""""""""""""""""""""" 
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边 
 let tagbar_left=1 
@@ -971,7 +812,7 @@ let g:disable_protodef_sorting=1
 " 工程文件浏览
 "
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
-nnoremap <Leader>ne :NERDTreeToggle<CR>
+nnoremap <Leader>db :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
 let NERDTreeWinSize=25
 " 设置 NERDTree 子窗口位置
@@ -989,7 +830,7 @@ let NERDTreeAutoDeleteBuffer=1
 " 多文档编辑
 "  
 " 显示/隐藏 MiniBufExplorer 窗口
-nnoremap <Leader>ml :MBEToggle<cr>
+nnoremap <Leader>mb :MBEToggle<cr>
 "
 " buffer 切换快捷键
 nnoremap <Leader>mn :MBEbn<cr>

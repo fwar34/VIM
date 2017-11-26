@@ -14,7 +14,7 @@
 "10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
 
 " 让配置变更立即生效
-"autocmd BufWritePost $MYVIMRC source $MYVIMRC
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
 set tags=tags
 set autochdir 
@@ -30,6 +30,22 @@ inoremap ii <Esc>
 nnoremap <Space> :
 let mapleader = ";"
 let g:mapleader = ";"
+
+" 设置快捷键将选中文本块复制至系统剪贴板
+vnoremap <Leader>y "+y
+" 设置快捷键将系统剪贴板内容粘贴至vim
+nmap <Leader>p "+p
+" 依次遍历
+nnoremap nw <C-W><C-W>
+" 跳转至右方的窗口
+nnoremap <Leader>lw <C-W>l
+" 跳转至方的窗口
+nnoremap <Leader>hw <C-W>h
+" 跳转至上方的子窗口
+nnoremap <Leader>kw <C-W>k
+" 跳转至下方的子窗口
+nnoremap <Leader>jw <C-W>j
+
 "
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有.h文件的话不切换
@@ -74,7 +90,7 @@ Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
 "Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
-"Plugin 'https://github.com/kshenoy/vim-signature.git'
+Plugin 'https://github.com/kshenoy/vim-signature.git'
 "
 "i ##### 周期性针对这个工程自动生成标签文件，并通知 vim 引人该标签文件
 " Plugin 'vim-scripts/indexer.tar.gz'
@@ -740,29 +756,30 @@ let g:Powerline_colorscheme='solarized256'
 "可视化书签vim-signature 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 自定义 vim-signature 快捷键
 let g:SignatureMap = {
-    \ 'Leader'             :  "m",
-    \ 'PlaceNextMark'      :  "m,",
-    \ 'ToggleMarkAtLine'   :  "m.",
-    \ 'PurgeMarksAtLine'   :  "m-",
-    \ 'DeleteMark'         :  "dm",
-    \ 'PurgeMarks'         :  "mda",
-    \ 'PurgeMarkers'       :  "m<BS>",
-    \ 'GotoNextLineAlpha'  :  "']",
-    \ 'GotoPrevLineAlpha'  :  "'[",
-    \ 'GotoNextSpotAlpha'  :  "`]",
-    \ 'GotoPrevSpotAlpha'  :  "`[",
-    \ 'GotoNextLineByPos'  :  "]'",
-    \ 'GotoPrevLineByPos'  :  "['",
-    \ 'GotoNextSpotByPos'  :  "mn",
-    \ 'GotoPrevSpotByPos'  :  "mp",
-    \ 'GotoNextMarker'     :  "[+",
-    \ 'GotoPrevMarker'     :  "[-",
-    \ 'GotoNextMarkerAny'  :  "]=",
-    \ 'GotoPrevMarkerAny'  :  "[=",
-    \ 'ListLocalMarks'     :  "ms",
-    \ 'ListLocalMarkers'   :  "m?"
-    \ }
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
 
 
 " 设置状态栏主题风格
@@ -808,39 +825,39 @@ let tagbar_width=32
 let g:tagbar_compact=1
 " 设置 ctags 对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
-\ 'kinds' : [
-     \ 'c:classes:0:1',
-     \ 'd:macros:0:1',
-     \ 'e:enumerators:0:0', 
-     \ 'f:functions:0:1',
-     \ 'g:enumeration:0:1',
-     \ 'l:local:0:1',
-     \ 'm:members:0:1',
-     \ 'n:namespaces:0:1',
-     \ 'p:functions_prototypes:0:1',
-     \ 's:structs:0:1',
-     \ 't:typedefs:0:1',
-     \ 'u:unions:0:1',
-     \ 'v:global:0:1',
-     \ 'x:external:0:1'
- \ ],
- \ 'sro'        : '::',
- \ 'kind2scope' : {
-     \ 'g' : 'enum',
-     \ 'n' : 'namespace',
-     \ 'c' : 'class',
-     \ 's' : 'struct',
-     \ 'u' : 'union'
- \ },
- \ 'scope2kind' : {
-     \ 'enum'      : 'g',
-     \ 'namespace' : 'n',
-     \ 'class'     : 'c',
-     \ 'struct'    : 's',
-     \ 'union'     : 'u'
- \ }
- \ }
-
+     \ 'ctagstype' : 'c++',
+     \ 'kinds'     : [
+         \ 'c:classes:0:1',
+         \ 'd:macros:0:1',
+         \ 'e:enumerators:0:0', 
+         \ 'f:functions:0:1',
+         \ 'g:enumeration:0:1',
+         \ 'l:local:0:1',
+         \ 'm:members:0:1',
+         \ 'n:namespaces:0:1',
+         \ 'p:functions_prototypes:0:1',
+         \ 's:structs:0:1',
+         \ 't:typedefs:0:1',
+         \ 'u:unions:0:1',
+         \ 'v:global:0:1',
+         \ 'x:external:0:1'
+     \ ],
+     \ 'sro'        : '::',
+     \ 'kind2scope' : {
+         \ 'g' : 'enum',
+         \ 'n' : 'namespace',
+         \ 'c' : 'class',
+         \ 's' : 'struct',
+         \ 'u' : 'union'
+     \ },
+     \ 'scope2kind' : {
+         \ 'enum'      : 'g',
+         \ 'namespace' : 'n',
+         \ 'class'     : 'c',
+         \ 'struct'    : 's',
+         \ 'union'     : 'u'
+     \ }
+\ }
 """"""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
 
@@ -973,11 +990,11 @@ let NERDTreeAutoDeleteBuffer=1
 " 多文档编辑
 "  
 " 显示/隐藏 MiniBufExplorer 窗口
-nnoremap <Leader>mb :MBEToggle<cr>
+nnoremap <Leader>ml :MBEToggle<cr>
 "
 " buffer 切换快捷键
 nnoremap <Leader>mn :MBEbn<cr>
-nnoremap <Leader>mp :MBEbp<cr>
+nnoremap <Leader>mq :MBEbp<cr>
 " <<
 "
 " >>

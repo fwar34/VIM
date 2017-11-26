@@ -34,7 +34,7 @@ let g:mapleader = ";"
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有。h文件的话不切换
 let g:alternateNonDefaultAlternate=1
-nmap <Leader>a :A<CR>
+nnoremap <Leader>a :A<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大
@@ -194,13 +194,13 @@ endf
 " 设置插件 indexer 调用 ctags 的参数
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
-let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
-"let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+"let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+let g:indexer_ctagsCommandLineOptions="--c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 
 " 正向遍历同名标签
-nmap <Leader>tn :tnext<CR>
+nnoremap <Leader>tn :tnext<CR>
 " 反向遍历同名标签
-nmap <Leader>tp :tprevious<CR>
+nnoremap <Leader>tp :tprevious<CR>
 "
 " 基于语义的代码导航
 "
@@ -328,9 +328,9 @@ endfunc
 "键盘命令
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""nmap <leader>w :w!<cr>
+""nnoremap <leader>w :w!<cr>
 
-""nmap <leader>f :find<cr>
+""nnoremap <leader>f :find<cr>
 
 " C+]显示列表
 "map <C-]> :ts<CR>
@@ -688,20 +688,20 @@ filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "/usr/include/ /usr/local/include
-"nmap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>
+"nnoremap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>
 "cd 到/usr/include执行(sudo)
-"nmap <Leader><F10> :!sudo ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f sys.tags .<CR>
+"nnoremap <Leader><F10> :!sudo ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f sys.tags .<CR>
 "根据系统c++版本修改对应的路径 (例如/usr/include/c++/4.8)
-"nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags /usr/include/c++/4.8<CR>
-nmap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags 
+"nnoremap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags /usr/include/c++/4.8<CR>
+nnoremap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q --language-force=c++ -f ~/.tags/stdcpp.tags 
 "/tang/include/
-nmap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
+nnoremap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
 
 set tags+=~/.tags/tang.tags
 set tags+=~/.tags/stdcpp.tags
 " 引入 C++ 标准库 tags
-"nmap <Leader><F9> :set tags+=/usr/include/c++/4.8/stdcpp.tags<CR>:set tags+=/usr/include/sys.tags<CR>
-"nmap <Leader><F9>:set tags+=~/.tags/stdcpp.tags<CR>
+"nnoremap <Leader><F9> :set tags+=/usr/include/c++/4.8/stdcpp.tags<CR>:set tags+=/usr/include/sys.tags<CR>
+"nnoremap <Leader><F9>:set tags+=~/.tags/stdcpp.tags<CR>
 "
 "若要加入系统函数或全局变量的tag标签，则需执行：
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+px --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
@@ -998,12 +998,12 @@ nnoremap <leader>ss :mksession! my.vim<cr>
 "map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 nnoremap <leader>rs :source my.vim<cr>
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 

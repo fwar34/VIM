@@ -39,13 +39,13 @@ vnoremap <Leader>y "+y
 " 设置快捷键将系统剪贴板内容粘贴至vim
 nmap <Leader>p "+p
 " 跳转至右方的窗口
-nnoremap <Leader>wl <C-W>l
+nnoremap <Leader>lw <C-W>l
 " 跳转至方的窗口
-nnoremap <Leader>wh <C-W>h
+nnoremap <Leader>hw <C-W>h
 " 跳转至上方的子窗口
-nnoremap <Leader>wk <C-W>k
+nnoremap <Leader>kw <C-W>k
 " 跳转至下方的子窗口
-nnoremap <Leader>wj <C-W>j
+nnoremap <Leader>jw <C-W>j
 
 "
 "a.vim .cpp和.h之间切换，:A
@@ -338,7 +338,9 @@ endfunc
 " C+]显示列表
 "map <C-]> :ts<CR>
 nnoremap <C-]> g<C-]>
-nnoremap <Leader>j g<C-]>
+"nnoremap <Leader>o g<C-]>
+nnoremap <Leader>g g<C-]>
+"nnoremap <Leader><Space> g<C-]>
 " 映射全选+复制 ctrl+a
 ""map <C-A> ggVGY
 ""map! <C-A> <Esc>ggVGY
@@ -362,7 +364,6 @@ nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
 
 nnoremap <C-l> :ls<CR>
 "nnoremap <Leader>l :ls<CR>
-nnoremap <Leader><Space> :ls<CR>
 nnoremap ;; :ls<CR>
 inoremap ;; <C-n>
 nnoremap <Leader>w <C-w><C-w>

@@ -746,7 +746,7 @@ let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 开启 YCM 标签补全引擎
 let g:ycm_collect_identifiers_from_tags_files=0
 "YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
-inoremap <leader><Tab> <C-x><C-o>
+inoremap <Leader><Tab> <C-x><C-o>
 "
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview

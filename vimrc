@@ -366,7 +366,7 @@ nnoremap <Leader><Space> :ls<CR>
 nnoremap ;; :ls<CR>
 inoremap ;; <C-n>
 nnoremap <Leader>w <C-w><C-w>
-nnoremap <Leader>r <C-^>
+nnoremap <Leader>e <C-^>
 nnoremap <Leader>mm %
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>

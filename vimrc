@@ -32,7 +32,8 @@ let mapleader = ";"
 let g:mapleader = ";"
 
 nnoremap <Leader>v $
-nnoremap <Leader>x <Home>
+"nnoremap <Leader>x <Home>
+nnoremap <Leader>x ^
 " 设置快捷键将选中文本块复制至系统剪贴板
 vnoremap <Leader>y "+y
 " 设置快捷键将系统剪贴板内容粘贴至vim

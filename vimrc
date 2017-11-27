@@ -585,8 +585,10 @@ nnoremap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -
 "/tang/include/
 nnoremap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
 
-set tags+=~/.tags/tang.tags
-set tags+=~/.tags/stdcpp.tags
+"set tags+=~/.tags/tang.tags
+"set tags+=~/.tags/stdcpp.tags
+nnoremap <Leader><F1> :set tags+=~/.tags/tang.tags<CR>:set tags+=~/.tags/stdcpp.tags<CR>
+nnoremap <Leader><F7> :set tags+=~/.indexer_files_tags/
 " 引入 C++ 标准库 tags
 "nnoremap <Leader><F9> :set tags+=/usr/include/c++/4.8/stdcpp.tags<CR>:set tags+=/usr/include/sys.tags<CR>
 "nnoremap <Leader><F9>:set tags+=~/.tags/stdcpp.tags<CR>

@@ -87,7 +87,7 @@ Plugin 'https://github.com/altercation/vim-colors-solarized.git'
 "语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
 "vim-cpp-enhanced-highlight
 "Plugin 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
-Plugin 'fwar34/vim-cpp-enhanced-highlight.git'
+Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
 "Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
@@ -834,7 +834,7 @@ let NERDTreeAutoDeleteBuffer=1
 nnoremap <Leader>mb :MBEToggle<cr>
 "
 " buffer 切换快捷键
-nnoremap <Leader>mn :MBEbn<cr>
+nnoremap <Leader>mh :MBEbn<cr>
 nnoremap <Leader>mq :MBEbp<cr>
 " <<
 "

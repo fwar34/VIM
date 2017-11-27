@@ -338,7 +338,7 @@ endfunc
 " C+]显示列表
 "map <C-]> :ts<CR>
 nnoremap <C-]> g<C-]>
-nnoremap <Leader>j g<C-]>
+nnoremap <Leader>c g<C-]>
 " 映射全选+复制 ctrl+a
 ""map <C-A> ggVGY
 ""map! <C-A> <Esc>ggVGY

@@ -23,14 +23,15 @@ set wildmenu
 " 修改leader键
 "let mapleader = "\<space>"
 "let g:mapleader ="\<space>"
-" ii 替换 Esc
-inoremap ii <Esc>
+" jj 替换 Esc
+inoremap jj <Esc>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
 let mapleader = ";"
 let g:mapleader = ";"
 
+nnoremap <Leader>ss :w<CR>
 nnoremap <Leader>v $
 "nnoremap <Leader>x <Home>
 nnoremap <Leader>x ^
@@ -52,6 +53,14 @@ nnoremap <Leader>jw <C-W>j
 "如果cpp没有.h文件的话不切换
 let g:alternateNonDefaultAlternate=1
 nnoremap <Leader>a :A<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<Leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
+
+"let g:UltiSnipsSnippetDirectories=["mycppsnippets"]
+let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/bundle/cppsnippets"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大
@@ -91,7 +100,7 @@ Plugin 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
 "Plugin 'Mizuchi/STL-Syntax'
 "书签可视化
-"Plugin 'https://github.com/kshenoy/vim-signature.git'
+Plugin 'https://github.com/kshenoy/vim-signature.git'
 "
 "i ##### 周期性针对这个工程自动生成标签文件，并通知 vim 引人该标签文件
 " Plugin 'vim-scripts/indexer.tar.gz'
@@ -122,16 +131,18 @@ Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "###### 多语言语法检查    
-"Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
 "doxygen
 Plugin 'https://github.com/scrooloose/nerdcommenter.git'
 
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 "Plugin 'marijnh/tern_for_vim'
-
+"代码模板补全
+Plugin 'https://github.com/SirVer/ultisnips'
+Plugin 'git@github.com:fwar34/cppsnippets.git'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 
@@ -142,37 +153,40 @@ filetype plugin indent on    " required
 "filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ###### 多语言语法检查   
-set statusline+=%#warningmsg#                                                                                                                
-set statusline+=%{SyntasticStatuslineFlag()}                                                                                                 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%* 
 " 检测到错误和警告时的标志
-let g:syntastic_error_symbol='✘✘'                                                                                                            
-let g:syntastic_warning_symbol='➤➤'                                                                                                          
-let g:syntastic_check_on_open=1                                                                                                              
-let g:syntastic_check_on_wq=0                                                                                                                
+let g:syntastic_error_symbol='✘✘'
+let g:syntastic_warning_symbol='➤➤'
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
 let g:syntastic_enable_highlighting=1
 " 使用pyflakes,速度比pylint快
 " 需要安装 pep8 或者 pyflakes，使用pip安装
 ",pep8是python的格式检测神器，建议安装。 
-let g:syntastic_python_checkers=['pep8', 'pyflakes']                                                                                         
+let g:syntastic_python_checkers=['pep8', 'pyflakes']
 let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题 
 highlight SyntasticErrorSign guifg=white guibg=black 
 " to see error location list
-let g:syntastic_always_populate_loc_list = 0                                                                                                 
-let g:syntastic_auto_loc_list = 0                                                                                                            
-let g:syntastic_loc_list_height = 5                                                                                                          
-function! ToggleErrors()                                                                                                                     
-    let old_last_winnr = winnr('$')                                                                                                          
-    lclose                                                                                                                                   
-    if old_last_winnr == winnr('$')                                                                                                          
-        " Nothing was closed, open syntastic error location panel                                                                            
-        Errors                                                                                                                               
-    endif                                                                                                                                    
-endfunction                                                                                                                                  
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_loc_list_height = 5
+
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+
+
 nnoremap <Leader>s :call ToggleErrors()<cr> 
 " 跳转到下一个/上一个错误处 
-nnoremap <Leader>sn :lnext<cr>                                                                                                               
+nnoremap <Leader>sn :lnext<cr>
 nnoremap <Leader>sp :lprevious<cr>
 " 关闭 某一语言的（如C/C++） 的语法检测                                                                        
 " let g:syntastic_ignore_files=[".*\.c$", ".*\.h$", ".*\.cpp", ".*\.hpp"]
@@ -220,9 +234,9 @@ nnoremap <Leader>tp :tprevious<CR>
 "
 " 基于语义的代码导航
 "
-"nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-"nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
 """"""""""""" By  ma6174""""""""""""""""""""
 " 显示相关  
@@ -338,7 +352,7 @@ endfunc
 " C+]显示列表
 "map <C-]> :ts<CR>
 nnoremap <C-]> g<C-]>
-"nnoremap <Leader>o g<C-]>
+"nnoremap <Leader>jj g<C-]>
 nnoremap <Leader>g g<C-]>
 "nnoremap <Leader><Space> g<C-]>
 " 映射全选+复制 ctrl+a
@@ -787,6 +801,7 @@ let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
 let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
 let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
 "let OmniCpp_DefaultNamespaces=["std"]
+"let OmniCpp_DefaultNamespaces=["_GLIBCXX_STD"]
 let OmniCpp_ShowScopeInAbbr=1 " show scope in abbreviation and remove the last column
 let OmniCpp_ShowAccess=1
 
@@ -853,7 +868,7 @@ set undofile
 "
 " 保存快捷键
 "map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
-nnoremap <leader>ss :mksession! my.vim<cr>
+nnoremap <leader>sv :mksession! my.vim<cr>
 "
 " 恢复快捷键
 "map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>

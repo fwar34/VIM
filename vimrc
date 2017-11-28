@@ -131,7 +131,7 @@ Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "###### 多语言语法检查    
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'scrooloose/nerdtree'
 Plugin 'fholgado/minibufexpl.vim'
@@ -153,26 +153,26 @@ filetype plugin indent on    " required
 "filetype plugin on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ###### 多语言语法检查   
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%* 
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%* 
 " 检测到错误和警告时的标志
-let g:syntastic_error_symbol='✘✘'
-let g:syntastic_warning_symbol='➤➤'
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=0
-let g:syntastic_enable_highlighting=1
+"let g:syntastic_error_symbol='e'
+"let g:syntastic_warning_symbol='w'
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq=0
+"let g:syntastic_enable_highlighting=1
 " 使用pyflakes,速度比pylint快
 " 需要安装 pep8 或者 pyflakes，使用pip安装
 ",pep8是python的格式检测神器，建议安装。 
-let g:syntastic_python_checkers=['pep8', 'pyflakes']
-let g:syntastic_python_pep8_args='--ignore=E501,E225'
+"let g:syntastic_python_checkers=['pep8', 'pyflakes']
+"let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题 
-highlight SyntasticErrorSign guifg=white guibg=black 
+"highlight SyntasticErrorSign guifg=white guibg=black 
 " to see error location list
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
+"let g:syntastic_always_populate_loc_list = 0
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_loc_list_height = 5
 
 function! ToggleErrors()
     let old_last_winnr = winnr('$')
@@ -183,13 +183,12 @@ function! ToggleErrors()
     endif
 endfunction
 
-
-nnoremap <Leader>s :call ToggleErrors()<cr> 
+"nnoremap <Leader>s :call ToggleErrors()<cr> 
 " 跳转到下一个/上一个错误处 
-nnoremap <Leader>sn :lnext<cr>
-nnoremap <Leader>sp :lprevious<cr>
+"nnoremap <Leader>sn :lnext<cr>
+"nnoremap <Leader>sp :lprevious<cr>
 " 关闭 某一语言的（如C/C++） 的语法检测                                                                        
-" let g:syntastic_ignore_files=[".*\.c$", ".*\.h$", ".*\.cpp", ".*\.hpp"]
+"" let g:syntastic_ignore_files=[".*\.c$", ".*\.h$", ".*\.cpp", ".*\.hpp"]
 
 """"""""""""""""""""""""""""""""""""""""""""
 "提示函数原型echofunc
@@ -601,7 +600,7 @@ nnoremap <Leader><F11> :!ctags -R --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -
 nnoremap <Leader><F12> :!ctags -R --c-kinds=+l+x+p --c++-kinds=+l+x+p --fields=+iaSl --extra=+q -f ~/.tags/tang.tags /tang/include<CR>
 
 "set tags+=~/.tags/tang.tags
-"set tags+=~/.tags/stdcpp.tags
+set tags+=~/.tags/stdcpp.tags
 nnoremap <Leader><F1> :set tags+=~/.tags/tang.tags<CR>:set tags+=~/.tags/stdcpp.tags<CR>
 nnoremap <Leader><F7> :set tags+=~/.indexer_files_tags/
 " 引入 C++ 标准库 tags
@@ -718,11 +717,8 @@ let g:tagbar_type_cpp = {
 \ }
 """"""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
-
 let g:miniBufExplMapWindowNavVim = 1
-
 let g:miniBufExplMapWindowNavArrows = 1
-
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -749,6 +745,11 @@ autocmd BufReadPost *
 endif " has("autocmd")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"3条关闭语法检测
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_echo_current_diagnostic = 0
+""""
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
 let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
 let g:ycm_server_python_interpreter='/usr/bin/python'
@@ -759,19 +760,16 @@ let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 " 开启 YCM 标签补全引擎
-let g:ycm_collect_identifiers_from_tags_files=0
+let g:ycm_collect_identifiers_from_tags_files=1
 "YCM 集成 OmniCppComplete 补全引擎，设置其快捷键
 inoremap <Leader><Tab> <C-x><C-o>
 "
 " 补全内容不以分割子窗口形式出现，只显示补全列表
 set completeopt-=preview
-"
 " 从第一个键入字符就开始罗列匹配项
 let g:ycm_min_num_of_chars_for_completion=1
-"
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
-"
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 
@@ -813,7 +811,6 @@ let OmniCpp_ShowAccess=1
 ""hi comment ctermfg=6
 ""hi comment ctermfg=blue
 ""hi comment ctermfg=green
-
 
 " 设置配色方案
 set t_Co=256

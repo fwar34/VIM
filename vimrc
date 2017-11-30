@@ -31,7 +31,8 @@ nnoremap <Space> :
 let mapleader = ";"
 let g:mapleader = ";"
 
-nnoremap <Leader>ss :w<CR>
+nnoremap <Leader>z :w<CR>
+"nnoremap <Leader>ss :w<CR>
 nnoremap <Leader>v $
 "nnoremap <Leader>x <Home>
 nnoremap <Leader>x ^
@@ -233,9 +234,10 @@ nnoremap <Leader>tp :tprevious<CR>
 "
 " 基于语义的代码导航
 "
-nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+nnoremap <Leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <Leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """"""""""""" By  ma6174""""""""""""""""""""
 " 显示相关  
@@ -750,7 +752,8 @@ let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_echo_current_diagnostic = 0
 """"
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'       "配置全局路径
 let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
 let g:ycm_server_python_interpreter='/usr/bin/python'
 "" 补全功能在注释中同样有效

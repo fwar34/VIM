@@ -565,6 +565,9 @@ set scrolloff=3
 " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile *  setfiletype txt
 
+"将当前光标所在的单词转换成 大写格式
+inoremap <Leader>U <Esc>viwUA
+nnoremap <Leader>U viwU
 "自动补全
 inoremap ( ()<ESC>i
 inoremap ) <c-r>=ClosePair(')')<CR>
@@ -884,3 +887,9 @@ nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
+
+"nnoremap <Leader>se :e $MYVIMRC<CR>
+nnoremap <Leader>se :e ~/.vimrc<CR>
+nnoremap <Leader>ss :source $MYVIMRC<CR>
+
+:iabbrev @@ liang.feng@quanshi.com

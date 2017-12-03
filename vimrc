@@ -823,7 +823,6 @@ let OmniCpp_ShowAccess=1
 set t_Co=256
 ""colorscheme codeschool
 colorscheme wombat256
-""colorscheme morning
 ""colorscheme torte
 
 " 成员函数的实现顺序与声明顺序一致
@@ -893,3 +892,16 @@ nnoremap <Leader>se :e ~/.vimrc<CR>
 nnoremap <Leader>ss :source $MYVIMRC<CR>
 
 :iabbrev @@ liang.feng@quanshi.com
+
+"在下一个括号内(inside next parentheses)
+onoremap in( :<C-U>normal! f(vi(<CR>
+onoremap in" :<C-U>normal! f"vi"<CR>
+onoremap in' :<C-U>normal! f'vi'<CR>
+onoremap in{ :<C-U>normal! f{vi{<CR>
+onoremap in< :<C-U>normal! f<vi<<CR>
+"在上一个括号内(inside last parentheses)
+onoremap il( :<C-U>normal! F)vi)<CR>
+onoremap il" :<C-U>normal! F"vi"<CR>
+onoremap il' :<C-U>normal! F'vi'<CR>
+onoremap il} :<C-U>normal! F}vi}<CR>
+onoremap il> :<C-U>normal! F>vi><CR>

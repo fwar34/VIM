@@ -895,13 +895,16 @@ nnoremap <Leader>ss :source $MYVIMRC<CR>
 
 "在下一个括号内(inside next parentheses)
 onoremap in( :<C-U>normal! f(vi(<CR>
-onoremap in" :<C-U>normal! f"vi"<CR>
-onoremap in' :<C-U>normal! f'vi'<CR>
+onoremap in" :<C-U>normal! f"lvi"<CR>
+onoremap in' :<C-U>normal! f'lvi'<CR>
 onoremap in{ :<C-U>normal! f{vi{<CR>
 onoremap in< :<C-U>normal! f<vi<<CR>
 "在上一个括号内(inside last parentheses)
 onoremap il( :<C-U>normal! F)vi)<CR>
-onoremap il" :<C-U>normal! F"vi"<CR>
-onoremap il' :<C-U>normal! F'vi'<CR>
+onoremap il" :<C-U>normal! F"hvi"<CR>
+onoremap il' :<C-U>normal! F'hvi'<CR>
 onoremap il} :<C-U>normal! F}vi}<CR>
 onoremap il> :<C-U>normal! F>vi><CR>
+
+"光标移动到word上任意字符，复制word
+nnoremap <Leader>yw viwy

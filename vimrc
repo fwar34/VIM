@@ -17,7 +17,7 @@
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
 set tags=tags
-set autochdir 
+"set autochdir 
 " vim 自身命令行模式智能补全
 set wildmenu
 " 修改leader键
@@ -79,6 +79,14 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'lambdalisue/vim-manpager'
+"""""""""""""""""""""""""""
+Plugin 'Shougo/vimshell.vim'
+Plugin 'Shougo/vimproc.vim'
+"""""""""""""""""""""""""""""
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+"""""""""""""""""""""""""""""""
 Plugin 'fwar34/vim-color-wombat256'
 Plugin 'vim-scripts/a.vim'
 "Plugin 'vim-scripts/c.vim'
@@ -196,6 +204,11 @@ endfunction
 "提示函数原型echofunc
 let g:EchoFuncKeyNext="<F2>"
 let g:EchoFuncKeyPrev="<F3>"
+""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""set ctrlp-funky
+"nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+"nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 """"""""""""""""""""""""""""""""""""""""""""""
 " >>
 " 营造专注气氛
@@ -908,3 +921,25 @@ onoremap il> :<C-U>normal! F>vi><CR>
 
 "光标移动到word上任意字符，复制word
 nnoremap <Leader>yw viwy
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"lambdalisue/vim-manpager
+"bashrc/zshrc 添加 export MANPAGER="vim -c MANPAGER -"
+"function! te#utils#find_mannel() abort
+"    let l:man_cmd=':Man'
+"    if !exists(l:man_cmd)
+"        call te#utils#EchoWarning('You must install lambdalisue/vim-manpager first!')
+"        return -1
+"    endif
+"    let l:cur_word=expand('<cword>')
+"    let l:ret = te#utils#GetError(l:man_cmd.' 3 '.l:cur_word,'\cno \(manual\|entry\).*')
+    "make sure index valid
+"    if l:ret != 0
+"        let l:ret = te#utils#GetError(l:man_cmd.' 2 '.l:cur_word,'\cno \(manual\|entry\).*')
+"        if l:ret != 0
+"            execute 'silent! help '.l:cur_word
+"        endif
+"    endif
+"endfunction
+
+"nnoremap <buffer> <silent> K :call te#utils#find_mannel()<cr>

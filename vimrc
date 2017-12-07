@@ -17,7 +17,7 @@
 "autocmd BufWritePost $MYVIMRC source $MYVIMRC
 "如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
 set tags=tags
-"set autochdir 
+set autochdir 
 " vim 自身命令行模式智能补全
 set wildmenu
 " 修改leader键

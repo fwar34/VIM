@@ -474,7 +474,7 @@ endfunc
 " 设置当文件被改动时自动载入
 set autoread
 " quickfix模式
-autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
+"autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
 "代码补全 
 set completeopt=longest,preview,menu 
 "允许插件  

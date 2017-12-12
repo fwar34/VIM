@@ -104,3 +104,8 @@ alias vim='/usr/local/bin/vim'
 bindkey  "^[[1~"   beginning-of-line
 bindkey  "^[[4~"   end-of-line
 export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH
+#vim man page
+export MANPAGER="vim -c MANPAGER -"
+
+ulimit -c unlimited
+unsetopt share_history

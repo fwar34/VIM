@@ -374,10 +374,19 @@ nnoremap <Leader>g g<C-]>
 ""map <C-A> ggVGY
 ""map! <C-A> <Esc>ggVGY
 "编辑模式移动光标,C-h和退格键冲突"
-"inoremap <C-h> <Left>
-"inoremap <C-j> <Down>
-"inoremap <C-k> <Up>
-"inoremap <C-l> <Right>
+"noremap <C-h> <Left>
+noremap <C-j> <Down>
+noremap <C-k> <Up>
+noremap <C-l> <Right>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+inoremap <Leader>h <Backspace>
+inoremap <Leader>w <C-w>
+inoremap <Leader>e <End>
+inoremap <Leader>d <Delete>
+nnoremap . ;
 "map <F1> :
 "map <C-k> :
 "map <Space> :

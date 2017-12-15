@@ -786,7 +786,10 @@ let g:ycm_echo_current_diagnostic = 0
 "let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'       "配置全局路径
 let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
-let g:ycm_server_python_interpreter='/usr/bin/python'
+
+"let g:ycm_server_python_interpreter='/usr/bin/python'
+let g:ycm_server_python_interpreter='/usr/bin/python2'
+
 "" 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 let g:ycm_min_num_of_chars_for_completion = 3 

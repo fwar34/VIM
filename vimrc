@@ -23,10 +23,10 @@ set wildmenu
 " 修改leader键
 "let mapleader = "\<space>"
 "let g:mapleader ="\<space>"
-" jj 替换 Esc
-noremap! jj <C-c>
-vnoremap jj <Esc>
-nnoremap jj <Esc>
+" ;v 替换 Esc
+noremap! ;<Space> <C-c>
+vnoremap ;<Space> <Esc>
+nnoremap ;<Space> <Esc>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
@@ -42,7 +42,7 @@ nnoremap <Leader>lw <C-W>l
 " 跳转至方的窗口
 nnoremap <Leader>hw <C-W>h
 " 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
+"nnoremap <Leader>kw <C-W>k
 " 跳转至下方的子窗口
 nnoremap <Leader>jw <C-W>j
 
@@ -378,19 +378,23 @@ nnoremap <Leader>g g<C-]>
 "inoremap <C-l> <Right>
 noremap! <Leader>h <C-h>
 noremap! <Leader>w <C-w>
-"noremap! <Leader>k <C-k>
+noremap! <Leader>k <C-k>
 noremap! <Leader>u <C-u>
 
+"a->begin
 inoremap <Leader>a <Esc>I
+noremap <Leader>a ^
+cnoremap <Leader>a <Home>
+"e->end
 inoremap <Leader>e <End>
+noremap <Leader>e $
+cnoremap <Leader>e <End>
+
 inoremap <Leader>d <Delete>
 nnoremap . ;
 nnoremap <Leader>z :w<CR>
+inoremap <Leader>z <Esc>:w<CR>a
 nnoremap <Leader>y y'a
-noremap <Leader>e $
-cnoremap <Leader>e <End>
-noremap <Leader>a ^
-cnoremap <Leader>a <Home>
 nnoremap <F7> :set tags+=
 "映射命令行模式C-k到:
 "cmap <C-k> :
@@ -404,7 +408,7 @@ nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
 nnoremap <C-l> :ls<CR>
 "nnoremap <Leader>l :ls<CR>
 nnoremap ;; :ls<CR>
-inoremap ;; <C-n>
+"inoremap ;; <C-n>
 nnoremap <Leader>w <C-w><C-w>
 nnoremap <Leader>q <C-^>
 nnoremap <Leader>mm %

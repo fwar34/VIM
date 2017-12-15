@@ -24,21 +24,17 @@ set wildmenu
 "let mapleader = "\<space>"
 "let g:mapleader ="\<space>"
 " jj 替换 Esc
-inoremap jj <Esc>
+noremap! jj <C-c>
+vnoremap jj <Esc>
+nnoremap jj <Esc>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
 let mapleader = ";"
 let g:mapleader = ";"
 
-nnoremap <Leader>z :w<CR>
-nnoremap <Leader>y y'a
-"nnoremap <Leader>ss :w<CR>
-nnoremap <Leader>v $
-"nnoremap <Leader>x <Home>
-nnoremap <Leader>x ^
 " 设置快捷键将选中文本块复制至系统剪贴板
-vnoremap <Leader>y "+y
+"vnoremap <Leader>y "+y
 " 设置快捷键将系统剪贴板内容粘贴至vim
 nmap <Leader>p "+p
 " 跳转至右方的窗口
@@ -54,7 +50,7 @@ nnoremap <Leader>jw <C-W>j
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有.h文件的话不切换
 let g:alternateNonDefaultAlternate=1
-nnoremap <Leader>a :A<CR>
+nnoremap <Leader>s :A<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<Leader><tab>"
@@ -373,23 +369,28 @@ nnoremap <Leader>g g<C-]>
 " 映射全选+复制 ctrl+a
 ""map <C-A> ggVGY
 ""map! <C-A> <Esc>ggVGY
-"编辑模式移动光标,C-h和退格键冲突"
 "noremap <C-h> <Left>
-noremap <C-j> <Down>
-noremap <C-k> <Up>
-noremap <C-l> <Right>
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-inoremap <Leader>h <Backspace>
-inoremap <Leader>w <C-w>
+"noremap <C-j> <Down>
+"noremap <C-k> <Up>
+"noremap <C-l> <Right>
+"编辑模式移动光标,C-h和退格键冲突"
+"inoremap <C-j> <Down>
+"inoremap <C-l> <Right>
+noremap! <Leader>h <C-h>
+noremap! <Leader>w <C-w>
+"noremap! <Leader>k <C-k>
+noremap! <Leader>u <C-u>
+
+inoremap <Leader>a <Esc>I
 inoremap <Leader>e <End>
 inoremap <Leader>d <Delete>
 nnoremap . ;
-"map <F1> :
-"map <C-k> :
-"map <Space> :
+nnoremap <Leader>z :w<CR>
+nnoremap <Leader>y y'a
+noremap <Leader>e $
+cnoremap <Leader>e <End>
+noremap <Leader>a ^
+cnoremap <Leader>a <Home>
 nnoremap <F7> :set tags+=
 "映射命令行模式C-k到:
 "cmap <C-k> :
@@ -405,7 +406,7 @@ nnoremap <C-l> :ls<CR>
 nnoremap ;; :ls<CR>
 inoremap ;; <C-n>
 nnoremap <Leader>w <C-w><C-w>
-nnoremap <Leader>e <C-^>
+nnoremap <Leader>q <C-^>
 nnoremap <Leader>mm %
 nnoremap <Leader>f <C-f>
 nnoremap <Leader>b <C-b>
@@ -908,10 +909,9 @@ nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-
 "nnoremap <Leader>se :e $MYVIMRC<CR>
-nnoremap <Leader>se :e ~/.vimrc<CR>
-nnoremap <Leader>ss :source $MYVIMRC<CR>
+"nnoremap <Leader>se :e ~/.vimrc<CR>
+"nnoremap <Leader>ss :source $MYVIMRC<CR>
 
 :iabbrev @@ liang.feng@quanshi.com
 

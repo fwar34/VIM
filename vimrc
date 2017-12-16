@@ -378,7 +378,8 @@ nnoremap <Leader>g g<C-]>
 "inoremap <C-l> <Right>
 noremap! <Leader>h <C-h>
 noremap! <Leader>w <C-w>
-noremap! <Leader>k <C-k>
+"noremap! <Leader>k <C-k>
+inoremap <Leader>k <Esc>lDa
 noremap! <Leader>u <C-u>
 
 "a->begin
@@ -390,6 +391,7 @@ inoremap <Leader>e <End>
 noremap <Leader>e $
 cnoremap <Leader>e <End>
 
+cnoremap <Leader>r <C-r><C-w>
 inoremap <Leader>d <Delete>
 nnoremap . ;
 nnoremap <Leader>z :w<CR>

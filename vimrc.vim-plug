@@ -407,7 +407,7 @@ nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>z :w<CR>
 inoremap <Leader>z <Esc>:w<CR>a
-nnoremap <Leader>y y'a
+nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
 cnoremap <Leader>r <C-r><C-w>
 "映射命令行模式C-k到:

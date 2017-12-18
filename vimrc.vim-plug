@@ -403,6 +403,7 @@ inoremap <Leader>d <C-d>
 noremap! <C-d> <Delete>
 noremap! <Leader>w <C-w>
 """"""""""""""""""""""""""""""""""""'
+nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>z :w<CR>
 inoremap <Leader>z <Esc>:w<CR>a

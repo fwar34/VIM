@@ -77,7 +77,8 @@ Plug 'VundleVim/Vundle.vim'
 Plug 'lambdalisue/vim-manpager'
 """""""""""""""""""""""""""
 Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/vimproc.vim'
+"Plug 'Shougo/vimproc.vim'
+Plug 'https://github.com/Shougo/vimproc.vim.git'
 """""""""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'

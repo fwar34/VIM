@@ -24,9 +24,8 @@ set wildmenu
 "let mapleader = "\<space>"
 "let g:mapleader ="\<space>"
 " ;v 替换 Esc
-noremap! ;<Space> <C-c>
-vnoremap ;<Space> <Esc>
-nnoremap ;<Space> <Esc>
+noremap! ;g <C-c>
+vnoremap ;g <Esc>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
@@ -376,10 +375,7 @@ nnoremap <Leader>g g<C-]>
 "编辑模式移动光标,C-h和退格键冲突"
 "inoremap <C-j> <Down>
 "inoremap <C-l> <Right>
-noremap! <Leader>h <C-h>
-noremap! <Leader>w <C-w>
-"noremap! <Leader>k <C-k>
-inoremap <Leader>k <Esc>lDa
+inoremap <expr> <Leader>k col('.') == col('$') ? "\<Delete>" : "\<C-o>D"
 noremap! <Leader>u <C-u>
 
 "a->begin
@@ -390,14 +386,31 @@ cnoremap <Leader>a <Home>
 inoremap <Leader>e <End>
 noremap <Leader>e $
 cnoremap <Leader>e <End>
+"move in insert mod or cmd mod
+noremap! <C-b> <Left>
+noremap! <C-f> <Right>
+noremap! <Leader>n <Down>
+noremap! <Leader>p <Up>
 
-cnoremap <Leader>r <C-r><C-w>
-inoremap <Leader>d <Delete>
+noremap! <Leader>f <S-Right>
+noremap! <Leader>b <S-Left>
+
+inoremap <Leader>o <C-o>O
+
+"adjust in insert mod
+inoremap <Leader>t <C-t>
+inoremap <Leader>d <C-d>
+"delete in insert mod
+noremap! <C-d> <Delete>
+noremap! <Leader>w <C-w>
+""""""""""""""""""""""""""""""""""""'
+nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>z :w<CR>
 inoremap <Leader>z <Esc>:w<CR>a
-nnoremap <Leader>y y'a
+nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
+cnoremap <Leader>r <C-r><C-w>
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :

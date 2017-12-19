@@ -86,6 +86,7 @@ Plug 'fwar34/vim-color-wombat256'
 Plug 'vim-scripts/a.vim'
 "Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/AutoComplPop'
+Plug 'tpope/vim-surround'
 "echofunc可以在命令行中提示当前输入函数的原型
 Plug 'vim-scripts/echofunc.vim'
 Plug 'vim-scripts/OmniCppComplete'

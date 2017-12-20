@@ -82,6 +82,8 @@ Plug 'https://github.com/Shougo/vimproc.vim.git'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 """""""""""""""""""""""""""""""
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'fwar34/vim-color-wombat256'
 Plug 'vim-scripts/a.vim'
 "Plug 'vim-scripts/c.vim'

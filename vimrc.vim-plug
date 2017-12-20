@@ -989,3 +989,18 @@ nnoremap <Leader>yw viwy
 if exists('$TMUX')
     set term=screen-256color
 endif
+
+"调整光标的形状
+"在默认情况下，当通过 Tmux 运行 Vim 时，无论当前 Vim
+"是处于插入模式、可视模式还是其他模式，光标的形状都是一样的。这样就很难判断当前的
+"Vim 模式是什么。若要避免这个问题，就需要让 Tmux 通知 iTerm
+"更新光标的形状。为此，需要将以下配置加入到文件 ~/.vimrc 中。
+if exists('$ITERM_PROFILE')
+    if exists('$TMUX') 
+        let &amp_SI = "<Esc>[3 q"
+        let &amp_EI = "<Esc>[0 q"
+    else
+        let &amp_SI = "<Esc>]50;CursorShape=1x7"
+        let &amp_EI = "<Esc>]50;CursorShape=0x7"
+    endif
+end

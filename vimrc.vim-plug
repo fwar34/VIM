@@ -405,6 +405,7 @@ inoremap <Leader>d <C-d>
 noremap! <C-d> <Delete>
 noremap! <Leader>w <C-w>
 """"""""""""""""""""""""""""""""""""'
+nnoremap <Leader>v /xxxxxx<CR>
 nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>z :w<CR>

@@ -95,8 +95,18 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -lht'
-alias vi='/usr/local/bin/vim'
-alias vim='/usr/local/bin/vim'
+alias tmux='tmux -2'
+
+if [ -f '/usr/local/bin/vim' ]
+then
+    alias vi='/usr/local/bin/vim'
+    alias vim='/usr/local/bin/vim'
+fi
+
+if [ -f '/usr/local/bin/emacs-25.3' ]
+then
+    alias emacs='/usr/local/bin/emacs-25.3'
+fi
 
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line

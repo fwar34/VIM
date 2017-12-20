@@ -108,6 +108,11 @@ then
     alias emacs='/usr/local/bin/emacs-25.3'
 fi
 
+if [ -f '/usr/local/bin/tmux' ]
+then
+    alias tmux='/usr/local/bin/tmux -2'
+fi
+
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

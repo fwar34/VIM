@@ -57,7 +57,8 @@ let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
 
 "let g:UltiSnipsSnippetDirectories=["mycppsnippets"]
-let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/bundle/cppsnippets"]
+let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/plugged/cppsnippets"]
+"let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/bundle/cppsnippets"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Vundle相关。Vundle是vim插件管理器，使用它来管理插件很方便，而且功能强大
@@ -84,6 +85,10 @@ Plug 'tacahiroy/ctrlp-funky'
 """""""""""""""""""""""""""""""
 "在tmux中的vim窗口跳转
 Plug 'christoomey/vim-tmux-navigator'
+"快速移动
+Plug 'easymotion/vim-easymotion'
+"Perform all your vim insert mode completions with Tab
+Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'fwar34/vim-color-wombat256'
@@ -841,7 +846,7 @@ if strlen(substr) == 0
 endif
 return pumvisible() ? "\<c-n>" : "\<c-x>\<c-o>"
 endfunction
-inoremap <tab> <c-r>=MyTabFunction()<cr>
+"inoremap <tab> <c-r>=MyTabFunction()<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

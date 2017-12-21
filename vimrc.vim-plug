@@ -432,9 +432,8 @@ cnoremap <Leader>r <C-r><C-w>
 nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-nnoremap <C-e> :ls<CR>
-"nnoremap ;; :ls<CR>
-"map <Leader> <Plug>(easymotion-prefix)
+nnoremap <Leader>x :ls<CR>
+"nnoremap <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader>w <C-w><C-w>
 nnoremap <Leader>q <C-^>
 nnoremap <Leader>mm %

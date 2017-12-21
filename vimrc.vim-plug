@@ -82,6 +82,8 @@ Plug 'https://github.com/Shougo/vimproc.vim.git'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 """""""""""""""""""""""""""""""
+"在tmux中的vim窗口跳转
+Plug 'christoomey/vim-tmux-navigator'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'fwar34/vim-color-wombat256'

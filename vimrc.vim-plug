@@ -26,6 +26,7 @@ set wildmenu
 " ;v 替换 Esc
 noremap! ;g <C-c>
 vnoremap ;g <Esc>
+onoremap ;g <C-c>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
@@ -431,10 +432,9 @@ cnoremap <Leader>r <C-r><C-w>
 nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-nnoremap <C-l> :ls<CR>
-"nnoremap <Leader>l :ls<CR>
-nnoremap ;; :ls<CR>
-"inoremap ;; <C-n>
+nnoremap <C-e> :ls<CR>
+"nnoremap ;; :ls<CR>
+"map <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader>w <C-w><C-w>
 nnoremap <Leader>q <C-^>
 nnoremap <Leader>mm %
@@ -877,6 +877,7 @@ let OmniCpp_ShowAccess=1
 
 " 设置配色方案
 set t_Co=256
+set term=screen-256color
 ""colorscheme codeschool
 colorscheme wombat256
 ""colorscheme torte
@@ -962,7 +963,12 @@ onoremap il} :<C-U>normal! F}vi}<CR>
 onoremap il> :<C-U>normal! F>vi><CR>
 
 "光标移动到word上任意字符，复制word
-nnoremap <Leader>yw viwy
+nnoremap yw yiw
+nnoremap dw diw
+nnoremap cw ciw
+"""""""""""""super tab setting""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lambdalisue/vim-manpager
@@ -1004,12 +1010,12 @@ endif
 "是处于插入模式、可视模式还是其他模式，光标的形状都是一样的。这样就很难判断当前的
 "Vim 模式是什么。若要避免这个问题，就需要让 Tmux 通知 iTerm
 "更新光标的形状。为此，需要将以下配置加入到文件 ~/.vimrc 中。
-if exists('$ITERM_PROFILE')
-    if exists('$TMUX') 
-        let &amp_SI = "<Esc>[3 q"
-        let &amp_EI = "<Esc>[0 q"
-    else
-        let &amp_SI = "<Esc>]50;CursorShape=1x7"
-        let &amp_EI = "<Esc>]50;CursorShape=0x7"
-    endif
-end
+"if exists('$ITERM_PROFILE')
+"    if exists('$TMUX') 
+"        let &amp_SI = "<Esc>[3 q"
+"        let &amp_EI = "<Esc>[0 q"
+"    else
+"        let &amp_SI = "<Esc>]50;CursorShape=1x7"
+"        let &amp_EI = "<Esc>]50;CursorShape=0x7"
+"    endif
+"end

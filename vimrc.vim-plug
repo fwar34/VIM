@@ -385,7 +385,7 @@ nnoremap <Leader>g g<C-]>
 "编辑模式移动光标,C-h和退格键冲突"
 "inoremap <C-j> <Down>
 "inoremap <C-l> <Right>
-inoremap <expr> <Leader>k col('.') == col('$') ? "\<Delete>" : "\<C-o>D"
+inoremap <expr> <Leader>k col('.') ==# col('$') ? "\<Delete>" : "\<C-o>D"
 noremap! <Leader>u <C-u>
 
 "a->begin
@@ -960,10 +960,6 @@ onoremap il' :<C-U>normal! F'hvi'<CR>
 onoremap il} :<C-U>normal! F}vi}<CR>
 onoremap il> :<C-U>normal! F>vi><CR>
 
-"光标移动到word上任意字符，复制word
-nnoremap yw yiw
-nnoremap dw diw
-nnoremap cw ciw
 """""""""""""super tab setting""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"

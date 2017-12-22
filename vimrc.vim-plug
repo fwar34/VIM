@@ -26,7 +26,6 @@ set wildmenu
 " ;v 替换 Esc
 noremap! ;g <C-c>
 vnoremap ;g <Esc>
-onoremap ;g <C-c>
 " 将 ; 绑定到 : 用于快速进入命令行
 "nnoremap ; :
 nnoremap <Space> :
@@ -415,7 +414,7 @@ inoremap <Leader>d <C-d>
 noremap! <C-d> <Delete>
 noremap! <Leader>w <C-w>
 """"""""""""""""""""""""""""""""""""'
-nnoremap <Leader>v /xxxxxx<CR>
+nnoremap <Leader>x /xxxxxx<CR>
 nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>z :w<CR>
@@ -432,7 +431,7 @@ cnoremap <Leader>r <C-r><C-w>
 nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-nnoremap <Leader>x :ls<CR>
+nnoremap <Leader>v :ls<CR>
 "nnoremap <Leader> <Plug>(easymotion-prefix)
 nnoremap <Leader>w <C-w><C-w>
 nnoremap <Leader>q <C-^>

@@ -424,6 +424,8 @@ inoremap <Leader>z <Esc>:w<CR>a
 nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
 cnoremap <Leader>r <C-r><C-w>
+"nnoremap <Leader>c :execute "normal! mgA;\<Esc>`g"
+nnoremap <Leader>c mgA;<Esc>`g
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :
@@ -602,7 +604,8 @@ set backspace=2
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-set mouse=a
+"set mouse=a
+set mouse=c
 set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过

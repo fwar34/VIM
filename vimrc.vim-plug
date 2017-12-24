@@ -553,9 +553,10 @@ set softtabstop=4
 set shiftwidth=4
 set cindent
 "set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
-set cinoptions+=g0,(1s,:0
+"set cinoptions+=g0,(1s,:0
+set cinoptions=g0,:0,(0
 " 不要用空格代替制表符
-set noexpandtab
+"set noexpandtab
 " 用空格代替制表符
 set expandtab
 " 在行和段开始处使用制表符

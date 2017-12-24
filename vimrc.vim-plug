@@ -423,7 +423,7 @@ nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
 cnoremap <Leader>r <C-r><C-w>
 "nnoremap <Leader>c :execute "normal! mgA;\<Esc>`g"
-nnoremap <Leader>c mgA;<Esc>`g
+nnoremap <Leader><Leader>; mgA;<Esc>`g
 "映射命令行模式C-k到:
 "cmap <C-k> :
 "omap <C-k> :

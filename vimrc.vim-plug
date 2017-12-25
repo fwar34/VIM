@@ -953,6 +953,7 @@ nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "nnoremap <Leader>ss :source $MYVIMRC<CR>
 
 :iabbrev @@ liang.feng@quanshi.com
+:iabbrev //// ///////////////////////////////////////////////////////////////////
 
 "在下一个括号内(inside next parentheses)
 onoremap in( :<C-U>normal! f(vi(<CR>
@@ -1022,7 +1023,7 @@ endif
 "end
 
 """"""""""vim-cpp-enhanced-highlight setting""""""""""""""""""""""""
-"let g:cpp_class_scope_highlight = 1
+let g:cpp_class_scope_highlight = 1
 "let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
+let g:cpp_class_decl_highlight = 1
 "let g:cpp_experimental_simple_template_highlight = 1

@@ -112,7 +112,7 @@ Plug 'https://github.com/altercation/vim-colors-solarized.git'
 "上图中 STL 容器模板类 unordered\_multimap 并未高亮，对滴，vim 对 C++
 "语法高亮支持不够好（特别是 C++11/14 新增元素），必须借由插件
 "vim-cpp-enhanced-highlight
-"Plug 'https://github.com/octol/vim-cpp-enhanced-highlight.git'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "STL\C++14等的C++语法高亮
 "Plug 'Mizuchi/STL-Syntax'
@@ -882,8 +882,9 @@ let OmniCpp_ShowAccess=1
 " 设置配色方案
 set t_Co=256
 set term=screen-256color
-""colorscheme codeschool
+"colorscheme codeschool
 colorscheme wombat256
+
 ""colorscheme torte
 
 " 成员函数的实现顺序与声明顺序一致
@@ -1019,3 +1020,9 @@ endif
 "        let &amp_EI = "<Esc>]50;CursorShape=0x7"
 "    endif
 "end
+
+""""""""""vim-cpp-enhanced-highlight setting""""""""""""""""""""""""
+"let g:cpp_class_scope_highlight = 1
+"let g:cpp_member_variable_highlight = 1
+"let g:cpp_class_decl_highlight = 1
+"let g:cpp_experimental_simple_template_highlight = 1

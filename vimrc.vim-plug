@@ -1058,6 +1058,9 @@ let g:cpp_class_decl_highlight = 1
 
 let g:lightline = {
       \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'filename': '%F%m%r%h%w'
+      \ },
       \ }
 
 """"""""""""""""yuttie/comfortable-motion.vim setting"""""""""""""""""""

@@ -90,9 +90,11 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 """""""""""""""""""""""""""""""
 "Vim 界定符自动补齐（delimitMate）插件
-Plug 'Raimondi/delimitMate'
+"Plug 'Raimondi/delimitMate'
+"Vim 界定符自动补齐auto-pairs
+Plug 'jiangmiao/auto-pairs'
 "在tmux中的vim窗口跳转
-Plug 'christoomey/vim-tmux-navigator'
+"Plug 'christoomey/vim-tmux-navigator'
 "快速移动
 Plug 'easymotion/vim-easymotion'
 "Perform all your vim insert mode completions with Tab

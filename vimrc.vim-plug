@@ -49,7 +49,8 @@ nnoremap <Leader>jw <C-W>j
 "a.vim .cpp和.h之间切换，:A
 "如果cpp没有.h文件的话不切换
 let g:alternateNonDefaultAlternate=1
-nnoremap <Leader>s :A<CR>
+"nnoremap <Leader>s :A<CR>
+nnoremap <Leader>ss :FSHere<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<Leader><tab>"
@@ -94,7 +95,8 @@ Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'fwar34/vim-color-wombat256'
-Plug 'vim-scripts/a.vim'
+"Plug 'vim-scripts/a.vim'
+Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'tpope/vim-surround'

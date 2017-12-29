@@ -80,6 +80,11 @@ Plug 'lambdalisue/vim-manpager'
 Plug 'Shougo/vimshell.vim'
 "Plug 'Shougo/vimproc.vim'
 Plug 'https://github.com/Shougo/vimproc.vim.git'
+""括号匹配
+Plug 'vim-scripts/matchit.zip'
+""""""""""""""""""""""""""""
+"平滑滚动
+Plug 'yuttie/comfortable-motion.vim'
 """""""""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
@@ -94,8 +99,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'fwar34/vim-color-wombat256'
-"Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
 Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/AutoComplPop'
@@ -529,6 +535,7 @@ set clipboard+=unnamed
 set nobackup
 "make 运行
 :set makeprg=g++\ -Wall\ \ -std=c++11\ %
+set noshowmode       "状态栏不显示模式
 "自动保存
 set autowrite
 set ruler                   " 打开状态栏标尺
@@ -1029,3 +1036,31 @@ let g:cpp_class_scope_highlight = 1
 "let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 "let g:cpp_experimental_simple_template_highlight = 1
+
+""""""""lightline setting"""""""""""""""""""""""""""""""""
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'component_function': {
+"      \   'filename': 'LightlineFilename',
+"      \ },
+"      \ }
+"
+"function! LightlineFilename()
+"    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+"                \ &filetype ==# 'unite' ? unite#get_status_string() :
+"                \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+"                \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+"endfunction
+"
+"let g:unite_force_overwrite_statusline = 0
+"let g:vimfiler_force_overwrite_statusline = 0
+"let g:vimshell_force_overwrite_statusline = 0
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+""""""""""""""""yuttie/comfortable-motion.vim setting"""""""""""""""""""
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_no_default_key_mappings = 1

@@ -113,6 +113,11 @@ then
     alias tmux='/usr/local/bin/tmux -2'
 fi
 
+if [ -f '/usr/local/bin/bear' ]
+then
+    alias bear='/usr/local/bin/bear'
+fi
+
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

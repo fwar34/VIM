@@ -101,6 +101,8 @@ if [ -f '/usr/local/bin/vim' ]
 then
     alias vi='/usr/local/bin/vim'
     alias vim='/usr/local/bin/vim'
+else
+    alias vi='vim'
 fi
 
 if [ -f '/usr/local/bin/emacs-25.3' ]

@@ -120,6 +120,10 @@ then
     alias bear='/usr/local/bin/bear'
 fi
 
+if [ -f '~/.vim/plugged/YCM-Generator/config_gen.py' ]
+then
+    alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
+fi
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

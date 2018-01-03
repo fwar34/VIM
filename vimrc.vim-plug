@@ -923,6 +923,13 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+
+"""NERDTree auto start""""""""""
+autocmd VimEnter * NERDTree
+wincmd w
+autocmd VimEnter * wincmd w
+"""NERDTree end auto start""""""""""
+
 "
 " <<
 "

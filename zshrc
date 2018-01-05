@@ -124,6 +124,8 @@ if [ -f '~/.vim/plugged/YCM-Generator/config_gen.py' ]
 then
     alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
 fi
+
+alias emacs='emacs -nw'
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

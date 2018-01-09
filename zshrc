@@ -105,9 +105,9 @@ else
     alias vi='vim'
 fi
 
-if [ -f '/usr/local/bin/emacs-25.3' ]
+if [ -f '/usr/local/bin/emacs' ]
 then
-    alias emacs='/usr/local/bin/emacs-25.3'
+    alias emacs='/usr/local/bin/emacs'
 fi
 
 if [ -f '/usr/local/bin/tmux' ]

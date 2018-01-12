@@ -125,7 +125,7 @@ then
     alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
 fi
 
-alias emacs='emacs -nw'
+alias cs='emacs -nw'
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

@@ -138,4 +138,6 @@ export MANPAGER="vim -c MANPAGER -"
 ulimit -c unlimited
 unsetopt share_history
 
- [[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
+
+autoload -U compinit && compinit -u

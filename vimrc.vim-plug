@@ -50,7 +50,7 @@ nnoremap <Leader>jw <C-W>j
 "如果cpp没有.h文件的话不切换
 let g:alternateNonDefaultAlternate=1
 "nnoremap <Leader>s :A<CR>
-nnoremap <Leader>ss :FSHere<CR>
+nnoremap <Leader>fo :FSHere<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<Leader><tab>"
@@ -171,8 +171,8 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 "Plug 'marijnh/tern_for_vim'
 "代码模板补全
-Plug 'https://github.com/SirVer/ultisnips'
-Plug 'git@github.com:fwar34/cppsnippets.git'
+"Plug 'https://github.com/SirVer/ultisnips'
+"Plug 'git@github.com:fwar34/cppsnippets.git'
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.
 
@@ -388,7 +388,7 @@ endfunc
 "map <C-]> :ts<CR>
 nnoremap <C-]> g<C-]>
 "nnoremap <Leader>jj g<C-]>
-nnoremap <Leader>g g<C-]>
+nnoremap <Leader>gt g<C-]>
 "nnoremap <Leader><Space> g<C-]>
 " 映射全选+复制 ctrl+a
 ""map <C-A> ggVGY
@@ -432,8 +432,8 @@ noremap! <Leader>w <C-w>
 nnoremap <Leader>x /xxxxxx<CR>
 nnoremap ge G
 nnoremap . ;
-nnoremap <Leader>z :w<CR>
-inoremap <Leader>z <Esc>:w<CR>a
+nnoremap <Leader>zz :w<CR>
+inoremap <Leader>zz <Esc>:w<CR>a
 nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
 cnoremap <Leader>r <C-r><C-w>
@@ -448,13 +448,14 @@ nnoremap <Leader><Leader>; mgA;<Esc>`g
 nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-nnoremap <Leader>v :ls<CR>
+nnoremap <Leader>bs :ls<CR>
 "nnoremap <Leader> <Plug>(easymotion-prefix)
-nnoremap <Leader>w <C-w><C-w>
-nnoremap <Leader>q <C-^>
+"nnoremap <Leader>w <C-w><C-w>
+nnoremap <Leader><TAB> <C-w><C-w>
+nnoremap <Leader>bb <C-^>
 nnoremap <Leader>mm %
-nnoremap <Leader>f <C-f>
-nnoremap <Leader>b <C-b>
+"nnoremap <Leader>f <C-f>
+"nnoremap <Leader>b <C-b>
 nnoremap <Leader>d <C-d>
 nnoremap <Leader>u <C-u>
 "map <silent> <F9> :cs add cscope.out

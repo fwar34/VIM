@@ -76,6 +76,7 @@ call plug#begin('~/.vim/plugged')
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
 Plug 'lambdalisue/vim-manpager'
+Plug 'terryma/vim-expand-region'
 " 翻译
 Plug 'ianva/vim-youdao-translater'
 """""""""""""""""""""""""""
@@ -91,6 +92,12 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tacahiroy/ctrlp-funky'
 """""""""""""""""""""""""""""""
+" PlugInstall and PlugUpdate will clone fzf in ~/.fzf and run install script
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+"   " Both options are optional. You don't have to install fzf in ~/.fzf
+"     " and you don't have to run install script if you use fzf only in Vim.
+"""""""""""""""""""""""""""""""""""
+Plug 'rking/ag.vim'
 "Vim 界定符自动补齐（delimitMate）插件
 "Plug 'Raimondi/delimitMate'
 "Vim 界定符自动补齐auto-pairs
@@ -110,6 +117,7 @@ Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 "echofunc可以在命令行中提示当前输入函数的原型
 Plug 'vim-scripts/echofunc.vim'
 Plug 'vim-scripts/OmniCppComplete'
@@ -224,12 +232,21 @@ endfunction
 "提示函数原型echofunc
 let g:EchoFuncKeyNext="<F2>"
 let g:EchoFuncKeyPrev="<F3>"
-""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""set ctrlp-funky
-"nnoremap <Leader>fu :CtrlPFunky<Cr>
+"""""""""""""""""""set ctrlp-funky""""""""""""""""""
+nnoremap <Leader>ii :CtrlPFunky<Cr>
 " narrow the list down with a word under cursor
-"nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap <Leader>iw :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 """"""""""""""""""""""""""""""""""""""""""""""
+""""Change the default mapping and the default command to invoke CtrlP:
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+"""When invoked without an explicit starting directory, CtrlP will 
+"set its local working directory according to this variable:
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <Leader>ff :CtrlP<CR>
+nnoremap <Leader>bs :CtrlPBuffer<CR>
+nnoremap <Leader>bf :CtrlPMRU<CR>
+nnoremap <Leader>bm :CtrlPMixed<CR>
 " >>
 " 营造专注气氛
 "
@@ -448,7 +465,7 @@ nnoremap <Leader><Leader>; mgA;<Esc>`g
 nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" -o -name "*.cc" -o -name "*.inl" > cscope.files<CR>:!cscope -Rbq -i cscope.files <CR>:cs add cscope.out<CR>
 "map <F2> :ls<CR>
 
-nnoremap <Leader>bs :ls<CR>
+"nnoremap <Leader>bs :ls<CR>
 "nnoremap <Leader> <Plug>(easymotion-prefix)
 "nnoremap <Leader>w <C-w><C-w>
 nnoremap <Leader><TAB> <C-w><C-w>
@@ -915,7 +932,7 @@ let g:disable_protodef_sorting=1
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nnoremap <Leader>tt :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=25
+let NERDTreeWinSize=15
 " 设置 NERDTree 子窗口位置
 let NERDTreeWinPos="right"
 " 显示隐藏文件
@@ -1087,3 +1104,12 @@ let g:comfortable_motion_no_default_key_mappings = 1
 vnoremap <silent> <C-y> :<C-u>Ydv<CR>
 nnoremap <silent> <C-y> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
+"""""""""""""""""""""""rking/ag.vim""""""""""""""""""""""""""
+let g:ag_working_path_mode="r"
+nnoremap <Leader>fa :Ag 
+"""""""""""junegunn/fzf""""""""""""""""""
+nnoremap <Leader>fz :FZF<CR>
+nnoremap <Leader>fm :FZF!<CR>
+"""""""""""""""tpope/vim-commentary""""""""""""""
+nnoremap <Leader>cc :commentary<CR>
+"""""""""terryma/vim-expand-region""""""""""""""""""

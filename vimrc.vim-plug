@@ -167,7 +167,7 @@ Plug 'fholgado/minibufexpl.vim'
 "doxygen
 Plug 'https://github.com/scrooloose/nerdcommenter.git'
 
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 "Plug 'marijnh/tern_for_vim'
 "代码模板补全

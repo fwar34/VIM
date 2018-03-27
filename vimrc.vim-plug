@@ -1,22 +1,13 @@
-" 主要参考 http://www.cnblogs.com/ma6174/archive/2011/12/10/2283393.html
-" 额外添加了 ctags， YouCompleteMe等
-"  主要特点 
+" {
+"=========================================
+"  Author: liang.feng
+"  Version: 1
+"  Date: 2018-03-27 15:53
+"  Sections:
+"=========================================
+" }
 
-"1.按F5可以直接编译并执行C、C++、java代码以及执行shell脚本，按“F4”可进行C、C++代码的调试
-"2.自动插入文件头 ，新建C、C++源文件时自动插入表头：包括文件名、作者、联系方式、建立时间等，读者可根据需求自行更改
-"3.映射“Ctrl + A”为全选并复制快捷键，方便复制代码
-"4.按“F2”可以直接消除代码中的空行
-"5.“F4”可列出当前目录文件，打开树状文件目录
-"6. 支持鼠标选择、方向键移动
-"7. 代码高亮，自动缩进，显示行号，显示状态行
-""按“Ctrl + P”可自动补全
-"9. []、{}、()、""、‘ ‘等都自动补全   --- 如果需要{}做函数形式的补全（右括号自动换行，加一个空行，光标定位到空行，可以看下面的修改提示）
-"10. 使用YouCompleteMe提供C++的自动补全提示，效果类似 Visual Studio那种，可以解析系统头文件
-
-" 让配置变更立即生效
-"autocmd BufWritePost $MYVIMRC source $MYVIMRC
-"如果经常在不同工程里查阅代码，那么可以在~/.vimrc中添加：
-set tags=tags
+"set tags=tags
 set autochdir 
 " vim 自身命令行模式智能补全
 set wildmenu
@@ -72,7 +63,7 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin(‘~/some/path/here‘)
-
+Plug 'haolongzhangm/auto_update_cscope_ctags_database'
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
 Plug 'lambdalisue/vim-manpager'
@@ -112,7 +103,7 @@ Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
 Plug 'fwar34/vim-color-wombat256'
-Plug 'vim-scripts/a.vim'
+"Plug 'vim-scripts/a.vim'
 Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
 Plug 'vim-scripts/AutoComplPop'
@@ -245,8 +236,14 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 nnoremap <Leader>ff :CtrlP<CR>
 nnoremap <Leader>bs :CtrlPBuffer<CR>
+"在历史文件中模糊查找
 nnoremap <Leader>bf :CtrlPMRU<CR>
 nnoremap <Leader>bm :CtrlPMixed<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
+let g:ctrlp_custom_ignore = {
+        \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
+        \ }
 " >>
 " 营造专注气氛
 "
@@ -285,10 +282,10 @@ nnoremap <Leader>tp :tprevious<CR>
 "
 " 基于语义的代码导航
 "
-nnoremap <Leader>jc :YcmCompleter GoToDeclaration<CR>
+"nnoremap <Leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-nnoremap <Leader>jd :YcmCompleter GoToDefinition<CR>
-nnoremap <Leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <Leader>jd :YcmCompleter GoToDefinition<CR>
+"nnoremap <Leader>jj :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 """"""""""""" By  ma6174""""""""""""""""""""
 " 显示相关  
@@ -406,17 +403,24 @@ endfunc
 nnoremap <C-]> g<C-]>
 "nnoremap <Leader>jj g<C-]>
 nnoremap <Leader>gt g<C-]>
-"nnoremap <Leader><Space> g<C-]>
-" 映射全选+复制 ctrl+a
-""map <C-A> ggVGY
-""map! <C-A> <Esc>ggVGY
-"noremap <C-h> <Left>
-"noremap <C-j> <Down>
-"noremap <C-k> <Up>
-"noremap <C-l> <Right>
-"编辑模式移动光标,C-h和退格键冲突"
-"inoremap <C-j> <Down>
-"inoremap <C-l> <Right>
+
+" Gtags {
+"let Gtags_Auto_Map = 1          "use a suggested key-mapping
+let Gtags_Auto_Update = 1       "keep tag files up-to-date automatically
+let Gtags_No_Auto_Jump = 1      "don't jump to the first tag at the time of search
+let Gtags_Close_When_Single = 1 "close quickfix windows in case of single tag
+nnoremap <Leader>gg :GtagsCursor<CR>
+"----查找函数、宏、枚举等定义的位置
+"nnoremap <Leader>ga :Gtags -a <C-R>=expand("<cword>")<CR><CR>
+"----查找调用本函数的函数
+nnoremap <Leader>gc :Gtags -rxa <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>ga :Gtags -ga <C-R>=expand("<cword>")<CR><CR>
+" }
+"
+" gtags-cscope {
+"let GtagsCscope_Auto_Load = 1
+" }
+
 inoremap <expr> <Leader>k col('.') ==# col('$') ? "\<Delete>" : "\<C-o>D"
 noremap! <Leader>u <C-u>
 
@@ -475,7 +479,6 @@ nnoremap <Leader>mm %
 "nnoremap <Leader>b <C-b>
 nnoremap <Leader>d <C-d>
 nnoremap <Leader>u <C-u>
-"map <silent> <F9> :cs add cscope.out
 
 nnoremap <silent> <F10> :!ctags -R .<CR><CR>
 nnoremap <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .<CR><CR>
@@ -943,9 +946,9 @@ let NERDTreeMinimalUI=1
 let NERDTreeAutoDeleteBuffer=1
 
 """NERDTree auto start""""""""""
-autocmd VimEnter * NERDTree
-wincmd w
-autocmd VimEnter * wincmd w
+"autocmd VimEnter * NERDTree
+"wincmd w
+"autocmd VimEnter * wincmd w
 """NERDTree end auto start""""""""""
 
 "

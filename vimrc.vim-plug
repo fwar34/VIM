@@ -63,7 +63,8 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin(‘~/some/path/here‘)
-Plug 'haolongzhangm/auto_update_cscope_ctags_database'
+"Plug 'haolongzhangm/auto_update_cscope_ctags_database'
+Plug 'skywind3000/asyncrun.vim'
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
 Plug 'lambdalisue/vim-manpager'
@@ -102,7 +103,7 @@ Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
-Plug 'fwar34/vim-color-wombat256'
+Plug 'git@github.com:fwar34/vim-color-wombat256'
 "Plug 'vim-scripts/a.vim'
 Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
@@ -418,7 +419,7 @@ nnoremap <Leader>ga :Gtags -ga <C-R>=expand("<cword>")<CR><CR>
 " }
 "
 " gtags-cscope {
-"let GtagsCscope_Auto_Load = 1
+let GtagsCscope_Auto_Load = 1
 " }
 
 inoremap <expr> <Leader>k col('.') ==# col('$') ? "\<Delete>" : "\<C-o>D"
@@ -1115,4 +1116,10 @@ nnoremap <Leader>fz :FZF<CR>
 nnoremap <Leader>fm :FZF!<CR>
 """""""""""""""tpope/vim-commentary""""""""""""""
 nnoremap <Leader>cc :commentary<CR>
-"""""""""terryma/vim-expand-region""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""
+"asyncrun update tags
+function! UpdateTags()
+    :AsyncRun ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .
+endfunction
+
+autocmd BufWritePost *.cpp,*.h,*.c,*.py call UpdateTags()

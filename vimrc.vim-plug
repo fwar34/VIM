@@ -401,7 +401,7 @@ endfunc
 ""nnoremap <leader>f :find<cr>
 " C+]显示列表
 "map <C-]> :ts<CR>
-nnoremap <C-]> g<C-]>
+nnoremap <Leader>ht <C-]>
 "nnoremap <Leader>jj g<C-]>
 nnoremap <Leader>gt g<C-]>
 

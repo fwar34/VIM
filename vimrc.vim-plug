@@ -67,7 +67,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'skywind3000/asyncrun.vim'
 " let Vundle manage Vundle, required
 Plug 'VundleVim/Vundle.vim'
-Plug 'lambdalisue/vim-manpager'
+"Plug 'lambdalisue/vim-manpager'
 Plug 'terryma/vim-expand-region'
 " 翻译
 Plug 'ianva/vim-youdao-translater'

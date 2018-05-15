@@ -1,0 +1,1 @@
+E:\msys64\usr\bin\mintty.exe /usr/bin/zsh.exe --login -i -c /mingw64/bin/runemacs.exe

@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\open_msys2]
+@="Open MSYS2 here"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\open_msys2\command]
+@="e:\\msys64\\usr\\bin\\mintty.exe /bin/sh -lc 'cd \"$(cygpath \"%V\")\"; exec zsh'"
+
+[HKEY_CLASSES_ROOT\Folder\shell\open_msys2]
+@="Open MSYS2 here"
+
+[HKEY_CLASSES_ROOT\Folder\shell\open_msys2\command]
+@="e:\\msys64\\usr\\bin\\mintty.exe /bin/sh -lc 'cd \"$(cygpath \"%V\")\"; exec zsh'"

@@ -134,6 +134,8 @@ bindkey  "^[[4~"   end-of-line
 export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH
 #vim man page
 export MANPAGER="vim -c MANPAGER -"
+#https://segmentfault.com/a/1190000002789600
+export MSYS="winsymlinks:lnk"
 
 ulimit -c unlimited
 unsetopt share_history

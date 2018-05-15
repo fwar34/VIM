@@ -155,9 +155,9 @@ Plug 'https://github.com/kshenoy/vim-signature.git'
 "  /data/workplace/foo/src/
 "  [bar]
 " /data/workplace/bar/src/
-Plug 'vim-scripts/indexer.tar.gz'
-Plug 'vim-scripts/DfrankUtil'
-Plug 'vim-scripts/vimprj'
+"Plug 'vim-scripts/indexer.tar.gz'
+"Plug 'vim-scripts/DfrankUtil'
+"Plug 'vim-scripts/vimprj'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "###### 多语言语法检查    
 "Plug 'scrooloose/syntastic'

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-05-16 16:00:55" build="180506">
+		<key name=".Vanilla" modified="2018-05-16 17:27:45" build="180506">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -54,7 +54,7 @@
 			<value name="FadeInactiveHigh" type="hex" data="D0"/>
 			<value name="ConVisible" type="hex" data="00"/>
 			<value name="UseInjects" type="hex" data="01"/>
-			<value name="SetDefaultTerminal" type="hex" data="01"/>
+			<value name="SetDefaultTerminal" type="hex" data="00"/>
 			<value name="SetDefaultTerminalStartup" type="hex" data="00"/>
 			<value name="SetDefaultTerminalStartupTSA" type="hex" data="00"/>
 			<value name="DefaultTerminalAgressive" type="hex" data="01"/>
@@ -82,9 +82,9 @@
 			<value name="JumpListAutoUpdate" type="hex" data="01"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
+				<line data="{Bash::CygWin bash}"/>
 				<line data="{Bash::Msys2-64}"/>
 				<line data='set CHERE_INVOKING=1 &amp; set "PATH=E:\msys64\usr\bin;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe E:\msys64\usr\bin\zsh.exe --login -i -cur_console:p -cur_console:C:E:\msys64\msys2.ico'/>
-				<line data="{Bash::CygWin bash}"/>
 				<line data="{Bash::Git bash}"/>
 			</value>
 			<value name="SingleInstance" type="hex" data="01"/>

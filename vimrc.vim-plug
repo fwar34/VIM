@@ -238,8 +238,8 @@ let g:ctrlp_working_path_mode = 'ra'
 nnoremap <Leader>ff :CtrlP<CR>
 nnoremap <Leader>bs :CtrlPBuffer<CR>
 "在历史文件中模糊查找
-nnoremap <Leader>bf :CtrlPMRU<CR>
-nnoremap <Leader>bm :CtrlPMixed<CR>
+nnoremap <Leader>rf :CtrlPMRU<CR>
+nnoremap <Leader>rm :CtrlPMixed<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',

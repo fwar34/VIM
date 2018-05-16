@@ -10,3 +10,5 @@
 	name = fwar34
 [push]
 	default = matching
+[core]
+	quotepath = false

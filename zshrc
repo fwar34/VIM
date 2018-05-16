@@ -94,6 +94,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export LANG=en_US.utf-8
+alias ls='ls --show-control-chars --color=auto'
+
 alias ll='ls -lht'
 alias tmux='tmux -2'
 

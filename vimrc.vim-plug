@@ -919,7 +919,12 @@ let OmniCpp_ShowAccess=1
 
 " 设置配色方案
 set t_Co=256
-set term=screen-256color
+if has('win32')
+    set term=win32
+else
+    set term=screen-256color
+endif
+
 "colorscheme codeschool
 colorscheme wombat256
 

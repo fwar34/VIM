@@ -137,6 +137,22 @@ export MANPAGER="vim -c MANPAGER -"
 #https://segmentfault.com/a/1190000002789600
 export MSYS="winsymlinks:lnk"
 
+gvim()
+{
+    OLD_HOME=$HOME
+    OLD_VIMRUNTIME=$VIMRUNTIME
+    export HOME=/e/msys64/home/liang.feng
+    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+    TARGET=$(cygpath -w $1) 
+    (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
+    export HOME=$OLD_HOME
+    export VIMRUNTIME=$OLD_VIMRUNTIME 
+} 
+
+if [ "$TERM" = "xterm" ]; then
+    export TERM=xterm-256color
+fi
+
 ulimit -c unlimited
 unsetopt share_history
 
@@ -145,7 +161,6 @@ unsetopt share_history
 [[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
 
 [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
-
 
 autoload -U compinit && compinit -u
 

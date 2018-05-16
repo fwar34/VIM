@@ -162,6 +162,13 @@ unsetopt share_history
 
 [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
 
+gvim2() {
+    ORIGHOME=$HOME
+    HOME=/cygdrive/i/home/fwar3
+    /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $1 & disown
+    HOME=$ORIGHOME
+} 2>/dev/null
+
 autoload -U compinit && compinit -u
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

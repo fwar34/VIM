@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#os=$(uname -a|awk -F_ '{print $1}')
-os=$(MSYSTEM)
+os=$(uname -a|awk -F_ '{print $1}')
+#os=$(MSYSTEM) #just define in msys
 
 if test $os = 'MSYS' -o $os = 'CYGWIN'
 then

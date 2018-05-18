@@ -1,0 +1,30 @@
+# https://wiki.archlinux.org/index.php/GNU_Screen_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+
+# 消除残余的编辑文本
+altscreen on
+
+# 使用 256 色
+term screen-256color
+
+# 如果在 xterm 中仍不能显示 256 色，试试下面的命令：
+attrcolor b ".I"    # 允许加粗色彩--由于某些原因是必须的
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'   # 告诉screen如何设置颜色。AB 指背景，AF 指前景
+defbce on    # 使用当前背景色来显示删除的字符]]'
+
+# 状态栏
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g} ][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W} %c %{g}]'
+
+# 关闭欢迎信息
+startup_message off
+
+# 让标题栏动态显示 urxvt|xterm|aterm 窗口名称
+backtick 1 5 5 true
+termcapinfo rxvt* 'hs:ts=\E]2;:fs=\007:ds=\E]2;\007'
+hardstatus string "screen (%n: %t)"
+caption string "%{= kw}%Y-%m-%d;%c %{= kw}%-Lw%{= kG}%{+b}[%n %t]%{-b}%{= kw}%+Lw%1`"
+caption always
+
+# 使用 X 滚动机制
+termcapinfo xterm* ti@:te@

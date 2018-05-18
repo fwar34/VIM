@@ -479,8 +479,8 @@ noremap! <Leader>b <S-Left>
 inoremap <Leader>o <C-o>O
 
 "adjust in insert mod
-inoremap <Leader>t <C-t>
-inoremap <Leader>d <C-d>
+"inoremap <Leader>t <C-t>
+"inoremap <Leader>d <C-d>
 "delete in insert mod
 noremap! <C-d> <Delete>
 noremap! <Leader>w <C-w>
@@ -510,10 +510,11 @@ nnoremap <silent> <F6> :!find `pwd` -name "*.h" -o -name "*.c" -o -name "*.cpp" 
 nnoremap <Leader><TAB> <C-w><C-w>
 nnoremap <Leader>bb <C-^>
 nnoremap <Leader>mm %
+nnoremap <Leader>dj :e .<CR>
 "nnoremap <Leader>f <C-f>
 "nnoremap <Leader>b <C-b>
-nnoremap <Leader>d <C-d>
-nnoremap <Leader>u <C-u>
+"nnoremap <Leader>d <C-d>
+"nnoremap <Leader>u <C-u>
 
 nnoremap <silent> <F10> :!ctags -R .<CR><CR>
 nnoremap <silent> <F11> :!ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .<CR><CR>

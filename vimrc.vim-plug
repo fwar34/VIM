@@ -152,6 +152,8 @@ Plug 'guns/xterm-color-table.vim'
 
 " 草稿 normal模式gs
 Plug 'mtth/scratch.vim'
+"
+Plug 'scrooloose/nerdtree'
 
 " Simple tmux statusline generator with support for powerline symbols and
 " statusline / airline / lightline integration
@@ -988,7 +990,7 @@ let g:disable_protodef_sorting=1
 "
 " >>
 " 工程文件浏览
-"
+""""""""""""""""""""""""""""NERDTree"""""""""""""""
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nnoremap <Leader>tt :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
@@ -1001,13 +1003,40 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+"How can I close vim if the only window left open is a NERDTree?
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"How can I change default arrows?
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+"Allow configuration for multiple highlighting based on file type
+"https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 """NERDTree auto start""""""""""
 "autocmd VimEnter * NERDTree
 "wincmd w
 "autocmd VimEnter * wincmd w
 """NERDTree end auto start""""""""""
-
+""""""""""""""""""""""""""""NERDTree"""""""""""""""
 "
 " <<
 "

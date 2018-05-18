@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -lht'
-alias tmux='tmux -2'
+alias tmux='TERM=screen-256color tmux -2'
 
 if [ -f '/usr/local/bin/vim' ]
 then
@@ -112,7 +112,7 @@ fi
 
 if [ -f '/usr/local/bin/tmux' ]
 then
-    alias tmux='/usr/local/bin/tmux -2'
+    alias tmux='TERM=screen-256color /usr/local/bin/tmux -2'
 fi
 
 if [ -f '/usr/local/bin/bear' ]
@@ -141,5 +141,8 @@ unsetopt share_history
 [[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
 
 autoload -U compinit && compinit -u
+
+#alias tmux="TERM=screen-256color tmux -2"
+#export TERM=screen-256color
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -98,6 +98,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 "     " and you don't have to run install script if you use fzf only in Vim.
 """""""""""""""""""""""""""""""""""
 Plug 'rking/ag.vim'
+Plug 'Chun-Yang/vim-action-ag'
+"""""""""""""""""""""""""""""""""""""""
 "Vim 界定符自动补齐（delimitMate）插件
 "Plug 'Raimondi/delimitMate'
 "Vim 界定符自动补齐auto-pairs
@@ -1150,6 +1152,14 @@ vnoremap <silent> <C-y> :<C-u>Ydv<CR>
 nnoremap <silent> <C-y> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
 """""""""""""""""""""""rking/ag.vim""""""""""""""""""""""""""
+let g:ag_working_path_mode="r"
+nnoremap <Leader>fa :Ag 
+"""""""""""""""""""""""Chun-Yang/vim-action-ag""""""""""""""""""""""""""
+"Normal Mode:
+"gagiw to search the word
+"gagi' to search the words inside single quotes.
+"Visual Mode:
+"gag to search the selected text
 let g:ag_working_path_mode="r"
 nnoremap <Leader>fa :Ag 
 """""""""""junegunn/fzf""""""""""""""""""

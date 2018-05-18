@@ -81,7 +81,8 @@ Plug 'ianva/vim-youdao-translater'
 """""""""""""""""""""""""""
 Plug 'Shougo/vimshell.vim'
 "Plug 'Shougo/vimproc.vim'
-Plug 'https://github.com/Shougo/vimproc.vim.git'
+"Plug 'https://github.com/Shougo/vimproc.vim.git'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 ""括号匹配
 Plug 'vim-scripts/matchit.zip'
 """"""""""""""""""""""""""""

@@ -27,7 +27,8 @@ let g:mapleader = ";"
 if has('win32')
     autocmd GUIEnter * simalt ~x
 else
-    set lines=999 columns=999
+    "set lines=999 columns=999
+    set lines=40 columns=100 
 endif
 
 " 设置快捷键将选中文本块复制至系统剪贴板
@@ -339,6 +340,7 @@ endif
 "if (has("gui_running")) 
 "   set guifont=Bitstream\ Vera\ Sans\ Mono\ 10 
 "endif 
+
 
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -929,12 +931,30 @@ let OmniCpp_ShowAccess=1
 ""hi comment ctermfg=blue
 ""hi comment ctermfg=green
 
+"if &term =~ '256color'  
+    " disable Background Color Erase (BCE) so that color schemes  
+    "       " render properly when inside 256-color tmux and GNU
+    "       screen.  
+    "             " see also
+    "             http://snk.tuxfamily.org/log/vim-256color-bce.html  
+"    set t_ut=  
+"endif  
+"
+if exists('$TMUX')
+    set term=screen-256color
+endif
+
 " 设置配色方案
-set t_Co=256
+if !has('gui_running')
+    set t_Co=256
+    "set t_ut=
+endif
+
 if has('win32')
     set term=win32
 else
     set term=screen-256color
+    "set term=xterm-256color
 endif
 
 "colorscheme codeschool
@@ -1056,18 +1076,6 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 "nnoremap <buffer> <silent> K :call te#utils#find_mannel()<cr>
 "
-"if &term =~ '256color'  
-    " disable Background Color Erase (BCE) so that color schemes  
-    "       " render properly when inside 256-color tmux and GNU
-    "       screen.  
-    "             " see also
-    "             http://snk.tuxfamily.org/log/vim-256color-bce.html  
-"    set t_ut=  
-"endif  
-"
-if exists('$TMUX')
-    set term=screen-256color
-endif
 
 "调整光标的形状
 "在默认情况下，当通过 Tmux 运行 Vim 时，无论当前 Vim

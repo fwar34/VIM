@@ -98,7 +98,8 @@ export LANG=en_US.utf-8
 alias ls='ls --show-control-chars --color=auto'
 
 alias ll='ls -lht'
-alias tmux='TERM=screen-256color tmux -2'
+alias tmux='tmux -2'
+#alias tmux='TERM=xterm-256color  tmux -2'
 
 if [ -f '/usr/local/bin/vim' ]
 then
@@ -115,7 +116,9 @@ fi
 
 if [ -f '/usr/local/bin/tmux' ]
 then
-    alias tmux='TERM=screen-256color /usr/local/bin/tmux -2'
+    alias tmux='/usr/local/bin/tmux -2'
+    #alias tmux='TERM=screen-256color-bce /usr/local/bin/tmux -2'
+    #alias tmux='TERM=xterm-256color /usr/local/bin/tmux -2'
 fi
 
 if [ -f '/usr/local/bin/bear' ]

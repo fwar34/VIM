@@ -991,7 +991,7 @@ let g:disable_protodef_sorting=1
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
 nnoremap <Leader>tt :NERDTreeToggle<CR>
 " 设置 NERDTree 子窗口宽度
-let NERDTreeWinSize=15
+let NERDTreeWinSize=35
 " 设置 NERDTree 子窗口位置
 let NERDTreeWinPos="right"
 " 显示隐藏文件

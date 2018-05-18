@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\MSYS here\command]
+@="E:\\msys64\\msys2.exe zsh"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\MINGW64 here\command]
+@="E:\\msys64\\mingw64.exe zsh"
+
+[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\MINGW32 here\command]
+@="E:\\msys64\\mingw32.exe zsh"

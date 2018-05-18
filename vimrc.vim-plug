@@ -23,6 +23,13 @@ nnoremap <Space> :
 let mapleader = ";"
 let g:mapleader = ";"
 
+" 启动全屏
+if has('win32')
+    autocmd GUIEnter * simalt ~x
+else
+    set lines=999 columns=999
+endif
+
 " 设置快捷键将选中文本块复制至系统剪贴板
 "vnoremap <Leader>y "+y
 " 设置快捷键将系统剪贴板内容粘贴至vim
@@ -130,6 +137,11 @@ Plug 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "Plug 'Mizuchi/STL-Syntax'
 "书签可视化
 Plug 'https://github.com/kshenoy/vim-signature.git'
+"completor for python
+Plug 'maralla/completor.vim'
+
+"Plug 'davidhalter/jedi-vim'
+
 "
 "i ##### 周期性针对这个工程自动生成标签文件，并通知 vim 引人该标签文件
 " Plug 'vim-scripts/indexer.tar.gz'
@@ -155,9 +167,9 @@ Plug 'https://github.com/kshenoy/vim-signature.git'
 "  /data/workplace/foo/src/
 "  [bar]
 " /data/workplace/bar/src/
-Plug 'vim-scripts/indexer.tar.gz'
-Plug 'vim-scripts/DfrankUtil'
-Plug 'vim-scripts/vimprj'
+"Plug 'vim-scripts/indexer.tar.gz'
+"Plug 'vim-scripts/DfrankUtil'
+"Plug 'vim-scripts/vimprj'
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 "###### 多语言语法检查    
 "Plug 'scrooloose/syntastic'
@@ -238,8 +250,8 @@ let g:ctrlp_working_path_mode = 'ra'
 nnoremap <Leader>ff :CtrlP<CR>
 nnoremap <Leader>bs :CtrlPBuffer<CR>
 "在历史文件中模糊查找
-nnoremap <Leader>bf :CtrlPMRU<CR>
-nnoremap <Leader>bm :CtrlPMixed<CR>
+nnoremap <Leader>rf :CtrlPMRU<CR>
+nnoremap <Leader>rm :CtrlPMixed<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
 let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
@@ -919,7 +931,12 @@ let OmniCpp_ShowAccess=1
 
 " 设置配色方案
 set t_Co=256
-set term=screen-256color
+if has('win32')
+    set term=win32
+else
+    set term=screen-256color
+endif
+
 "colorscheme codeschool
 colorscheme wombat256
 
@@ -1121,5 +1138,11 @@ nnoremap <Leader>cc :commentary<CR>
 function! UpdateTags()
     :AsyncRun ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .
 endfunction
+
+""""""""""""""""""""""""""completor"""""""""""""""""""""""""""
+"Use Tab to trigger completion (disable auto trigger)
+let g:completor_auto_trigger = 0
+inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 autocmd BufWritePost *.cpp,*.h,*.c,*.py call UpdateTags()

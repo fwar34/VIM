@@ -94,6 +94,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export LANG=en_US.utf-8
+alias ls='ls --show-control-chars --color=auto'
+
 alias ll='ls -lht'
 alias tmux='TERM=screen-256color tmux -2'
 
@@ -134,11 +137,40 @@ bindkey  "^[[4~"   end-of-line
 export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH
 #vim man page
 export MANPAGER="vim -c MANPAGER -"
+#https://segmentfault.com/a/1190000002789600
+export MSYS="winsymlinks:lnk"
+
+gvim()
+{
+    OLD_HOME=$HOME
+    OLD_VIMRUNTIME=$VIMRUNTIME
+    export HOME=/e/msys64/home/liang.feng
+    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+    TARGET=$(cygpath -w $1) 
+    (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
+    export HOME=$OLD_HOME
+    export VIMRUNTIME=$OLD_VIMRUNTIME 
+} 
+
+if [ "$TERM" = "xterm" ]; then
+    export TERM=xterm-256color
+fi
 
 ulimit -c unlimited
 unsetopt share_history
 
 [[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
+
+[[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
+
+[[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
+
+gvim2() {
+    ORIGHOME=$HOME
+    HOME=/cygdrive/i/home/fwar3
+    /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $1 & disown
+    HOME=$ORIGHOME
+} 2>/dev/null
 
 autoload -U compinit && compinit -u
 

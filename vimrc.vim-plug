@@ -1006,8 +1006,8 @@ let NERDTreeAutoDeleteBuffer=1
 "How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 "How can I change default arrows?
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
 
 "Allow configuration for multiple highlighting based on file type
 "https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696

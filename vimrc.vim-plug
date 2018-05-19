@@ -117,7 +117,11 @@ Plug 'git@github.com:fwar34/vim-color-wombat256'
 "Plug 'vim-scripts/a.vim'
 Plug 'derekwyatt/vim-fswitch'
 "Plug 'vim-scripts/c.vim'
+"{{{
+" Automatically opens popup menu for completions 
 Plug 'vim-scripts/AutoComplPop'
+"}}}
+"
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 "echofunc可以在命令行中提示当前输入函数的原型

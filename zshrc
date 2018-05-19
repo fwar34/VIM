@@ -147,10 +147,10 @@ gvim()
 {
     OLD_HOME=$HOME
     OLD_VIMRUNTIME=$VIMRUNTIME
-    export HOME=/e/msys64/home/liang.feng
-    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+    export HOME=/i/msys64/home/fwar3
+    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"
     TARGET=$(cygpath -w $1) 
-    (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
+    (/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe $TARGET &)
     export HOME=$OLD_HOME
     export VIMRUNTIME=$OLD_VIMRUNTIME 
 } 

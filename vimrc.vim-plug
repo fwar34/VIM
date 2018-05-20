@@ -71,18 +71,31 @@ call plug#begin('~/.vim/plugged')
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin(‘~/some/path/here‘)
 "Plug 'haolongzhangm/auto_update_cscope_ctags_database'
+"{{{
+""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'skywind3000/asyncrun.vim'
+"asyncrun update tags
+function! UpdateTags()
+    :AsyncRun ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .
+endfunction
+autocmd BufWritePost *.cpp,*.h,*.c,*.py call UpdateTags()
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
 " let Vundle manage Vundle, required
-Plug 'VundleVim/Vundle.vim'
+"Plug 'VundleVim/Vundle.vim'
 "Plug 'lambdalisue/vim-manpager'
 Plug 'terryma/vim-expand-region'
 " 翻译
 Plug 'ianva/vim-youdao-translater'
 """""""""""""""""""""""""""
 Plug 'Shougo/vimshell.vim'
-"Plug 'Shougo/vimproc.vim'
-"Plug 'https://github.com/Shougo/vimproc.vim.git'
+"{{{
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+if has('win32')
+    let g:vimproc_dll_path="~/.vim/plugged/vimproc.vim/lib/vimproc_cygwin.dll"
+endif
+"}}}
+
 ""括号匹配
 Plug 'vim-scripts/matchit.zip'
 """"""""""""""""""""""""""""
@@ -112,7 +125,36 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+"
+"{{{
+""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'itchyny/lightline.vim'
+"let g:lightline = {
+"      \ 'colorscheme': 'wombat',
+"      \ 'component_function': {
+"      \   'filename': 'LightlineFilename',
+"      \ },
+"      \ }
+"
+"function! LightlineFilename()
+"    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
+"                \ &filetype ==# 'unite' ? unite#get_status_string() :
+"                \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
+"                \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+"endfunction
+"
+"let g:unite_force_overwrite_statusline = 0
+"let g:vimfiler_force_overwrite_statusline = 0
+"let g:vimshell_force_overwrite_statusline = 0
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'component': {
+      \   'filename': '%F%m%r%h%w'
+      \ },
+      \ }
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
 Plug 'git@github.com:fwar34/vim-color-wombat256'
 "Plug 'vim-scripts/a.vim'
 Plug 'derekwyatt/vim-fswitch'
@@ -145,28 +187,63 @@ Plug 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
 "书签可视化
 Plug 'https://github.com/kshenoy/vim-signature.git'
 
-"{{{
-"completor
-Plug 'maralla/completor.vim'
-"Use Tab to trigger completion (disable auto trigger)
-let g:completor_auto_trigger = 0
-inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+if has('win32')
+    "{{{
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    "completor
+    Plug 'maralla/completor.vim'
+    "Use Tab to trigger completion (disable auto trigger)
+    let g:completor_auto_trigger = 0
+    inoremap <expr> <Tab> pumvisible() ? "<C-N>" : "<C-R>=completor#do('complete')<CR>"
+    "
+    "C++
+    let g:completor_clang_binary = '/usr/bin/clang'
+    let g:completor_python_binary = '/usr/bin/python3'
+    "Plug 'davidhalter/jedi-vim'
+    map <tab> <Plug>CompletorCppJumpToPlaceholder
+    imap <tab> <Plug>CompletorCppJumpToPlaceholder
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    "}}}
+endif
 "
-"C++
-let g:completor_clang_binary = '/usr/bin/clang'
-let g:completor_python_binary = '/usr/bin/python3'
-"Plug 'davidhalter/jedi-vim'
-map <tab> <Plug>CompletorCppJumpToPlaceholder
-imap <tab> <Plug>CompletorCppJumpToPlaceholder
-"}}}
-"
+if has('unix')
+    "{{{ 
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    " deoplete
+    if has('nvim')
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    let g:deoplete#enable_at_startup = 1
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    "}}}
+    "
+    "{{{
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    Plug 'zchee/deoplete-jedi'
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    "}}}
+    "
+    "{{{
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    Plug 'zchee/deoplete-clang'
+    """"""""""""""""""""""""""""""""""""""""""""""""""
+    "}}}
+endif
+
 "{{{
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " This script is for generating a .clang_complete that could be 
 " utilized by emacs irony-mode or company-clang mode.
 Plug 'WenxiJin/.clang_complete'
+""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
 
 "{{{
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " 彩虹括号
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
@@ -192,6 +269,7 @@ let g:rainbow_conf = {
 	\		'css': 0,
 	\	}
 	\}
+""""""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
 
 Plug 'guns/xterm-color-table.vim'
@@ -1218,31 +1296,6 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_class_decl_highlight = 1
 "let g:cpp_experimental_simple_template_highlight = 1
 
-""""""""lightline setting"""""""""""""""""""""""""""""""""
-"let g:lightline = {
-"      \ 'colorscheme': 'wombat',
-"      \ 'component_function': {
-"      \   'filename': 'LightlineFilename',
-"      \ },
-"      \ }
-"
-"function! LightlineFilename()
-"    return &filetype ==# 'vimfiler' ? vimfiler#get_status_string() :
-"                \ &filetype ==# 'unite' ? unite#get_status_string() :
-"                \ &filetype ==# 'vimshell' ? vimshell#get_status_string() :
-"                \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
-"endfunction
-"
-"let g:unite_force_overwrite_statusline = 0
-"let g:vimfiler_force_overwrite_statusline = 0
-"let g:vimshell_force_overwrite_statusline = 0
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'component': {
-      \   'filename': '%F%m%r%h%w'
-      \ },
-      \ }
 
 """"""""""""""""yuttie/comfortable-motion.vim setting"""""""""""""""""""
 let g:comfortable_motion_scroll_down_key = "j"
@@ -1270,10 +1323,6 @@ nnoremap <Leader>fm :FZF!<CR>
 """""""""""""""tpope/vim-commentary""""""""""""""
 nnoremap <Leader>cc :commentary<CR>
 """""""""""""""""""""""""""""""""""""""
-"asyncrun update tags
-function! UpdateTags()
-    :AsyncRun ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .
-endfunction
 
 """"""""""""""""""""""""""scratch""""""""""""""""""""""""""""""""""""
 let g:scratch_autohide=1
@@ -1304,4 +1353,3 @@ smap <m-u> <Plug>(complete_parameter#overload_up)
 
 
 
-autocmd BufWritePost *.cpp,*.h,*.c,*.py call UpdateTags()

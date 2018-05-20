@@ -637,7 +637,7 @@ inoremap <Leader>o <C-o>O
 noremap! <C-d> <Delete>
 noremap! <Leader>w <C-w>
 """"""""""""""""""""""""""""""""""""'
-nnoremap <Leader>x /xxxxxx<CR>
+nnoremap <Leader>x nohl<CR>
 nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>zz :w<CR>

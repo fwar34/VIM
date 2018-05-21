@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-05-17 15:45:44" build="180506">
+		<key name=".Vanilla" modified="2018-05-21 09:43:21" build="180506">
 			<value name="Language" type="string" data="en"/>
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
@@ -82,8 +82,8 @@
 			<value name="JumpListAutoUpdate" type="hex" data="01"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
-				<line data="{Bash::Msys2-64}"/>
 				<line data="{Bash::CygWin bash}"/>
+				<line data="{Bash::Msys2-64}"/>
 				<line data='set CHERE_INVOKING=1 &amp; set "PATH=E:\msys64\usr\bin;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe E:\msys64\usr\bin\zsh.exe --login -i -cur_console:p -cur_console:C:E:\msys64\msys2.ico'/>
 				<line data="{Bash::Git bash}"/>
 			</value>
@@ -251,7 +251,7 @@
 			<value name="DragPanel" type="hex" data="02"/>
 			<value name="DragPanelBothEdges" type="hex" data="00"/>
 			<value name="KeyBarRClick" type="hex" data="01"/>
-			<value name="StatusBar.Show" type="hex" data="01"/>
+			<value name="StatusBar.Show" type="hex" data="00"/>
 			<value name="StatusBar.Flags" type="dword" data="00000000"/>
 			<value name="StatusFontFace" type="string" data="Segoe UI"/>
 			<value name="StatusFontCharSet" type="ulong" data="0"/>

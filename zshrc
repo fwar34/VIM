@@ -143,29 +143,56 @@ export MANPAGER="vim -c MANPAGER -"
 #https://segmentfault.com/a/1190000002789600
 export MSYS="winsymlinks:lnk"
 
-gvimf()
+gvim()
 {
     OLD_HOME=$HOME
     OLD_VIMRUNTIME=$VIMRUNTIME
-    export HOME=/i/msys64/home/fwar3
-    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"
-    TARGET=$(cygpath -w $1) 
-    (/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe $TARGET &)
+
+    if [ -d /i/msys64/home/fwar3 ]
+    then
+        echo "111"
+        export HOME=/i/msys64/home/fwar3
+    elif [ -d /e/msys64/home/liang.feng ]
+    then
+        echo "222"
+        export HOME=/e/msys64/home/liang.feng
+    fi
+
+    vim80="/c/Program Files (x86)/Vim/vim80"
+    vim81="/c/Program Files (x86)/Vim/vim81"
+
+    if [ -d "$vim81" ]
+    then
+        echo "333"
+        export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"
+        TARGET=$(cygpath -w $1) 
+        (/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe $TARGET &)
+
+    elif [ -d "$vim80" ]
+    then
+        echo ("444")
+        export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+        TARGET=$(cygpath -w $1) 
+        (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
+    else
+        echo "555"
+    fi
+
     export HOME=$OLD_HOME
     export VIMRUNTIME=$OLD_VIMRUNTIME 
 } 
 
-gviml()
-{
-    OLD_HOME=$HOME
-    OLD_VIMRUNTIME=$VIMRUNTIME
-    export HOME=/e/msys64/home/liang.feng
-    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
-    TARGET=$(cygpath -w $1) 
-    (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
-    export HOME=$OLD_HOME
-    export VIMRUNTIME=$OLD_VIMRUNTIME 
-} 
+#gviml()
+#{
+    #OLD_HOME=$HOME
+    #OLD_VIMRUNTIME=$VIMRUNTIME
+    #export HOME=/e/msys64/home/liang.feng
+    #export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+    #TARGET=$(cygpath -w $1) 
+    #(/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
+    #export HOME=$OLD_HOME
+    #export VIMRUNTIME=$OLD_VIMRUNTIME 
+#} 
 
 if [ "$TERM" = "xterm" ]; then
     export TERM=xterm-256color

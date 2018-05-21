@@ -143,7 +143,7 @@ export MANPAGER="vim -c MANPAGER -"
 #https://segmentfault.com/a/1190000002789600
 export MSYS="winsymlinks:lnk"
 
-gvim()
+gvimf()
 {
     OLD_HOME=$HOME
     OLD_VIMRUNTIME=$VIMRUNTIME
@@ -151,6 +151,18 @@ gvim()
     export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"
     TARGET=$(cygpath -w $1) 
     (/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe $TARGET &)
+    export HOME=$OLD_HOME
+    export VIMRUNTIME=$OLD_VIMRUNTIME 
+} 
+
+gviml()
+{
+    OLD_HOME=$HOME
+    OLD_VIMRUNTIME=$VIMRUNTIME
+    export HOME=/e/msys64/home/liang.feng
+    export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
+    TARGET=$(cygpath -w $1) 
+    (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
     export HOME=$OLD_HOME
     export VIMRUNTIME=$OLD_VIMRUNTIME 
 } 
@@ -168,7 +180,7 @@ unsetopt share_history
 
 [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
 
-gvim2() {
+gvim3() {
     ORIGHOME=$HOME
     HOME=/cygdrive/i/home/fwar3
     /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $1 & disown

@@ -281,8 +281,35 @@ Plug 'scrooloose/nerdtree'
 " Async plugin for vim and neovim to ease the use of ctags/gtags
 Plug 'jsfaint/gen_tags.vim'
 
+"{{{
+"""""""""""""""""""""""""""""""""""""""""""""""
 " Complete parameter after select the completion. Integration with YouCompleteMe(ycm), deoplete, neocomplete. 
 Plug 'tenfyzhong/CompleteParameter.vim'
+"Install a complete engine have supported. Goto the completion item of the completion popup menu you want to select, and then type ((minimal setting), the parameters will be inserted and select the the first parameter. <c-j>/<c-k>(minimal setting) will jump to the next/previous parameter and select it.
+" Minimal setting
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+" Goto next parameter and select it.
+nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+" Goto previous parameter and select it.
+nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+" Select next overload function.
+nmap <m-d> <Plug>(complete_parameter#overload_down)
+imap <m-d> <Plug>(complete_parameter#overload_down)
+smap <m-d> <Plug>(complete_parameter#overload_down)
+" Select previous overload function.
+nmap <m-u> <Plug>(complete_parameter#overload_up)
+imap <m-u> <Plug>(complete_parameter#overload_up)
+smap <m-u> <Plug>(complete_parameter#overload_up)
+"""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
 
 " Simple tmux statusline generator with support for powerline symbols and
 " statusline / airline / lightline integration
@@ -1326,30 +1353,6 @@ nnoremap <Leader>cc :commentary<CR>
 
 """"""""""""""""""""""""""scratch""""""""""""""""""""""""""""""""""""
 let g:scratch_autohide=1
-""""""""""""""""""""""""""CompleteParameter""""""""""""""""""""""""""""""""""""
-"Install a complete engine have supported. Goto the completion item of the completion popup menu you want to select, and then type ((minimal setting), the parameters will be inserted and select the the first parameter. <c-j>/<c-k>(minimal setting) will jump to the next/previous parameter and select it.
-" Minimal setting
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-" Goto next parameter and select it.
-nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-" Goto previous parameter and select it.
-nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-" Select next overload function.
-nmap <m-d> <Plug>(complete_parameter#overload_down)
-imap <m-d> <Plug>(complete_parameter#overload_down)
-smap <m-d> <Plug>(complete_parameter#overload_down)
-" Select previous overload function.
-nmap <m-u> <Plug>(complete_parameter#overload_up)
-imap <m-u> <Plug>(complete_parameter#overload_up)
-smap <m-u> <Plug>(complete_parameter#overload_up)
 
 
 

@@ -159,7 +159,6 @@ gvim()
     vim80="/c/Program Files (x86)/Vim/vim80"
     vim81="/c/Program Files (x86)/Vim/vim81"
 
-    echo "xxx"
     if [ -d $vim81 ]
     then
         export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"

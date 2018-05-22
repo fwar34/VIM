@@ -13,7 +13,7 @@ then
         mkdir -p ~/vimfiles/autoload/
         wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ~/vimfiles/autoload/plug.vim
     else
-        if [ ! -f ~\vimfiles\autoload\plug.vim ]
+        if [ ! -f ~/vimfiles/autoload/plug.vim ]
         then
             wget https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim -O ~/vimfiles/autoload/plug.vim
         fi

@@ -212,4 +212,9 @@ autoload -U compinit && compinit -u
 #alias tmux="TERM=screen-256color tmux -2"
 #export TERM=screen-256color
 
+#{{{
+# for fzf in windows-->https://github.com/junegunn/fzf/wiki/Windows
+export TERM=
+#}}}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

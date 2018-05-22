@@ -154,7 +154,10 @@ gvim()
     OLD_VIMRUNTIME=$VIMRUNTIME
     OLD_TERM=$TERM
 
+    #{{{
+    # for fzf in windows-->https://github.com/junegunn/fzf/wiki/Windows
     export TERM=
+    #}}}
     if [ -d /i/msys64/home/fwar3 ]
     then
         export HOME=/i/msys64/home/fwar3
@@ -217,8 +220,5 @@ autoload -U compinit && compinit -u
 #alias tmux="TERM=screen-256color tmux -2"
 #export TERM=screen-256color
 
-#{{{
-# for fzf in windows-->https://github.com/junegunn/fzf/wiki/Windows
-#}}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

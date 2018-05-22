@@ -109,10 +109,24 @@ Plug 'tacahiroy/ctrlp-funky'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 "   " Both options are optional. You don't have to install fzf in ~/.fzf
 "     " and you don't have to run install script if you use fzf only in Vim.
+"
+"""""""""""""""""""""""""""""""""""
+"
+
+"{{{
 """""""""""""""""""""""""""""""""""
 Plug 'rking/ag.vim'
+let g:ag_working_path_mode="r" "search from project root
+"let g:ag_prg="ag --smart-case --ignore tags --ignore .vscode --ignore GTAGS --ignore GPATH --ignore GRTAGS --ignore .cquery_cached_index --ignore doxygen-doc --ignore m4 --ignore autom4te.cache"
+let g:ag_highlight=1
+nnoremap <Leader>fa :Ag 
+nnoremap <Leader>fb :AgBuffer 
+nnoremap <Leader>fc :AgFile 
+
 Plug 'Chun-Yang/vim-action-ag'
 """""""""""""""""""""""""""""""""""""""
+"}}}
+"""""""""""""""""""""""""""""""""""
 "Vim 界定符自动补齐（delimitMate）插件
 "Plug 'Raimondi/delimitMate'
 "Vim 界定符自动补齐auto-pairs
@@ -286,8 +300,11 @@ Plug 'guns/xterm-color-table.vim'
 Plug 'mtth/scratch.vim'
 "
 Plug 'scrooloose/nerdtree'
+
+"{{{
 " Async plugin for vim and neovim to ease the use of ctags/gtags
 Plug 'jsfaint/gen_tags.vim'
+"}}}
 
 "{{{
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -1341,9 +1358,6 @@ let g:comfortable_motion_no_default_key_mappings = 1
 vnoremap <silent> <C-y> :<C-u>Ydv<CR>
 nnoremap <silent> <C-y> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
-"""""""""""""""""""""""rking/ag.vim""""""""""""""""""""""""""
-let g:ag_working_path_mode="r"
-nnoremap <Leader>fa :Ag 
 """""""""""""""""""""""Chun-Yang/vim-action-ag""""""""""""""""""""""""""
 "Normal Mode:
 "gagiw to search the word

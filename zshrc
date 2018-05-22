@@ -187,9 +187,9 @@ gvim()
     #export VIMRUNTIME=$OLD_VIMRUNTIME 
 #} 
 
-if [ "$TERM" = "xterm" ]; then
-    export TERM=xterm-256color
-fi
+#if [ "$TERM" = "xterm" ]; then
+    #export TERM=xterm-256color
+#fi
 
 ulimit -c unlimited
 unsetopt share_history

@@ -841,7 +841,7 @@ set helplang=cn
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 "set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
 " 命令行（在状态行下）的高度，默认为1，这里是2
-set cmdheight=1
+set cmdheight=2
 " 侦测文件类型
 filetype on
 " 载入文件类型插件

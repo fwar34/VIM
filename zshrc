@@ -131,6 +131,11 @@ then
     alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
 fi
 
+if [ "$TERM" = "xterm" ]
+then
+    export TERM=xterm-256color
+fi
+
 alias cs='emacs -nw'
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
@@ -147,7 +152,9 @@ gvim()
 {
     OLD_HOME=$HOME
     OLD_VIMRUNTIME=$VIMRUNTIME
+    OLD_TERM=$TERM
 
+    export TERM=
     if [ -d /i/msys64/home/fwar3 ]
     then
         export HOME=/i/msys64/home/fwar3
@@ -173,6 +180,7 @@ gvim()
 
     export HOME=$OLD_HOME
     export VIMRUNTIME=$OLD_VIMRUNTIME 
+    export TERM=$OLD_TERM
 } 
 
 #gviml()
@@ -187,9 +195,6 @@ gvim()
     #export VIMRUNTIME=$OLD_VIMRUNTIME 
 #} 
 
-#if [ "$TERM" = "xterm" ]; then
-    #export TERM=xterm-256color
-#fi
 
 ulimit -c unlimited
 unsetopt share_history
@@ -214,7 +219,6 @@ autoload -U compinit && compinit -u
 
 #{{{
 # for fzf in windows-->https://github.com/junegunn/fzf/wiki/Windows
-export TERM=
 #}}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

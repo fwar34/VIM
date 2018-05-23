@@ -124,6 +124,11 @@ nnoremap <Leader>fb :AgBuffer
 nnoremap <Leader>fc :AgFile 
 
 Plug 'Chun-Yang/vim-action-ag'
+"Normal Mode:
+"gagiw to search the word
+"gagi' to search the words inside single quotes.
+"Visual Mode:
+"gag to search the selected text
 """""""""""""""""""""""""""""""""""""""
 "}}}
 """""""""""""""""""""""""""""""""""
@@ -1358,14 +1363,6 @@ let g:comfortable_motion_no_default_key_mappings = 1
 vnoremap <silent> <C-y> :<C-u>Ydv<CR>
 nnoremap <silent> <C-y> :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
-"""""""""""""""""""""""Chun-Yang/vim-action-ag""""""""""""""""""""""""""
-"Normal Mode:
-"gagiw to search the word
-"gagi' to search the words inside single quotes.
-"Visual Mode:
-"gag to search the selected text
-let g:ag_working_path_mode="r"
-nnoremap <Leader>fa :Ag 
 """""""""""junegunn/fzf""""""""""""""""""
 nnoremap <Leader>fz :FZF<CR>
 nnoremap <Leader>fm :FZF!<CR>

@@ -6,3 +6,6 @@ tags
 *aclocal*
 *m4*
 *auxdir*
+*GTAGS*
+*GPATH*
+*GRTAGS*

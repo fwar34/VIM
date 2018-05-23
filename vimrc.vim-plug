@@ -120,7 +120,8 @@ let g:ag_working_path_mode="r" "search from project root
 "let g:ag_prg="ag --smart-case --ignore tags --ignore .vscode --ignore GTAGS --ignore GPATH --ignore GRTAGS --ignore .cquery_cached_index --ignore doxygen-doc --ignore m4 --ignore autom4te.cache"
 let g:ag_highlight=1
 nnoremap <Leader>fa :Ag 
-nnoremap <Leader>fb :AgBuffer 
+nnoremap <Leader>fw :Ag <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>fb :AgBuffer <C-R>=expand("<cword>")<CR><CR>
 nnoremap <Leader>fc :AgFile 
 
 Plug 'Chun-Yang/vim-action-ag'
@@ -701,7 +702,14 @@ nnoremap <Leader>zz :w<CR>
 inoremap <Leader>zz <Esc>:w<CR>a
 nnoremap <Leader>ya y'a
 nnoremap <F7> :set tags+=
-cnoremap <Leader>r <C-r><C-w>
+cnoremap <Leader>rr <C-r><C-w>
+"{{{
+"can see :h registers
+":di == :reg
+cnoremap <Leader>rc <C-r>*
+cnoremap <Leader>ry <C-r>"
+"cnoremap <Leader>ry <C-r>0
+"}}}
 "nnoremap <Leader>c :execute "normal! mgA;\<Esc>`g"
 nnoremap <Leader><Leader>; mgA;<Esc>`g
 "映射命令行模式C-k到:
@@ -720,6 +728,7 @@ nnoremap <Leader><TAB> <C-w><C-w>
 nnoremap <Leader>bb <C-^>
 nnoremap <Leader>mm %
 nnoremap <Leader>dj :e .<CR>
+nnoremap <Leader>df :Explore<CR>
 "nnoremap <Leader>f <C-f>
 "nnoremap <Leader>b <C-b>
 "nnoremap <Leader>d <C-d>

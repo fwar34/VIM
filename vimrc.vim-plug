@@ -563,6 +563,9 @@ if version >= 603
     set encoding=utf-8
 endif
 
+let $LANG = 'en'  "set message language  
+set langmenu=en   "set menu's language of gvim. no spaces beside '='  
+
 " 设置配色方案
 "colorscheme codeschool
 
@@ -892,8 +895,11 @@ set backspace=2
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-"set mouse=a
-set mouse=c
+if has('gui_running')
+    set mouse=a
+else
+    set mouse=
+endif
 set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
@@ -909,9 +915,21 @@ set scrolloff=3
 " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile *  setfiletype txt
 
+"{{{
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim中大小写转化的命令是gu或者gU
+"只转化某个单词
+"guw 、gue
+"gUw、gUe
 "将当前光标所在的单词转换成 大写格式
-inoremap <Leader>U <Esc>viwUA
-nnoremap <Leader>U viwU
+inoremap <M-u> <Esc>viwUA
+inoremap <M-i> <Esc>viwuA
+"将当前光标所在的单词转换成 小写格式
+nnoremap <M-u> mgviwU`g
+nnoremap <M-i> mgviwu`g
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
+
 "自动补全
 "inoremap ( ()<ESC>i
 "inoremap ) <c-r>=ClosePair(')')<CR>
@@ -1246,13 +1264,61 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"----------------------------------------------------------------------
+" NERDTree
+"----------------------------------------------------------------------
+let s:ignore = ['.obj', '.so', '.a', '~', '.tmp', '.egg', '.class', '.jar']
+let s:ignore += ['.tar.gz', '.zip', '.7z', '.bz2', '.rar', '.jpg', '.png']
+let s:ignore += ['.chm', '.docx', '.xlsx', '.pptx', '.pdf', '.dll', '.pyd']
+
+for s:extname in s:ignore
+	let s:pattern = escape(s:extname, '.~') . '\($\|\t\),'
+	" let g:netrw_list_hide = s:pattern . g:netrw_list_hide
+endfor
+
+let NERDTreeIgnore = ['\~$', '\$.*$', '\.swp$', '\.pyc$', '#.\{-\}#$']
+let s:ignore += ['.xls', '.mobi', '.mp4', '.mp3', '.exe']
+
+for s:extname in s:ignore
+	let NERDTreeIgnore += [escape(s:extname, '.~$')]
+endfor
+
+let NERDTreeIgnore += ['\.png$','\.jpg$','\.gif$','\.mp3$','\.flac$', '\.ogg$', '\.mp4$','\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$', '\.rar$']
+let NERDTreeIgnore += ['\.DAT$', '\.LOG1$', '\.LOG1$']
+let NERDTreeIgnore += ['$RECYCLE.BIN', 'WinPEpge.sys', '360Rec', '\.', '\.\.', 'System Volume Information']
+
+let NERDTreeRespectWildIgnore = 1
+
+" let g:vinegar_nerdtree_as_netrw = 1
 
 """NERDTree auto start""""""""""
 "autocmd VimEnter * NERDTree
 "wincmd w
 "autocmd VimEnter * wincmd w
 """NERDTree end auto start""""""""""
-""""""""""""""""""""""""""""NERDTree"""""""""""""""
+"-----------------------------------------------------
+" netrw
+"-----------------------------------------------------
+let g:netrw_liststyle = 1
+let g:netrw_winsize = 25
+let g:netrw_list_hide = '\.swp\($\|\t\),\.py[co]\($\|\t\),\.o\($\|\t\),\.bak\($\|\t\),\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_sort_sequence = '[\/]$,*,\.bak$,\.o$,\.info$,\.swp$,\.obj$'
+let g:netrw_preview = 0
+"let g:netrw_special_syntax = 1
+let g:netrw_sort_options = 'i'
+
+if isdirectory(expand('~/.vim'))
+	let g:netrw_home = expand('~/.vim')
+endif
+
+"let g:netrw_timefmt = "%Y-%m-%d %H:%M:%S"
+
+"let g:netrw_banner=0 
+"let g:netrw_browse_split=4   " open in prior window
+"let g:netrw_altv=1           " open splits to the right
+"let g:netrw_liststyle=3      " tree view
+"let g:netrw_list_hide=netrw_gitignore#Hide()
+"-----------------------------------------------------
 "
 " <<
 "
@@ -1347,13 +1413,13 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 "Vim 模式是什么。若要避免这个问题，就需要让 Tmux 通知 iTerm
 "更新光标的形状。为此，需要将以下配置加入到文件 ~/.vimrc 中。
 "if exists('$ITERM_PROFILE')
-"    if exists('$TMUX') 
-"        let &amp_SI = "<Esc>[3 q"
-"        let &amp_EI = "<Esc>[0 q"
-"    else
-"        let &amp_SI = "<Esc>]50;CursorShape=1x7"
-"        let &amp_EI = "<Esc>]50;CursorShape=0x7"
-"    endif
+    "if exists('$TMUX') 
+        "let &amp_SI = "<Esc>[3 q"
+        "let &amp_EI = "<Esc>[0 q"
+    "else
+        "let &amp_SI = "<Esc>]50;CursorShape=1x7"
+        "let &amp_EI = "<Esc>]50;CursorShape=0x7"
+    "endif
 "end
 
 """"""""""vim-cpp-enhanced-highlight setting""""""""""""""""""""""""

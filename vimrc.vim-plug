@@ -472,16 +472,24 @@ let g:ctrlp_cmd = 'CtrlP'
 """When invoked without an explicit starting directory, CtrlP will 
 "set its local working directory according to this variable:
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_regexp = 1
 nnoremap <Leader>ff :CtrlP<CR>
 nnoremap <Leader>bs :CtrlPBuffer<CR>
 "在历史文件中模糊查找
 nnoremap <Leader>rf :CtrlPMRU<CR>
 nnoremap <Leader>rm :CtrlPMixed<CR>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = {
         \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
         \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
         \ }
+
+if has('unix')
+    let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+elseif has('win32') || has('win64')
+    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+endif
 " >>
 " 营造专注气氛
 "
@@ -1264,32 +1272,6 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-"----------------------------------------------------------------------
-" NERDTree
-"----------------------------------------------------------------------
-let s:ignore = ['.obj', '.so', '.a', '~', '.tmp', '.egg', '.class', '.jar']
-let s:ignore += ['.tar.gz', '.zip', '.7z', '.bz2', '.rar', '.jpg', '.png']
-let s:ignore += ['.chm', '.docx', '.xlsx', '.pptx', '.pdf', '.dll', '.pyd']
-
-for s:extname in s:ignore
-	let s:pattern = escape(s:extname, '.~') . '\($\|\t\),'
-	" let g:netrw_list_hide = s:pattern . g:netrw_list_hide
-endfor
-
-let NERDTreeIgnore = ['\~$', '\$.*$', '\.swp$', '\.pyc$', '#.\{-\}#$']
-let s:ignore += ['.xls', '.mobi', '.mp4', '.mp3', '.exe']
-
-for s:extname in s:ignore
-	let NERDTreeIgnore += [escape(s:extname, '.~$')]
-endfor
-
-let NERDTreeIgnore += ['\.png$','\.jpg$','\.gif$','\.mp3$','\.flac$', '\.ogg$', '\.mp4$','\.avi$','.webm$','.mkv$','\.pdf$', '\.zip$', '\.tar.gz$', '\.rar$']
-let NERDTreeIgnore += ['\.DAT$', '\.LOG1$', '\.LOG1$']
-let NERDTreeIgnore += ['$RECYCLE.BIN', 'WinPEpge.sys', '360Rec', '\.', '\.\.', 'System Volume Information']
-
-let NERDTreeRespectWildIgnore = 1
-
-" let g:vinegar_nerdtree_as_netrw = 1
 
 """NERDTree auto start""""""""""
 "autocmd VimEnter * NERDTree
@@ -1344,12 +1326,12 @@ set undodir=~/.undo_history/
 set undofile
 "
 " 保存快捷键
-"map <leader>ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
-nnoremap <leader>sv :mksession! my.vim<cr>
+nnoremap <Leader>ss :mksession! ~/.my.vim<cr> :wviminfo! ~/.my.viminfo<cr>
+"nnoremap <leader>sv :mksession! ~/.my.vim<cr>
 "
 " 恢复快捷键
-"map <leader>rs :source my.vim<cr> :rviminfo my.viminfo<cr>
-nnoremap <leader>rs :source my.vim<cr>
+nnoremap <leader>rs :source ~/.my.vim<cr> :rviminfo ~/.my.viminfo<cr>
+"nnoremap <leader>rs :source ~/.my.vim<cr>
 
 nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -1448,5 +1430,7 @@ nnoremap <Leader>cc :commentary<CR>
 """"""""""""""""""""""""""scratch""""""""""""""""""""""""""""""""""""
 let g:scratch_autohide=1
 
+source ~/mine/VIM/lib/tools.vim
+nnoremap <Leader>qq :call Toggle_QuickFix(6)<CR>
 
 

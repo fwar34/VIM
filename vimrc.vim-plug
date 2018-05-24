@@ -412,6 +412,62 @@ let g:UltiSnipsEditSplit="vertical"
 "Plug 'git@github.com:fwar34/cppsnippets.git'
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.
+"
+"{{{
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'mhinz/vim-signify'
+let g:signify_vcs_list = ['git', 'svn']
+let g:signify_difftool = 'diff'
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
+"
+"{{{
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+
+ let g:gutentags_modules = ['ctags', 'gtags_cscope']
+"let g:gutentags_project_root = ['.root', '.svn', '.git']
+let g:gutentags_ctags_tagfile = '.tags'
+
+"let g:gutentags_cache_dir = expand('~/.cache/tags')
+"let g:gutentags_ctags_extra_args = []
+"let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+"let g:gutentags_auto_add_gtags_cscope = 0
+
+" let g:gutentags_define_advanced_commands = 1
+"
+if has('win32') || has('win16') || has('win64') || has('win95')
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+endif
+
+let g:gutentags_plus_nomap = 1
+noremap <silent> <Leader>gs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <Leader>gg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <Leader>gc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <Leader>gt :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <Leader>ge :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <Leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <Leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <Leader>gd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <Leader>ga :GscopeFind a <C-R><C-W><cr>
+"
+" "
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"}}}
+"
+"{{{
+"}}}
 
 " All of your Plugs must be added before the following line
 call plug#end()            " required
@@ -656,21 +712,21 @@ endfunc
 ""nnoremap <leader>f :find<cr>
 " C+]显示列表
 "map <C-]> :ts<CR>
-nnoremap <Leader>ht <C-]>
+"nnoremap <Leader>ht <C-]>
 "nnoremap <Leader>jj g<C-]>
-nnoremap <Leader>gt g<C-]>
+nnoremap <Leader>ht g<C-]>
 
 " Gtags {
 "let Gtags_Auto_Map = 1          "use a suggested key-mapping
 let Gtags_Auto_Update = 1       "keep tag files up-to-date automatically
 let Gtags_No_Auto_Jump = 1      "don't jump to the first tag at the time of search
 let Gtags_Close_When_Single = 1 "close quickfix windows in case of single tag
-nnoremap <Leader>gg :GtagsCursor<CR>
+nnoremap <Leader>hg :GtagsCursor<CR>
 "----查找函数、宏、枚举等定义的位置
 "nnoremap <Leader>ga :Gtags -a <C-R>=expand("<cword>")<CR><CR>
 "----查找调用本函数的函数
-nnoremap <Leader>gc :Gtags -rxa <C-R>=expand("<cword>")<CR><CR>
-nnoremap <Leader>ga :Gtags -ga <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>hc :Gtags -rxa <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Leader>ha :Gtags -ga <C-R>=expand("<cword>")<CR><CR>
 " }
 "
 " gtags-cscope {
@@ -1272,6 +1328,10 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+let NERDTreeIgnore = ['\.o$', '\.lo$', '\.swp$', '\.pyc$', '\.la$'] 
+let NERDTreeIgnore += ['cscope\..*', 'tags', 'GPATH', 'GTAGS', 'GRTAGS']
+
 
 """NERDTree auto start""""""""""
 "autocmd VimEnter * NERDTree

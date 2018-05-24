@@ -1430,7 +1430,31 @@ nnoremap <Leader>cc :commentary<CR>
 """"""""""""""""""""""""""scratch""""""""""""""""""""""""""""""""""""
 let g:scratch_autohide=1
 
-source ~/mine/VIM/lib/tools.vim
-nnoremap <Leader>qq :call Toggle_QuickFix(6)<CR>
+"source ~/mine/VIM/lib/tools.vim
+"nnoremap <Leader>qq :call Toggle_QuickFix(6)<CR>
+
+func MyToggle_Quickfix()
+    function! s:WindowCheck(mode)
+        if getbufvar('%', '&buftype') == 'quickfix'
+            let s:quickfix_open = 1
+            return
+        endif
+        if a:mode == 0
+            let w:quickfix_save = winsaveview()
+        else
+            call winrestview(w:quickfix_save)
+        endif
+    endfunc
+    let s:quickfix_open = 0
+	windo call s:WindowCheck(0)
+	if s:quickfix_open == 0
+		"exec 'botright copen '.a:size
+        copen
+		"wincmd k
+	else
+		cclose
+	endif
+endfunc
+nnoremap <Leader>qq :call MyToggle_Quickfix()<CR>
 
 

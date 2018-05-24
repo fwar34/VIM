@@ -488,6 +488,10 @@ noremap <silent> <Leader>ga :GscopeFind a <C-R><C-W><cr>
 "}}}
 "
 "{{{
+Plug 'haya14busa/incsearch.vim'
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 "}}}
 
 " All of your Plugs must be added before the following line
@@ -1542,6 +1546,6 @@ func MyToggle_Quickfix()
 		cclose
 	endif
 endfunc
-nnoremap <Leader>qq :call MyToggle_Quickfix()<CR>
+nnoremap <Leader>ww :call MyToggle_Quickfix()<CR>
 
 

@@ -69,12 +69,6 @@ then
 fi
 ln -s ~/mine/VIM/git/gitconfig ~/.gitconfig
 
-if [ -f ~/.gitignore ]
-then
-	mv ~/.gitignore ~/.gitignore.bak
-fi
-ln -s ~/mine/VIM/git/gitignore ~/.gitignore
-
 if [ -f ~/.agignore ]
 then
 	mv ~/.agignore ~/.agignore.bak

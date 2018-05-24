@@ -1547,6 +1547,6 @@ func MyToggle_Quickfix()
 		cclose
 	endif
 endfunc
-nnoremap <Leader>ww :call MyToggle_Quickfix()<CR>
+nnoremap <silent> <Leader>ww :call MyToggle_Quickfix()<CR>
 
 

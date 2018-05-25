@@ -127,7 +127,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
        "\ 'spinner': ['fg', 'Label'],
        "\ 'header':  ['fg', 'Comment'] }
 
-nnoremap <Leader>fl :FZF<CR>
+nnoremap <Leader>fi :FZF<CR>
 nnoremap <Leader>fm :FZF!<CR>
 nnoremap <Leader>fh :FZF! ~<CR>
 """""""""""""""""""""""""""""""""""

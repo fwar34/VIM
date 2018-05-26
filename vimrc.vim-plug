@@ -12,6 +12,13 @@ else
     set lines=999 columns=999
 endif
 
+" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
+if has('gui_running')
+    set mouse=a
+else
+    set mouse=
+endif
+
 "set autochdir 
 " vim 自身命令行模式智能补全
 set wildmenu
@@ -26,8 +33,8 @@ noremap! ;g <C-c>
 vnoremap ;g <Esc>
 vnoremap <C-g> <Esc>
 nnoremap <Space><Space> :
-nnoremap <Space>xc :q<CR>
-nnoremap <Space>xz <C-z>
+nnoremap <Space>qq :q<CR>
+nnoremap <Space>qm <C-z>
 let mapleader = ";"
 let g:mapleader = ";"
 
@@ -105,7 +112,7 @@ nnoremap <Space>ff :CtrlP<CR>
 nnoremap <Space>bs :CtrlPBuffer<CR>
 "在历史文件中模糊查找
 nnoremap <Space>rf :CtrlPMRU<CR>
-nnoremap <Spacebrm :CtrlPMixed<CR>
+nnoremap <Space>rm :CtrlPMixed<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = {
@@ -230,6 +237,7 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 let g:Lf_ShortcutF = '<Leader>ff'
 let g:Lf_ShortcutB = '<Leader>bs'
+nnoremap <Leader>bd :bd<CR>
 noremap <Leader>rm :LeaderfMru<cr>
 noremap <Leader>ii :LeaderfFunction!<cr>
 noremap <Leader>tb :LeaderfTag<cr>
@@ -428,14 +436,34 @@ nnoremap <Leader>cc :commentary<CR>
 
 
 "--------------------------------------------------------------------------
-" 
+" Omni
 "--------------------------------------------------------------------------
 Plug 'vim-scripts/OmniCppComplete'
+"set completeopt=menu,menuone " 关掉智能补全时的预览窗口
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
+let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
+let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
+"let OmniCpp_DefaultNamespaces=["std"]
+"let OmniCpp_DefaultNamespaces=["_GLIBCXX_STD"]
+let OmniCpp_ShowScopeInAbbr=1 " show scope in abbreviation and remove the last column
+let OmniCpp_ShowAccess=1
+
+""setlocal omnifunc=tern#Complete
+""call tern#Enable()
+
 
 "--------------------------------------------------------------------------
-" 
+" Powerline设置
 "--------------------------------------------------------------------------
 "Plug 'https://github.com/Lokaltog/vim-powerline.git'
+" 设置状态栏主题风格
+let g:Powerline_colorscheme='solarized256'
+
 
 "--------------------------------------------------------------------------
 " 
@@ -537,6 +565,29 @@ let g:cpp_class_decl_highlight = 1
 " 书签可视化
 "--------------------------------------------------------------------------
 Plug 'https://github.com/kshenoy/vim-signature.git'
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]'",
+        \ 'GotoPrevLineByPos'  :  "['",
+        \ 'GotoNextSpotByPos'  :  "mn",
+        \ 'GotoPrevSpotByPos'  :  "mp",
+        \ 'GotoNextMarker'     :  "[+",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarkers'   :  "m?"
+        \ }
 
 
 "--------------------------------------------------------------------------
@@ -655,8 +706,9 @@ let g:NERDTreeDirArrowCollapsible = '-'
 "https://github.com/scrooloose/nerdtree/issues/433#issuecomment-92590696
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd filetype nerdtree highlight ' . a:extension .' 
+                \ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
 call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
@@ -675,12 +727,6 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
 let NERDTreeIgnore = ['\.o$', '\.lo$', '\.swp$', '\.pyc$', '\.la$'] 
 let NERDTreeIgnore += ['cscope\..*', 'tags', 'GPATH', 'GTAGS', 'GRTAGS']
-
-"""NERDTree auto start""""""""""
-"autocmd VimEnter * NERDTree
-"wincmd w
-"autocmd VimEnter * wincmd w
-"""NERDTree end auto start""""""""""
 
 
 "--------------------------------------------------------------------------
@@ -747,6 +793,13 @@ Plug 'fholgado/minibufexpl.vim'
 nnoremap <Leader>mb :MBEToggle<cr>
 nnoremap <Leader>mh :MBEbn<cr>
 nnoremap <Leader>mq :MBEbp<cr>
+" minibufexpl插件的一般设置
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+"not auto start
+let g:miniBufExplorerAutoStart = 0
 
 
 "--------------------------------------------------------------------------
@@ -768,8 +821,6 @@ Plug 'https://github.com/scrooloose/nerdcommenter.git'
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_echo_current_diagnostic = 0
-""""
-"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'       "配置全局路径
 "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'       "配置全局路径
 let g:ycm_confirm_extra_conf=0   "每次直接加载该文件，不提示是否要加载
 
@@ -825,6 +876,7 @@ let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
 
 if isdirectory("/home/liang.feng")
     let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/plugged/cppsnippets"]
+    let g:UltiSnipsSnippetDirectories=[expand("~/.vim/plugged/cppsnippets")]
 elseif isdirectory("/honza/fwar3")
     let g:UltiSnipsSnippetDirectories=["/home/fwar3/.vim/plugged/cppsnippets"]
 endif
@@ -921,7 +973,7 @@ inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
 "--------------------------------------------------------------------------
 let $GTAGSLABEL = 'native-pygments'
 "let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
-let $GTAGSCONF = '~/.globalrc'
+"let $GTAGSCONF = '~/.globalrc'
 
 
 "--------------------------------------------------------------------------
@@ -972,7 +1024,7 @@ set go=             " 不要图形按钮
 
 "字体设置 
 if has('win32') && has('gui_running')
-    "set guifont=Courier_New:h12:cANSI
+    set guifont=Courier_New:h12:cANSI
 endif
 
 syntax on           " 语法高亮  
@@ -1289,7 +1341,7 @@ set history=1000
 set nobackup
 set noswapfile
 "搜索忽略大小写
-""set ignorecase
+"set ignorecase
 "搜索逐字符高亮
 set hlsearch
 set incsearch
@@ -1321,12 +1373,6 @@ set wildmenu
 set backspace=2
 " 允许backspace和光标键跨越行边界
 set whichwrap+=<,>,h,l
-" 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
-if has('gui_running')
-    set mouse=a
-else
-    set mouse=
-endif
 set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
@@ -1342,8 +1388,10 @@ set scrolloff=3
 " 高亮显示普通txt文件（需要txt.vim脚本）
 au BufRead,BufNewFile *  setfiletype txt
 
-"{{{
-""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"--------------------------------------------------------------------------
+"  
+"--------------------------------------------------------------------------
 "vim中大小写转化的命令是gu或者gU
 "只转化某个单词
 "guw 、gue
@@ -1354,36 +1402,14 @@ inoremap <M-i> <Esc>viwuA
 "将当前光标所在的单词转换成 小写格式
 nnoremap <M-u> mgviwU`g
 nnoremap <M-i> mgviwu`g
-""""""""""""""""""""""""""""""""""""""""""""""""""
-"}}}
-
-"自动补全
-"inoremap ( ()<ESC>i
-"inoremap ) <c-r>=ClosePair(')')<CR>
-"by Suzzz：  原作者这种设置，输入{会自动补全，并且中间插入一个空行，将光标定位到空行。这对于函数是OK的，但是使用花括号初始化数组、vector时就不方便了。所以改为现在这种。只是补全，然后光标在左右括号中间。
-":inoremap { {<CR>}<ESC>O
-"inoremap { {}<ESC>i
-"inoremap } <c-r>=ClosePair('}')<CR>
-""inoremap [ []<ESC>i
-""inoremap ] <c-r>=ClosePair(']')<CR>
-""inoremap " ""<ESC>i
-""inoremap ' ''<ESC>i
-
-function! ClosePair(char)
-if getline('.')[col('.') - 1] == a:char
-    return "\<Right>"
-else
-    return a:char
-endif
-endfunction
-filetype plugin indent on 
 
 "打开文件类型检测, 加了这句才可以用智能补全
 "set completeopt=longest,menu
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"--------------------------------------------------------------------------
 " CTags的设定  
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"--------------------------------------------------------------------------
 "/usr/include/ /usr/local/include
 "nnoremap <Leader><F10> :!ctags -R --c-kinds=+l+x+p --fields=+lS -I __THROW,__nonnull -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>
 "cd 到/usr/include执行(sudo)
@@ -1408,175 +1434,10 @@ nnoremap <Leader><F7> :set tags+=~/.indexer_files_tags/
 
 "map <silent> <F2> :!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/sys.tags /usr/include /usr/local/include<CR>:!ctags -I __THROW --file-scope=yes --langmap=c:+.h --languages=c,c++ --links=yes --c-kinds=+p --c++-kinds=+l+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+ialS --extra=+q -R -f ~/.tags/tang.tags /tang/include<CR>:set tags+=~/.tags/sys.tags<CR>:set tags+=~/.tags/tang.tags<CR>
 
-let Tlist_Sort_Type ="name"    " 按照名称排序  
-let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
-let Tlist_Compart_Format = 1    " 压缩方式  
-let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
-let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
-let Tlist_Enable_Fold_Column = 0    " 不要显示折叠树  
-""autocmd FileType java set tags+=D:\tools\java\tags  
-""autocmd FileType h,cpp,cc,c set tags+=D:\tools\cpp\tags  
-""let Tlist_Show_One_File=1            "不同时显示多个文件的tag，只显示当前文件的
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Powerline设置
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 设置状态栏主题风格
-let g:Powerline_colorscheme='solarized256'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"可视化书签vim-signature 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自定义 vim-signature 快捷键
-let g:SignatureMap = {
-        \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "m-",
-        \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "mda",
-        \ 'PurgeMarkers'       :  "m<BS>",
-        \ 'GotoNextLineAlpha'  :  "']",
-        \ 'GotoPrevLineAlpha'  :  "'[",
-        \ 'GotoNextSpotAlpha'  :  "`]",
-        \ 'GotoPrevSpotAlpha'  :  "`[",
-        \ 'GotoNextLineByPos'  :  "]'",
-        \ 'GotoPrevLineByPos'  :  "['",
-        \ 'GotoNextSpotByPos'  :  "mn",
-        \ 'GotoPrevSpotByPos'  :  "mp",
-        \ 'GotoNextMarker'     :  "[+",
-        \ 'GotoPrevMarker'     :  "[-",
-        \ 'GotoNextMarkerAny'  :  "]=",
-        \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListLocalMarks'     :  "ms",
-        \ 'ListLocalMarkers'   :  "m?"
-        \ }
-
-" 设置状态栏主题风格
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"默认打开Taglist 
-""let Tlist_Auto_Open=1
-"""""""""""""""""""""""""""""" 
-" Tag list (ctags) 
-"""""""""""""""""""""""""""""""" 
-let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
-let Tlist_Show_One_File = 1 "不同时显示多个文件的tag，只显示当前文件的 
-let Tlist_Exit_OnlyWindow = 1 "如果taglist窗口是最后一个窗口，则退出vim 
-let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
-"设置显示标签列表子窗口的快捷键。速记：taglist
-nnoremap <Leader>tl :TlistToggle<CR> 
-
-"--------------------------------------------------------------------------
-" Tagbar(ctags) 
-"--------------------------------------------------------------------------
-"Plug 'vim-scripts/tagbar'
-" 设置 tagbar 子窗口的位置出现在主编辑区的左边 
-let tagbar_left=1 
-" " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
-nnoremap <Space>tb :TagbarToggle<CR> 
-" " 设置标签子窗口的宽度 
-let tagbar_width=32 
-" " tagbar 子窗口中不显示冗余帮助信息 
-let g:tagbar_compact=1
-" 设置 ctags 对哪些代码标识符生成标签
-let g:tagbar_type_cpp = {
-     \ 'ctagstype' : 'c++',
-     \ 'kinds'     : [
-         \ 'c:classes:0:1',
-         \ 'd:macros:0:1',
-         \ 'e:enumerators:0:0', 
-         \ 'f:functions:0:1',
-         \ 'g:enumeration:0:1',
-         \ 'l:local:0:1',
-         \ 'm:members:0:1',
-         \ 'n:namespaces:0:1',
-         \ 'p:functions_prototypes:0:1',
-         \ 's:structs:0:1',
-         \ 't:typedefs:0:1',
-         \ 'u:unions:0:1',
-         \ 'v:global:0:1',
-         \ 'x:external:0:1'
-     \ ],
-     \ 'sro'        : '::',
-     \ 'kind2scope' : {
-         \ 'g' : 'enum',
-         \ 'n' : 'namespace',
-         \ 'c' : 'class',
-         \ 's' : 'struct',
-         \ 'u' : 'union'
-     \ },
-     \ 'scope2kind' : {
-         \ 'enum'      : 'g',
-         \ 'namespace' : 'n',
-         \ 'class'     : 'c',
-         \ 'struct'    : 's',
-         \ 'union'     : 'u'
-     \ }
-\ }
-
-""""""""""""""""""""""""""""""""
-" minibufexpl插件的一般设置
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
-"not auto start
-let g:miniBufExplorerAutoStart = 0
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 文本格式和排版
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 自动格式化
-""set formatoptions=tcrqn
-
-" 只在下列文件类型被侦测到的时候显示行号，普通文本文件不显示
-if has("autocmd")
-"   autocmd FileType xml,html,c,cs,java,perl,shell,bash,cpp,python,vim,php,ruby,sh set number
-"   autocmd FileType xml,html vmap <C-o> <ESC>'<i<!--<ESC>o<ESC>'>o-->
-"   autocmd FileType java,c,cpp,cs vmap <C-o> <ESC>'<o/*<ESC>'>o*/
-"   autocmd FileType html,text,php,vim,c,java,xml,bash,shell,perl,python setlocal textwidth=100
-"   autocmd Filetype html,xml,xsl source $VIMRUNTIME/plugin/closetag.vim
-"   打开文件时定位到上次退出的光标位置
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
-endif " has("autocmd")
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"--------------------------------------------------------------------------
-" 
-" Omni
-"--------------------------------------------------------------------------
-"set completeopt=menu,menuone " 关掉智能补全时的预览窗口
-let OmniCpp_MayCompleteDot = 1 " autocomplete with .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
-let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
-let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype in popup window
-let OmniCpp_GlobalScopeSearch=1 " enable the global scope search
-let OmniCpp_DisplayMode=1 " Class scope completion mode: always show all members
-"let OmniCpp_DefaultNamespaces=["std"]
-"let OmniCpp_DefaultNamespaces=["_GLIBCXX_STD"]
-let OmniCpp_ShowScopeInAbbr=1 " show scope in abbreviation and remove the last column
-let OmniCpp_ShowAccess=1
-
-""setlocal omnifunc=tern#Complete
-""call tern#Enable()
-
 
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
-""PS1='\[\033]0;\u@\h:\w\007\]\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\]'
-
-""hi comment ctermfg=6
-""hi comment ctermfg=blue
-""hi comment ctermfg=green
-
 "if &term =~ '256color'  
     " disable Background Color Erase (BCE) so that color schemes  
     "       " render properly when inside 256-color tmux and GNU
@@ -1589,6 +1450,7 @@ let OmniCpp_ShowAccess=1
 "if exists('$TMUX')
     "set term=screen-256color
 "endif
+
 
 " 设置配色方案
 if !has('gui_running')
@@ -1605,9 +1467,6 @@ endif
 
 "colorscheme codeschool
 colorscheme wombat256
-
-" 成员函数的实现顺序与声明顺序一致
-let g:disable_protodef_sorting=1
 
 
 "-----------------------------------------------------

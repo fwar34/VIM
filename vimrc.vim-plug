@@ -88,12 +88,12 @@ Plug 'terryma/vim-expand-region'
 " 翻译
 Plug 'ianva/vim-youdao-translater'
 """""""""""""""""""""""""""
-Plug 'Shougo/vimshell.vim'
+"Plug 'Shougo/vimshell.vim'
 "{{{
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-if has('win32')
-    let g:vimproc_dll_path="~/.vim/plugged/vimproc.vim/lib/vimproc_cygwin.dll"
-endif
+"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+"if has('win32')
+    "let g:vimproc_dll_path="~/.vim/plugged/vimproc.vim/lib/vimproc_cygwin.dll"
+"endif
 "}}}
 
 ""括号匹配
@@ -166,6 +166,52 @@ Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+
+"--------------------------------------------------------------------------
+"全异步显示文件函数列表，不用的时候不会占用你任何屏幕空间，
+"将 ALT+P 绑定到 `:LeaderfFunction!` 这个命令上，按 ALT+P 
+"就弹出当前文件的函数列表，然后可以进行模糊匹配搜索，除了上下键移动选择外，
+"各种vim的跳转和搜索命令都可以始用，回车跳转然后关闭函数列表，
+"除此之外按 i 进入模糊匹配，按TAB切换回列表选择。
+"--------------------------------------------------------------------------
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutB = '<m-n>'
+noremap <c-n> :LeaderfMru<cr>
+noremap <m-p> :LeaderfFunction!<cr>
+noremap <m-n> :LeaderfBuffer<cr>
+noremap <m-m> :LeaderfTag<cr>
+let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_CacheDirectory = expand('~/.vim/cache')
+let g:Lf_ShowRelativePath = 0
+let g:Lf_HideHelp = 1
+let g:Lf_StlColorscheme = 'lightline'
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+"--------------------------------------------------------------------------
+"当前文档按“-”号就能不切窗口的情况下在当前窗口直接返回当前文档所在的目录，
+"再按一次减号就返回上一级目录，按回车进入下一级目录或者再当前窗口打开光标下的文件。
+"进一步映射 “<tab>7” , “<tab>8” 和 “<tab>9” 分别用于在新的 split, vsplit 
+"和新标签打开当前文件所在目录，这样从一个文件如手，很容易找到和该文件相关的其他项目文件
+"--------------------------------------------------------------------------
+Plug 'justinmk/vim-dirvish'
+
+"--------------------------------------------------------------------------
+" Print documents in echo area. 
+"--------------------------------------------------------------------------
+Plug 'Shougo/echodoc.vim'
+
+"--------------------------------------------------------------------------
+" A (Neo)vim plugin for formatting code. 
+"--------------------------------------------------------------------------
+Plug 'sbdchd/neoformat'
+
+"
 "
 "{{{
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,8 +258,7 @@ Plug 'tpope/vim-commentary'
 "echofunc可以在命令行中提示当前输入函数的原型
 Plug 'vim-scripts/echofunc.vim'
 Plug 'vim-scripts/OmniCppComplete'
-Plug 'vim-scripts/taglist.vim'
-Plug 'vim-scripts/tagbar'
+"Plug 'vim-scripts/taglist.vim'
 "前面介绍的主题风格对状态栏不起作用，需要借助插件
 "Powerline（https://github.com/Lokaltog/vim-powerline ）美化状态栏，在 .vimrc
 "Plug 'https://github.com/Lokaltog/vim-powerline.git'
@@ -221,6 +266,54 @@ Plug 'vim-scripts/tagbar'
 Plug 'https://github.com/yianwillis/vimcdoc.git'
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 
+"--------------------------------------------------------------------------
+" 语法检查
+"--------------------------------------------------------------------------
+Plug 'w0rp/ale'
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+"基本上就是定义了一下运行规则，信息显示格式以及几个 linter 的运行参数，其中 6，7 两行比较重要，
+"它规定了如果 normal 模式下文字改变以及离开 insert 模式的时候运行 linter，这是相对保守的做法，
+"如果没有的话，会导致 YouCompleteMe 的补全对话框频繁刷新。记得设置一下各个 linter 的参数，
+"忽略一些你觉得没问题的规则，不然错误太多没法看。默认错误和警告的风格都太难看了，你需要修改一下，
+"比如我使用 GVim，就重新定义了警告和错误的样式，去除默认难看的红色背景，代码正文使用干净的波浪下划线表示：
+let g:ale_sign_error = "\ue009\ue009"
+hi! clear SpellBad
+hi! clear SpellCap
+hi! clear SpellRare
+hi! SpellBad gui=undercurl guisp=red
+hi! SpellCap gui=undercurl guisp=blue
+hi! SpellRare gui=undercurl guisp=magenta
+
+"--------------------------------------------------------------------------
+" 文本对象 
+"i, 和 a, ：参数对象，写代码一半在修改，现在可以用 di, 或 ci, 一次性删除/改写当前参数
+"ii 和 ai ：缩进对象，同一个缩进层次的代码，可以用 vii 选中，dii / cii 删除或改写
+"if 和 af ：函数对象，可以用 vif / dif / cif 来选中/删除/改写函数的内容
+"--------------------------------------------------------------------------
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-syntax'
+Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
+Plug 'sgur/vim-textobj-parameter'
+
+"--------------------------------------------------------------------------
+" 前面编译运行时需要频繁的操作 quickfix 窗口，ale查错时也需要快速再错误间跳转（location list），
+" 就连文件比较也会用到快速跳转到上/下一个差异处，unimpaired 插件帮你定义了一系列方括号开头的快捷键，
+" 被称为官方 Vim 中丢失的快捷键。
+"--------------------------------------------------------------------------
+Plug 'tpope/vim-unimpaired'
 
 "{{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -293,9 +386,18 @@ if has('unix')
     "
     "{{{
     """"""""""""""""""""""""""""""""""""""""""""""""""
-    Plug 'zchee/deoplete-clang'
+    "Plug 'zchee/deoplete-clang'
     """"""""""""""""""""""""""""""""""""""""""""""""""
     "}}}
+    Plug 'Shougo/deoplete-clangx'
+    " Change clang binary path
+    call deoplete#custom#var('clangx', 'clang_binary', '/usr/local/bin/clang')
+
+    " Change clang options
+    call deoplete#custom#var('clangx', 'default_c_options', '')
+    call deoplete#custom#var('clangx', 'default_cpp_options', '')
+
+    Plug 'Shougo/neoinclude.vim'
 endif
 
 "{{{
@@ -485,9 +587,8 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-"if has('unix')
-let g:gutentags_auto_add_gtags_cscope = 0
-"endif
+"https://zhuanlan.zhihu.com/p/36279445
+"let g:gutentags_auto_add_gtags_cscope = 0
 
 "let g:gutentags_define_advanced_commands = 1
 
@@ -507,6 +608,27 @@ noremap <silent> <Leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <Leader>ga :GscopeFind a <C-R><C-W><cr>
 "
 " "
+
+"--------------------------------------------------------------------------
+" 使用 vim-preview 插件高效的在 quickfix 中先快速预览所有结果，再有针对性的打开必要文件
+" This plugin solves a series of user experience problems in vim's preview window and 
+" provide a handy way to preview tags, files and function signatures.
+"--------------------------------------------------------------------------
+Plug 'skywind3000/vim-preview'
+noremap <m-u> :PreviewScroll -1<cr>
+noremap <m-d> :PreviewScroll +1<cr>
+inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
+inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+noremap <F4> :PreviewSignature!<cr>
+inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
+
+"--------------------------------------------------------------------------
+" https://zhuanlan.zhihu.com/p/36279445 
+"--------------------------------------------------------------------------
+let $GTAGSLABEL = 'native-pygments'
+let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "}}}
@@ -763,6 +885,14 @@ func SetPythonTitle()
     autocmd BufNewFile * normal G
 endfunc
 
+func InsertVimCommit()
+    call append(line(".") - 1, "\"--------------------------------------------------------------------------")
+    call append(line(".") - 1, "\" ")
+    call append(line(".") - 1, "\"--------------------------------------------------------------------------")
+endfunc
+
+nnoremap <Leader>ic :call InsertVimCommit()<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -872,11 +1002,22 @@ nnoremap <silent> <F12> :!ctags -R --languages=c++ --langmap=c++:+.inl -h +.inl 
 "新建标签  
 ""map <M-F2> :tabnew<CR>  
 "列出当前目录文件  
-nnoremap <F4> :tabnew .<CR>  
+"nnoremap <F4> :tabnew .<CR>  
 
 "打开树状文件目录  
 ""map <C-F3> \be  
 "":autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
+
+"--------------------------------------------------------------------------
+" F9 compile single file
+"--------------------------------------------------------------------------
+"nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+
+"--------------------------------------------------------------------------
+" F5 run
+"--------------------------------------------------------------------------
+"nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+
 
 "C，C++ 按F5编译运行
 nnoremap <F5> :call CompileRunGcc()<CR>
@@ -888,20 +1029,24 @@ if &filetype == 'c'
     if filereadable(expand("%<"))
         silent exec "!rm %<"
     endif
-    exec "!gcc % -o %<"
+    "exec "!gcc % -o %<"
+    exec "AsyncRun gcc -Wall -O2 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>"
     "如果编译成功了有了可执行文件才运行"
     if filereadable(expand("%<"))
-        exec "! ./%<"
+        "exec "! ./%<"
+        exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>"
     endif
 elseif &filetype == 'cpp'
     "先删除上次编译的执行文件"
     if filereadable(expand("%<"))
         silent exec "!rm %<"
     endif
-    exec "!g++ -std=c++11 % -o %<"
+    "exec "!g++ -std=c++11 % -o %<"
+    exec "AsyncRun g++ -Wall -O2 -std=c++11 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>"
     "如果编译成功了有了可执行文件才运行"
     if filereadable(expand("%<"))
-        exec "! ./%<"
+        "exec "! ./%<"
+        exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT) <cr>"
     endif
 elseif &filetype == 'java'
     exec "!javac %" 
@@ -1159,9 +1304,10 @@ let Tlist_Use_Right_Window = 1 "在右侧窗口中显示taglist窗口
 "设置显示标签列表子窗口的快捷键。速记：taglist
 nnoremap <Leader>tl :TlistToggle<CR> 
 
-"""""""""""""""""""""""""""""" 
+"--------------------------------------------------------------------------
 " Tagbar(ctags) 
-"""""""""""""""""""""""""""""""" 
+"--------------------------------------------------------------------------
+"Plug 'vim-scripts/tagbar'
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边 
 let tagbar_left=1 
 " " 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
@@ -1205,6 +1351,7 @@ let g:tagbar_type_cpp = {
          \ 'union'     : 'u'
      \ }
 \ }
+
 """"""""""""""""""""""""""""""""
 " minibufexpl插件的一般设置
 let g:miniBufExplMapWindowNavVim = 1
@@ -1541,6 +1688,9 @@ noremap <leader>yd :<C-u>Yde<CR>
 """""""""""""""tpope/vim-commentary""""""""""""""
 nnoremap <Leader>cc :commentary<CR>
 """""""""""""""""""""""""""""""""""""""
+nnoremap <Leader>tm :term zsh<CR>
+tnoremap <Leader>g <C-w>N
+tnoremap <Leader><Tab> <C-w><C-w>
 
 """"""""""""""""""""""""""scratch""""""""""""""""""""""""""""""""""""
 let g:scratch_autohide=1

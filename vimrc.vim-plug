@@ -26,7 +26,7 @@ noremap! ;g <C-c>
 vnoremap ;g <Esc>
 vnoremap <C-g> <Esc>
 nnoremap <Space><Space> :
-nnoremap <Space>xc :q
+nnoremap <Space>xc :q<CR>
 nnoremap <Space>xz <C-z>
 let mapleader = ";"
 let g:mapleader = ";"

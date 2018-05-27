@@ -53,11 +53,19 @@ call plug#begin('~/.vim/plugged')
 " asyncrun 
 "--------------------------------------------------------------------------
 Plug 'skywind3000/asyncrun.vim'
-"asyncrun update tags
-function! UpdateTags()
-    :AsyncRun ctags -R --c++-kinds=+px --fields=+ilaS --extra=+q .
-endfunction
-"autocmd bufwritepost *.cpp,*.h,*.c,*.py call updatetags()
+ 
+" 自动打开 quickfix window ，高度为 6
+let g:asyncrun_open = 6
+" 任务结束时候响铃提醒
+let g:asyncrun_bell = 1
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml'] 
+
+"然后在 AsyncRun 命令行中，用 <root> 或者 $(VIM_ROOT) 
+"来表示项目所在路径，于是我们可以定义按 F7 编译整个项目
+nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
+source ~/mine/VIM/lib/tools.vim
+" 设置 F10 打开/关闭 Quickfix 窗口
+nnoremap <slient><Leader>ww :call asyncrun#quickfix_toggle(6)<CR>
 
 
 "--------------------------------------------------------------------------
@@ -168,16 +176,37 @@ nnoremap <Leader>fh :FZF! ~<CR>
 
 
 "--------------------------------------------------------------------------
-" ag.vim 
+" ag.vim
 "--------------------------------------------------------------------------
 Plug 'rking/ag.vim'
 " ag的忽略文件在~/.agignore
 let g:ag_working_path_mode="r" "search from project root
 let g:ag_highlight=1
-nnoremap <Leader>fa :Ag 
-nnoremap <Leader>fw :Ag <C-R>=expand("<cword>")<CR><CR>
-nnoremap <Leader>fb :AgBuffer <C-R>=expand("<cword>")<CR><CR>
-nnoremap <Leader>fc :AgFile 
+nnoremap <Space>fa :Ag 
+nnoremap <Space>fw :Ag <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Space>fb :AgBuffer <C-R>=expand("<cword>")<CR><CR>
+nnoremap <Space>fc :AgFile 
+
+"--------------------------------------------------------------------------
+" An ack.vim alternative mimics Ctrl-Shift-F on Sublime Text 2  
+"--------------------------------------------------------------------------
+Plug 'dyng/ctrlsf.vim'
+"Input :CtrlSF in command line for you, just a handy shortcut.
+nmap <Leader>fa <Plug>CtrlSFPrompt
+"Input :CtrlSF in command line for you, just a handy shortcut.
+nmap <Leader>fv <Plug>CtrlSFVwordPath<CR>
+"Like <Plug>CtrlSFVwordPath, but execute it immediately.
+nmap <Leader>fe <Plug>CtrlSFVwordExec<CR>
+"Input :CtrlSF foo in command line where foo is word under the cursor.
+nmap <Leader>fw <Plug>CtrlSFCwordPath<CR>
+"Like <Plug>CtrlSFCwordPath, but also add word boundary around searching word.
+nmap <Leader>fc <Plug>CtrlSFCCwordPath<CR>
+"Input :CtrlSF foo in command line where foo is the last search pattern of vim.
+nmap <Leader>fp <Plug>CtrlSFPwordPath<CR>
+
+nnoremap <Leader>ft :CtrlSFOpen<CR>
+nnoremap <Leader>fn :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
 
 "--------------------------------------------------------------------------
@@ -607,6 +636,7 @@ if has('win32')
     imap <tab> <Plug>CompletorCppJumpToPlaceholder
 endif
 
+
 "--------------------------------------------------------------------------
 " deoplete
 "--------------------------------------------------------------------------
@@ -913,6 +943,7 @@ let g:signify_sign_delete            = '-'
 let g:signify_sign_delete_first_line = '^'
 let g:signify_sign_change            = '~'
 let g:signify_sign_changedelete      = g:signify_sign_change
+nnoremap <Leader>di :SignifyDiff<CR>
 
 
 "--------------------------------------------------------------------------
@@ -934,7 +965,16 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 "https://zhuanlan.zhihu.com/p/36279445
 "let g:gutentags_auto_add_gtags_cscope = 0
 
+" 错误排查：gutentags: gutentags: gtags-cscope job failed, returned: 1
+"这是因为 gutentags 调用 gtags 时，gtags 返回了错误值 1，具体是什么情况，
+"需要进一步打开日志，查看 gtags 的错误输出：
 "let g:gutentags_define_advanced_commands = 1
+"先在 vimrc 中添加上面这一句话，允许 gutentags 打开一些高级命令和选项。
+"然后打开你出错的源文件，运行 “:GutentagsToggleTrace”命令打开日志，
+"然后保存一下当前文件，触发 gtags 数据库更新，接下来你应该能看到一些讨厌的日志输出，
+"这里不够的话，~/.cache/tags 目录下还有对应项目名字的 log 文件，
+"打开看看 gtags 具体输出了什么，然后进行相应的处理。
+let g:gutentags_define_advanced_commands = 1
 
 if has('win32')
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
@@ -1576,28 +1616,33 @@ tnoremap <Leader><Tab> <C-w><C-w>
 "--------------------------------------------------------------------------
 " toggle quickfix 
 "--------------------------------------------------------------------------
-func MyToggle_Quickfix()
-    function! s:WindowCheck(mode)
-        if getbufvar('%', '&buftype') == 'quickfix'
-            let s:quickfix_open = 1
-            return
-        endif
-        if a:mode == 0
-            let w:quickfix_save = winsaveview()
-        else
-            call winrestview(w:quickfix_save)
-        endif
-    endfunc
-    let s:quickfix_open = 0
-	windo call s:WindowCheck(0)
-	if s:quickfix_open == 0
-		"exec 'botright copen '.a:size
-        copen
-		"wincmd k
-	else
-		cclose
-	endif
-endfunc
-nnoremap <silent> <Leader>ww :call MyToggle_Quickfix()<CR>
+"func MyToggle_Quickfix()
+"    function! s:WindowCheck(mode)
+"        if getbufvar('%', '&buftype') == 'quickfix'
+"            let s:quickfix_open = 1
+"            return
+"        endif
+"        if a:mode == 0
+"            let w:quickfix_save = winsaveview()
+"        else
+"            call winrestview(w:quickfix_save)
+"        endif
+"    endfunc
+"    let s:quickfix_open = 0
+"	windo call s:WindowCheck(0)
+"	if s:quickfix_open == 0
+"		"exec 'botright copen '.a:size
+"        copen
+"		"wincmd k
+"	else
+"		cclose
+"	endif
+"endfunc
+"nnoremap <silent> <Leader>ww :call MyToggle_Quickfix()<CR>
+
+
+"--------------------------------------------------------------------------
+" 
+"--------------------------------------------------------------------------
 
 

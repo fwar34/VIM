@@ -210,7 +210,7 @@ nmap <Leader>fp <Plug>CtrlSFPwordPath<CR>
 
 nnoremap <Leader>ft :CtrlSFOpen<CR>
 nnoremap <Leader>fn :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+inoremap <Leader>fn <Esc>:CtrlSFToggle<CR>
 
 
 "--------------------------------------------------------------------------
@@ -234,7 +234,7 @@ Plug 'Chun-Yang/vim-action-ag'
 " Vim 界定符自动补齐auto-pairs
 "--------------------------------------------------------------------------
 Plug 'jiangmiao/auto-pairs'
-let g:AutoPairsShortcutToggle = '<another key>'
+let g:AutoPairsShortcutToggle = '<Leader>pp'
 
 
 "--------------------------------------------------------------------------
@@ -526,6 +526,12 @@ let g:ale_cpp_cppcheck_options = ''
 	"let g:ale_command_wrapper = 'nice -n5'
 "endif
 
+"使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
+let g:ale_linters = { 'c++': ['clang'], 'c': ['clang'], 'python': ['pylint'] }
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 "基本上就是定义了一下运行规则，信息显示格式以及几个 linter 的运行参数，其中 6，7 两行比较重要，
 "它规定了如果 normal 模式下文字改变以及离开 insert 模式的时候运行 linter，这是相对保守的做法，
 "如果没有的话，会导致 YouCompleteMe 的补全对话框频繁刷新。记得设置一下各个 linter 的参数，
@@ -538,6 +544,7 @@ hi! clear SpellRare
 hi! SpellBad gui=undercurl guisp=red
 hi! SpellCap gui=undercurl guisp=blue
 hi! SpellRare gui=undercurl guisp=magenta
+
 
 
 "--------------------------------------------------------------------------
@@ -660,13 +667,17 @@ if has('unix')
     let g:deoplete#enable_at_startup = 1
 
     Plug 'zchee/deoplete-jedi'
-    Plug 'Shougo/deoplete-clangx'
-    " Change clang binary path
-    call deoplete#custom#var('clangx', 'clang_binary', '/usr/local/bin/clang')
+    "Plug 'Shougo/deoplete-clangx'
+    "" Change clang binary path
+    "call deoplete#custom#var('clangx', 'clang_binary', '/usr/local/bin/clang')
 
-    " Change clang options
-    call deoplete#custom#var('clangx', 'default_c_options', '')
-    call deoplete#custom#var('clangx', 'default_cpp_options', '')
+    "" Change clang options
+    "call deoplete#custom#var('clangx', 'default_c_options', '')
+    "call deoplete#custom#var('clangx', 'default_cpp_options', '')
+
+    Plug 'zchee/deoplete-clang'
+    let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+    let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
 
     Plug 'Shougo/neoinclude.vim'
 endif
@@ -793,12 +804,45 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 
 "--------------------------------------------------------------------------
+" 代码模板补全
+"--------------------------------------------------------------------------
+Plug 'honza/vim-snippets'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+"--------------------------------------------------------------------------
+" ultisnips 
+"--------------------------------------------------------------------------
+Plug 'SirVer/ultisnips'
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<Leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
+"let g:UltiSnipsSnippetDirectories=["mycppsnippets"]
+
+if isdirectory("/home/liang.feng")
+    let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/plugged/cppsnippets"]
+    let g:UltiSnipsSnippetDirectories=[expand("~/.vim/plugged/cppsnippets")]
+elseif isdirectory("/honza/fwar3")
+    let g:UltiSnipsSnippetDirectories=["/home/fwar3/.vim/plugged/cppsnippets"]
+endif
+
+
+"--------------------------------------------------------------------------
 " Complete parameter after select the completion. Integration with YouCompleteMe(ycm), deoplete, neocomplete. 
 " Install a complete engine have supported. Goto the completion item of the completion popup menu you want to select, 
 " and then type ((minimal setting), the parameters will be inserted and select the the first parameter. <c-j>/<c-k>(minimal setting) 
 " will jump to the next/previous parameter and select it.
 "--------------------------------------------------------------------------
 Plug 'tenfyzhong/CompleteParameter.vim'
+"NOTE: If you use ultinsips, you must load ultisnips before this plugin. In other 
+"words, if you use plug to load plugins, Plug 'SirVer/ultisnips' must 
+"before Plug 'tenfyzhong/CompleteParameter.vim' in your vimrc.
 
 " Minimal setting
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
@@ -822,6 +866,11 @@ smap <m-d> <Plug>(complete_parameter#overload_down)
 nmap <m-u> <Plug>(complete_parameter#overload_up)
 imap <m-u> <Plug>(complete_parameter#overload_up)
 smap <m-u> <Plug>(complete_parameter#overload_up)
+
+"Can't work with plugin auto-pairs use the default mapping (
+"https://github.com/tenfyzhong/CompleteParameter.vim
+let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+inoremap <buffer><silent> ) <C-R>=AutoPairsInsert(')')<CR>
 
 
 "--------------------------------------------------------------------------
@@ -904,36 +953,6 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 
 "--------------------------------------------------------------------------
-" ultisnips 
-"--------------------------------------------------------------------------
-Plug 'SirVer/ultisnips'
-" UltiSnips 的 tab 键与 YCM 冲突，重新设定
-let g:UltiSnipsExpandTrigger="<Leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
-"let g:UltiSnipsSnippetDirectories=["mycppsnippets"]
-
-if isdirectory("/home/liang.feng")
-    let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/plugged/cppsnippets"]
-    let g:UltiSnipsSnippetDirectories=[expand("~/.vim/plugged/cppsnippets")]
-elseif isdirectory("/honza/fwar3")
-    let g:UltiSnipsSnippetDirectories=["/home/fwar3/.vim/plugged/cppsnippets"]
-endif
-
-
-"--------------------------------------------------------------------------
-" 代码模板补全
-"--------------------------------------------------------------------------
-Plug 'honza/vim-snippets'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
-"--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
 "Plug 'git@github.com:fwar34/cppsnippets.git'
@@ -953,6 +972,31 @@ let g:signify_sign_delete_first_line = '^'
 let g:signify_sign_change            = '~'
 let g:signify_sign_changedelete      = g:signify_sign_change
 nnoremap <Leader>di :SignifyDiff<CR>
+
+"Hunk jumping:~
+    "]c   Jump to next hunk.
+    "[c   Jump to previous hunk.
+
+    "]C   Jump to last hunk.
+    "[C   Jump to first hunk.
+
+"If you don't like these mappings, you can map them yourself:
+">
+    "nmap <leader>gj <plug>(signify-next-hunk)
+    "nmap <leader>gk <plug>(signify-prev-hunk)
+    "nmap <leader>gJ 9999<leader>gj
+    "nmap <leader>gK 9999<leader>gk
+"<
+"------------------------------------------------------------------------------
+"Hunk text object:~
+">
+    "omap ic <plug>(signify-motion-inner-pending)
+    "xmap ic <plug>(signify-motion-inner-visual)
+    "omap ac <plug>(signify-motion-outer-pending)
+    "xmap ac <plug>(signify-motion-outer-visual)
+"<
+"ic" operates on all lines of the current hunk. "ac" does the same, but also
+"removes all trailing empty lines.
 
 
 "--------------------------------------------------------------------------
@@ -1000,6 +1044,13 @@ noremap <silent> <Leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <Leader>gd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <Leader>ga :GscopeFind a <C-R><C-W><cr>
 
+"gutentags.txt
+augroup MyGutentagsStatusLineRefresher
+    autocmd!
+    autocmd User GutentagsUpdating call lightline#update()
+    autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
 
 "--------------------------------------------------------------------------
 " 使用 vim-preview 插件高效的在 quickfix 中先快速预览所有结果，再有针对性的打开必要文件
@@ -1013,7 +1064,7 @@ inoremap <C-k> <c-\><c-o>:PreviewScroll -1<cr>
 inoremap <C-j> <c-\><c-o>:PreviewScroll +1<cr>
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
 autocmd FileType qf nnoremap <silent><buffer> q :PreviewClose<cr>
-noremap <F4> :PreviewSignature!<cr>
+noremap <Tab> :PreviewSignature!<cr>
 inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
 
 

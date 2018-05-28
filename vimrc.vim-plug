@@ -279,7 +279,7 @@ noremap <Leader>ii :LeaderfFunction!<cr>
 noremap <Leader>tb :LeaderfTag<cr>
 "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 let g:Lf_PreviewCode = 1
-"let g:Lf_Ctags = "/usr/local/universal-ctags/ctags"
+let g:Lf_Ctags = "/usr/local/bin/ctags"
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_WindowHeight = 0.30

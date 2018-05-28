@@ -131,6 +131,11 @@ then
     alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
 fi
 
+if [ -f '/usr/local/bin/ctags' ]
+then
+    alias ctags='/usr/local/bin/ctags'
+fi
+
 if [ "$TERM" = "xterm" ]
 then
     export TERM=xterm-256color

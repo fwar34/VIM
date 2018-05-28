@@ -5,6 +5,13 @@
 "  Sections:
 "=========================================
 
+"--------------------------------------------------------------------------
+" 
+"--------------------------------------------------------------------------
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " 启动全屏
 if has('win32')
     autocmd GUIEnter * simalt ~x
@@ -44,9 +51,6 @@ let g:mapleader = ";"
 "--------------------------------------------------------------------------
 " set the runtime path to include Vundle and initialize
 call plug#begin('~/.vim/plugged')
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin(‘~/some/path/here‘)
-"Plug 'haolongzhangm/auto_update_cscope_ctags_database'
 
 
 "--------------------------------------------------------------------------
@@ -60,12 +64,12 @@ let g:asyncrun_open = 6
 let g:asyncrun_bell = 1
 let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml'] 
 
+nnoremap <Leader>ar :AsyncRun 
 "然后在 AsyncRun 命令行中，用 <root> 或者 $(VIM_ROOT) 
 "来表示项目所在路径，于是我们可以定义按 F7 编译整个项目
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
-source ~/mine/VIM/lib/tools.vim
-" 设置 F10 打开/关闭 Quickfix 窗口
-nnoremap <slient><Leader>ww :call asyncrun#quickfix_toggle(6)<CR>
+" 设置 <leader>ww 打开/关闭 Quickfix 窗口
+nnoremap <silent><Leader>ww :call asyncrun#quickfix_toggle(6)<CR>
 
 
 "--------------------------------------------------------------------------
@@ -555,7 +559,12 @@ Plug 'sgur/vim-textobj-parameter'
 " 被称为官方 Vim 中丢失的快捷键。
 "--------------------------------------------------------------------------
 Plug 'tpope/vim-unimpaired'
-
+"Note we're not using the noremap family because we do want to recursively
+"invoke unimpaired.vim's maps.
+"See :help unimpaired-customization for more advanced options.
+"let g:nremap = {"[": "<", "]": ">"}
+"let g:xremap = {"[": "<", "]": ">"}
+"let g:oremap = {"[": "<", "]": ">"}
 
 "--------------------------------------------------------------------------
 " 
@@ -998,12 +1007,12 @@ noremap <silent> <Leader>ga :GscopeFind a <C-R><C-W><cr>
 " provide a handy way to preview tags, files and function signatures.
 "--------------------------------------------------------------------------
 Plug 'skywind3000/vim-preview'
-noremap <m-u> :PreviewScroll -1<cr>
-noremap <m-d> :PreviewScroll +1<cr>
-inoremap <m-u> <c-\><c-o>:PreviewScroll -1<cr>
-inoremap <m-d> <c-\><c-o>:PreviewScroll +1<cr>
+noremap <C-k> :PreviewScroll -1<cr>
+noremap <C-j> :PreviewScroll +1<cr>
+inoremap <C-k> <c-\><c-o>:PreviewScroll -1<cr>
+inoremap <C-j> <c-\><c-o>:PreviewScroll +1<cr>
 autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
-autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+autocmd FileType qf nnoremap <silent><buffer> q :PreviewClose<cr>
 noremap <F4> :PreviewSignature!<cr>
 inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
 

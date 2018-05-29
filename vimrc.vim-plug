@@ -678,8 +678,13 @@ if has('unix')
     "call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
     Plug 'zchee/deoplete-clang'
-    let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
-    let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+    if isdirectory('/usr/lib/llvm-6.0/')
+        let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+        let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang'
+    else
+        let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so'
+        let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+    endif
 
     Plug 'Shougo/neoinclude.vim'
 endif

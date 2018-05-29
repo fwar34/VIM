@@ -77,8 +77,6 @@ nnoremap <silent> <Leader>ww :call asyncrun#quickfix_toggle(6)<CR>
 " 
 "--------------------------------------------------------------------------
 Plug 'terryma/vim-expand-region'
-map K <Plug>(expand_region_expand)
-map J <Plug>(expand_region_shrink)
 
 
 "--------------------------------------------------------------------------
@@ -273,7 +271,8 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 let g:Lf_ShortcutF = '<Leader>ff'
 let g:Lf_ShortcutB = '<Leader>bs'
-nnoremap <Leader>bd :bd<CR>
+nnoremap <Leader>db :bd<CR>
+nnoremap <Leader>do :on<CR>
 noremap <Leader>rm :LeaderfMru<cr>
 noremap <Leader>ii :LeaderfFunction!<cr>
 noremap <Leader>tb :LeaderfTag<cr>

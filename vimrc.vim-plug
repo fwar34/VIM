@@ -1520,7 +1520,7 @@ if !has('nvim')
         set term=win32
     else
         "set term=screen-256color
-        set term=xterm-256color
+        "set term=xterm-256color
     endif
 endif
 

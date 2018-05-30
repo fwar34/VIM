@@ -103,10 +103,10 @@ alias tmux='tmux -2'
 
 if [ -f '/usr/local/bin/vim' ]
 then
-    alias vi='/usr/local/bin/vim'
-    alias vim='/usr/local/bin/vim'
+    alias vi='TERM=xterm-256color /usr/local/bin/vim'
+    alias vim='TERM=xterm-256color /usr/local/bin/vim'
 else
-    alias vi='vim'
+    alias vi='TERM=xterm-256color vim'
 fi
 
 if [ -f '/usr/local/bin/emacs' ]

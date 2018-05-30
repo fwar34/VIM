@@ -25,11 +25,11 @@ else
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
 
-    if [ ! -f ~/.config/nvim/autoload/plug.vim ]
-    then
-        curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
-                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    fi
+    #if [ ! -f ~/.config/nvim/autoload/plug.vim ]
+    #then
+        #curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+                #https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    #fi
 fi
 
 if [ ! -d ~/.oh-my-zsh ]
@@ -49,16 +49,16 @@ fi
 ln -s ~/mine/VIM/vimrc.vim-plug ~/.vimrc
 
 
-if [ ! -d ~/.config/nvim ]
-then
-    mkdir -p ~/.config/nvim
-fi
+#if [ ! -d ~/.config/nvim ]
+#then
+    #mkdir -p ~/.config/nvim
+#fi
 
-if [ -f ~/.config/nvim/init.vim ]
-then
-	mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak
-fi
-ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
+#if [ -f ~/.config/nvim/init.vim ]
+#then
+	#mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak
+#fi
+#ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
 
 if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
 then
@@ -92,3 +92,15 @@ then
 	mv ~/.agignore ~/.agignore.bak
 fi
 ln -s ~/mine/VIM/agignore ~/.agignore
+
+if [ ! -d ~/.vim/ ]
+then
+    echo "~/.vim is not exist!!!!!!!!"
+else
+    if [ ! -d ~/.config ]; then
+        mkdir -p ~/.config
+    fi
+    ln -s ~/.vim ~/.config/nvim
+    ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
+fi
+        

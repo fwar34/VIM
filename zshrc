@@ -102,6 +102,7 @@ alias ll='ls -lht'
 alias tmux='tmux -u'
 #alias tmux='TERM=xterm-256color  tmux -2'
 
+alias nv='nvim'
 if [ -f '/usr/local/bin/vim' ]
 then
     alias vi='TERM=xterm-256color /usr/local/bin/vim'

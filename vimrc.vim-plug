@@ -44,6 +44,7 @@ nnoremap <silent> <Space>qm <C-z>
 let mapleader = ";"
 let g:mapleader = ";"
 
+"set termguicolors
 
 "--------------------------------------------------------------------------
 " Plugins begin

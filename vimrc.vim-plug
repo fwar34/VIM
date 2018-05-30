@@ -15,8 +15,6 @@ endif
 " 启动全屏
 if has('win32')
     autocmd GUIEnter * simalt ~x
-else
-    set lines=999 columns=999
 endif
 
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
@@ -1521,8 +1519,8 @@ if !has('nvim')
     if has('win32')
         set term=win32
     else
-        set term=screen-256color
-        "set term=xterm-256color
+        "set term=screen-256color
+        set term=xterm-256color
     endif
 endif
 

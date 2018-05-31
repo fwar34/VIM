@@ -308,11 +308,13 @@ let g:Lf_NormalMap = {
             \            ["<C-g>", ':exec g:Lf_py "bufExplManager.quit()"<CR>']
             \           ],
             \ "Mru":    [["<Esc>", ':exec g:Lf_py "mruExplManager.quit()"<CR>'],
-            \            ["<C-g>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']],
+            \            ["<C-g>", ':exec g:Lf_py "mruExplManager.quit()"<CR>']
+            \           ],
             \ "Tag":    [],
             \ "BufTag": [],
             \ "Function": [["<Esc>", ':exec g:Lf_py "functionExplManager.quit()"<CR>'],
-            \              ["<C-g>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']],
+            \              ["<C-g>", ':exec g:Lf_py "functionExplManager.quit()"<CR>']
+            \           ],
             \ "Line":   [],
             \ "History":[],
             \ "Help":   [],

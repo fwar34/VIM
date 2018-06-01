@@ -1305,7 +1305,7 @@ cnoremap <Leader>ry <C-r>"
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
-nnoremap <Leader>ia mgA;<Esc>`g
+nnoremap <Leader>ia mgA;<Esc>`gmg
 nnoremap <Leader><TAB> <C-w><C-w>
 nnoremap <Leader>bb <C-^>
 nnoremap <Leader>mm %

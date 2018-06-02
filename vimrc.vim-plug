@@ -1060,7 +1060,9 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 "这里不够的话，~/.cache/tags 目录下还有对应项目名字的 log 文件，
 "打开看看 gtags 具体输出了什么，然后进行相应的处理。
 let g:gutentags_define_advanced_commands = 1
-let g:gutentags_trace = 1
+
+"输出trace信息
+"let g:gutentags_trace = 1
 
 if has('win32')
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
@@ -1105,7 +1107,7 @@ inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
 " https://zhuanlan.zhihu.com/p/36279445 
 "--------------------------------------------------------------------------
 "let $GTAGSLABEL = 'native-pygments'
-if !has('win32')
+if !has('win32') && executable('/usr/local/bin/ctags')
     let $GTAGSLABEL = 'universal-ctags'
 endif
 "let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'

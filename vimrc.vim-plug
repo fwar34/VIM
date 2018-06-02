@@ -32,6 +32,7 @@ filetype off                  " required
 
 "set background=dark
 
+
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
@@ -43,8 +44,8 @@ nnoremap <silent> <Space>qq :q<CR>
 nnoremap <silent> <Space>qm <C-z>
 let mapleader = ";"
 let g:mapleader = ";"
-
 "set termguicolors
+
 
 "--------------------------------------------------------------------------
 " Plugins begin
@@ -55,6 +56,7 @@ if has('nvim')
 else
     call plug#begin('~/.vim/plugged')
 endif
+
 
 "--------------------------------------------------------------------------
 " asyncrun 
@@ -281,7 +283,9 @@ noremap <Leader>ii :LeaderfFunction!<cr>
 noremap <Leader>tb :LeaderfTag<cr>
 "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 let g:Lf_PreviewCode = 1
-let g:Lf_Ctags = "/usr/local/bin/ctags"
+if executable('/usr/local/bin/ctags')
+    let g:Lf_Ctags = "/usr/local/bin/ctags"
+endif
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_WindowHeight = 0.30
@@ -516,10 +520,17 @@ Plug 'https://github.com/yianwillis/vimcdoc.git'
 " 语法检查
 "--------------------------------------------------------------------------
 Plug 'w0rp/ale'
+"始终开启标志列
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
 let g:ale_linters_explicit = 1
 let g:ale_completion_delay = 500
 let g:ale_echo_delay = 20
 let g:ale_lint_delay = 500
+"显示Linter名称,出错或警告等相关信息
+"let g:ale_echo_msg_error_str = 'E'
+"let g:ale_echo_msg_warning_str = 'W'
+"let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
@@ -538,6 +549,8 @@ let g:ale_linters = { 'c++': ['clang'], 'c': ['clang'], 'python': ['pylint'] }
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+"nmap sp <Plug>(ale_previous_wrap)
+"nmap sn <Plug>(ale_next_wrap)
 
 "基本上就是定义了一下运行规则，信息显示格式以及几个 linter 的运行参数，其中 6，7 两行比较重要，
 "它规定了如果 normal 模式下文字改变以及离开 insert 模式的时候运行 linter，这是相对保守的做法，
@@ -552,6 +565,13 @@ hi! SpellBad gui=undercurl guisp=red
 hi! SpellCap gui=undercurl guisp=blue
 hi! SpellRare gui=undercurl guisp=magenta
 
+"<Leader>d查看错误或警告的详细信息
+"nmap <Leader>d :ALEDetail<CR>
+
+"文件内容发生变化时不进行检查
+"let g:ale_lint_on_text_changed = 'never'
+"打开文件时不进行检查
+"let g:ale_lint_on_enter = 0
 
 
 "--------------------------------------------------------------------------
@@ -1040,6 +1060,7 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 "这里不够的话，~/.cache/tags 目录下还有对应项目名字的 log 文件，
 "打开看看 gtags 具体输出了什么，然后进行相应的处理。
 let g:gutentags_define_advanced_commands = 1
+let g:gutentags_trace = 1
 
 if has('win32')
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
@@ -1083,7 +1104,10 @@ inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
 "--------------------------------------------------------------------------
 " https://zhuanlan.zhihu.com/p/36279445 
 "--------------------------------------------------------------------------
-let $GTAGSLABEL = 'native-pygments'
+"let $GTAGSLABEL = 'native-pygments'
+if !has('win32')
+    let $GTAGSLABEL = 'universal-ctags'
+endif
 "let $GTAGSCONF = '/path/to/share/gtags/gtags.conf'
 "let $GTAGSCONF = '~/.globalrc'
 

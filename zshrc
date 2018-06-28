@@ -98,15 +98,17 @@ export LANG=en_US.utf-8
 alias ls='ls --show-control-chars --color=auto'
 
 alias ll='ls -lht'
-alias tmux='tmux -2'
+#alias tmux='tmux -2'
+alias tmux='tmux -u'
 #alias tmux='TERM=xterm-256color  tmux -2'
 
+alias nv='nvim'
 if [ -f '/usr/local/bin/vim' ]
 then
-    alias vi='/usr/local/bin/vim'
-    alias vim='/usr/local/bin/vim'
+    alias vi='TERM=xterm-256color /usr/local/bin/vim'
+    alias vim='TERM=xterm-256color /usr/local/bin/vim'
 else
-    alias vi='vim'
+    alias vi='TERM=xterm-256color vim'
 fi
 
 if [ -f '/usr/local/bin/emacs' ]
@@ -116,7 +118,8 @@ fi
 
 if [ -f '/usr/local/bin/tmux' ]
 then
-    alias tmux='/usr/local/bin/tmux -2'
+    #alias tmux='/usr/local/bin/tmux -2'
+    alias tmux='/usr/local/bin/tmux'
     #alias tmux='TERM=screen-256color-bce /usr/local/bin/tmux -2'
     #alias tmux='TERM=xterm-256color /usr/local/bin/tmux -2'
 fi
@@ -140,6 +143,21 @@ if [ "$TERM" = "xterm" ]
 then
     export TERM=xterm-256color
 fi
+
+#https://superuser.com/questions/399296/256-color-support-for-vim-background-in-tmux
+#if [[ -z $TMUX  ]]; then
+#    if [ -e /usr/share/terminfo/x/xterm+256color  ]; then # may be xterm-256 depending on your distro
+#        export TERM='xterm-256color'
+#    else
+#        export TERM='xterm'
+#    fi
+#else
+#    if [ -e /usr/share/terminfo/s/screen-256color  ]; then
+#        export TERM='screen-256color'
+#    else
+#        export TERM='screen'
+#    fi
+#fi
 
 alias cs='emacs -nw'
 #bindkey  "^[[H"   beginning-of-line

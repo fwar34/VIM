@@ -838,7 +838,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "--------------------------------------------------------------------------
 " 代码模板补全
 "--------------------------------------------------------------------------
-Plug 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -850,7 +850,7 @@ let g:UltiSnipsEditSplit="vertical"
 "--------------------------------------------------------------------------
 " ultisnips 
 "--------------------------------------------------------------------------
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<Leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<Leader><tab>"

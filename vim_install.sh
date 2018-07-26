@@ -40,6 +40,7 @@ fi
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz
+    sudo apt install libncurses5-dev
 fi
 
 if [ -f ~/.vimrc ]

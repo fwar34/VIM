@@ -1656,13 +1656,16 @@ onoremap il> :<C-U>normal! F>vi><CR>
 "--------------------------------------------------------------------------
 " inside terminal 
 "--------------------------------------------------------------------------
-nnoremap <silent> <Leader>tm :term zsh<CR>
-if !has('nvim')
-    tnoremap <silent> <Leader>g exit<CR><C-w>:q!<CR>
-else
-    tnoremap <silent> <Leader>g exit<CR>
+if has('tnoremap')
+    nnoremap <silent> <Leader>tm :term zsh<CR>
+    if !has('nvim')
+        tnoremap <silent> <Leader>g exit<CR><C-w>:q!<CR>
+    else
+        tnoremap <silent> <Leader>g exit<CR>
+    endif
+
+    tnoremap <Leader><Tab> <C-w><C-w>
 endif
-tnoremap <Leader><Tab> <C-w><C-w>
 
 
 "--------------------------------------------------------------------------

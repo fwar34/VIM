@@ -104,4 +104,6 @@ else
     ln -s ~/.vim ~/.config/nvim
     ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
 fi
+
+#sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip
         

@@ -6,6 +6,20 @@
 "=========================================
 
 "--------------------------------------------------------------------------
+" 一些检测函数 
+"--------------------------------------------------------------------------
+function! s:read_total_memory()
+    if isdirectory("/proc")
+        let s:line = readfile("/proc/meminfo")
+        let s:memory = split(s:line[0])
+        let s:memory_enough = s:memory[1] > 1000000
+    else
+        let s:memory_enough = 1
+    endif
+endfunc
+
+call s:read_total_memory()
+"--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
 if has("autocmd")
@@ -83,6 +97,14 @@ nnoremap <silent> <Leader>ww :call asyncrun#quickfix_toggle(6)<CR>
 "--------------------------------------------------------------------------
 Plug 'terryma/vim-expand-region'
 
+"--------------------------------------------------------------------------
+" 
+"--------------------------------------------------------------------------
+if !(s:memory_enough)
+    Plug 'rkulla/pydiction'
+    let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
+endif
+
 
 "--------------------------------------------------------------------------
 " 翻译
@@ -96,7 +118,9 @@ noremap <leader>yd :<C-u>Yde<CR>
 "--------------------------------------------------------------------------
 " 括号匹配 
 "--------------------------------------------------------------------------
-Plug 'vim-scripts/matchit.zip'
+if (s:memory_enough)
+    Plug 'vim-scripts/matchit.zip'
+endif
 
 
 "--------------------------------------------------------------------------
@@ -112,46 +136,48 @@ let g:comfortable_motion_no_default_key_mappings = 1
 "--------------------------------------------------------------------------
 " ctrlp and ctrlp-funky 
 "--------------------------------------------------------------------------
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'tacahiroy/ctrlp-funky'
-nnoremap <Space>ii :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Space>iw :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+if (s:memory_enough)
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'tacahiroy/ctrlp-funky'
+    nnoremap <Space>ii :CtrlPFunky<Cr>
+    " narrow the list down with a word under cursor
+    nnoremap <Space>iw :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
 
-"Change the default mapping and the default command to invoke CtrlP:
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
+    "Change the default mapping and the default command to invoke CtrlP:
+    "let g:ctrlp_map = '<c-p>'
+    "let g:ctrlp_cmd = 'CtrlP'
 
-"When invoked without an explicit starting directory, CtrlP will 
-"set its local working directory according to this variable:
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_regexp = 1
-nnoremap <Space>ff :CtrlP<CR>
-nnoremap <Space>bs :CtrlPBuffer<CR>
-"在历史文件中模糊查找
-nnoremap <Space>rf :CtrlPMRU<CR>
-nnoremap <Space>rm :CtrlPMixed<CR>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_custom_ignore = {
-        \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-        \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
-        \ }
+    "When invoked without an explicit starting directory, CtrlP will 
+    "set its local working directory according to this variable:
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_regexp = 1
+    nnoremap <Space>ff :CtrlP<CR>
+    nnoremap <Space>bs :CtrlPBuffer<CR>
+    "在历史文件中模糊查找
+    nnoremap <Space>rf :CtrlPMRU<CR>
+    nnoremap <Space>rm :CtrlPMixed<CR>
+    set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+    set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+    let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+                \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz)$',
+                \ }
 
-let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
-let g:ctrlp_working_path = 0
+    let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
+    let g:ctrlp_working_path = 0
 
-"调用ag进行搜索提升速度
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-    let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-    "不使用缓存文件
-    "let g:ctrlp_use_caching = 0
-else
-    if has('unix')
-        let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-    elseif has('win32') || has('win64')
-        let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+    "调用ag进行搜索提升速度
+    if executable('ag')
+        set grepprg=ag\ --nogroup\ --nocolor
+        let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+        "不使用缓存文件
+        "let g:ctrlp_use_caching = 0
+    else
+        if has('unix')
+            let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+        elseif has('win32') || has('win64')
+            let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+        endif
     endif
 endif
 
@@ -482,7 +508,9 @@ nnoremap <Leader>cc :commentary<CR>
 "--------------------------------------------------------------------------
 " Omni
 "--------------------------------------------------------------------------
-Plug 'vim-scripts/OmniCppComplete'
+if (s:memory_enough)
+    Plug 'vim-scripts/OmniCppComplete'
+endif
 "set completeopt=menu,menuone " 关掉智能补全时的预览窗口
 let OmniCpp_MayCompleteDot = 1 " autocomplete with .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
@@ -519,7 +547,7 @@ Plug 'https://github.com/yianwillis/vimcdoc.git'
 "--------------------------------------------------------------------------
 " 语法检查
 "--------------------------------------------------------------------------
-Plug 'w0rp/ale'
+"Plug 'w0rp/ale'
 "始终开启标志列
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
@@ -683,35 +711,37 @@ endif
 "--------------------------------------------------------------------------
 " deoplete
 "--------------------------------------------------------------------------
-if has('unix')
-    if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-    let g:deoplete#enable_at_startup = 1
+if has('unix') && s:memory_enough
+    "if (s:memory_enough)
+        if has('nvim')
+            Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        else
+            Plug 'Shougo/deoplete.nvim'
+            Plug 'roxma/nvim-yarp'
+            Plug 'roxma/vim-hug-neovim-rpc'
+        endif
+        let g:deoplete#enable_at_startup = 1
 
-    Plug 'zchee/deoplete-jedi'
-    "Plug 'Shougo/deoplete-clangx'
-    "" Change clang binary path
-    "call deoplete#custom#var('clangx', 'clang_binary', '/usr/local/bin/clang')
+        Plug 'zchee/deoplete-jedi'
+        "Plug 'Shougo/deoplete-clangx'
+        "" Change clang binary path
+        "call deoplete#custom#var('clangx', 'clang_binary', '/usr/local/bin/clang')
 
-    "" Change clang options
-    "call deoplete#custom#var('clangx', 'default_c_options', '')
-    "call deoplete#custom#var('clangx', 'default_cpp_options', '')
+        "" Change clang options
+        "call deoplete#custom#var('clangx', 'default_c_options', '')
+        "call deoplete#custom#var('clangx', 'default_cpp_options', '')
 
-    Plug 'zchee/deoplete-clang'
-    if isdirectory('/usr/lib/llvm-6.0/')
-        let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
-        let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang'
-    else
-        let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so.1'
-        let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
-    endif
+        Plug 'zchee/deoplete-clang'
+        if isdirectory('/usr/lib/llvm-6.0/')
+            let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
+            let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang'
+        else
+            let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so.1'
+            let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+        endif
 
-    Plug 'Shougo/neoinclude.vim'
+        Plug 'Shougo/neoinclude.vim'
+    "endif
 endif
 
 "--------------------------------------------------------------------------
@@ -724,7 +754,9 @@ Plug 'WenxiJin/.clang_complete'
 "--------------------------------------------------------------------------
 " 彩虹括号
 "--------------------------------------------------------------------------
-Plug 'luochen1990/rainbow'
+if (s:memory_enough)
+    Plug 'luochen1990/rainbow'
+endif
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 let g:rainbow_conf = {
 	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -860,7 +892,7 @@ let g:UltiSnipsJumpBackwardTrigger="<Leader><s-tab>"
 if isdirectory("/home/liang.feng")
     let g:UltiSnipsSnippetDirectories=["/home/liang.feng/.vim/plugged/cppsnippets"]
     let g:UltiSnipsSnippetDirectories=[expand("~/.vim/plugged/cppsnippets")]
-elseif isdirectory("/honza/fwar3")
+elseif isdirectory("/home/fwar3")
     let g:UltiSnipsSnippetDirectories=["/home/fwar3/.vim/plugged/cppsnippets"]
 endif
 
@@ -871,55 +903,59 @@ endif
 " and then type ((minimal setting), the parameters will be inserted and select the the first parameter. <c-j>/<c-k>(minimal setting) 
 " will jump to the next/previous parameter and select it.
 "--------------------------------------------------------------------------
-Plug 'tenfyzhong/CompleteParameter.vim'
 "NOTE: If you use ultinsips, you must load ultisnips before this plugin. In other 
 "words, if you use plug to load plugins, Plug 'SirVer/ultisnips' must 
 "before Plug 'tenfyzhong/CompleteParameter.vim' in your vimrc.
 
-" Minimal setting
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-" Goto next parameter and select it.
-nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-" Goto previous parameter and select it.
-nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-" Select next overload function.
-nmap <m-d> <Plug>(complete_parameter#overload_down)
-imap <m-d> <Plug>(complete_parameter#overload_down)
-smap <m-d> <Plug>(complete_parameter#overload_down)
-" Select previous overload function.
-nmap <m-u> <Plug>(complete_parameter#overload_up)
-imap <m-u> <Plug>(complete_parameter#overload_up)
-smap <m-u> <Plug>(complete_parameter#overload_up)
+if (s:memory_enough)
+    Plug 'tenfyzhong/CompleteParameter.vim'
+    " Minimal setting
+    inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+    smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+    imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+    smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+    imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+    " Goto next parameter and select it.
+    nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+    imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+    smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+    " Goto previous parameter and select it.
+    nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+    imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+    smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+    " Select next overload function.
+    nmap <m-d> <Plug>(complete_parameter#overload_down)
+    imap <m-d> <Plug>(complete_parameter#overload_down)
+    smap <m-d> <Plug>(complete_parameter#overload_down)
+    " Select previous overload function.
+    nmap <m-u> <Plug>(complete_parameter#overload_up)
+    imap <m-u> <Plug>(complete_parameter#overload_up)
+    smap <m-u> <Plug>(complete_parameter#overload_up)
 
-"Can't work with plugin auto-pairs use the default mapping (
-"https://github.com/tenfyzhong/CompleteParameter.vim
-let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
-inoremap <buffer><silent> ) <C-R>=AutoPairsInsert(')')<CR>
+    "Can't work with plugin auto-pairs use the default mapping (
+    "https://github.com/tenfyzhong/CompleteParameter.vim
+    let g:AutoPairs = {'[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
+    inoremap <buffer><silent> ) <C-R>=AutoPairsInsert(')')<CR>
+endif
+
+
 
 
 "--------------------------------------------------------------------------
 " minibufexpl 
 "--------------------------------------------------------------------------
-Plug 'fholgado/minibufexpl.vim'
-" 显示/隐藏 MiniBufExplorer 窗口
-nnoremap <Leader>mb :MBEToggle<cr>
-nnoremap <Leader>mh :MBEbn<cr>
-nnoremap <Leader>mq :MBEbp<cr>
-" minibufexpl插件的一般设置
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplModSelTarget = 1
+"Plug 'fholgado/minibufexpl.vim'
+ "显示/隐藏 MiniBufExplorer 窗口
+"nnoremap <Leader>mb :MBEToggle<cr>
+"nnoremap <Leader>mh :MBEbn<cr>
+"nnoremap <Leader>mq :MBEbp<cr>
+ "minibufexpl插件的一般设置
+"let g:miniBufExplMapWindowNavVim = 1
+"let g:miniBufExplMapWindowNavArrows = 1
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"let g:miniBufExplModSelTarget = 1
 "not auto start
-let g:miniBufExplorerAutoStart = 0
+"let g:miniBufExplorerAutoStart = 0
 
 
 "--------------------------------------------------------------------------

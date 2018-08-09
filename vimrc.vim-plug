@@ -1348,7 +1348,7 @@ nnoremap ge G
 nnoremap . ;
 nnoremap <Leader>zz :w<CR>
 inoremap <Leader>zz <Esc>:w<CR>a
-nnoremap <Leader>yy y'a
+nnoremap <Leader>yy mgy'a`g
 nnoremap <Leader>dd d'a
 cnoremap <Leader>rr <C-r><C-w>
 

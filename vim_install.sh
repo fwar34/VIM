@@ -40,11 +40,12 @@ then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
+if [ ! -f ~/downloads/global-6.6.2.tar.gz   ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz
-    tar -zxvf ~/downloads/global-6.6.2.tar.gz ~/downloads/global-6.6.2
-    ~/downloads/global-6.6.2/./configure
+    cd ~/downloads/
+    tar -zxvf global-6.6.2.tar.gz
+    cd ~/downloads/global-6.6.2/ && ./configure && make -j 4 && sudo make install
 fi
 
 if [ -f ~/.vimrc ]

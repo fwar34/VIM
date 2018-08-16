@@ -4,6 +4,7 @@ os=$(uname -a|awk -F_ '{print $1}')
 #os=$(MSYSTEM) #just define in msys
 echo $os
 
+
 #if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
 #if [ "$os" = 'MSYS' -o "$os" = 'CYGWIN' ]
 if [ "$os" = 'MSYS' ] || [ "$os" = 'CYGWIN' ]
@@ -19,6 +20,8 @@ then
         fi
     fi
 else
+    sudo apt install curl wget build-essential zsh tmux autojump ctags \
+        libncurses5-dev ctags silversearcher-ag python-pip python3-pip
     if [ ! -f ~/.vim/autoload/plug.vim ]
     then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -40,7 +43,8 @@ fi
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz
-    sudo apt install libncurses5-dev
+    tar -zxvf ~/downloads/global-6.6.2.tar.gz
+    ~/downloads/global-6.6.2/./configure
 fi
 
 if [ -f ~/.vimrc ]
@@ -106,4 +110,14 @@ else
 fi
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag
+
+#build vim
+#./configure --with-features=huge \
+    #--enable-multibyte \
+    #--enable-rubyinterp=yes \
+    #--enable-python3interp=yes \
+    #--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+    #--enable-perlinterp=yes \
+    #--enable-luainterp=yes \
+    #--enable-cscope
         

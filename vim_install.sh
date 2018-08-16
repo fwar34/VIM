@@ -43,7 +43,7 @@ fi
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz
-    tar -zxvf ~/downloads/global-6.6.2.tar.gz
+    tar -zxvf ~/downloads/global-6.6.2.tar.gz ~/downloads/global-6.6.2
     ~/downloads/global-6.6.2/./configure
 fi
 

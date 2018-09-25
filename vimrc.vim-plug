@@ -735,9 +735,12 @@ if has('unix') && s:memory_enough
         if isdirectory('/usr/lib/llvm-6.0/')
             let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-6.0/lib/libclang.so.1'
             let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-6.0/lib/clang'
-        else
+        elseif isdirectory('/usr/lib/llvm-3.8/')
             let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-3.8/lib/libclang.so.1'
             let g:deoplete#sources#clang#clang_header = '/usr/lib/llvm-3.8/lib/clang'
+        elseif findfile("libclang.so", "/usr/lib")
+            let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+            let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
         endif
 
         Plug 'Shougo/neoinclude.vim'

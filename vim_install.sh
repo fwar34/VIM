@@ -43,10 +43,15 @@ fi
 if [ ! -d ~/bin ]
 then
     mkdir ~/bin
+    #install diff-so-fancy
     wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
         build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
-    wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb
-    sudo dpkg -i fd_7.2.0_amd64.deb
+    chmod +x ~/bin/diff-so-fancy
+
+    #install fd
+    wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
+    sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
+    rm ~/bin/fd_7.2.0_amd64.deb
 fi
 
 if [ ! -f ~/downloads/global-6.6.2.tar.gz   ]

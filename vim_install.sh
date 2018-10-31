@@ -61,6 +61,10 @@ then
     wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
     sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
     rm ~/bin/bat_0.8.0_amd64.deb
+
+    #install jq
+    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
+    chmod +x ~/bin/jq
 fi
 
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]

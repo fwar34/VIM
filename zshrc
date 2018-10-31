@@ -299,6 +299,7 @@ function man_color3()
 
 function man_color4()
 {
+    #https://unix.stackexchange.com/questions/6010/colored-man-pages-not-working-on-gentoo
     export LESS_TERMCAP_mb=$'\E[01;31m'
     export LESS_TERMCAP_md=$'\E[01;31m'
     export LESS_TERMCAP_me=$'\E[0m'

@@ -88,11 +88,14 @@ install_my_bin
 
 function bash_snippets()
 {
-    cd ~/mine
-    git clone https://github.com/alexanderepstein/Bash-Snippets
-    cd Bash-Snippets
-    git checkout v1.22.0
-    sudo ./install.sh all
+    if [ ! -d ~/mine/Bash-Snippets ]
+    then
+        cd ~/mine
+        git clone https://github.com/alexanderepstein/Bash-Snippets
+        cd Bash-Snippets
+        git checkout v1.22.0
+        sudo ./install.sh all
+    fi
 }
 bash_snippets
 

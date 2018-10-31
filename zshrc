@@ -296,7 +296,19 @@ function man_color3()
     export LESS_TERMCAP_ZO=$(tput ssupm)
     export LESS_TERMCAP_ZW=$(tput rsupm)
 }
-man_color3
+
+function man_color4()
+{
+    export LESS_TERMCAP_mb=$'\E[01;31m'
+    export LESS_TERMCAP_md=$'\E[01;31m'
+    export LESS_TERMCAP_me=$'\E[0m'
+    export LESS_TERMCAP_se=$'\E[0m'
+    export LESS_TERMCAP_so=$'\E[01;47;34m'
+    export LESS_TERMCAP_ue=$'\E[0m'
+    export LESS_TERMCAP_us=$'\E[01;32m'
+    export LESS=-r
+}
+man_color4
 
 export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

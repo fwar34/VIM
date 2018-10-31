@@ -84,8 +84,17 @@ function install_my_bin()
         chmod +x ~/bin/jq
     fi
 }
-
 install_my_bin
+
+function bash_snippets()
+{
+    cd ~/mine
+    git clone https://github.com/alexanderepstein/Bash-Snippets
+    cd Bash-Snippets
+    git checkout v1.22.0
+    sudo ./install.sh all
+}
+bash_snippets
 
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then

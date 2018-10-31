@@ -40,32 +40,52 @@ then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
-if [ ! -d ~/bin ]
-then
-    mkdir ~/bin
+function install_my_bin()
+{
+    if [ ! -d ~/bin ]
+    then
+        mkdir ~/bin
+    fi
     #install diff-so-fancy
-    wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
-        build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
-    chmod +x ~/bin/diff-so-fancy
+    if [ ! -f ~/bin/diff-so-fancy ]
+    then
+        wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
+            build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
+        chmod +x ~/bin/diff-so-fancy
+    fi
 
     #install fd
-    wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
-    sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
-    rm ~/bin/fd_7.2.0_amd64.deb
+    if [ ! -f /usr/bin/fd ]
+    then
+        wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
+        sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
+        rm ~/bin/fd_7.2.0_amd64.deb
+    fi
 
     #install tldr
-    curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
-    chmod +x ~/bin/tldr
+    if [ ! -f ~/bin/tldr ]
+    then
+        curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
+        chmod +x ~/bin/tldr
+    fi
 
     #install bat
-    wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
-    sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
-    rm ~/bin/bat_0.8.0_amd64.deb
+    if [ ! -f /usr/bin/bat ]
+    then
+        wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
+        sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
+        rm ~/bin/bat_0.8.0_amd64.deb
+    fi
 
     #install jq
-    wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
-    chmod +x ~/bin/jq
-fi
+    if [ ! -f ~/bin/jq ]
+    then
+        wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
+        chmod +x ~/bin/jq
+    fi
+}
+
+install_my_bin
 
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then

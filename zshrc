@@ -268,3 +268,10 @@ export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'
 
 export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#tldr
+export TLDR_HEADER='magenta bold underline'
+export TLDR_QUOTE='italic'
+export TLDR_DESCRIPTION='green'
+export TLDR_CODE='red'
+export TLDR_PARAM='blue'

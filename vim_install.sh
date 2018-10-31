@@ -52,14 +52,31 @@ then
     wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
     sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
     rm ~/bin/fd_7.2.0_amd64.deb
+
+    #install tldr
+    curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
+    chmod +x ~/bin/tldr
+
+    #install bat
+    wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
+    sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
+    rm ~/bin/bat_0.8.0_amd64.deb
 fi
 
-if [ ! -f ~/downloads/global-6.6.2.tar.gz   ]
+if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz
     cd ~/downloads/
     tar -zxvf global-6.6.2.tar.gz
     cd ~/downloads/global-6.6.2/ && ./configure && make -j 4 && sudo make install
+fi
+
+if [ ! -f ~/downloads/ncdu-1.13.tar.gz ]
+then
+    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/downloads/ncdu-1.13.tar.gz
+    cd ~/downloads
+    tar -zxvf ncdu-1.13.tar.gz
+    cd ~/downloads/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
 fi
 
 if [ -f ~/.vimrc ]

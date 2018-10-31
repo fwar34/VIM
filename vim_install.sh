@@ -60,8 +60,8 @@ function install_my_bin()
     #install diff-so-fancy
     if [ ! -f ~/bin/diff-so-fancy -a ! -f /usr/bin/diff-so-fancy ]
     then
-        wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
-            build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
+        wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" \
+            -O ~/bin/diff-so-fancy
         chmod +x ~/bin/diff-so-fancy
     fi
 

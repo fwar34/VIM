@@ -40,6 +40,15 @@ then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
+if [ ! -d ~/bin ]
+then
+    mkdir ~/bin
+    wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
+        build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
+    wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb
+    sudo dpkg -i fd_7.2.0_amd64.deb
+fi
+
 if [ ! -f ~/downloads/global-6.6.2.tar.gz   ]
 then
     wget http://tamacom.com/global/global-6.6.2.tar.gz -O ~/downloads/global-6.6.2.tar.gz

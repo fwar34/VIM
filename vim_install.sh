@@ -1,9 +1,16 @@
 #!/bin/bash
 
-os=$(uname -a|awk -F_ '{print $1}')
-#os=$(MSYSTEM) #just define in msys
+lsb_release -d >/dev/null 2>&1
+if [ $? -eq 0 ]
+then
+    #os=$(lsb_release -d|cut -d: -f2|sed 's/^[ \t]//')
+    #os=$(lsb_release -i|awk '{print 3}')
+    os=$(lsb_release -i|cut -f2)
+else
+    #os=$(MSYSTEM) #just define in msys
+    os=$(uname -a|awk -F_ '{print $1}')
+fi
 echo $os
-
 
 #if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
 #if [ "$os" = 'MSYS' -o "$os" = 'CYGWIN' ]
@@ -20,8 +27,12 @@ then
         fi
     fi
 else
-    sudo apt install curl wget build-essential zsh tmux autojump ctags \
-        libncurses5-dev ctags silversearcher-ag python-pip python3-pip
+    if [ $os = 'Ubuntu' -o $os = 'Debian' ]
+    then
+        sudo apt install curl wget build-essential zsh tmux autojump ctags \
+            libncurses5-dev ctags silversearcher-ag python-pip python3-pip
+    fi
+
     if [ ! -f ~/.vim/autoload/plug.vim ]
     then
         curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -47,7 +58,7 @@ function install_my_bin()
         mkdir ~/bin
     fi
     #install diff-so-fancy
-    if [ ! -f ~/bin/diff-so-fancy ]
+    if [ ! -f ~/bin/diff-so-fancy -a ! -f /usr/bin/diff-so-fancy ]
     then
         wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/\
             build_fatpack/diff-so-fancy -O ~/bin/diff-so-fancy
@@ -63,7 +74,7 @@ function install_my_bin()
     fi
 
     #install tldr
-    if [ ! -f ~/bin/tldr ]
+    if [ ! -f ~/bin/tldr  -a ! -f /usr/bin/tldr ]
     then
         curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
         chmod +x ~/bin/tldr
@@ -78,7 +89,7 @@ function install_my_bin()
     fi
 
     #install jq
-    if [ ! -f ~/bin/jq ]
+    if [ ! -f ~/bin/jq -a ! -f /usr/bin/jq ]
     then
         wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
         chmod +x ~/bin/jq
@@ -173,9 +184,15 @@ else
     if [ ! -d ~/.config ]; then
         mkdir -p ~/.config
     fi
-    ln -s ~/.vim ~/.config/nvim
-    ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
+
+    if [ ! -d ~/.config/nvim ]
+    then
+        ln -s ~/.vim ~/.config/nvim
+        ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
+    fi
 fi
+
+echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag
 

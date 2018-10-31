@@ -323,6 +323,7 @@ export TLDR_PARAM='blue'
 #complete -W "$(tldr 2>/dev/null --list)" tldr
 #tldr在zsh中设置成和man命令一样的补全 https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 compdef tldr=man
+compdef cheat=man
 
 #ncdu
 alias ncdu='ncdu --color dark -rr -x'

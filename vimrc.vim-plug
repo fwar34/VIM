@@ -469,7 +469,7 @@ let g:lightline = {
 "--------------------------------------------------------------------------
 " syntax color  
 "--------------------------------------------------------------------------
-Plug 'git@github.com:fwar34/vim-color-wombat256'
+Plug 'https://github.com/fwar34/vim-color-wombat256.git'
 
 
 "--------------------------------------------------------------------------
@@ -654,7 +654,7 @@ Plug 'tpope/vim-unimpaired'
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
-Plug 'git@github.com:fwar34/vim-cpp-enhanced-highlight.git'
+Plug 'https://github.com/fwar34/vim-cpp-enhanced-highlight.git'
 let g:cpp_class_scope_highlight = 1
 "let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
@@ -1026,7 +1026,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
-"Plug 'git@github.com:fwar34/cppsnippets.git'
+"Plug 'https://github.com/fwar34/cppsnippets.git'
 " The following are examples of different formats supported.
 " Keep Plug commands between vundle#begin/end.
 

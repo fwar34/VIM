@@ -1009,6 +1009,8 @@ let g:ycm_seed_identifiers_with_syntax=1
 
 "--------------------------------------------------------------------------
 " YCM-Generator
+" This is a script which generates a list of compiler flags from a project
+" with an arbitrary build system
 "--------------------------------------------------------------------------
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 "Plug 'marijnh/tern_for_vim'

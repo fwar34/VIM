@@ -205,7 +205,9 @@ echo Complete
     #--enable-perlinterp=yes \
     #--enable-luainterp=yes \
     #--enable-cscope
-        
+
+#build emacs-26
+#./configure --without-x --with-gnutls=no --with-mailutils
 
 #common command
 #A)thefuck Bash-Snippets(cheat cloudup crypt cryptocurrency currency geo lyrics meme movies newton 

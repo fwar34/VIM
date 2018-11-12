@@ -214,3 +214,5 @@ echo Complete
 #qrify short siteciphers stocks taste todo transfer weather youtube-viewer) jq ncdu htop bat tldr
 
 #B)find grep awk sed tr xargs cat tail head less top cut nl
+
+#v2ray bash <(curl -L -s https://install.direct/go.sh)

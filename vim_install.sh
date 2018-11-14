@@ -216,3 +216,4 @@ echo Complete
 #B)find grep awk sed tr xargs cat tail head less top cut nl
 
 #v2ray bash <(curl -L -s https://install.direct/go.sh)
+#proxychains https://github.com/rofl0r/proxychains-ng.git

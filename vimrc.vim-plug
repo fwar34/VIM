@@ -715,9 +715,9 @@ endif
 if has('unix') && s:memory_enough
     "if (s:memory_enough)
         if has('nvim')
-            Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+            Plug 'Shougo/deoplete.nvim', { 'tag': '4.1', 'do': ':UpdateRemotePlugins' }
         else
-            Plug 'Shougo/deoplete.nvim'
+            Plug 'Shougo/deoplete.nvim', { 'tag': '4.1' }
             Plug 'roxma/nvim-yarp'
             Plug 'roxma/vim-hug-neovim-rpc'
         endif

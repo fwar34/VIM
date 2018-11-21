@@ -197,6 +197,7 @@ echo Complete
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag
 
 #build vim
+# https://github.com/vim/vim.git
 #./configure --with-features=huge \
     #--enable-multibyte \
     #--enable-rubyinterp=yes \
@@ -217,3 +218,7 @@ echo Complete
 
 #v2ray bash <(curl -L -s https://install.direct/go.sh)
 #proxychains https://github.com/rofl0r/proxychains-ng.git
+#./configure --prefix=/usr --sysconfdir=/etc
+#make
+#[optional] sudo make install
+#[optional] sudo make install-config (installs proxychains.conf)

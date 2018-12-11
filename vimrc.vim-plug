@@ -18,7 +18,11 @@ function! s:read_total_memory()
     endif
 endfunc
 
-call s:read_total_memory()
+if has('win32')
+    let s:memory_enough = 1
+else
+    call s:read_total_memory()
+endif
 "--------------------------------------------------------------------------
 " 
 "--------------------------------------------------------------------------
@@ -29,7 +33,13 @@ endif
 " 启动全屏
 if has('win32')
     autocmd GUIEnter * simalt ~x
+
+    "200~250
+    if executable("vimtweak.dll") 
+        autocmd guienter * call libcallnr("vimtweak", "SetAlpha", 245) 
+    endif 
 endif
+
 
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 if has('gui_running')
@@ -42,8 +52,6 @@ endif
 " vim 自身命令行模式智能补全
 set wildmenu
 set nocompatible
-
-"set background=dark
 
 
 "--------------------------------------------------------------------------
@@ -174,7 +182,7 @@ if (s:memory_enough)
     else
         if has('unix')
             let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-        elseif has('win32') || has('win64')
+        elseif has('win32')
             let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
         endif
     endif
@@ -942,8 +950,6 @@ if (s:memory_enough)
 endif
 
 
-
-
 "--------------------------------------------------------------------------
 " minibufexpl 
 "--------------------------------------------------------------------------
@@ -1215,6 +1221,11 @@ set nofoldenable    "不许折叠
 
 let $LANG = 'en'  "set message language  
 set langmenu=en   "set menu's language of gvim. no spaces beside '='  
+"language message zh_CN.UTF-8
+if has('win32')
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
+endif
 
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
@@ -1273,8 +1284,10 @@ endfunc
 autocmd BufNewFile *py exec ":call SetPythonTitle()"
 
 func SetPythonTitle()
-    call setline(1,"#!/usr/bin/env python3")
-    call append( line("."),"#-*- coding: utf-8 -*-" )
+    if !has('win32')
+        call setline(1,"#!/usr/bin/env python3")
+        call append( line("."),"#-*- coding: utf-8 -*-" )
+    endif
     call append(line(".")+1," ")
     call append(line(".")+2, "\# File Name: ".expand("%")) 
     call append(line(".")+3, "\# Author: Feng") 
@@ -1392,39 +1405,39 @@ nnoremap <Leader>df :Explore<CR>
 nnoremap <F5> :call CompileRunGcc()<CR>
 
 func! CompileRunGcc()
-exec "w"
-if &filetype == 'c'
-    "先删除上次编译的执行文件"
-    if filereadable(expand("%<"))
-        silent exec "!rm %<"
+    exec "w"
+    if &filetype == 'c'
+        "先删除上次编译的执行文件"
+        if filereadable(expand("%<"))
+            silent exec "!rm %<"
+        endif
+        "exec "!gcc % -o %<"
+        exec "AsyncRun gcc -Wall -O2 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+        "如果编译成功了有了可执行文件才运行"
+        if filereadable(expand("%<"))
+            "exec "! ./%<"
+            exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+        endif
+    elseif &filetype == 'cpp'
+        "先删除上次编译的执行文件"
+        if filereadable(expand("%<"))
+            silent exec "!rm %<"
+        endif
+        "exec "!g++ -std=c++11 % -o %<"
+        exec "AsyncRun g++ -Wall -O2 -std=c++11 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+        "如果编译成功了有了可执行文件才运行"
+        if filereadable(expand("%<"))
+            "exec "! ./%<"
+            exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
+        endif
+    elseif &filetype == 'java'
+        exec "!javac %" 
+        exec "!java %<"
+    elseif &filetype == 'sh'
+        :!./%
+    elseif &filetype == 'python'
+        exec "!python3 %"
     endif
-    "exec "!gcc % -o %<"
-    exec "AsyncRun gcc -Wall -O2 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
-    "如果编译成功了有了可执行文件才运行"
-    if filereadable(expand("%<"))
-        "exec "! ./%<"
-        exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
-    endif
-elseif &filetype == 'cpp'
-    "先删除上次编译的执行文件"
-    if filereadable(expand("%<"))
-        silent exec "!rm %<"
-    endif
-    "exec "!g++ -std=c++11 % -o %<"
-    exec "AsyncRun g++ -Wall -O2 -std=c++11 $(VIM_FILEPATH) -o $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
-    "如果编译成功了有了可执行文件才运行"
-    if filereadable(expand("%<"))
-        "exec "! ./%<"
-        exec "AsyncRun -raw -cwd=$(VIM_FILEDIR) $(VIM_FILEDIR)/$(VIM_FILENOEXT)"
-    endif
-elseif &filetype == 'java'
-    exec "!javac %" 
-    exec "!java %<"
-elseif &filetype == 'sh'
-    :!./%
-elseif &filetype == 'python'
-    exec "!python3 %"
-endif
 endfunc
 
 "C,C++的调试
@@ -1645,7 +1658,7 @@ nnoremap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nnoremap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"nnoremap <Leader>se :e $MYVIMRC<CR>
+nnoremap <Leader>se :e $MYVIMRC<CR>
 "nnoremap <Leader>se :e ~/.vimrc<CR>
 "nnoremap <Leader>ss :source $MYVIMRC<CR>
 
@@ -1692,8 +1705,13 @@ onoremap il> :<C-U>normal! F>vi><CR>
 "--------------------------------------------------------------------------
 " inside terminal 
 "--------------------------------------------------------------------------
-if has('tnoremap')
-    nnoremap <silent> <Leader>tm :term zsh<CR>
+if has('terminal')
+    if has('unix')
+        nnoremap <silent> <Leader>tm :term zsh<CR>
+    else
+        nnoremap <silent> <Leader>tm :term<CR>
+    endif
+
     if !has('nvim')
         tnoremap <silent> <Leader>g exit<CR><C-w>:q!<CR>
     else
@@ -1733,7 +1751,36 @@ endif
 
 
 "--------------------------------------------------------------------------
-" 
+" auto close pair ( { [ ' "
 "--------------------------------------------------------------------------
+function! AutoClosePair()
+    inoremap ( ()<Esc>i
+    inoremap ) <c-r>=ClosePair(')')<CR>
+    inoremap { {}<Esc>i
+    inoremap } <c-r>=ClosePair('}')<CR>
+    inoremap [ []<Esc>i
+    inoremap ] <c-r>=ClosePair(']')<CR>
+    inoremap " ""<Esc>i
+    inoremap ' ''<Esc>i
+endfunction
 
+function! RestoreClosePair()
+    inoremap ( (
+    inoremap { {
+    inoremap [ [
+    inoremap " "
+    inoremap ' '
+endfunction
+
+function! ClosePair(char)
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
+endfunction
+
+"call AutoClosePair()
+"nnoremap <Leader>nau :call RestoreClosePair()<CR>
+"nnoremap <Leader>hau :call AutoClosePair()<CR>
 

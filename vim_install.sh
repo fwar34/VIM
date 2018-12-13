@@ -130,7 +130,8 @@ if [ -f ~/.vimrc ]
 then
 	mv ~/.vimrc ~/.vimrc.bak
 fi
-ln -s ~/mine/VIM/vimrc.vim-plug ~/.vimrc
+#ln -s ~/mine/VIM/vimrc.vim-plug ~/.vimrc
+ln -s ~/mine/VIM/vimfiles/vimrc ~/.vimrc
 
 
 #if [ ! -d ~/.config/nvim ]

@@ -197,7 +197,7 @@ else
     if [ ! -d ~/.config/nvim ]
     then
         ln -s ~/.vim ~/.config/nvim
-        ln -s ~/mine/VIM/vimrc.vim-plug ~/.config/nvim/init.vim
+        ln -s ~/mine/VIM/vimfiles/vimrc ~/.config/nvim/init.vim
     fi
 fi
 

@@ -29,11 +29,10 @@ then
 else
     if [ $os = 'Ubuntu' -o $os = 'Debian' ]
     then
-        sudo apt install curl wget build-essential zsh tmux autojump ctags \
-            libncurses5-dev ctags silversearcher-ag python-pip python3-pip cmake
-	    elif [ $os = 'ManjaroLinux' ]
-	    then
-		    sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake
+        sudo apt install curl wget build-essential zsh tmux autojump ctags libncurses5-dev ctags silversearcher-ag python-pip python3-pip cmake
+    elif [ $os = 'ManjaroLinux' ]
+    then
+        sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake
     fi
 
     if [ ! -f ~/.vim/autoload/plug.vim ]

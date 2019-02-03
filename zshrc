@@ -139,6 +139,11 @@ then
     alias ctags='/usr/local/bin/ctags'
 fi
 
+if [ -f '/usr/bin/setxkbmap' ]
+then
+	setxkbmap -option ctrl:nocaps
+fi
+
 if [ "$TERM" = "xterm" ]
 then
     export TERM=xterm-256color

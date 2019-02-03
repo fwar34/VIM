@@ -30,7 +30,10 @@ else
     if [ $os = 'Ubuntu' -o $os = 'Debian' ]
     then
         sudo apt install curl wget build-essential zsh tmux autojump ctags \
-            libncurses5-dev ctags silversearcher-ag python-pip python3-pip
+            libncurses5-dev ctags silversearcher-ag python-pip python3-pip cmake
+	    elif [ $os = 'ManjaroLinux' ]
+	    then
+		    sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake
     fi
 
     if [ ! -f ~/.vim/autoload/plug.vim ]
@@ -65,6 +68,8 @@ function install_my_bin()
         chmod +x ~/bin/diff-so-fancy
     fi
 
+    if [ $os != 'ManjaroLinux' ]
+    then
     #install fd
     if [ ! -f /usr/bin/fd ]
     then
@@ -72,6 +77,7 @@ function install_my_bin()
         sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
         rm ~/bin/fd_7.2.0_amd64.deb
     fi
+fi
 
     #install tldr
     if [ ! -f ~/bin/tldr  -a ! -f /usr/bin/tldr ]
@@ -80,6 +86,8 @@ function install_my_bin()
         chmod +x ~/bin/tldr
     fi
 
+    if [  $os != 'ManjaroLinux' ]
+    then
     #install bat
     if [ ! -f /usr/bin/bat ]
     then
@@ -87,6 +95,7 @@ function install_my_bin()
         sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
         rm ~/bin/bat_0.8.0_amd64.deb
     fi
+fi
 
     #install jq
     if [ ! -f ~/bin/jq -a ! -f /usr/bin/jq ]
@@ -108,7 +117,7 @@ function bash_snippets()
         sudo ./install.sh all
     fi
 }
-bash_snippets
+#bash_snippets
 
 if [ ! -f ~/downloads/global-6.6.2.tar.gz ]
 then

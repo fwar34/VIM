@@ -126,13 +126,13 @@ then
     cd ~/downloads/global-6.6.2/ && ./configure && make -j 4 && sudo make install
 fi
 
-if [ ! -f ~/downloads/ncdu-1.13.tar.gz ]
-then
-    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/downloads/ncdu-1.13.tar.gz
-    cd ~/downloads
-    tar -zxvf ncdu-1.13.tar.gz
-    cd ~/downloads/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
-fi
+#if [ ! -f ~/downloads/ncdu-1.13.tar.gz ]
+#then
+#    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/downloads/ncdu-1.13.tar.gz
+#    cd ~/downloads
+#    tar -zxvf ncdu-1.13.tar.gz
+#    cd ~/downloads/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
+#fi
 
 if [ -f ~/.vimrc ]
 then

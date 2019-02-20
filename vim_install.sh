@@ -64,19 +64,19 @@ function install_my_bin()
     then
         wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" \
             -O ~/bin/diff-so-fancy
-        chmod +x ~/bin/diff-so-fancy
-    fi
+                    chmod +x ~/bin/diff-so-fancy
+                fi
 
-    if [ $os != 'ManjaroLinux' ]
-    then
-    #install fd
-    if [ ! -f /usr/bin/fd ]
-    then
-        wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
-        sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
-        rm ~/bin/fd_7.2.0_amd64.deb
-    fi
-fi
+                if [ $os != 'ManjaroLinux' ]
+                then
+                    #install fd
+                    if [ ! -f /usr/bin/fd ]
+                    then
+                        wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
+                        sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
+                        rm ~/bin/fd_7.2.0_amd64.deb
+                    fi
+                fi
 
     #install tldr
     if [ ! -f ~/bin/tldr  -a ! -f /usr/bin/tldr ]
@@ -87,14 +87,14 @@ fi
 
     if [  $os != 'ManjaroLinux' ]
     then
-    #install bat
-    if [ ! -f /usr/bin/bat ]
-    then
-        wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
-        sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
-        rm ~/bin/bat_0.8.0_amd64.deb
+        #install bat
+        if [ ! -f /usr/bin/bat ]
+        then
+            wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
+            sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
+            rm ~/bin/bat_0.8.0_amd64.deb
+        fi
     fi
-fi
 
     #install jq
     if [ ! -f ~/bin/jq -a ! -f /usr/bin/jq ]
@@ -102,6 +102,8 @@ fi
         wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
         chmod +x ~/bin/jq
     fi
+
+    ln -s ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
 }
 install_my_bin
 

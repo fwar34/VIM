@@ -141,7 +141,7 @@ then
 	mv ~/.vimrc ~/.vimrc.bak
 fi
 #ln -s ~/mine/VIM/vimrc.vim-plug ~/.vimrc
-ln -s ~/mine/VIM/vimfiles/vimrc ~/.vimrc
+ln -s ~/mine/vimfiles/vimrc ~/.vimrc
 
 
 #if [ ! -d ~/.config/nvim ]
@@ -180,7 +180,8 @@ if [ -f ~/.gitconfig ]
 then
 	mv ~/.gitconfig ~/.gitconfig.bak
 fi
-ln -s ~/mine/VIM/git/gitconfig ~/.gitconfig
+#ln -s ~/mine/VIM/git/gitconfig ~/.gitconfig
+ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
 if [ -f ~/.agignore ]
 then
@@ -198,8 +199,7 @@ else
 
     if [ ! -d ~/.config/nvim ]
     then
-        ln -s ~/.vim ~/.config/nvim
-        ln -s ~/mine/VIM/vimfiles/vimrc ~/.config/nvim/init.vim
+        ln -s ~/mine/nvim ~/.config/nvim
     fi
 fi
 

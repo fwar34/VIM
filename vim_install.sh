@@ -180,8 +180,13 @@ if [ -f ~/.gitconfig ]
 then
 	mv ~/.gitconfig ~/.gitconfig.bak
 fi
-#ln -s ~/mine/VIM/git/gitconfig ~/.gitconfig
 ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+
+if [ -f ~/.globalrc ]
+then
+	mv ~/.globalrc ~/.globalrc.bak
+fi
+ln -s ~/mine/vimfiles/globalrc ~/..globalrc
 
 if [ -f ~/.agignore ]
 then

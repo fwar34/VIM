@@ -212,6 +212,10 @@ echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag
 
+#support python2
+#--enable-pythoninterp=yes \
+#--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+
 #build vim
 # https://github.com/vim/vim.git
 #./configure --with-features=huge \

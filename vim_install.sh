@@ -242,3 +242,46 @@ echo Complete
 #make
 #[optional] sudo make install
 #[optional] sudo make install-config (installs proxychains.conf)
+#////////////////////////////////////////////////////////////////////
+# http://goushi.me/navigation-in-vim/
+#Replace Exuberant Ctags by Universal Ctags.
+#git clone https://github.com/universal-ctags/ctags --depth 1
+#cd ctags
+#./autogen.sh
+#./configure
+#make
+#sudo make install
+
+#pip install pygments
+
+#Expand Universal Ctags by Gtags.
+    
+#wget http://tamacom.com/global/global-6.6.3.tar.gz
+#tar xvf global-6.6.3.tar.gz
+#cd global-6.6.3
+#./configure --with-universal-ctags=/usr/local/bin/ctags
+#make -j4
+#sudo make install
+
+#Generate tag files automatically by Gutentags.
+#let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+#let g:gutentags_exclude_project_root = [expand('~/.vim')]
+#let g:gutentags_cache_dir = expand('~/.cache/gutentags')
+ 
+#let g:gutentags_modules = []
+#if executable('ctags')
+	#let g:gutentags_modules += ['ctags']
+#endif
+#if executable('gtags-cscope') && executable('gtags')
+	#let g:gutentags_modules += ['gtags_cscope']
+#endif
+ 
+#" Universal Ctags support Wildcard in options.
+#let g:gutentags_ctags_extra_args = ['--fields=*', '--extras=*', '--all-kinds=*']
+#let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+ 
+#" If built-in parser exists for the target, it is used.
+#" Else if pygments parser exists it is used.
+#let $GTAGSLABEL = 'native-pygments'
+#let $GTAGSCONF = expand('~/.vim/globalrc')
+#////////////////////////////////////////////////////////////////////

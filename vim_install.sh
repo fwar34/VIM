@@ -55,10 +55,6 @@ elif [ $os = 'ManjaroLinux' ]; then
     sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake
 fi
 
-if [ ! -d ~/.vim/autoload ]; then
-    ln -s ~/mine/nvim/autoload/ ~/.vim/autoload
-fi
-
 if [ ! -d ~/.oh-my-zsh ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi

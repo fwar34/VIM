@@ -176,23 +176,23 @@ then
 fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
-if [ -f ~/.gitconfig ]
-then
-	mv ~/.gitconfig ~/.gitconfig.bak
-fi
-ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+#if [ -f ~/.gitconfig ]
+#then
+	#mv ~/.gitconfig ~/.gitconfig.bak
+#fi
+#ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
-if [ -f ~/.globalrc ]
-then
-	mv ~/.globalrc ~/.globalrc.bak
-fi
-ln -s ~/mine/vimfiles/globalrc ~/..globalrc
+#if [ -f ~/.globalrc ]
+#then
+	#mv ~/.globalrc ~/.globalrc.bak
+#fi
+#ln -s ~/mine/vimfiles/globalrc ~/..globalrc
 
-if [ -f ~/.agignore ]
-then
-	mv ~/.agignore ~/.agignore.bak
-fi
-ln -s ~/mine/VIM/agignore ~/.agignore
+#if [ -f ~/.agignore ]
+#then
+	#mv ~/.agignore ~/.agignore.bak
+#fi
+#ln -s ~/mine/VIM/agignore ~/.agignore
 
 if [ ! -d ~/.vim/ ]
 then

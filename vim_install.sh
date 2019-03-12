@@ -171,11 +171,11 @@ then
 fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
-if [ -f ~/.gitconfig ]
-then
-	mv ~/.gitconfig ~/.gitconfig.bak
-fi
-ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+#if [ -f ~/.gitconfig ]
+#then
+    #mv ~/.gitconfig ~/.gitconfig.bak
+#fi
+#ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
 #if [ -f ~/.globalrc ]
 #then
@@ -188,7 +188,6 @@ ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 	#mv ~/.agignore ~/.agignore.bak
 #fi
 #ln -s ~/mine/VIM/agignore ~/.agignore
-
 
 echo Complete
 

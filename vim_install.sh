@@ -262,3 +262,6 @@ echo Complete
 #let $GTAGSLABEL = 'native-pygments'
 #let $GTAGSCONF = expand('~/.vim/globalrc')
 #////////////////////////////////////////////////////////////////////
+#compile emacs with x window
+#sudo apt install libgtk-3-dev
+#sudo apt-get install libxpm-dev libjpeg-dev libgif-dev libtiff5-dev libgnutls28-dev

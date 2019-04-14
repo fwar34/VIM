@@ -318,6 +318,7 @@ man_color4
 
 export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export GOPATH=$HOME/go
 
 #tldr
 export TLDR_HEADER='magenta bold underline'

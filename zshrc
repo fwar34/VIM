@@ -318,6 +318,7 @@ man_color4
 
 export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 
 #tldr

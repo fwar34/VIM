@@ -314,7 +314,7 @@ function man_color4()
     export LESS_TERMCAP_us=$'\E[01;32m'
     export LESS=-r
 }
-man_color4
+#man_color4
 
 export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

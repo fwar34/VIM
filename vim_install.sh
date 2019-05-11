@@ -34,25 +34,21 @@ if [ ! -d ~/mine/Other ]; then
     git clone https://github.com/fwar34/Other.git ~/mine/Other
 fi
 
-if [ ! -d ~/.vim/ ]; then
-    echo "~/.vim is not exist!!!!!!!!"
-else
-    if [ ! -d ~/.config ]; then
-        mkdir -p ~/.config
-    fi
+if [ ! -d ~/.config ]; then
+mkdir -p ~/.config
+fi
 
-    if [ ! -d ~/.config/nvim ]; then
-        ln -s ~/mine/nvim ~/.config/nvim
-    fi
+if [ ! -d ~/.config/nvim ]; then
+ln -s ~/mine/nvim ~/.config/nvim
 fi
 
 #if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
 #if [ "$os" = 'MSYS' -o "$os" = 'CYGWIN' ]
 #if [ "$os" = 'MSYS' ] || [ "$os" = 'CYGWIN' ]
 if [ $os = 'Ubuntu' -o $os = 'Debian' ]; then
-    sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev silversearcher-ag python3-pip cmake
+    sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev silversearcher-ag python3-pip cmake autoconf pkg-config
 elif [ $os = 'ManjaroLinux' ]; then
-    sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake
+    sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake 
 fi
 
 if [ ! -d ~/.oh-my-zsh ]; then
@@ -129,6 +125,20 @@ if [ ! -d ~/downloads/ctags ]; then
     fi
 fi
 
+#proxychains https://github.com/rofl0r/proxychains-ng.git
+#./configure --prefix=/usr --sysconfdir=/etc
+#make
+#[optional] sudo make install
+#[optional] sudo make install-config (installs proxychains.conf)
+if [ ! -d ~/downloads/proxychains-ng ]; then
+    git clone https://github.com/rofl0r/proxychains-ng.git ~/downloads/proxychains-ng
+    cd ~/downloads/proxychains-ng
+    ./configure --prefix=/usr --sysconfdir=/etc
+    make
+    sudo make install
+    sudo make install-config
+fi
+
 if [ ! -f ~/downloads/global-6.6.3.tar.gz ]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/downloads/global-6.6.3.tar.gz
     cd ~/downloads/
@@ -151,7 +161,7 @@ fi
 #fi
 
 if [ -f ~/.vimrc ]; then
-	mv ~/.vimrc ~/.vimrc.bak
+    mv ~/.vimrc ~/.vimrc.bak
 fi
 ln -s ~/mine/vimfiles/vimrc ~/.vimrc
 
@@ -163,25 +173,25 @@ ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
 
 if [ -f ~/.zshrc ]
 then
-	mv ~/.zshrc ~/.zshrc.bak
+    mv ~/.zshrc ~/.zshrc.bak
 fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
 #if [ -f ~/.gitconfig ]
 #then
-    #mv ~/.gitconfig ~/.gitconfig.bak
+#mv ~/.gitconfig ~/.gitconfig.bak
 #fi
 #ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
 #if [ -f ~/.globalrc ]
 #then
-	#mv ~/.globalrc ~/.globalrc.bak
+#mv ~/.globalrc ~/.globalrc.bak
 #fi
 #ln -s ~/mine/vimfiles/globalrc ~/..globalrc
 
 #if [ -f ~/.agignore ]
 #then
-	#mv ~/.agignore ~/.agignore.bak
+#mv ~/.agignore ~/.agignore.bak
 #fi
 #ln -s ~/mine/VIM/agignore ~/.agignore
 
@@ -196,13 +206,13 @@ echo Complete
 #build vim
 # https://github.com/vim/vim.git
 #./configure --with-features=huge \
-    #--enable-multibyte \
-    #--enable-rubyinterp=yes \
-    #--enable-python3interp=yes \
-    #--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
-    #--enable-perlinterp=yes \
-    #--enable-luainterp=yes \
-    #--enable-cscope
+#--enable-multibyte \
+#--enable-rubyinterp=yes \
+#--enable-python3interp=yes \
+#--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+#--enable-perlinterp=yes \
+#--enable-luainterp=yes \
+#--enable-cscope
 
 #build emacs-26
 #./configure --without-x --with-gnutls=no --with-mailutils
@@ -232,7 +242,7 @@ echo Complete
 #pip install pygments
 
 #Expand Universal Ctags by Gtags.
-    
+
 #wget http://tamacom.com/global/global-6.6.3.tar.gz
 #tar xvf global-6.6.3.tar.gz
 #cd global-6.6.3
@@ -244,19 +254,19 @@ echo Complete
 #let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 #let g:gutentags_exclude_project_root = [expand('~/.vim')]
 #let g:gutentags_cache_dir = expand('~/.cache/gutentags')
- 
+
 #let g:gutentags_modules = []
 #if executable('ctags')
-	#let g:gutentags_modules += ['ctags']
+#let g:gutentags_modules += ['ctags']
 #endif
 #if executable('gtags-cscope') && executable('gtags')
-	#let g:gutentags_modules += ['gtags_cscope']
+#let g:gutentags_modules += ['gtags_cscope']
 #endif
- 
+
 #" Universal Ctags support Wildcard in options.
 #let g:gutentags_ctags_extra_args = ['--fields=*', '--extras=*', '--all-kinds=*']
 #let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
- 
+
 #" If built-in parser exists for the target, it is used.
 #" Else if pygments parser exists it is used.
 #let $GTAGSLABEL = 'native-pygments'

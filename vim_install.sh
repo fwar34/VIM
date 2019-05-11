@@ -239,7 +239,8 @@ echo Complete
 #make
 #sudo make install
 
-#pip install pygments
+#pip3 install pygments
+#pip3 install neovim pynvim clang
 
 #Expand Universal Ctags by Gtags.
 

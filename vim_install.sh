@@ -219,7 +219,9 @@ echo Complete
 #--enable-cscope
 
 #build emacs-26
-#./configure --without-x --with-gnutls=no --with-mailutils
+#https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
+# apt install libgnutls28-dev
+#./configure --without-x --with-mailutils
 
 #common command
 #A)thefuck Bash-Snippets(cheat cloudup crypt cryptocurrency currency geo lyrics meme movies newton 

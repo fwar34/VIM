@@ -34,6 +34,10 @@ if [ ! -d ~/mine/Other ]; then
     git clone https://github.com/fwar34/Other.git ~/mine/Other
 fi
 
+if [ ! -d ~/.emacs.d ]; then
+    git clone https://github.com/fwar34/emacs.d.git ~/.emacs.d
+fi
+
 if [ ! -d ~/.config ]; then
 mkdir -p ~/.config
 fi

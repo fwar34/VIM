@@ -336,6 +336,6 @@ compdef cheat=man
 alias ncdu='ncdu --color dark -rr -x'
 
 #thefuck https://github.com/nvbn/thefuck
-eval $(thefuck --alias)
+#eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
-eval $(thefuck --alias FUCK)
+#eval $(thefuck --alias FUCK)

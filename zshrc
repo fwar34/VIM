@@ -321,6 +321,8 @@ export TZ='Asia/Shanghai'
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
+export PAHT=$PATH:$HOME/.cargo/bin
+
 #tldr
 export TLDR_HEADER='magenta bold underline'
 export TLDR_QUOTE='italic'

@@ -181,6 +181,8 @@ then
 fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
+ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
+
 #if [ -f ~/.gitconfig ]
 #then
 #mv ~/.gitconfig ~/.gitconfig.bak

@@ -220,10 +220,16 @@ echo Complete
 #--enable-luainterp=yes \
 #--enable-cscope
 
-#build emacs-26
+#build emacs-26 with x
 #https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
-# apt install libgnutls28-dev
+# sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev
+# sudo apt-get install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev 
+#./configure --with-mailutils
+
+#build emacs-26 without x
+# sudo apt install libgnutls28-dev
 #./configure --without-x --with-mailutils
+
 
 #common command
 #A)thefuck Bash-Snippets(cheat cloudup crypt cryptocurrency currency geo lyrics meme movies newton 

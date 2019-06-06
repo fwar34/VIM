@@ -105,8 +105,8 @@ function install_my_bin()
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh
     if [! -f ~/bin/man ]; then
-        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/downloads/
-        tar -zxvf ~/downloads/manssh_0.5.1_linux_amd64.tar.gz -C ~/bin/
+        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/downloads/manssh.tar.gz
+        tar -zxvf ~/downloads/manssh.tar.gz -C ~/bin/
     fi
 }
 install_my_bin

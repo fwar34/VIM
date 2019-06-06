@@ -101,6 +101,13 @@ function install_my_bin()
     fi
 
     ln -s ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
+
+    #install manssh (or stormssh)
+    #https://github.com/xwjdsh/manssh
+    if [! -f ~/bin/man ]; then
+        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/downloads/
+        tar -zxvf ~/downloads/manssh_0.5.1_linux_amd64.tar.gz -C ~/bin/
+    fi
 }
 install_my_bin
 

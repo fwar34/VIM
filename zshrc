@@ -95,9 +95,23 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export LANG=en_US.utf-8
-alias ls='ls --show-control-chars --color=auto'
 
-alias ll='ls -lht'
+#https://blog.csdn.net/gengli2017/article/details/82917827
+#https://blog.csdn.net/yangyiwxl/article/details/72865371
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    #alias ls='ls --color=auto'
+    alias ls='ls --show-control-chars --color=auto'
+    alias ll='ls -lht'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
 #alias tmux='tmux -2'
 alias tmux='tmux -u'
 #alias tmux='TERM=xterm-256color  tmux -2'

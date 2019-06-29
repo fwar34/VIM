@@ -11,9 +11,11 @@ else
 fi
 echo $os
 
-if [ ! -d ~/downloads ]; then
-    mkdir -p ~/downloads
+if [ ! -d ~/Downloads ]; then
+    mkdir -p ~/Downloads
 fi
+DOWNLOADS_NAME="Downloads"
+
 if [ ! -d ~/mine ]; then
     mkdir -p ~/mine
 fi
@@ -105,8 +107,8 @@ function install_my_bin()
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh
     if [ ! -f ~/bin/man ]; then
-        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/downloads/manssh.tar.gz
-        tar -zxvf ~/downloads/manssh.tar.gz -C ~/bin/
+        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
+        tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
     fi
 }
 install_my_bin
@@ -122,9 +124,9 @@ function bash_snippets()
 }
 #bash_snippets
 
-if [ ! -d ~/downloads/ctags ]; then
-    git clone https://github.com/universal-ctags/ctags --depth 1 ~/downloads/ctags
-    cd ~/downloads/ctags
+if [ ! -d ~/${DOWNLOADS_NAME}/ctags ]; then
+    git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
+    cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
     ./configure
     make -j 4
@@ -141,20 +143,20 @@ fi
 #make
 #[optional] sudo make install
 #[optional] sudo make install-config (installs proxychains.conf)
-if [ ! -d ~/downloads/proxychains-ng ]; then
-    git clone https://github.com/rofl0r/proxychains-ng.git ~/downloads/proxychains-ng
-    cd ~/downloads/proxychains-ng
+if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]; then
+    git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
+    cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc
     make
     sudo make install
     sudo make install-config
 fi
 
-if [ ! -f ~/downloads/global-6.6.3.tar.gz ]; then
-    wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/downloads/global-6.6.3.tar.gz
-    cd ~/downloads/
+if [ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]; then
+    wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
+    cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
-    cd ~/downloads/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
+    cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
     if [ $? -eq 0 ]; then
         sudo make install
     else
@@ -163,12 +165,12 @@ if [ ! -f ~/downloads/global-6.6.3.tar.gz ]; then
     fi
 fi
 
-#if [ ! -f ~/downloads/ncdu-1.13.tar.gz ]
+#if [ ! -f ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz ]
 #then
-#    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/downloads/ncdu-1.13.tar.gz
-#    cd ~/downloads
+#    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz
+#    cd ~/${DOWNLOADS_NAME}
 #    tar -zxvf ncdu-1.13.tar.gz
-#    cd ~/downloads/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
+#    cd ~/${DOWNLOADS_NAME}/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
 #fi
 
 if [ -f ~/.vimrc ]; then
@@ -229,8 +231,8 @@ echo Complete
 
 #build emacs-26 with x
 #https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
-# sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev
-# sudo apt-get install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev 
+#sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
+#    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
 #./configure --with-mailutils
 
 #build emacs-26 without x

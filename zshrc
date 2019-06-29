@@ -179,6 +179,13 @@ fi
 #fi
 
 alias cs='emacs -nw'
+
+#https://www.jianshu.com/p/006517cc260e
+#fix emacs gui not run in elementary
+if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
+    alias emacs="XLIB_SKIP_ARGB_VISUALS=1 emacs"
+fi
+
 #bindkey  "^[[H"   beginning-of-line
 #bindkey  "^[[F"   end-of-line
 

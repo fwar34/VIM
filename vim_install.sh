@@ -49,7 +49,7 @@ fi
 #if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
 #if [ "$os" = 'MSYS' -o "$os" = 'CYGWIN' ]
 #if [ "$os" = 'MSYS' ] || [ "$os" = 'CYGWIN' ]
-if [ $os = 'Ubuntu' -o $os = 'Debian' ]; then
+if [ $os = 'Ubuntu' -o $os = 'Debian' -o $os = 'elementary' ]; then
     sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev silversearcher-ag python3-pip cmake autoconf pkg-config
 elif [ $os = 'ManjaroLinux' ]; then
     sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake 

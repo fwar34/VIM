@@ -176,7 +176,7 @@ fi
 if [ -f ~/.vimrc ]; then
     mv ~/.vimrc ~/.vimrc.bak
 fi
-ln -s ~/mine/vimfiles/vimrc ~/.vimrc
+ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
 
 if [ -f ~/.tmux.conf ]
 then

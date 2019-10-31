@@ -11,10 +11,10 @@ else
 fi
 echo $os
 
-if [ ! -d ~/Downloads ]; then
-    mkdir -p ~/Downloads
-fi
-DOWNLOADS_NAME="Downloads"
+#if [ ! -d ~/Downloads ]; then
+    #mkdir -p ~/Downloads
+#fi
+DOWNLOADS_NAME="downloads"
 
 if [ ! -d ~/mine ]; then
     mkdir -p ~/mine

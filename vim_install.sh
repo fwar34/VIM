@@ -14,7 +14,7 @@ echo $os
 #if [ ! -d ~/Downloads ]; then
     #mkdir -p ~/Downloads
 #fi
-DOWNLOADS_NAME="downloads"
+DOWNLOADS_NAME="Downloads"
 
 if [ ! -d ~/mine ]; then
     mkdir -p ~/mine

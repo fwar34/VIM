@@ -360,3 +360,5 @@ alias ncdu='ncdu --color dark -rr -x'
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 #eval $(thefuck --alias FUCK)
+#export DISPLAY=:0.0
+#export LIBGL_ALWAYS_INDIRECT=1

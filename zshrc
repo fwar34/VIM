@@ -362,3 +362,6 @@ alias ncdu='ncdu --color dark -rr -x'
 #eval $(thefuck --alias FUCK)
 #export DISPLAY=:0.0
 #export LIBGL_ALWAYS_INDIRECT=1
+if [[ "$(umask)" == '000' ]]; then
+    umask 022
+fi

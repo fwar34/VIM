@@ -180,6 +180,13 @@ fi
 
 alias cs='emacs -nw'
 
+if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
+    alias cdc="cd /mnt/c/" 
+    alias cdd="cd /mnt/d/" 
+    alias cde="cd /mnt/e/" 
+    alias cdf="cd /mnt/f/" 
+fi
+
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
 if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
@@ -365,3 +372,4 @@ alias ncdu='ncdu --color dark -rr -x'
 if [[ "$(umask)" == '000' ]]; then
     umask 022
 fi
+#export LC_CTYPE="zh_CN.utf8"

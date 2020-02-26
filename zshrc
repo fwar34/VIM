@@ -363,6 +363,31 @@ compdef cheat=man
 #ncdu
 alias ncdu='ncdu --color dark -rr -x'
 
+alias vxemacs='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid emacs
+'
+
+alias vxterm='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid xfce4-terminal
+'
+
+alias vxidea='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid idea
+'
+
+alias vxecli='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid eclipse
+'
+
+
 #thefuck https://github.com/nvbn/thefuck
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:

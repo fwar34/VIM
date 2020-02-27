@@ -143,7 +143,7 @@ fi
 #make
 #[optional] sudo make install
 #[optional] sudo make install-config (installs proxychains.conf)
-if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]; then
+if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng -a ! -f /usr/bin/proxychains4 -a ! -f /usr/local/bin/proxychains4 ]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc

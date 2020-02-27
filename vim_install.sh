@@ -191,6 +191,7 @@ fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
+ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
 #if [ -f ~/.gitconfig ]
 #then

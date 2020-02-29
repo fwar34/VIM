@@ -386,8 +386,10 @@ export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 setsid eclipse
 '
-alias gproxy="git config --global http.proxy http://127.0.0.1:1080"
-alias gunproxy="git config --global --unset http.proxy"
+
+alias gproxy_http="git config --global http.proxy http://127.0.0.1:1080"
+alias gproxy_socks="git config --global http.proxy socks5://127.0.0.1:1080"
+alias gunproxy="git config --global --unset http.proxy && git config --global --unset https.proxy"
 
 #thefuck https://github.com/nvbn/thefuck
 #eval $(thefuck --alias)

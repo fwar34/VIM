@@ -263,7 +263,7 @@ echo Complete
 #make
 #sudo make install
 
-#pip3 install neovim pynvim clang jedi pygments
+#pip3 install neovim nvim pynvim clang jedi pygments
 
 #Expand Universal Ctags by Gtags.
 

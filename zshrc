@@ -360,3 +360,11 @@ alias ncdu='ncdu --color dark -rr -x'
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
 #eval $(thefuck --alias FUCK)
+
+export JAVA_HOME=/home/feng/jdk-13.0.2
+export PATH=$PATH:$JAVA_HOME/bin
+
+export MAVEN_HOME=/usr/share/maven
+export PATH=$PATH:$MAVEN_HOME/bin
+
+export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release

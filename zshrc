@@ -180,6 +180,13 @@ fi
 
 alias cs='emacs -nw'
 
+if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
+    alias cdc="cd /mnt/c/" 
+    alias cdd="cd /mnt/d/" 
+    alias cde="cd /mnt/e/" 
+    alias cdf="cd /mnt/f/" 
+fi
+
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
 if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
@@ -356,6 +363,34 @@ compdef cheat=man
 #ncdu
 alias ncdu='ncdu --color dark -rr -x'
 
+alias vxemacs='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid emacs
+'
+
+alias vxterm='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid xfce4-terminal
+'
+
+alias vxidea='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid idea
+'
+
+alias vxecli='
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid eclipse
+'
+
+alias gproxy_http="git config --global http.proxy http://127.0.0.1:1080"
+alias gproxy_socks="git config --global http.proxy socks5://127.0.0.1:1080"
+alias gunproxy="git config --global --unset http.proxy && git config --global --unset https.proxy"
+
 #thefuck https://github.com/nvbn/thefuck
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:
@@ -368,3 +403,10 @@ export MAVEN_HOME=/usr/share/maven
 export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
+
+#export DISPLAY=:0.0
+#export LIBGL_ALWAYS_INDIRECT=1
+if [[ "$(umask)" == '000' ]]; then
+    umask 022
+fi
+#export LC_CTYPE="zh_CN.utf8"

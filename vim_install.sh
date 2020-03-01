@@ -14,7 +14,7 @@ echo $os
 #if [ ! -d ~/Downloads ]; then
     #mkdir -p ~/Downloads
 #fi
-DOWNLOADS_NAME="downloads"
+DOWNLOADS_NAME="Downloads"
 
 if [ ! -d ~/mine ]; then
     mkdir -p ~/mine
@@ -143,7 +143,7 @@ fi
 #make
 #[optional] sudo make install
 #[optional] sudo make install-config (installs proxychains.conf)
-if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]; then
+if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng -a ! -f /usr/bin/proxychains4 -a ! -f /usr/local/bin/proxychains4 ]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc
@@ -176,7 +176,7 @@ fi
 if [ -f ~/.vimrc ]; then
     mv ~/.vimrc ~/.vimrc.bak
 fi
-ln -s ~/mine/vimfiles/vimrc ~/.vimrc
+ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
 
 if [ -f ~/.tmux.conf ]
 then
@@ -191,6 +191,7 @@ fi
 ln -s ~/mine/VIM/zshrc ~/.zshrc
 
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
+ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
 #if [ -f ~/.gitconfig ]
 #then

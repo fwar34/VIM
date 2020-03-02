@@ -399,6 +399,10 @@ alias gunproxy="git config --global --unset http.proxy && git config --global --
 
 if [ -d /usr/lib/jvm/java-11-openjdk-amd64 ];then
     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+elif [ -d /usr/lib/jvm/java-8-openjdk-amd64 ];then
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    export JRE_HOME=${JAVA_HOME}/jre
+    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 else
     export JAVA_HOME=/home/feng/jdk-13.0.2
 fi

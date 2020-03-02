@@ -396,7 +396,11 @@ alias gunproxy="git config --global --unset http.proxy && git config --global --
 # You can use whatever you want as an alias, like for Mondays:
 #eval $(thefuck --alias FUCK)
 
-export JAVA_HOME=/home/feng/jdk-13.0.2
+if [ -d /usr/lib/jvm/java-11-openjdk-amd64 ];then
+    export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+else
+    export JAVA_HOME=/home/feng/jdk-13.0.2
+fi
 export PATH=$PATH:$JAVA_HOME/bin
 
 export MAVEN_HOME=/usr/share/maven

@@ -185,6 +185,7 @@ if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
     alias cdd="cd /mnt/d/" 
     alias cde="cd /mnt/e/" 
     alias cdf="cd /mnt/f/" 
+    alias cdg="cd /mnt/g/" 
 fi
 
 #https://www.jianshu.com/p/006517cc260e

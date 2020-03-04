@@ -419,3 +419,5 @@ if [[ "$(umask)" == '000' ]]; then
     umask 022
 fi
 #export LC_CTYPE="zh_CN.utf8"
+
+export DOCKER_HOST=tcp://localhost:2375

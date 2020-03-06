@@ -234,11 +234,11 @@ echo Complete
 #https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
 #sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
 #    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
-#./configure --with-mailutils
+#./configure --with-mailutils --with-modules
 
 #build emacs-26 without x
 # sudo apt install libgnutls28-dev
-#./configure --without-x --with-mailutils
+#./configure --without-x --with-mailutils --with-modules
 
 
 #common command

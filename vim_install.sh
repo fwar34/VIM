@@ -190,6 +190,12 @@ then
 fi
 ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
+if [ -f ~/.config/TabNine/TabNine.toml ]
+then
+    mv ~/.config/TabNine/TabNine.toml ~/.config/TabNine/TabNine.toml.bak
+fi
+ln -s ~/mine/vimfiles/TabNine/TabNine.toml.ccls ~/.config/TabNine/TabNine.toml
+
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 

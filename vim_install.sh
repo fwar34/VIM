@@ -188,7 +188,7 @@ if [ -f ~/.zshrc ]
 then
     mv ~/.zshrc ~/.zshrc.bak
 fi
-ln -s ~/mine/VIM/zshrc ~/.zshrc
+ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc

@@ -190,6 +190,13 @@ then
 fi
 ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
+# https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b
+if [ -f ~/.ctags ]
+then
+    mv ~/.ctags ~/.ctags.bak
+fi
+ln -s ~/mine/vimfiles/universal_ctags_config ~/.ctags
+
 #if [ -f ~/.config/TabNine/TabNine.toml ]
 #then
     #mv ~/.config/TabNine/TabNine.toml ~/.config/TabNine/TabNine.toml.bak

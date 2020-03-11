@@ -1,80 +1,90 @@
 #!/bin/bash
 
-lsb_release -d >/dev/null 2>&1
-if [ $? -eq 0 ]; then
-    #os=$(lsb_release -d|cut -d: -f2|sed 's/^[ \t]//')
-    #os=$(lsb_release -i|awk '{print 3}')
-    os=$(lsb_release -i|cut -f2)
-else
-    #os=$(MSYSTEM) #just define in msys
-    os=$(uname -a|awk -F_ '{print $1}')
-fi
-echo $os
-
-#if [ ! -d ~/Downloads ]; then
-    #mkdir -p ~/Downloads
+#lsb_release -d >/dev/null 2>&1
+#if [[ $? -eq 0 ]]; then
+#    #os=$(lsb_release -d|cut -d: -f2|sed 's/^[[ \t]]//')
+#    #os=$(lsb_release -i|awk '{print 3}')
+#    os=$(lsb_release -i|cut -f2)
+#else
+#    #os=$(MSYSTEM) #just define in msys
+#    os=$(uname -a|awk -F_ '{print $1}')
 #fi
+os=$(head -1 /etc/os-release|awk -F\" '{print $2}')
+echo ${os}
+
+#if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]]; then
+#	echo $os
+#fi
+#
+#exit 1
+
+if [[ ! -d ~/Downloads ]]; then
+    mkdir -p ~/Downloads
+fi
 DOWNLOADS_NAME="Downloads"
 
-if [ ! -d ~/mine ]; then
+if [[ ! -d ~/mine ]]; then
     mkdir -p ~/mine
 fi
 
-if [ ! -d ~/mine/VIM ]; then
+if [[ ! -d ~/mine/VIM ]]; then
     git clone https://github.com/fwar34/VIM.git ~/mine/VIM
 fi
 
-if [ ! -d ~/mine/vimfiles ]; then
+if [[ ! -d ~/mine/vimfiles ]]; then
     git clone https://github.com/fwar34/vimfiles.git ~/mine/vimfiles
 fi
 
-if [ ! -d ~/mine/nvim ]; then
+if [[ ! -d ~/mine/nvim ]]; then
     git clone https://github.com/fwar34/nvim.git ~/mine/nvim
 fi
 
-if [ ! -d ~/mine/Other ]; then
+if [[ ! -d ~/mine/Other ]]; then
     git clone https://github.com/fwar34/Other.git ~/mine/Other
 fi
 
-if [ ! -d ~/.emacs.d ]; then
+if [[ ! -d ~/.emacs.d ]]; then
     git clone https://github.com/fwar34/emacs.d.git ~/.emacs.d
 fi
 
-if [ ! -d ~/.config ]; then
+if [[ ! -d ~/.config ]]; then
 mkdir -p ~/.config
 fi
 
-if [ ! -d ~/.config/nvim ]; then
+if [[ ! -d ~/.config/nvim ]]; then
 ln -s ~/mine/nvim ~/.config/nvim
 fi
 
-#if test "$os" = 'MSYS' -o "$os" = 'CYGWIN'
-#if [ "$os" = 'MSYS' -o "$os" = 'CYGWIN' ]
-#if [ "$os" = 'MSYS' ] || [ "$os" = 'CYGWIN' ]
-if [ $os = 'Ubuntu' -o $os = 'Debian' -o $os = 'elementary' ]; then
-    sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev silversearcher-ag python3-pip cmake autoconf pkg-config
-elif [ $os = 'ManjaroLinux' ]; then
-    sudo pacman -S curl wget zsh tmux autojump ctags global fzf the_silver_searcher thefuck tig cmake 
+#if test "${os}" = 'MSYS' -o "${os}" = 'CYGWIN'
+#if [[ "${os}" = 'MSYS' -o "${os}" = 'CYGWIN' ]]
+#if [[ "${os}" = 'MSYS' ]] || [[ "${os}" = 'CYGWIN' ]]
+if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]]; then
+    sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
+	    silversearcher-ag python3-pip cmake autoconf pkg-config
+elif [[ ${os} = 'ManjaroLinux' ]] || [[ ${os} = 'Arch Linux' ]]; then
+    sudo pacman -S curl wget zsh tmux autojump global fzf the_silver_searcher \
+	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr
 fi
 
-if [ ! -d ~/.oh-my-zsh ]; then
+if [[ ! -d ~/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 fi
 
 function install_my_bin()
 {
-    if [ ! -d ~/bin ]; then
+    if [[ ! -d ~/bin ]]; then
         mkdir ~/bin
     fi
+
     #install diff-so-fancy
-    if [ ! -f ~/bin/diff-so-fancy -a ! -f /usr/bin/diff-so-fancy ]; then
+    if [[ ! -f ~/bin/diff-so-fancy ]] && [[ ! -f /usr/bin/diff-so-fancy ]]; then
         wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/bin/diff-so-fancy
         chmod +x ~/bin/diff-so-fancy
     fi
 
-    if [ $os != 'ManjaroLinux' ]; then
+    if [[ ${os} != 'ManjaroLinux' ]] && [[ ${os} != 'Arch Linux' ]]; then
         #install fd
-        if [ ! -f /usr/bin/fd ]; then
+        if [[ ! -f /usr/bin/fd ]]; then
             wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
             sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
             rm ~/bin/fd_7.2.0_amd64.deb
@@ -82,14 +92,14 @@ function install_my_bin()
     fi
 
     #install tldr
-    if [ ! -f ~/bin/tldr  -a ! -f /usr/bin/tldr ]; then
+    if [[ ! -f ~/bin/tldr ]] && [[ ! -f /usr/bin/tldr ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
         curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
         chmod +x ~/bin/tldr
     fi
 
-    if [  $os != 'ManjaroLinux' ]; then
+    if [[  ${os} != 'ManjaroLinux' ]] && [[ ${os} != 'Arch Linux' ]]; then
         #install bat
-        if [ ! -f /usr/bin/bat ]; then
+        if [[ ! -f /usr/bin/bat ]]; then
             wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
             sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
             rm ~/bin/bat_0.8.0_amd64.deb
@@ -97,7 +107,7 @@ function install_my_bin()
     fi
 
     #install jq
-    if [ ! -f ~/bin/jq -a ! -f /usr/bin/jq ]; then
+    if [[ ! -f ~/bin/jq ]] && [[ ! -f /usr/bin/jq ]]; then
         wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
         chmod +x ~/bin/jq
     fi
@@ -106,7 +116,7 @@ function install_my_bin()
 
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh
-    if [ ! -f ~/bin/man ]; then
+    if [[ ! -f ~/bin/man ]]; then
         wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
         tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
     fi
@@ -115,7 +125,7 @@ install_my_bin
 
 function bash_snippets()
 {
-    if [ ! -d ~/mine/Bash-Snippets ]; then
+    if [[ ! -d ~/mine/Bash-Snippets ]]; then
         git clone https://github.com/alexanderepstein/Bash-Snippets ~/mine/Bash-Snippets
         cd ~/mine/Bash-Snippets
         git checkout v1.22.0
@@ -124,13 +134,13 @@ function bash_snippets()
 }
 #bash_snippets
 
-if [ ! -d ~/${DOWNLOADS_NAME}/ctags ]; then
+if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
     git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
     cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
     ./configure
     make -j 4
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         sudo make install
     else
         echo "Compile universal-ctags failed!!!!"
@@ -141,9 +151,9 @@ fi
 #proxychains https://github.com/rofl0r/proxychains-ng.git
 #./configure --prefix=/usr --sysconfdir=/etc
 #make
-#[optional] sudo make install
-#[optional] sudo make install-config (installs proxychains.conf)
-if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng -a ! -f /usr/bin/proxychains4 -a ! -f /usr/local/bin/proxychains4 ]; then
+#[[optional]] sudo make install
+#[[optional]] sudo make install-config (installs proxychains.conf)
+if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && [[ ! -f /usr/bin/proxychains4 ]] && [[ ! -f /usr/local/bin/proxychains4 ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc
@@ -152,12 +162,12 @@ if [ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng -a ! -f /usr/bin/proxychains4 -a ! 
     sudo make install-config
 fi
 
-if [ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]; then
+if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && [[ -f /usr/local/bin/ctags ]]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         sudo make install
     else
         echo "Compile global failed!!!!"
@@ -165,7 +175,7 @@ if [ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]; then
     fi
 fi
 
-#if [ ! -f ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz ]
+#if [[ ! -f ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz ]]
 #then
 #    wget https://dev.yorhel.nl/download/ncdu-1.13.tar.gz -O ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz
 #    cd ~/${DOWNLOADS_NAME}
@@ -173,31 +183,31 @@ fi
 #    cd ~/${DOWNLOADS_NAME}/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
 #fi
 
-if [ -f ~/.vimrc ]; then
+if [[ -f ~/.vimrc ]]; then
     mv ~/.vimrc ~/.vimrc.bak
 fi
 ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
 
-if [ -f ~/.tmux.conf ]
+if [[ -f ~/.tmux.conf ]]
 then
     mv ~/.tmux.conf ~/.tmux.conf.bak
 fi
 ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
 
-if [ -f ~/.zshrc ]
+if [[ -f ~/.zshrc ]]
 then
     mv ~/.zshrc ~/.zshrc.bak
 fi
 ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
 # https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b
-if [ -f ~/.ctags ]
+if [[ -f ~/.ctags ]]
 then
     mv ~/.ctags ~/.ctags.bak
 fi
 ln -s ~/mine/vimfiles/universal_ctags_config ~/.ctags
 
-#if [ -f ~/.config/TabNine/TabNine.toml ]
+#if [[ -f ~/.config/TabNine/TabNine.toml ]]
 #then
     #mv ~/.config/TabNine/TabNine.toml ~/.config/TabNine/TabNine.toml.bak
 #fi
@@ -206,19 +216,19 @@ ln -s ~/mine/vimfiles/universal_ctags_config ~/.ctags
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
-#if [ -f ~/.gitconfig ]
+#if [[ -f ~/.gitconfig ]]
 #then
 #mv ~/.gitconfig ~/.gitconfig.bak
 #fi
 #ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
-#if [ -f ~/.globalrc ]
+#if [[ -f ~/.globalrc ]]
 #then
 #mv ~/.globalrc ~/.globalrc.bak
 #fi
 #ln -s ~/mine/vimfiles/globalrc ~/..globalrc
 
-#if [ -f ~/.agignore ]
+#if [[ -f ~/.agignore ]]
 #then
 #mv ~/.agignore ~/.agignore.bak
 #fi
@@ -264,8 +274,8 @@ echo Complete
 #proxychains https://github.com/rofl0r/proxychains-ng.git
 #./configure --prefix=/usr --sysconfdir=/etc
 #make
-#[optional] sudo make install
-#[optional] sudo make install-config (installs proxychains.conf)
+#[[optional]] sudo make install
+#[[optional]] sudo make install-config (installs proxychains.conf)
 #////////////////////////////////////////////////////////////////////
 # http://goushi.me/navigation-in-vim/
 #Replace Exuberant Ctags by Universal Ctags.
@@ -288,21 +298,21 @@ echo Complete
 #sudo make install
 
 #Generate tag files automatically by Gutentags.
-#let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-#let g:gutentags_exclude_project_root = [expand('~/.vim')]
+#let g:gutentags_project_root = [['.root', '.svn', '.git', '.hg', '.project']]
+#let g:gutentags_exclude_project_root = [[expand('~/.vim')]]
 #let g:gutentags_cache_dir = expand('~/.cache/gutentags')
 
-#let g:gutentags_modules = []
+#let g:gutentags_modules = [[]]
 #if executable('ctags')
-#let g:gutentags_modules += ['ctags']
+#let g:gutentags_modules += [['ctags']]
 #endif
 #if executable('gtags-cscope') && executable('gtags')
-#let g:gutentags_modules += ['gtags_cscope']
+#let g:gutentags_modules += [['gtags_cscope']]
 #endif
 
 #" Universal Ctags support Wildcard in options.
-#let g:gutentags_ctags_extra_args = ['--fields=*', '--extras=*', '--all-kinds=*']
-#let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+#let g:gutentags_ctags_extra_args = [['--fields=*', '--extras=*', '--all-kinds=*']]
+#let g:gutentags_ctags_extra_args += [['--output-format=e-ctags']]
 
 #" If built-in parser exists for the target, it is used.
 #" Else if pygments parser exists it is used.

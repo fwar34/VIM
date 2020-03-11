@@ -180,14 +180,6 @@ fi
 
 alias cs='emacs -nw'
 
-if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
-    alias cdc="cd /mnt/c/" 
-    alias cdd="cd /mnt/d/" 
-    alias cde="cd /mnt/e/" 
-    alias cdf="cd /mnt/f/" 
-    alias cdg="cd /mnt/g/" 
-fi
-
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
 #if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
@@ -365,32 +357,6 @@ compdef cheat=man
 #ncdu
 alias ncdu='ncdu --color dark -rr -x'
 
-# set DISPLAY variable to the IP automatically assigned to WSL2
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-
-alias vxemacs='
-#export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-setsid emacs
-'
-
-alias vxterm='
-#export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-setsid xfce4-terminal
-'
-
-alias vxidea='
-#export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-setsid idea
-'
-
-alias vxecli='
-#export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-setsid eclipse
-'
 
 alias gproxy_http="git config --global http.proxy http://127.0.0.1:1080"
 alias gproxy_socks="git config --global http.proxy socks5://127.0.0.1:1080"
@@ -420,11 +386,53 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
+###WSL####################################################################
+export LC_CTYPE=zh_CN.UTF-8
+export LANG="zh_CN.UTF-8"
+export LC_ALL="zh_CN.UTF-8"
+
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+
 if [[ "$(umask)" == '000' ]]; then
     umask 022
 fi
-#export LC_CTYPE="zh_CN.utf8"
 
 export DOCKER_HOST=tcp://localhost:2375
+
+if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
+    alias cdc="cd /mnt/c/" 
+    alias cdd="cd /mnt/d/" 
+    alias cde="cd /mnt/e/" 
+    alias cdf="cd /mnt/f/" 
+    alias cdg="cd /mnt/g/" 
+fi
+
+# set DISPLAY variable to the IP automatically assigned to WSL2
+# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+
+alias vxemacs='
+#export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid emacs
+'
+
+alias vxterm='
+#export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid xfce4-terminal
+'
+
+alias vxidea='
+#export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid idea
+'
+
+alias vxecli='
+#export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+setsid eclipse
+'
+###WSL####################################################################
+

@@ -417,11 +417,11 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
-#export DISPLAY=:0.0
-#export LIBGL_ALWAYS_INDIRECT=1
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
 if [[ "$(umask)" == '000' ]]; then
     umask 022
 fi
 #export LC_CTYPE="zh_CN.utf8"
 
-#export DOCKER_HOST=tcp://localhost:2375
+export DOCKER_HOST=tcp://localhost:2375

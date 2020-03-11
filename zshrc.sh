@@ -191,7 +191,7 @@ fi
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
 #if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
-if [ $(head -1 /etc/os-release|awk -F\" '{print $2}') = 'elementary' ]; then
+if [ "$(head -1 /etc/os-release|awk -F\" '{print $2}')" = 'elementary' ]; then
     alias emacs="XLIB_SKIP_ARGB_VISUALS=1 emacs"
 fi
 

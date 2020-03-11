@@ -63,7 +63,7 @@ if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]
 	    silversearcher-ag python3-pip cmake autoconf pkg-config
 elif [[ ${os} = 'ManjaroLinux' ]] || [[ ${os} = 'Arch Linux' ]]; then
     sudo pacman -S curl wget zsh tmux autojump global fzf the_silver_searcher \
-	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr
+	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then

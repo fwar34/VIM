@@ -400,7 +400,7 @@ fi
 
 export DOCKER_HOST=tcp://localhost:2375
 
-if [ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]; then
+if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
     alias cdc="cd /mnt/c/" 
     alias cdd="cd /mnt/d/" 
     alias cde="cd /mnt/e/" 

@@ -412,25 +412,25 @@ fi
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 alias vxemacs='
-#export DISPLAY=:0.0
+export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 setsid emacs
 '
 
 alias vxterm='
-#export DISPLAY=:0.0
+export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 setsid xfce4-terminal
 '
 
 alias vxidea='
-#export DISPLAY=:0.0
+export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 setsid idea
 '
 
 alias vxecli='
-#export DISPLAY=:0.0
+export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 setsid eclipse
 '

@@ -396,6 +396,9 @@ alias gproxy_http="git config --global http.proxy http://127.0.0.1:1080"
 alias gproxy_socks="git config --global http.proxy socks5://127.0.0.1:1080"
 alias gunproxy="git config --global --unset http.proxy && git config --global --unset https.proxy"
 
+alias ppush="proxychains4 git push"
+alias ppull="proxychains4 git pull"
+
 #thefuck https://github.com/nvbn/thefuck
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:

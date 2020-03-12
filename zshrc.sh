@@ -395,7 +395,7 @@ export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 # 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动
 # Emacs 时将 LC_CTYPE 设为 zh_CN.UTF-8. 终端下并不会遇到此现象，因为输入法会交给终端程序处理。 
 
-OS_NAME=$(head -1 /etc/os-release|awk -F\" '{pirnt $2}')
+OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
 OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 
 # for wsl docker build

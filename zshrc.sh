@@ -178,7 +178,9 @@ fi
 #    fi
 #fi
 
+
 alias cs='emacs -nw'
+
 
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
@@ -389,6 +391,10 @@ export PATH=$PATH:$MAVEN_HOME/bin
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
+# https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+# 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动
+# Emacs 时将 LC_CTYPE 设为 zh_CN.UTF-8. 终端下并不会遇到此现象，因为输入法会交给终端程序处理。 
+
 #export LC_CTYPE=zh_CN.UTF-8
 #export LANG="zh_CN.UTF-8"
 #export LC_ALL="zh_CN.UTF-8"
@@ -413,15 +419,25 @@ fi
 # set DISPLAY variable to the IP automatically assigned to WSL2
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
+# https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+# 1. 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动
+# Emacs 时将 LC_CTYPE 设为 zh_CN.UTF-8. 终端下并不会遇到此现象，因为输入法会交给终端程序处理。 
+# 2. 而且必须设置fcitx的3个环境变量:
+# export GTK_IM_MODULE=fcitx
+# export QT_IM_MODULE=fcitx
+# export XMODIFIERS=@im=fcitx
+
 alias vxemacs='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+export LC_CTYPE=zh_CN.UTF-8
 setsid emacs
 '
 
 alias vxterm='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+export LC_CTYPE=zh_CN.UTF-8
 setsid xfce4-terminal
 '
 
@@ -438,3 +454,6 @@ setsid eclipse
 '
 ###WSL####################################################################
 
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx

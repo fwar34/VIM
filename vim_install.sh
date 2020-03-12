@@ -62,7 +62,7 @@ if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]
     sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
 	    silversearcher-ag python3-pip cmake autoconf pkg-config
 elif [[ ${os} = 'ManjaroLinux' ]] || [[ ${os} = 'Arch Linux' ]]; then
-    sudo pacman -S curl wget zsh tmux autojump global fzf the_silver_searcher \
+    sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
 	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
 fi
 
@@ -162,11 +162,17 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && [[ ! -f /usr/bin/proxychains
     sudo make install-config
 fi
 
-if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && [[ -f /usr/local/bin/ctags ]]; then
+CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
+
+if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && [[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
-    cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
+    if [[ -f /usr/local/bin/ctags ]]; then
+        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
+    else
+        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/bin/ctags && make -j 4
+    fi
     if [[ $? -eq 0 ]]; then
         sudo make install
     else

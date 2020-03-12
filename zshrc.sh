@@ -390,6 +390,9 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
+# export LC_CTYPE=zh_CN.UTF-8
+# export LANG="zh_CN.UTF-8"
+# export LC_ALL="zh_CN.UTF-8"
 ###WSL####################################################################
 # https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 # 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动
@@ -400,9 +403,7 @@ OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 
 # for wsl docker build
 if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
-    export LC_CTYPE=zh_CN.UTF-8
-    export LANG="zh_CN.UTF-8"
-    export LC_ALL="zh_CN.UTF-8"
+    export LANG="C.UTF-8"
 fi
 
 export DISPLAY=:0.0

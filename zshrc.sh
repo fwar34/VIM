@@ -403,7 +403,8 @@ OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 
 # for wsl docker build
 if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
-    export LANG="C.UTF-8"
+    export LANG="zh_CN.utf8"
+    export LC_ALL=
 fi
 
 export DISPLAY=:0.0

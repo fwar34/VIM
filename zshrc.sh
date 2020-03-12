@@ -362,6 +362,8 @@ alias gproxy_http="git config --global http.proxy http://127.0.0.1:1080"
 alias gproxy_socks="git config --global http.proxy socks5://127.0.0.1:1080"
 alias gunproxy="git config --global --unset http.proxy && git config --global --unset https.proxy"
 
+alias pc="proxychains4"
+alias pclone="proxychains4 git clone"
 alias ppush="proxychains4 git push"
 alias ppull="proxychains4 git pull"
 

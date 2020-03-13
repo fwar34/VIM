@@ -94,7 +94,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export LANG=en_US.utf-8
+# export LANG=en_US.utf-8
 
 #https://blog.csdn.net/gengli2017/article/details/82917827
 #https://blog.csdn.net/yangyiwxl/article/details/72865371
@@ -391,6 +391,8 @@ export PATH=$PATH:$MAVEN_HOME/bin
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
+CN_CODE=zh_CN.utf8
+EN_CODE=en_US.utf8
 
 OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
 OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
@@ -398,10 +400,9 @@ OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 # for wsl docker build
 if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
     export LC_ALL=
-    export LANG=zh_CN.utf8
-    #export LANGUAGE=zh_CN.utf8
-    #export LC_MESSAGES=zh_CN.utf8
-    #export LC_CTYPE=zh_CN.utf8
+    #export LANG=${CN_CODE}
+    export LANG=${EN_CODE}
+    export LC_CTYPE=${CN_CODE}
 else #其他正常的linux
     export LC_ALL=
     export LANG=${EN_CODE}
@@ -428,8 +429,6 @@ export DOCKER_HOST=tcp://localhost:2375
 # export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
 
-CN_CODE=zh_CN.utf8
-EN_CODE=en_US.utf8
 
 alias vxemacs='
 export DISPLAY=:0.0

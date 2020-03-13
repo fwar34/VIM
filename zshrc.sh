@@ -72,6 +72,31 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+#####################################################################################
+# 这个代码块放到最前面
+OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
+OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
+
+CN_CODE=zh_CN.utf8
+EN_CODE=en_US.utf8
+
+# for wsl docker build
+if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
+    export LC_ALL=
+    export LANG=${EN_CODE}
+    #export LANGUAGE=zh_CN.utf8
+    #export LC_MESSAGES=zh_CN.utf8
+    export LC_CTYPE=${CN_CODE}
+else #其他正常的linux
+    export LC_ALL=
+    export LANG=${EN_CODE}
+    export LC_CTYPE=${CN_CODE}
+fi
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+#####################################################################################
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -94,7 +119,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export LANG=en_US.utf-8
+#export LANG=en_US.utf-8
 
 #https://blog.csdn.net/gengli2017/article/details/82917827
 #https://blog.csdn.net/yangyiwxl/article/details/72865371
@@ -391,23 +416,6 @@ export PATH=$PATH:$MAVEN_HOME/bin
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
-
-OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
-OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
-
-# for wsl docker build
-if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
-    export LC_ALL=
-    export LANG=zh_CN.utf8
-    #export LANGUAGE=zh_CN.utf8
-    #export LC_MESSAGES=zh_CN.utf8
-    #export LC_CTYPE=zh_CN.utf8
-else #其他正常的linux
-    export LC_ALL=
-    export LANG=${EN_CODE}
-    export LC_CTYPE=${CN_CODE}
-fi
-
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
 
@@ -428,43 +436,17 @@ export DOCKER_HOST=tcp://localhost:2375
 # export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
 
-CN_CODE=zh_CN.utf8
-EN_CODE=en_US.utf8
+alias vxemacs='setsid emacs'
+alias vxterm='setsid xfce4-terminal'
+alias vxidea='setsid idea'
+alias vxecli='setsid eclipse'
 
-alias vxemacs='
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE=${CN_CODE}
-setsid emacs
-'
-alias vxterm='
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE=${CN_CODE}
-setsid xfce4-terminal
-'
-alias vxidea='
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE={CN_CODE}
-setsid idea
-'
-alias vxecli='
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE=${CN_CODE}
-setsid eclipse
-'
 if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
-    alias cdc="cd /mnt/c/" 
-    alias cdd="cd /mnt/d/" 
-    alias cde="cd /mnt/e/" 
-    alias cdf="cd /mnt/f/" 
-    alias cdg="cd /mnt/g/" 
+    alias cdc="cd /c/" 
+    alias cdd="cd /d/" 
+    alias cde="cd /e/" 
+    alias cdf="cd /f/" 
+    alias cdg="cd /g/" 
 fi
 ###WSL####################################################################
 
-
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx

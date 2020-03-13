@@ -74,6 +74,9 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 #####################################################################################
 # 这个代码块放到最前面
+export DISPLAY=:0.0
+export LIBGL_ALWAYS_INDIRECT=1
+
 OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
 OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 
@@ -119,7 +122,7 @@ export XMODIFIERS=@im=fcitx
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#export LANG=en_US.utf-8
+# export LANG=en_US.utf-8
 
 #https://blog.csdn.net/gengli2017/article/details/82917827
 #https://blog.csdn.net/yangyiwxl/article/details/72865371
@@ -416,8 +419,6 @@ export PATH=$PATH:$MAVEN_HOME/bin
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
 
 if [[ "$(umask)" == '000' ]]; then
     umask 022

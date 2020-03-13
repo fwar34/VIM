@@ -390,13 +390,7 @@ export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
-# export LC_CTYPE=zh_CN.UTF-8
-# export LANG="zh_CN.UTF-8"
-# export LC_ALL="zh_CN.UTF-8"
 ###WSL####################################################################
-# https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
-# 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动
-# Emacs 时将 LC_CTYPE 设为 zh_CN.UTF-8. 终端下并不会遇到此现象，因为输入法会交给终端程序处理。 
 
 OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
 OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
@@ -404,10 +398,14 @@ OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
 # for wsl docker build
 if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
     export LC_ALL=
-    export LANG=en_US.utf8
+    export LANG=zh_CN.utf8
     #export LANGUAGE=zh_CN.utf8
     #export LC_MESSAGES=zh_CN.utf8
-    export LC_CTYPE=zh_CN.utf8
+    #export LC_CTYPE=zh_CN.utf8
+else #其他正常的linux
+    export LC_ALL=
+    export LANG=${EN_CODE}
+    export LC_CTYPE=${CN_CODE}
 fi
 
 export DISPLAY=:0.0
@@ -418,14 +416,6 @@ if [[ "$(umask)" == '000' ]]; then
 fi
 
 export DOCKER_HOST=tcp://localhost:2375
-
-if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
-    alias cdc="cd /mnt/c/" 
-    alias cdd="cd /mnt/d/" 
-    alias cde="cd /mnt/e/" 
-    alias cdf="cd /mnt/f/" 
-    alias cdg="cd /mnt/g/" 
-fi
 
 # set DISPLAY variable to the IP automatically assigned to WSL2
 # export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
@@ -438,32 +428,42 @@ fi
 # export QT_IM_MODULE=fcitx
 # export XMODIFIERS=@im=fcitx
 
+CN_CODE=zh_CN.utf8
+EN_CODE=en_US.utf8
+
 alias vxemacs='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE=zh_CN.UTF-8
+export LC_CTYPE=${CN_CODE}
 setsid emacs
 '
-
 alias vxterm='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
-export LC_CTYPE=zh_CN.UTF-8
+export LC_CTYPE=${CN_CODE}
 setsid xfce4-terminal
 '
-
 alias vxidea='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+export LC_CTYPE={CN_CODE}
 setsid idea
 '
-
 alias vxecli='
 export DISPLAY=:0.0
 export LIBGL_ALWAYS_INDIRECT=1
+export LC_CTYPE=${CN_CODE}
 setsid eclipse
 '
+if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
+    alias cdc="cd /mnt/c/" 
+    alias cdd="cd /mnt/d/" 
+    alias cde="cd /mnt/e/" 
+    alias cdf="cd /mnt/f/" 
+    alias cdg="cd /mnt/g/" 
+fi
 ###WSL####################################################################
+
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx

@@ -60,8 +60,19 @@ fi
 #if [[ "${os}" = 'MSYS' -o "${os}" = 'CYGWIN' ]]
 #if [[ "${os}" = 'MSYS' ]] || [[ "${os}" = 'CYGWIN' ]]
 if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary" ]]; then
+    VERSION_ID=$(cat /etc/os-release|grep VERSION_ID|awk -F= '{print $2}')
+    if [[ ${VERSION_ID} == "14.04" ]] && [[ ${os} == "ubuntu" ]]; then
+        git clone https://github.com/ggreer/the_silver_searcher ~/${DOWNLOADS_NAME}/ag
+        if [[ $? -eq 0 ]]; then
+            cd ~/${DOWNLOADS_NAME}/ag && ./build.sh && sudo make install
+        else
+            echo "install ag failed!"
+        fi
+    else
+        sudo silversearcher-ag
+    fi
     sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
-	    silversearcher-ag python3-pip cmake autoconf pkg-config
+         python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
 	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip

@@ -49,11 +49,11 @@ if [[ ! -d ~/.emacs.d ]]; then
 fi
 
 if [[ ! -d ~/.config ]]; then
-mkdir -p ~/.config
+    mkdir -p ~/.config
 fi
 
 if [[ ! -d ~/.config/nvim ]]; then
-ln -s ~/mine/nvim ~/.config/nvim
+    ln -s ~/mine/nvim ~/.config/nvim
 fi
 
 #if test "${os}" = 'MSYS' -o "${os}" = 'CYGWIN'
@@ -61,7 +61,7 @@ fi
 #if [[ "${os}" = 'MSYS' ]] || [[ "${os}" = 'CYGWIN' ]]
 if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary" ]]; then
     VERSION_ID=$(cat /etc/os-release|grep VERSION_ID|awk -F= '{print $2}')
-    if [[ ${VERSION_ID} == "14.04" ]] && [[ ${os} == "ubuntu" ]]; then
+    if [[ ${VERSION_ID} == "14.04" ]] && [[ ${os} == "ubuntu" ]] && [[ ! -d ~/{DOWNLOADS_NAME}/ag ]]; then
         git clone https://github.com/ggreer/the_silver_searcher ~/${DOWNLOADS_NAME}/ag
         if [[ $? -eq 0 ]]; then
             cd ~/${DOWNLOADS_NAME}/ag && ./build.sh && sudo make install
@@ -75,7 +75,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
          python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
-	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
+         thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
@@ -98,48 +98,48 @@ function install_my_bin()
         #install fd
         if [[ ! -f /usr/bin/fd ]]; then
             wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
-	    if [[ $? -eq 0 ]]; then
-		    sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
-		    rm ~/bin/fd_7.2.0_amd64.deb
-	    else
-		    echo "error: rm ~/bin/fd_7.2.0_amd64.deb"
-	    fi
+            if [[ $? -eq 0 ]]; then
+                sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
+                rm ~/bin/fd_7.2.0_amd64.deb
+            else
+                echo "error: rm ~/bin/fd_7.2.0_amd64.deb"
+            fi
         fi
     fi
 
     #install tldr
     if [[ ! -f ~/bin/tldr ]] && [[ ! -f /usr/bin/tldr ]] && \
-	    [[ ${os} != 'arch' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
+           [[ ${os} != 'arch' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
         curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
-	if [[ $? -eq 0 ]]; then
-		chmod +x ~/bin/tldr
-	else
-		echo "error: tldr did not exist"
-	fi
+        if [[ $? -eq 0 ]]; then
+            chmod +x ~/bin/tldr
+        else
+            echo "error: tldr did not exist"
+        fi
     fi
 
     if [[  ${os} != 'ManjaroLinux' ]] && [[ ${os} != "arch" ]]; then
         #install bat
         if [[ ! -f /usr/bin/bat ]]; then
             wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb \
-		    -O ~/bin/bat_0.8.0_amd64.deb
-		if [[ $? -eq 0 ]]; then
-			sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
-			rm ~/bin/bat_0.8.0_amd64.deb
-		else
-			echo "error: rm ~/bin/bat_0.8.0_amd64.deb"
-		fi
+                 -O ~/bin/bat_0.8.0_amd64.deb
+            if [[ $? -eq 0 ]]; then
+                sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
+                rm ~/bin/bat_0.8.0_amd64.deb
+            else
+                echo "error: rm ~/bin/bat_0.8.0_amd64.deb"
+            fi
         fi
     fi
 
     #install jq
     if [[ ! -f ~/bin/jq ]] && [[ ! -f /usr/bin/jq ]]; then
         wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
-	if [[ $? -eq 0 ]]; then
-		chmod +x ~/bin/jq
-	else
-		echo "error: chmod +x ~/bin/jq"
-	fi
+        if [[ $? -eq 0 ]]; then
+            chmod +x ~/bin/jq
+        else
+            echo "error: chmod +x ~/bin/jq"
+        fi
     fi
 
     ln -sf ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
@@ -148,12 +148,12 @@ function install_my_bin()
     #https://github.com/xwjdsh/manssh
     if [[ ! -f ~/bin/man ]]; then
         wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1\
-		/manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
-	if [[ $? -eq 0 ]]; then
-		tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
-	else
-		echo "error: ar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/"
-	fi
+             /manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
+        if [[ $? -eq 0 ]]; then
+            tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
+        else
+            echo "error: ar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/"
+        fi
     fi
 }
 install_my_bin
@@ -162,27 +162,48 @@ function bash_snippets()
 {
     if [[ ! -d ~/mine/Bash-Snippets ]]; then
         git clone https://github.com/alexanderepstein/Bash-Snippets ~/mine/Bash-Snippets
-	if [[ $? -eq 0 ]]; then
-		cd ~/mine/Bash-Snippets
-		git checkout v1.22.0
-		sudo ./install.sh all
-	else
-		echo "error: Bash-Snippets"
-	fi
+        if [[ $? -eq 0 ]]; then
+            cd ~/mine/Bash-Snippets
+            git checkout v1.22.0
+            sudo ./install.sh all
+        else
+            echo "error: Bash-Snippets"
+        fi
     fi
 }
 #bash_snippets
 
+#build emacs-26 with x
+#https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz
+#https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
+#sudo apt install build-essential automake texinfo libjpeg-dev libncurses5-dev
+#sudo apt install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
+#./configure --with-mailutils --with-modules
+
+#build emacs-26 without x
+# sudo apt install libgnutls28-dev
+#./configure --without-x --with-mailutils --with-modules
+if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]]; then
+    wget https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz -O ~/${DOWNLOADS_NAME}/emacs-26.3.tar.gz
+    if [[ $? -eq 0 ]]; then
+        sudo apt install build-essential automake texinfo libjpeg-dev libncurses5-dev
+        sudo apt install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
+        cd ~/${DOWNLOADS_NAME}/emacs-26.3
+        ./configure --with-mailutils --with-modules      
+        make -j 8 && sudo make install
+    fi
+fi
+
 CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
 
 if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
-	[[ ${os} != 'arch' ]] && \
-	[[ ${os} != 'ManjaroLinux' ]] && \
-	[[ ${CTAGS_FLAG} -ne 2 ]]; then
+       [[ ${os} != 'arch' ]] && \
+       [[ ${os} != 'ManjaroLinux' ]] && \
+       [[ ${CTAGS_FLAG} -ne 2 ]]; then
     git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
     cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
-    ./configure
+    ./configure --prefix=/usr
     make -j 4
     if [[ $? -eq 0 ]]; then
         sudo make install
@@ -198,12 +219,12 @@ fi
 #[[optional]] sudo make install
 #[[optional]] sudo make install-config (installs proxychains.conf)
 if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
-	[[ ! -f /usr/bin/proxychains4 ]] && \
-	[[ ! -f /usr/local/bin/proxychains4 ]] && 
-	[[ ${os} != 'arch' ]] && \
-	[[ ${os} != 'ManjaroLinux' ]] && \
-	[[ ! -f /usr/bin/ctags ]] && \
-	[[ ${CTAGS_FLAG} -ne 2 ]]; then
+       [[ ! -f /usr/bin/proxychains4 ]] && \
+       [[ ! -f /usr/local/bin/proxychains4 ]] && 
+       [[ ${os} != 'arch' ]] && \
+           [[ ${os} != 'ManjaroLinux' ]] && \
+           [[ ! -f /usr/bin/ctags ]] && \
+           [[ ${CTAGS_FLAG} -ne 2 ]]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc
@@ -213,7 +234,7 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
 fi
 
 if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && \
-	[[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
+       [[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
@@ -264,7 +285,7 @@ ln -s ~/mine/vimfiles/universal_ctags_config ~/.ctags
 
 #if [[ -f ~/.config/TabNine/TabNine.toml ]]
 #then
-    #mv ~/.config/TabNine/TabNine.toml ~/.config/TabNine/TabNine.toml.bak
+#mv ~/.config/TabNine/TabNine.toml ~/.config/TabNine/TabNine.toml.bak
 #fi
 #ln -s ~/mine/vimfiles/TabNine/TabNine.toml.ccls ~/.config/TabNine/TabNine.toml
 
@@ -272,7 +293,7 @@ ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
 if [[ -f ~/.gitconfig ]]; then
-mv ~/.gitconfig ~/.gitconfig.bak
+    mv ~/.gitconfig ~/.gitconfig.bak
 fi
 ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
@@ -294,23 +315,24 @@ echo Complete
 
 #support python2
 #--enable-pythoninterp=yes \
-#--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
+    #--with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
 
 #build vim
 # https://github.com/vim/vim.git
 #./configure --with-features=huge \
-#--enable-multibyte \
-#--enable-rubyinterp=yes \
-#--enable-python3interp=yes \
-#--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
-#--enable-perlinterp=yes \
-#--enable-luainterp=yes \
-#--enable-cscope
+    #--enable-multibyte \
+    #--enable-rubyinterp=yes \
+    #--enable-python3interp=yes \
+    #--with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
+    #--enable-perlinterp=yes \
+    #--enable-luainterp=yes \
+    #--enable-cscope
 
 #build emacs-26 with x
+#https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz
 #https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
 #sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
-#    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
+    #    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
 #./configure --with-mailutils --with-modules
 
 #build emacs-26 without x

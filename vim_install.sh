@@ -9,10 +9,11 @@
 #    #os=$(MSYSTEM) #just define in msys
 #    os=$(uname -a|awk -F_ '{print $1}')
 #fi
-os=$(head -1 /etc/os-release|awk -F\" '{print $2}')
+#os=$(head -1 /etc/os-release|awk -F\" '{print $2}')
+os=$(cat /etc/os-release|grep -E "\bID="|awk -F= '{print $2}')
 echo ${os}
 
-#if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]]; then
+#if [[ ${os} = "ubuntu" ]] || [[ ${os} = "debian" ]] || [[ ${os} = "elementary" ]]; then
 #	echo $os
 #fi
 #
@@ -58,10 +59,10 @@ fi
 #if test "${os}" = 'MSYS' -o "${os}" = 'CYGWIN'
 #if [[ "${os}" = 'MSYS' -o "${os}" = 'CYGWIN' ]]
 #if [[ "${os}" = 'MSYS' ]] || [[ "${os}" = 'CYGWIN' ]]
-if [[ ${os} = "Ubuntu" ]] || [[ ${os} = "Debian" ]] || [[ ${os} = "elementary" ]]; then
+if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary" ]]; then
     sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
 	    silversearcher-ag python3-pip cmake autoconf pkg-config
-elif [[ ${os} = 'ManjaroLinux' ]] || [[ ${os} = 'Arch Linux' ]]; then
+elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
 	    thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
 fi
@@ -76,49 +77,72 @@ function install_my_bin()
         mkdir ~/bin
     fi
 
+    DIFF_URL="https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" 
     #install diff-so-fancy
     if [[ ! -f ~/bin/diff-so-fancy ]] && [[ ! -f /usr/bin/diff-so-fancy ]]; then
-        wget "https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy" -O ~/bin/diff-so-fancy
-        chmod +x ~/bin/diff-so-fancy
+        wget ${DIFF_URL} -O ~/bin/diff-so-fancy && chmod +x ~/bin/diff-so-fancy
     fi
 
-    if [[ ${os} != 'ManjaroLinux' ]] && [[ ${os} != 'Arch Linux' ]]; then
+    if [[ ${os} != 'ManjaroLinux' ]] && [[ ${os} != 'arch' ]]; then
         #install fd
         if [[ ! -f /usr/bin/fd ]]; then
             wget https://github.com/sharkdp/fd/releases/download/v7.2.0/fd_7.2.0_amd64.deb -O ~/bin/fd_7.2.0_amd64.deb
-            sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
-            rm ~/bin/fd_7.2.0_amd64.deb
+	    if [[ $? -eq 0 ]]; then
+		    sudo dpkg -i ~/bin/fd_7.2.0_amd64.deb
+		    rm ~/bin/fd_7.2.0_amd64.deb
+	    else
+		    echo "error: rm ~/bin/fd_7.2.0_amd64.deb"
+	    fi
         fi
     fi
 
     #install tldr
-    if [[ ! -f ~/bin/tldr ]] && [[ ! -f /usr/bin/tldr ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
+    if [[ ! -f ~/bin/tldr ]] && [[ ! -f /usr/bin/tldr ]] && \
+	    [[ ${os} != 'arch' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
         curl -o ~/bin/tldr https://raw.githubusercontent.com/raylee/tldr/master/tldr
-        chmod +x ~/bin/tldr
+	if [[ $? -eq 0 ]]; then
+		chmod +x ~/bin/tldr
+	else
+		echo "error: tldr did not exist"
+	fi
     fi
 
-    if [[  ${os} != 'ManjaroLinux' ]] && [[ ${os} != 'Arch Linux' ]]; then
+    if [[  ${os} != 'ManjaroLinux' ]] && [[ ${os} != "arch" ]]; then
         #install bat
         if [[ ! -f /usr/bin/bat ]]; then
-            wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb -O ~/bin/bat_0.8.0_amd64.deb
-            sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
-            rm ~/bin/bat_0.8.0_amd64.deb
+            wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb \
+		    -O ~/bin/bat_0.8.0_amd64.deb
+		if [[ $? -eq 0 ]]; then
+			sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
+			rm ~/bin/bat_0.8.0_amd64.deb
+		else
+			echo "error: rm ~/bin/bat_0.8.0_amd64.deb"
+		fi
         fi
     fi
 
     #install jq
     if [[ ! -f ~/bin/jq ]] && [[ ! -f /usr/bin/jq ]]; then
         wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
-        chmod +x ~/bin/jq
+	if [[ $? -eq 0 ]]; then
+		chmod +x ~/bin/jq
+	else
+		echo "error: chmod +x ~/bin/jq"
+	fi
     fi
 
-    ln -s ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
+    ln -sf ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
 
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh
     if [[ ! -f ~/bin/man ]]; then
-        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1/manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
-        tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
+        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1\
+		/manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
+	if [[ $? -eq 0 ]]; then
+		tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
+	else
+		echo "error: ar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/"
+	fi
     fi
 }
 install_my_bin
@@ -127,14 +151,23 @@ function bash_snippets()
 {
     if [[ ! -d ~/mine/Bash-Snippets ]]; then
         git clone https://github.com/alexanderepstein/Bash-Snippets ~/mine/Bash-Snippets
-        cd ~/mine/Bash-Snippets
-        git checkout v1.22.0
-        sudo ./install.sh all
+	if [[ $? -eq 0 ]]; then
+		cd ~/mine/Bash-Snippets
+		git checkout v1.22.0
+		sudo ./install.sh all
+	else
+		echo "error: Bash-Snippets"
+	fi
     fi
 }
 #bash_snippets
 
-if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
+CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
+
+if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
+	[[ ${os} != 'arch' ]] && \
+	[[ ${os} != 'ManjaroLinux' ]] && \
+	[[ ${CTAGS_FLAG} -ne 2 ]]; then
     git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
     cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
@@ -153,7 +186,13 @@ fi
 #make
 #[[optional]] sudo make install
 #[[optional]] sudo make install-config (installs proxychains.conf)
-if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && [[ ! -f /usr/bin/proxychains4 ]] && [[ ! -f /usr/local/bin/proxychains4 ]] && [[ ${os} != 'Arch Linux' ]] && [[ ${os} != 'ManjaroLinux' ]]; then
+if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
+	[[ ! -f /usr/bin/proxychains4 ]] && \
+	[[ ! -f /usr/local/bin/proxychains4 ]] && 
+	[[ ${os} != 'arch' ]] && \
+	[[ ${os} != 'ManjaroLinux' ]] && \
+	[[ ! -f /usr/bin/ctags ]] && \
+	[[ ${CTAGS_FLAG} -ne 2 ]]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc
@@ -162,9 +201,8 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && [[ ! -f /usr/bin/proxychains
     sudo make install-config
 fi
 
-CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
-
-if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && [[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
+if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && \
+	[[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
@@ -222,11 +260,10 @@ ln -s ~/mine/vimfiles/universal_ctags_config ~/.ctags
 ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
-#if [[ -f ~/.gitconfig ]]
-#then
-#mv ~/.gitconfig ~/.gitconfig.bak
-#fi
-#ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+if [[ -f ~/.gitconfig ]]; then
+mv ~/.gitconfig ~/.gitconfig.bak
+fi
+ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
 #if [[ -f ~/.globalrc ]]
 #then
@@ -359,3 +396,13 @@ echo Complete
 #➔ pacman -Sc：清理未安装的包文件，包文件位于 /var/cache/pacman/pkg/ 目录。
 #➔ pacman -Scc：清理所有的缓存文件
 #////////////////////////////////////////////////////////////////////
+# wsl 字体设置
+# 中文字体安装及中文配置
+# 安装字体管理包
+# sudo apt-get install --assume-yes fontconfig
+# 安装中文字体
+# sudo mkdir -p /usr/share/fonts/windows && sudo cp -r /c/Windows/Fonts/*.ttf /usr/share/fonts/windows/
+# 清除字体缓存
+# fc-cache
+# 生成中文环境
+# sudo locale-gen zh_CN.UTF-8

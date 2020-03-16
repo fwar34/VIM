@@ -297,6 +297,7 @@ echo Complete
 #--enable-cscope
 
 #build emacs-26 with x
+#https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz
 #https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
 #sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
 #    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev

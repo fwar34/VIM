@@ -162,6 +162,27 @@ function bash_snippets()
 }
 #bash_snippets
 
+#build emacs-26 with x
+#https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz
+#https://www.reddit.com/r/emacs/comments/7c0ry9/insall_emacs_27_from_source_ubuntu_1710_notes/
+#sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
+#    libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
+#./configure --with-mailutils --with-modules
+
+#build emacs-26 without x
+# sudo apt install libgnutls28-dev
+#./configure --without-x --with-mailutils --with-modules
+if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]]; then
+    wget https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz -O ~/${DOWNLOADS_NAME}/emacs.tar.gz
+    if [[ $? -eq 0 ]]; then
+        sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev \
+             libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
+        cd ~/${DOWNLOADS_NAME}/emacs
+        ./configure --with-mailutils --with-modules      
+        make -j 8 && sudo make install
+    fi
+fi
+
 CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
 
 if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
@@ -171,7 +192,7 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
     git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
     cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
-    ./configure
+    ./configure --prefix=/usr
     make -j 4
     if [[ $? -eq 0 ]]; then
         sudo make install
@@ -261,7 +282,7 @@ ln -sf ~/mine/vimfiles/_ideavimrc ~/.ideavimrc
 ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 
 if [[ -f ~/.gitconfig ]]; then
-mv ~/.gitconfig ~/.gitconfig.bak
+    mv ~/.gitconfig ~/.gitconfig.bak
 fi
 ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 

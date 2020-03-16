@@ -74,8 +74,18 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 #####################################################################################
 # 这个代码块放到最前面
-export DISPLAY=:0.0
-export LIBGL_ALWAYS_INDIRECT=1
+NAMESERVER_LINE_NUM=$(cat /etc/resolv.conf|grep nameserver|wc -l)
+if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
+    # wsl
+    export DISPLAY=:0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    export DOCKER_HOST=tcp://localhost:2375
+else
+    # wsl2
+    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+    export LIBGL_ALWAYS_INDIRECT=1
+    export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
+fi
 
 OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
 OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
@@ -419,15 +429,6 @@ export PATH=$PATH:$MAVEN_HOME/bin
 export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
-
-if [[ "$(umask)" == '000' ]]; then
-    umask 022
-fi
-
-export DOCKER_HOST=tcp://localhost:2375
-
-# set DISPLAY variable to the IP automatically assigned to WSL2
-# export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 
 # https://wiki.archlinux.org/index.php/Fcitx_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
 # 1. 当 LC_CTYPE 为英文时, 在 Emacs 上可能无法使用输入法。若遇到此情况，请在启动

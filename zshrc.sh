@@ -80,6 +80,9 @@ if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
     export DISPLAY=:0.0
     export LIBGL_ALWAYS_INDIRECT=1
     export DOCKER_HOST=tcp://localhost:2375
+elif [[ $(uname -n|grep esxi|wc -l) -eq 1 ]]; then
+    export DISPLAY=192.168.125.52:0.0
+    export LIBGL_ALWAYS_INDIRECT=1
 else
     # wsl2
     export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0

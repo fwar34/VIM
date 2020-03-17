@@ -173,11 +173,11 @@ function bash_snippets()
 # sudo apt install libgnutls28-dev
 #./configure --without-x --with-mailutils --with-modules
 if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]]; then
-    wget https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz -O ~/${DOWNLOADS_NAME}/emacs.tar.gz
+    wget https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz -O ~/${DOWNLOADS_NAME}/emacs-26.3.tar.gz
     if [[ $? -eq 0 ]]; then
         sudo apt install build-essential automake texinfo libjpeg-dev libncurses5-dev
         sudo apt install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev
-        cd ~/${DOWNLOADS_NAME}/emacs
+        cd ~/${DOWNLOADS_NAME}/emacs-26.3
         ./configure --with-mailutils --with-modules      
         make -j 8 && sudo make install
     fi

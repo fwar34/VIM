@@ -189,8 +189,9 @@ then
     alias config_gen='~/.vim/plugged/YCM-Generator/config_gen.py'
 fi
 
-if [ -f '/usr/local/bin/ctags' ]
-then
+if [[ $(/usr/bin/ctags --version|grep Universal|wc -l) -eq 2 ]]; then
+    alias ctags='/usr/bin/ctags'
+elif [ -f '/usr/local/bin/ctags' ]; then
     alias ctags='/usr/local/bin/ctags'
 fi
 

@@ -297,6 +297,9 @@ if [[ -f ~/.gitconfig ]]; then
 fi
 ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
 
+if [[ ! -d ~/.pip ]]; then
+    mkdir ~/.pip
+fi
 if [[ -f ~/.pip/pip.conf ]]; then
     mv ~/.pip/pip.conf ~/.pip/pip.conf.bak
 fi

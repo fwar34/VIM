@@ -194,12 +194,13 @@ if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]]; then
     fi
 fi
 
-CTAGS_FLAG=$(ctags --version|grep Universal|wc -l)
+BIN_CTAGS_FLAG=$(/usr/bin/ctags --version|grep Universal|wc -l)
+LOCAL_BIN_CTAGS_FLAG=$(/usr/local/bin/ctags --version|grep Universal|wc -l)
 
 if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
        [[ ${os} != 'arch' ]] && \
        [[ ${os} != 'ManjaroLinux' ]] && \
-       [[ ${CTAGS_FLAG} -ne 2 ]]; then
+       [[ ${BIN_CTAGS_FLAG} -ne 2 ]]; then
     git clone https://github.com/universal-ctags/ctags --depth 1 ~/${DOWNLOADS_NAME}/ctags
     cd ~/${DOWNLOADS_NAME}/ctags
     ./autogen.sh
@@ -220,11 +221,9 @@ fi
 #[[optional]] sudo make install-config (installs proxychains.conf)
 if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
        [[ ! -f /usr/bin/proxychains4 ]] && \
-       [[ ! -f /usr/local/bin/proxychains4 ]] && 
+       [[ ! -f /usr/local/bin/proxychains4 ]] && \
        [[ ${os} != 'arch' ]] && \
-           [[ ${os} != 'ManjaroLinux' ]] && \
-           [[ ! -f /usr/bin/ctags ]] && \
-           [[ ${CTAGS_FLAG} -ne 2 ]]; then
+       [[ ${os} != 'ManjaroLinux' ]]; then
     git clone https://github.com/rofl0r/proxychains-ng.git ~/${DOWNLOADS_NAME}/proxychains-ng
     cd ~/${DOWNLOADS_NAME}/proxychains-ng
     ./configure --prefix=/usr --sysconfdir=/etc

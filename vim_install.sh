@@ -69,7 +69,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
             echo "install ag failed!"
         fi
     else
-        sudo silversearcher-ag
+        sudo apt install silversearcher-ag
     fi
     sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
          python3-pip cmake autoconf pkg-config

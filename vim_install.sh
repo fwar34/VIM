@@ -234,13 +234,13 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
 fi
 
 if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && \
-       [[ -f /usr/local/bin/ctags ]] || [[ ${CTAGS_FLAG} -eq 2 ]]; then
+       [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]] || [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
     wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
     cd ~/${DOWNLOADS_NAME}/
     tar -zxvf global-6.6.3.tar.gz
-    if [[ -f /usr/local/bin/ctags ]]; then
+    if [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]]; then
         cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
-    else
+    elif [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
         cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/bin/ctags && make -j 4
     fi
     if [[ $? -eq 0 ]]; then

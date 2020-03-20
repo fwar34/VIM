@@ -163,7 +163,11 @@ then
     alias vi='TERM=xterm-256color /usr/local/bin/vim'
     alias vim='TERM=xterm-256color /usr/local/bin/vim'
 else
-    alias vi='TERM=xterm-256color vim'
+    if [[ -f "/usr/bin/nvim" ]]; then
+        alias vi="nvim"
+    else
+        alias vi='TERM=xterm-256color vim'
+    fi
 fi
 
 if [ -f '/usr/local/bin/emacs' ]

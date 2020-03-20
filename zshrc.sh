@@ -456,3 +456,5 @@ if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
 fi
 ###WSL####################################################################
 
+# for rust
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup

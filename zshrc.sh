@@ -74,20 +74,22 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 #####################################################################################
 # 这个代码块放到最前面
-NAMESERVER_LINE_NUM=$(cat /etc/resolv.conf|grep nameserver|wc -l)
-if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
-    # wsl
-    export DISPLAY=:0.0
-    export LIBGL_ALWAYS_INDIRECT=1
-    export DOCKER_HOST=tcp://localhost:2375
-elif [[ $(uname -n|grep esxi|wc -l) -eq 1 ]]; then
-    export DISPLAY=192.168.125.52:0.0
-    export LIBGL_ALWAYS_INDIRECT=1
-else
-    # wsl2
-    export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-    export LIBGL_ALWAYS_INDIRECT=1
-    export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
+if [[ $(uname -r|awk -F- '{print $3}') == "Microsoft" ]]; then
+    NAMESERVER_LINE_NUM=$(cat /etc/resolv.conf|grep nameserver|wc -l)
+    if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
+        # wsl
+        export DISPLAY=:0.0
+        export LIBGL_ALWAYS_INDIRECT=1
+        export DOCKER_HOST=tcp://localhost:2375
+    elif [[ $(uname -n|grep esxi|wc -l) -eq 1 ]]; then
+        export DISPLAY=192.168.125.52:0.0
+        export LIBGL_ALWAYS_INDIRECT=1
+    else
+        # wsl2
+        export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+        export LIBGL_ALWAYS_INDIRECT=1
+        export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
+    fi
 fi
 
 OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')

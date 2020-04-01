@@ -352,7 +352,7 @@ echo Complete
 #qrify short siteciphers stocks taste todo transfer weather youtube-viewer) jq ncdu htop bat tldr
 
 #常用命令
-#B)find grep awk sed tr xargs cat tail head less top cut nl strings(打印文件中可打印的文本)
+#B)find grep awk sed tr xargs cat tail head less top cut nl strings(打印文件中可打印的文本,可打印库或者执行文件) ldd
 
 #v2ray bash <(curl -L -s https://install.direct/go.sh)
 #proxychains https://github.com/rofl0r/proxychains-ng.git

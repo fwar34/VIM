@@ -351,7 +351,8 @@ echo Complete
 #A)thefuck Bash-Snippets(cheat cloudup crypt cryptocurrency currency geo lyrics meme movies newton 
 #qrify short siteciphers stocks taste todo transfer weather youtube-viewer) jq ncdu htop bat tldr
 
-#B)find grep awk sed tr xargs cat tail head less top cut nl
+#常用命令
+#B)find grep awk sed tr xargs cat tail head less top cut nl strings(打印文件中可打印的文本)
 
 #v2ray bash <(curl -L -s https://install.direct/go.sh)
 #proxychains https://github.com/rofl0r/proxychains-ng.git

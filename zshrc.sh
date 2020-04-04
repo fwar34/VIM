@@ -92,8 +92,10 @@ if [[ $(uname -r|awk -F- '{print $3}') == "Microsoft" ]]; then
     fi
 fi
 
-OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
-OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
+if [[ -f "/etc/os-release" ]]; then
+	OS_NAME=$(head -1 /etc/os-release|awk -F\" '{print $2}')
+	OS_VERSION=$(grep VERSION_ID /etc/os-release|awk -F\" '{print $2}')
+fi
 
 CN_CODE=zh_CN.utf8
 EN_CODE=en_US.utf8
@@ -233,7 +235,7 @@ alias cs='emacs -nw'
 #https://www.jianshu.com/p/006517cc260e
 #fix emacs gui not run in elementary
 #if [ $(lsb_release -i|cut -f2) = 'elementary' ]; then
-if [ "$(head -1 /etc/os-release|awk -F\" '{print $2}')" = 'elementary' ]; then
+if [[ -f "/etc/os-release" ]] && [ "$(head -1 /etc/os-release|awk -F\" '{print $2}')" = 'elementary' ]; then
     alias emacs="XLIB_SKIP_ARGB_VISUALS=1 emacs"
 fi
 
@@ -467,3 +469,6 @@ export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 #export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static 
 #export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
+# for brew
+export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles

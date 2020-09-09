@@ -183,7 +183,7 @@ function bash_snippets()
 #build emacs-26 without x
 # sudo apt install libgnutls28-dev
 #./configure --without-x --with-mailutils --with-modules
-if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]]; then
+if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]] && [[ ${VERSION_ID} == "14.04" ]]; then
     wget https://mirrors.tuna.tsinghua.edu.cn/gnu/emacs/emacs-26.3.tar.gz -O ~/${DOWNLOADS_NAME}/emacs-26.3.tar.gz
     if [[ $? -eq 0 ]]; then
         sudo apt install build-essential automake texinfo libjpeg-dev libncurses5-dev

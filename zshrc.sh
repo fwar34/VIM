@@ -74,7 +74,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 #####################################################################################
 # 这个代码块放到最前面
-if [[ $(uname -r|awk -F- '{print $3}') == "Microsoft" ]]; then
+if [[ $(uname -r|awk -F- '{print $2}') == "microsoft" ]]; then
     NAMESERVER_LINE_NUM=$(cat /etc/resolv.conf|grep nameserver|wc -l)
     if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
         # wsl
@@ -88,7 +88,7 @@ if [[ $(uname -r|awk -F- '{print $3}') == "Microsoft" ]]; then
         # wsl2
         export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
         export LIBGL_ALWAYS_INDIRECT=1
-        export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
+        #export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
     fi
 fi
 

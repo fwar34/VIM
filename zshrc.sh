@@ -482,3 +482,5 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 # https://www.zhihu.com/question/338022694
 alias proxyhon='export http_proxy=http://127.0.0.1:8123 https_proxy=http://127.0.0.1:8123'
 alias unproxyh='unset http_proxy https_proxy'
+
+alias rn='ranger'

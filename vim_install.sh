@@ -75,7 +75,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
          python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
-         thefuck tig cmake archlinuxcn/universal-ctags-git bat tldr python-pip
+         thefuck global tig cmake universal-ctags bat tldr python-pip
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
@@ -146,15 +146,15 @@ function install_my_bin()
 
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh
-    if [[ ! -f ~/bin/man ]]; then
-        wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1\
-             /manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
-        if [[ $? -eq 0 ]]; then
-            tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
-        else
-            echo "error: ar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/"
-        fi
-    fi
+    # if [[ ! -f ~/bin/man ]]; then
+    #     wget https://github.com/xwjdsh/manssh/releases/download/v0.5.1\
+    #          /manssh_0.5.1_linux_amd64.tar.gz -O ~/${DOWNLOADS_NAME}/manssh.tar.gz
+    #     if [[ $? -eq 0 ]]; then
+    #         tar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/
+    #     else
+    #         echo "error: ar -zxvf ~/${DOWNLOADS_NAME}/manssh.tar.gz -C ~/bin/"
+    #     fi
+    # fi
 }
 install_my_bin
 
@@ -232,23 +232,25 @@ if [[ ! -d ~/${DOWNLOADS_NAME}/proxychains-ng ]] && \
     sudo make install-config
 fi
 
-if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && \
-       [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]] || [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
-    wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
-    cd ~/${DOWNLOADS_NAME}/
-    tar -zxvf global-6.6.3.tar.gz
-    if [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]]; then
-        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
-    elif [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
-        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/bin/ctags && make -j 4
-    fi
-    if [[ $? -eq 0 ]]; then
-        sudo make install
-    else
-        echo "Compile global failed!!!!"
-        exit 1
-    fi
-fi
+#if [[ ! -f ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz ]] && \
+#       [[ ${os} != 'arch' ]] && \
+#       [[ ${os} != 'ManjaroLinux' ]] && \
+#       [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]] || [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
+#    wget http://tamacom.com/global/global-6.6.3.tar.gz -O ~/${DOWNLOADS_NAME}/global-6.6.3.tar.gz
+#    cd ~/${DOWNLOADS_NAME}/
+#    tar -zxvf global-6.6.3.tar.gz
+#    if [[ ${LOCAL_BIN_CTAGS_FLAG} -eq 2 ]]; then
+#        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/local/bin/ctags && make -j 4
+#    elif [[ ${BIN_CTAGS_FLAG} -eq 2 ]]; then
+#        cd ~/${DOWNLOADS_NAME}/global-6.6.3/ && ./configure --with-universal-ctags=/usr/bin/ctags && make -j 4
+#    fi
+#    if [[ $? -eq 0 ]]; then
+#        sudo make install
+#    else
+#        echo "Compile global failed!!!!"
+#        exit 1
+#    fi
+#fi
 
 #if [[ ! -f ~/${DOWNLOADS_NAME}/ncdu-1.13.tar.gz ]]
 #then

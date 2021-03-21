@@ -318,6 +318,15 @@ ln -s ~/mine/vimfiles/pip.conf ~/.pip/pip.conf
 #fi
 #ln -s ~/mine/VIM/agignore ~/.agignore
 
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+cd ~/Downloads
+git clone git://github.com/joelthelion/autojump.git
+cd autojump
+./install.py
+
 echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag

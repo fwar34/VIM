@@ -71,10 +71,10 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
     else
         sudo apt install silversearcher-ag
     fi
-    sudo apt install curl wget build-essential zsh tmux autojump libncurses5-dev \
+    sudo apt install curl wget build-essential zsh tmux libncurses5-dev \
          python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
-    sudo pacman -S curl wget zsh tmux autojump fzf the_silver_searcher \
+    sudo pacman -S curl wget zsh tmux fzf the_silver_searcher \
          thefuck global tig cmake universal-ctags bat tldr python-pip
 fi
 

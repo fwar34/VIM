@@ -427,6 +427,9 @@ alias pclone="proxychains4 git clone"
 alias ppush="proxychains4 git push"
 alias ppull="proxychains4 git pull"
 
+alias docker-trunk="docker start trunk && docker exec -it trunk /bin/zsh"
+alias docker-dev="docker start dev && docker exec -it dev /bin/zsh"
+
 #thefuck https://github.com/nvbn/thefuck
 #eval $(thefuck --alias)
 # You can use whatever you want as an alias, like for Mondays:

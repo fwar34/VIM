@@ -92,6 +92,19 @@ if [[ $(uname -r|awk -F- '{print $2}') == "microsoft" ]]; then
         export LIBGL_ALWAYS_INDIRECT=1
         #export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
     fi
+
+    # https://hkvim.com/post/windows-setup/
+    export GDK_SCALE=2
+    
+    # fix interop
+    fix_wsl2_interop() {
+        for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
+            if [[ -e "/run/WSL/${i}_interop" ]]; then
+                export WSL_INTEROP=/run/WSL/${i}_interop
+            fi
+        done
+    }
+
 fi
 
 if [[ -f "/etc/os-release" ]]; then

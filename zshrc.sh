@@ -245,7 +245,7 @@ fi
 
 
 alias cs='emacs -nw'
-alias csdmp='emacs -nw --dump-file="/home/feng/.emacs.d/emacs.pdmp"'
+alias csd='emacs -nw --dump-file="/home/feng/.emacs.d/emacs.pdmp"'
 
 
 #https://www.jianshu.com/p/006517cc260e

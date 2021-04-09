@@ -133,14 +133,14 @@ function install_my_bin()
     fi
 
     #install jq
-    if [[ ! -f ~/bin/jq ]] && [[ ! -f /usr/bin/jq ]]; then
-        wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
-        if [[ $? -eq 0 ]]; then
-            chmod +x ~/bin/jq
-        else
-            echo "error: chmod +x ~/bin/jq"
-        fi
-    fi
+    # if [[ ! -f ~/bin/jq ]] && [[ ! -f /usr/bin/jq ]]; then
+    #     wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O ~/bin/jq
+    #     if [[ $? -eq 0 ]]; then
+    #         chmod +x ~/bin/jq
+    #     else
+    #         echo "error: chmod +x ~/bin/jq"
+    #     fi
+    # fi
 
     ln -sf ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
 

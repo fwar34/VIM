@@ -476,6 +476,7 @@ export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 # export XMODIFIERS=@im=fcitx
 
 alias vxemacs='setsid emacs'
+alias vxemacsd='setsid emacs --dump-file="/home/feng/.emacs.d/emacs.pdmp"'
 alias vxterm='setsid xfce4-terminal'
 alias vxidea='setsid idea'
 alias vxecli='setsid eclipse'

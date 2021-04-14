@@ -459,7 +459,7 @@ echo Complete
 # 生成中文环境
 # sudo locale-gen zh_CN.UTF-8
 #////////////////////////////////////////////////////////////////////
-# git for window alias
+# git for window alias in ~/.bashrc
 # alias gst='git status'
 # alias gl='git pull'
 # alias gp='git push'

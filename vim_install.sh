@@ -453,8 +453,18 @@ echo Complete
 # 安装字体管理包
 # sudo apt-get install --assume-yes fontconfig
 # 安装中文字体
-# sudo mkdir -p /usr/share/fonts/windows && sudo cp -r /c/Windows/Fonts/*.ttf /usr/share/fonts/windows/
+# ln -sf /mnt/c/Windows/Fonts/ ~/.fonts
 # 清除字体缓存
 # fc-cache
 # 生成中文环境
 # sudo locale-gen zh_CN.UTF-8
+#////////////////////////////////////////////////////////////////////
+# git for window alias
+# alias gst='git status'
+# alias gl='git pull'
+# alias gp='git push'
+# alias gcmsg='git commit -m'
+# alias gco='git checkout'
+# alias gcl='git clone'
+# alias gd='git diff'
+# alias ga='git add'

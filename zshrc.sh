@@ -500,7 +500,11 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # https://www.zhihu.com/question/338022694
+# polipo
 alias proxyhon='export http_proxy=http://127.0.0.1:8123 https_proxy=http://127.0.0.1:8123'
-alias unproxyh='unset http_proxy https_proxy'
+
+# clash in win10
+alias proxyopen='http_proxy=http://192.168.169.1:7890 https_proxy=http://192.168.169.1:7890'
+alias proxyoff='unset http_proxy https_proxy'
 
 alias rn='ranger'

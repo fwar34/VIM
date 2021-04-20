@@ -74,7 +74,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
     sudo apt install curl wget build-essential zsh tmux libncurses5-dev \
          python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
-    sudo pacman -S curl wget zsh tmux fzf the_silver_searcher fd \
+    sudo pacman -S curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd \
          thefuck global tig cmake universal-ctags bat tldr python-pip
 fi
 

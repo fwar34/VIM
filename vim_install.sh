@@ -75,7 +75,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
          python3-pip cmake autoconf pkg-config
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd \
-         thefuck global tig cmake universal-ctags bat tldr python-pip
+         thefuck global tig cmake universal-ctags bat tldr python-pip librime
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then

@@ -80,16 +80,16 @@ if [[ $(uname -r|awk -F- '{print $2}') == "microsoft" ]]; then
     NAMESERVER_LINE_NUM=$(cat /etc/resolv.conf|grep nameserver|wc -l)
     if [[ ${NAMESERVER_LINE_NUM} -gt 1 ]]; then
         # wsl
-        export DISPLAY=:0.0
-        export LIBGL_ALWAYS_INDIRECT=1
-        export DOCKER_HOST=tcp://localhost:2375
+        #export DISPLAY=:0.0
+        #export LIBGL_ALWAYS_INDIRECT=1
+        #export DOCKER_HOST=tcp://localhost:2375
     elif [[ $(uname -n|grep esxi|wc -l) -eq 1 ]]; then
-        export DISPLAY=192.168.125.52:0.0
-        export LIBGL_ALWAYS_INDIRECT=1
+        #export DISPLAY=192.168.125.52:0.0
+        #export LIBGL_ALWAYS_INDIRECT=1
     else
         # wsl2
-        export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-        export LIBGL_ALWAYS_INDIRECT=1
+        #export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
+        #export LIBGL_ALWAYS_INDIRECT=1
         #export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
     fi
 
@@ -123,7 +123,7 @@ if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
     #export LC_MESSAGES=zh_CN.utf8
     export LC_CTYPE=${CN_CODE}
 else #其他正常的linux
-    export LC_ALL=
+    export LC_ALL=C
     export LANG=${EN_CODE}
     export LC_CTYPE=${CN_CODE}
 fi

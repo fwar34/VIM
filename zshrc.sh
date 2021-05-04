@@ -123,7 +123,7 @@ if [[ ${OS_NAME} == "Ubuntu" ]] && [[ ${OS_VERSION} == "14.04" ]]; then
     #export LC_MESSAGES=zh_CN.utf8
     export LC_CTYPE=${CN_CODE}
 else #其他正常的linux
-    export LC_ALL=C
+    export LC_ALL=
     export LANG=${EN_CODE}
     export LC_CTYPE=${CN_CODE}
 fi

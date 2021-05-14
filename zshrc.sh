@@ -508,3 +508,10 @@ alias proxyopen='export http_proxy=http://192.168.169.1:7890 https_proxy=http://
 alias proxyoff='unset http_proxy https_proxy'
 
 alias rn='ranger'
+
+function subv2ray
+{
+    sudo subsystemctl start
+    sudo subsystemctl exec systemctl start v2ray
+    sudo subsystemctl exec systemctl start sshd
+}

@@ -304,7 +304,7 @@ fi
 if [[ -f ~/.pip/pip.conf ]]; then
     mv ~/.pip/pip.conf ~/.pip/pip.conf.bak
 fi
-ln -s ~/mine/vimfiles/pip.conf ~/.pip/pip.conf
+ln -s ~/mine/dotfiles/.pip/pip.conf ~/.pip/pip.conf
 
 #if [[ -f ~/.globalrc ]]
 #then

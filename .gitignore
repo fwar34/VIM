@@ -1,5 +1,6 @@
 *.pyc
 *.bak
+*.swp
 .netrwhist
 .DS_Store
 tags

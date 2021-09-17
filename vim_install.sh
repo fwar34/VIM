@@ -46,6 +46,8 @@ fi
 
 if [[ ! -d ~/.emacs.d ]]; then
     git clone https://github.com/fwar34/emacs.d.git ~/.emacs.d
+    cd ~/.emacs.d/
+    git submodule update --init --recursive
 fi
 
 if [[ ! -d ~/.config ]]; then

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install zsh autojump
+sudo apt install zsh autojump tmux
 if [[ ! -d ~/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     #sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"

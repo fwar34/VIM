@@ -223,10 +223,10 @@ then
 	setxkbmap -option ctrl:nocaps
 fi
 
-if [ "$TERM" = "xterm" ]
-then
+# if [ "$TERM" = "xterm" ]
+# then
     export TERM=xterm-256color
-fi
+# fi
 
 #https://superuser.com/questions/399296/256-color-support-for-vim-background-in-tmux
 #if [[ -z $TMUX  ]]; then

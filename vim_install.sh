@@ -125,13 +125,13 @@ function install_my_bin()
     if [[  ${os} != 'ManjaroLinux' ]] && [[ ${os} != "arch" ]]; then
         #install bat
         if [[ ! -f /usr/bin/bat ]]; then
-            wget https://github.com/sharkdp/bat/releases/download/v0.8.0/bat_0.8.0_amd64.deb \
-                 -O ~/bin/bat_0.8.0_amd64.deb
+            wget https://github.com/sharkdp/bat/releases/download/v0.18.3/bat-musl_0.18.3_amd64.deb \
+                 -O ~/bin/bat_0.18.3_amd64.deb
             if [[ $? -eq 0 ]]; then
-                sudo dpkg -i ~/bin/bat_0.8.0_amd64.deb
-                rm ~/bin/bat_0.8.0_amd64.deb
+                sudo dpkg -i ~/bin/bat_0.18.3_amd64.deb
+                rm ~/bin/bat_0.18.3_amd64.deb
             else
-                echo "error: rm ~/bin/bat_0.8.0_amd64.deb"
+                echo "error: rm ~/bin/bat_0.18.3_amd64.deb"
             fi
         fi
     fi

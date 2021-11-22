@@ -325,6 +325,9 @@ unsetopt share_history
 [[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
 
 [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/feng/.autojump/etc/profile.d/autojump.sh ]] && source /home/feng/.autojump/etc/profile.d/autojump.sh
+
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
 gvim3() {
     ORIGHOME=$HOME
@@ -511,7 +514,22 @@ alias proxyhon='export http_proxy=http://127.0.0.1:8123 https_proxy=http://127.0
 alias proxyopen='export http_proxy=http://192.168.169.1:7890 https_proxy=http://192.168.169.1:7890'
 alias proxyoff='unset http_proxy https_proxy'
 
-alias rn='ranger'
+#alias rn='ranger'
+
+# Add a `r` function to zsh that opens ranger either at the given directory or
+# at the one autojump suggests
+rn() {
+  if [ "$1" != "" ]; then
+    if [ -d "$1" ]; then
+      ranger "$1"
+    else
+      ranger "$(autojump $1)"
+    fi
+  else
+    ranger
+  fi
+	return $?
+}
 
 function subv2ray
 {

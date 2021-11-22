@@ -321,13 +321,9 @@ ulimit -c unlimited
 unsetopt share_history
 
 [[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
-
 [[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
-
 [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
 [[ -s /home/feng/.autojump/etc/profile.d/autojump.sh ]] && source /home/feng/.autojump/etc/profile.d/autojump.sh
-
-[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 
 gvim3() {
     ORIGHOME=$HOME
@@ -516,7 +512,7 @@ alias proxyoff='unset http_proxy https_proxy'
 
 #alias rn='ranger'
 
-https://github.com/fdw/ranger-autojump/blob/main/ranger-autojump.plugin.zsh
+# https://github.com/fdw/ranger-autojump/blob/main/ranger-autojump.plugin.zsh
 # Add a `r` function to zsh that opens ranger either at the given directory or
 # at the one autojump suggests
 rn() {

@@ -516,6 +516,7 @@ alias proxyoff='unset http_proxy https_proxy'
 
 #alias rn='ranger'
 
+https://github.com/fdw/ranger-autojump/blob/main/ranger-autojump.plugin.zsh
 # Add a `r` function to zsh that opens ranger either at the given directory or
 # at the one autojump suggests
 rn() {

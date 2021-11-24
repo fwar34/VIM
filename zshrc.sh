@@ -225,7 +225,7 @@ fi
 
 # if [ "$TERM" = "xterm" ]
 # then
-    export TERM=xterm-256color
+    #export TERM=xterm-256color
 # fi
 
 #https://superuser.com/questions/399296/256-color-support-for-vim-background-in-tmux
@@ -237,7 +237,8 @@ fi
 #    fi
 #else
 #    if [ -e /usr/share/terminfo/s/screen-256color  ]; then
-#        export TERM='screen-256color'
+#        export TERM=xterm-256color
+        export TERM=screen-256color
 #    else
 #        export TERM='screen'
 #    fi

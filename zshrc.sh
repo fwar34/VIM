@@ -128,9 +128,13 @@ else #其他正常的linux
     export LC_CTYPE=${CN_CODE}
 fi
 
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
+# export GTK_IM_MODULE=fcitx
+# export XMODIFIERS=@im=fcitx
+# export QT_IM_MODULE=fcitx
+
+# export GTK_IM_MODULE=fcitx5
+# export QT_IM_MODULE=fcitx5
+# export XMODIFIERS=@im=fcitx5
 #####################################################################################
 
 # Preferred editor for local and remote sessions

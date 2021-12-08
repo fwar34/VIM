@@ -417,3 +417,13 @@ function subv2ray
     sudo subsystemctl exec systemctl start v2ray
     sudo subsystemctl exec systemctl start sshd
 }
+
+# https://www.jianshu.com/p/2c1ac913d2cb
+# 我开始设置的是zsh，我发现，当我用$cd$命令改变工作目录的时候，emacs里的default-directory这个变量没有改变，
+# 使得C-x C-f调用打开文件时目录不是当前工作目录？
+# INSIDE_EMACS 变量是 multi-term 包中定义的变量
+if [ -n "$INSIDE_EMACS" ]; then
+    chpwd() { print -P "\033AnSiTc %d" }
+    print -P "\033AnSiTu %n"
+    print -P "\033AnSiTc %d"
+fi

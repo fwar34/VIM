@@ -290,8 +290,6 @@ then
     echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.profile
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # #golang
 # export GOPATH=$HOME/go
 # export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/bin/maven/bin

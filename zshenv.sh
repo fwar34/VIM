@@ -4,7 +4,7 @@
 # https://www.cnblogs.com/Cherry-Linux/p/9053002.html
 # 修改.zshrc配置文件，添加下列配置。
 # [[ $TMUX = ""  ]] && export TERM="xterm-256color"
-# INSIDE_EMACS 变量是 multi-term 包中定义的环境变量
+# INSIDE_EMACS 变量是 emacs 的 multi-term 包中定义的环境变量
 [[ $TMUX = "" ]] && [[ $INSIDE_EMACS = "" ]] && export TERM="xterm-256color"
 # 修改.tmux.conf配置文件，添加下列配置（如果此文件不存在，直接创建即可。）
 # set -g default-terminal "screen-256color"

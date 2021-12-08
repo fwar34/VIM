@@ -20,8 +20,9 @@ then
 fi
 ln -s $PWD/zshenv ~/.zshenv
 
-if [[ -f ~/.tmux.conf ]]
-then
-    mv ~/.tmux.conf ~/.tmux.conf.bak
-fi
-ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
+# if [[ -f ~/.tmux.conf ]]
+# then
+#     mv ~/.tmux.conf ~/.tmux.conf.bak
+# fi
+# ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
+echo '. "$HOME/mine/VIM/zshenv.sh"' >> $HOME/.zshenv

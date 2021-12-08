@@ -281,11 +281,12 @@ then
 fi
 ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
-if [[ -f ~/.zshenv ]]
-then
-    mv ~/.zshenv ~/.zshenv.bak
-fi
-ln -s $PWD/zshenv ~/.zshenv
+# if [[ -f ~/.zshenv ]]
+# then
+#     mv ~/.zshenv ~/.zshenv.bak
+# fi
+# ln -s $PWD/zshenv ~/.zshenv
+echo '. "$HOME/mine/VIM/zshenv.sh"' >> $HOME/.zshenv
 
 # https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b
 if [[ -f ~/.ctags ]]

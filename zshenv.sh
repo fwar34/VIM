@@ -1,4 +1,4 @@
-. "$HOME/.cargo/env"
+#!/bin/sh
 
 export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$HOME/.local/share/nvim/lsp_servers/pylsp/venv/bin
 #golang

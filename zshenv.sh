@@ -46,9 +46,8 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 
 # {{{
-###
-###FZF
-###
+# FZF 设置
+# https://www.jianshu.com/p/aeebaee1dd2b
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" . /etc $HOME'

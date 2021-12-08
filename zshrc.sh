@@ -127,14 +127,6 @@ else #其他正常的linux
     export LANG=${EN_CODE}
     export LC_CTYPE=${CN_CODE}
 fi
-
-# export GTK_IM_MODULE=fcitx
-# export XMODIFIERS=@im=fcitx
-# export QT_IM_MODULE=fcitx
-
-# export GTK_IM_MODULE=fcitx5
-# export QT_IM_MODULE=fcitx5
-# export XMODIFIERS=@im=fcitx5
 #####################################################################################
 
 # Preferred editor for local and remote sessions
@@ -251,7 +243,7 @@ fi
 # {{{
 # https://www.cnblogs.com/Cherry-Linux/p/9053002.html
 # 修改.zshrc配置文件，添加下列配置。
-[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 # 修改.tmux.conf配置文件，添加下列配置（如果此文件不存在，直接创建即可。）
 # set -g default-terminal "screen-256color"
 # }}}
@@ -275,62 +267,10 @@ fi
 
 bindkey  "^[[1~"   beginning-of-line
 bindkey  "^[[4~"   end-of-line
-export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH
+# export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH
 #vim man page
 #export MANPAGER="vim -c MANPAGER -"
 #https://segmentfault.com/a/1190000002789600
-export MSYS="winsymlinks:lnk"
-
-gvim()
-{
-    OLD_HOME=$HOME
-    OLD_VIMRUNTIME=$VIMRUNTIME
-    OLD_TERM=$TERM
-
-    #{{{
-    # for fzf in windows-->https://github.com/junegunn/fzf/wiki/Windows
-    export TERM=
-    #}}}
-    if [ -d /i/msys64/home/fwar3 ]
-    then
-        export HOME=/i/msys64/home/fwar3
-    elif [ -d /e/msys64/home/liang.feng ]
-    then
-        export HOME=/e/msys64/home/liang.feng
-    fi
-
-    vim80="/c/Program Files (x86)/Vim/vim80"
-    vim81="/c/Program Files (x86)/Vim/vim81"
-
-    if [ -d $vim81 ]
-    then
-        export VIMRUNTIME="C:\Program Files (x86)\Vim\vim81"
-        TARGET=$(cygpath -w $1) 
-        (/c/Program\ Files\ \(x86\)/Vim/vim81/gvim.exe $TARGET &)
-    elif [ -d $vim80 ]
-    then
-        export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
-        TARGET=$(cygpath -w $1) 
-        (/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
-    fi
-
-    export HOME=$OLD_HOME
-    export VIMRUNTIME=$OLD_VIMRUNTIME 
-    export TERM=$OLD_TERM
-} 
-
-#gviml()
-#{
-    #OLD_HOME=$HOME
-    #OLD_VIMRUNTIME=$VIMRUNTIME
-    #export HOME=/e/msys64/home/liang.feng
-    #export VIMRUNTIME="C:\Program Files (x86)\Vim\vim80"
-    #TARGET=$(cygpath -w $1) 
-    #(/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $TARGET &)
-    #export HOME=$OLD_HOME
-    #export VIMRUNTIME=$OLD_VIMRUNTIME 
-#} 
-
 
 ulimit -c unlimited
 unsetopt share_history
@@ -339,13 +279,6 @@ unsetopt share_history
 # [[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
 # [[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
 # [[ -s /home/feng/.autojump/etc/profile.d/autojump.sh ]] && source /home/feng/.autojump/etc/profile.d/autojump.sh
-
-gvim3() {
-    ORIGHOME=$HOME
-    HOME=/cygdrive/i/home/fwar3
-    /cygdrive/c/Program\ Files\ \(x86\)/Vim/vim80/gvim.exe $1 & disown
-    HOME=$ORIGHOME
-} 2>/dev/null
 
 autoload -U compinit && compinit -u
 
@@ -357,69 +290,7 @@ then
     echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.profile
 fi
 
-function man_color()
-{
-    # 放到你的 ~/.bashrc 配置文件中，给 man 增加漂亮的色彩高亮
-    export LESS_TERMCAP_mb=$'\E[1m\E[32m'
-    export LESS_TERMCAP_mh=$'\E[2m'
-    export LESS_TERMCAP_mr=$'\E[7m'
-    export LESS_TERMCAP_md=$'\E[1m\E[36m'
-    export LESS_TERMCAP_ZW=""
-    export LESS_TERMCAP_us=$'\E[4m\E[1m\E[37m'
-    export LESS_TERMCAP_me=$'\E(B\E[m'
-    export LESS_TERMCAP_ue=$'\E[24m\E(B\E[m'
-    export LESS_TERMCAP_ZO=""
-    export LESS_TERMCAP_ZN=""
-    export LESS_TERMCAP_se=$'\E[27m\E(B\E[m'
-    export LESS_TERMCAP_ZV=""
-    export LESS_TERMCAP_so=$'\E[1m\E[33m\E[44m'
-}
-
-function man_color2()
-{
-    export LESS_TERMCAP_mb=$'\E[01;31m'
-    export LESS_TERMCAP_md=$'\E[01;31m'
-    export LESS_TERMCAP_me=$'\E[0m'
-    export LESS_TERMCAP_se=$'\E[0m'
-    export LESS_TERMCAP_so=$'\E[01;44;33m'
-    export LESS_TERMCAP_ue=$'\E[0m'
-    export LESS_TERMCAP_us=$'\E[01;32m'
-}
-
-function man_color3()
-{
-    export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
-    export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
-    export LESS_TERMCAP_me=$(tput sgr0)
-    export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
-    export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-    export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
-    export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-    export LESS_TERMCAP_mr=$(tput rev)
-    export LESS_TERMCAP_mh=$(tput dim)
-    export LESS_TERMCAP_ZN=$(tput ssubm)
-    export LESS_TERMCAP_ZV=$(tput rsubm)
-    export LESS_TERMCAP_ZO=$(tput ssupm)
-    export LESS_TERMCAP_ZW=$(tput rsupm)
-}
-
-function man_color4()
-{
-    #https://unix.stackexchange.com/questions/6010/colored-man-pages-not-working-on-gentoo
-    export LESS_TERMCAP_mb=$'\E[01;31m'
-    export LESS_TERMCAP_md=$'\E[01;31m'
-    export LESS_TERMCAP_me=$'\E[0m'
-    export LESS_TERMCAP_se=$'\E[0m'
-    export LESS_TERMCAP_so=$'\E[01;47;34m'
-    export LESS_TERMCAP_ue=$'\E[0m'
-    export LESS_TERMCAP_us=$'\E[01;32m'
-    #export LESS=-r
-}
-man_color4
-
-export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 
 # #golang
 # export GOPATH=$HOME/go
@@ -505,14 +376,14 @@ if [[ $(uname -r|awk -F- '{print $3}') = 'Microsoft' ]]; then
 fi
 ###WSL####################################################################
 
-# for rust
-# export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
-
-export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static 
-export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
-
-# for brew
-export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+## for rust
+## export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+#
+#export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static 
+#export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+#
+## for brew
+#export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
 # https://www.zhihu.com/question/338022694
 # polipo

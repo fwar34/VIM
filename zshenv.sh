@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# {{{
+# https://www.cnblogs.com/Cherry-Linux/p/9053002.html
+# 修改.zshrc配置文件，添加下列配置。
+# [[ $TMUX = ""  ]] && export TERM="xterm-256color"
+# 修改.tmux.conf配置文件，添加下列配置（如果此文件不存在，直接创建即可。）
+# set -g default-terminal "screen-256color"
+# }}}
+
 export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$HOME/.local/share/nvim/lsp_servers/pylsp/venv/bin
 #golang
 export GOPATH=$HOME/go
@@ -36,13 +44,6 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
 
 
-# {{{
-# https://www.cnblogs.com/Cherry-Linux/p/9053002.html
-# 修改.zshrc配置文件，添加下列配置。
-[[ $TMUX = ""  ]] && export TERM="xterm-256color"
-# 修改.tmux.conf配置文件，添加下列配置（如果此文件不存在，直接创建即可。）
-# set -g default-terminal "screen-256color"
-# }}}
 
 
 export PKG_CONFIG_PATH=/tang/lib/pkgconfig/:$PKG_CONFIG_PATH

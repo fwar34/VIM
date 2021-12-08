@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$HOME/.local/share/nvim/lsp_servers/pylsp/venv/bin
+# export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$HOME/.local/share/nvim/lsp_servers/pylsp/venv/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -421,12 +421,12 @@ export TZ='Asia/Shanghai'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
-#golang
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/bin/maven/bin
-#golang proxy
-export GO111MODULE=on
-export GOPROXY=https://goproxy.cn
+# #golang
+# export GOPATH=$HOME/go
+# export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/bin/maven/bin
+# #golang proxy
+# export GO111MODULE=on
+# export GOPROXY=https://goproxy.cn
 
 #tldr
 export TLDR_HEADER='magenta bold underline'
@@ -460,25 +460,25 @@ alias docker-dev="docker start dev && docker exec -it dev /bin/zsh"
 # You can use whatever you want as an alias, like for Mondays:
 #eval $(thefuck --alias FUCK)
 
-if [ -d /usr/lib/jvm/java-11-openjdk-amd64 ];then
-    export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-elif [ -d /usr/lib/jvm/java-8-openjdk-amd64 ];then
-    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-    export JRE_HOME=${JAVA_HOME}/jre
-    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-elif [ -d /usr/lib/jvm/java-8-openjdk ];then
-    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-    export JRE_HOME=${JAVA_HOME}/jre
-    export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-else
-    export JAVA_HOME=/home/feng/jdk-13.0.2
-fi
-export PATH=$PATH:$JAVA_HOME/bin
+# if [ -d /usr/lib/jvm/java-11-openjdk-amd64 ];then
+#     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+# elif [ -d /usr/lib/jvm/java-8-openjdk-amd64 ];then
+#     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+#     export JRE_HOME=${JAVA_HOME}/jre
+#     export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+# elif [ -d /usr/lib/jvm/java-8-openjdk ];then
+#     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+#     export JRE_HOME=${JAVA_HOME}/jre
+#     export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+# else
+#     export JAVA_HOME=/home/feng/jdk-13.0.2
+# fi
+# export PATH=$PATH:$JAVA_HOME/bin
 
-export MAVEN_HOME=/usr/share/maven
-export PATH=$PATH:$MAVEN_HOME/bin
+# export MAVEN_HOME=/usr/share/maven
+# export PATH=$PATH:$MAVEN_HOME/bin
 
-export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
+# export ROCKETMQ_HOME=/home/feng/rocketMQ/rocketmq-all-4.6.1-bin-release
 
 ###WSL####################################################################
 

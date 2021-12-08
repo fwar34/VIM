@@ -27,3 +27,8 @@ export MAVEN_HOME=/usr/share/maven
 export PATH=$PATH:$MAVEN_HOME/bin
 
 export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
+
+[[ -s /home/linux/.autojump/etc/profile.d/autojump.sh  ]] && source /home/linux/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/liang.feng/.autojump/etc/profile.d/autojump.sh  ]] && source /home/liang.feng/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/fwar3/.autojump/etc/profile.d/autojump.sh ]] && source /home/fwar3/.autojump/etc/profile.d/autojump.sh
+[[ -s /home/feng/.autojump/etc/profile.d/autojump.sh ]] && source /home/feng/.autojump/etc/profile.d/autojump.sh

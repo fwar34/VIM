@@ -14,6 +14,12 @@ then
 fi
 ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 
+if [[ -f ~/.zshenv ]]
+then
+    mv ~/.zshenv ~/.zshenv.bak
+fi
+ln -s $PWD/zshenv ~/.zshenv
+
 if [[ -f ~/.tmux.conf ]]
 then
     mv ~/.tmux.conf ~/.tmux.conf.bak

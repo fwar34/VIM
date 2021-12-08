@@ -242,12 +242,22 @@ fi
 #else
 #    if [ -e /usr/share/terminfo/s/screen-256color  ]; then
 #        export TERM=xterm-256color
-        export TERM=screen-256color
+        #export TERM=screen-256color
 #    else
 #        export TERM='screen'
 #    fi
 #fi
 
+# {{{
+# https://www.cnblogs.com/Cherry-Linux/p/9053002.html
+# 修改.zshrc配置文件，添加下列配置。
+[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+# 修改.tmux.conf配置文件，添加下列配置（如果此文件不存在，直接创建即可。）
+# set -g default-terminal "screen-256color"
+# }}}
+
+#alias tmux="TERM=screen-256color tmux -2"
+#export TERM=screen-256color
 
 alias cs='emacs -nw'
 alias csd='emacs -nw --dump-file="/home/feng/.emacs.d/emacs.pdmp"'
@@ -338,9 +348,6 @@ gvim3() {
 } 2>/dev/null
 
 autoload -U compinit && compinit -u
-
-#alias tmux="TERM=screen-256color tmux -2"
-#export TERM=screen-256color
 
 if [ -d ~/.linuxbrew ] || [ -d ~/.linuxbrew ]
 then

@@ -51,7 +51,7 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" . /etc $HOME'
-export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion"'
+export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps"'
 # export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview "echo {} | ~/linux-config-file/fzf/fzf_preview.py" --preview-window=down'
 
 # use fzf in bash and zsh
@@ -67,13 +67,13 @@ export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E 
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
   # fd --hidden --follow -E ".git" -E "node_modules" . -E ".svn" -E "debian" . /etc $HOME
-  fd --hidden --follow -E ".git" -E "node_modules" . -E ".svn" -E "debian" -E ".subversion"
+  fd --hidden --follow -E ".git" -E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps"
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   # fd --type d --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" . /etc $HOME
-  fd --type d --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion"
+  fd --type d --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps"
 }
 # }}}
 

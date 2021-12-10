@@ -53,7 +53,7 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 exclude1='-E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc" -E ".local/share/containers" -E "*.pyc" -E "*.pyi"'
 exclude2='-E "*.a" -E "*.so" -E "*.class" -E "*.zip" -E "*.pyo" -E "*.iso" -E "*.swp" -E "*.obj" -E "*.exe" -E "*.pdb" -E "*.lib" -E "__pycache__"'
 exclude3='-E "*.tar" -E "*.rar" -E "*.7z" -E "*.jar" -E "*.ttf" -E "*.pdf" -E "*.dll" -E "*.bz2" -E "*.xz" -E "*.gz" -E "*.gzip"'
-exclude4='-E "*.png" -E "*.jpg" -E "*.gif" -E "*.bmp" -E "*.tga" -E "*.pcx" -E "*.ppm" -E "*.img"'
+exclude4='-E "*.png" -E "*.jpg" -E "*.gif" -E "*.bmp" -E "*.tga" -E "*.pcx" -E "*.ppm" -E "*.img" -E "tags"'
 
 # export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc"'
 export FZF_DEFAULT_COMMAND="fd --hidden --follow ${exclude1} ${exclude2} ${exclude3} ${exclude4}"

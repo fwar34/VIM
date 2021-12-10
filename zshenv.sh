@@ -50,8 +50,10 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 # https://www.jianshu.com/p/aeebaee1dd2b
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" . /etc $HOME'
-export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps"'
+exclude1='-E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc" -E ".local/share/containers"'
+
+# export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc"'
+export FZF_DEFAULT_COMMAND="fd --hidden --follow ${exclude1}"
 # export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview "echo {} | ~/linux-config-file/fzf/fzf_preview.py" --preview-window=down'
 
 # use fzf in bash and zsh
@@ -65,16 +67,16 @@ export FZF_DEFAULT_COMMAND='fd --hidden --follow -E ".git" -E "node_modules" -E 
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
-_fzf_compgen_path() {
+# _fzf_compgen_path() {
   # fd --hidden --follow -E ".git" -E "node_modules" . -E ".svn" -E "debian" . /etc $HOME
-  fd --hidden --follow -E ".git" -E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps"
-}
+  # fd --hidden --follow -E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc" -E ".local/share/containers" . "$1"
+# }
 
 # Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
+# _fzf_compgen_dir() {
   # fd --type d --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" . /etc $HOME
-  fd --type d --hidden --follow -E ".git" -E "node_modules" -E ".svn" -E "debian" -E ".subversion" -E ".deps"
-}
+  # fd --type d --hidden --follow -E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc" -E ".local/share/containers" . "$1"
+# }
 # }}}
 
 

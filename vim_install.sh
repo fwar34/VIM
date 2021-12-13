@@ -36,8 +36,8 @@ if [[ ! -d ~/mine/vimfiles ]]; then
     git clone https://github.com/fwar34/vimfiles.git ~/mine/vimfiles
 fi
 
-if [[ ! -d ~/mine/nvim ]]; then
-    git clone https://github.com/fwar34/nvim.git ~/mine/nvim
+if [[ ! -d ~/mine/nvim.lua ]]; then
+    git clone https://github.com/fwar34/nvim.lua.git ~/mine/nvim.lua
 fi
 
 if [[ ! -d ~/mine/Other ]]; then
@@ -55,7 +55,7 @@ if [[ ! -d ~/.config ]]; then
 fi
 
 if [[ ! -d ~/.config/nvim ]]; then
-    ln -s ~/mine/nvim ~/.config/nvim
+    ln -s ~/mine/nvim.lua ~/.config/nvim
 fi
 
 #if test "${os}" = 'MSYS' -o "${os}" = 'CYGWIN'

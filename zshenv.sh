@@ -161,6 +161,33 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 # export XMODIFIERS=@im=fcitx
 # export QT_IM_MODULE=fcitx
 
-# export GTK_IM_MODULE=fcitx5
-# export QT_IM_MODULE=fcitx5
-# export XMODIFIERS=@im=fcitx5
+# {{{
+# fcitx5
+# https://blog.woshiluo.com/1693.html
+# https://github.com/wongdean/rime-settings
+# pacman -S fcitx5 fcitx5-qt fcitx5-gtk
+# pacman -S fcitx5-chinese-addons fcitx5-rime
+# 此时，Fcitx5 的配置文件在 ~/.config/fcitx5 下
+#
+# 1.2 Rime 的安装
+# pacman -S librime 
+# pacman -S rime-double-pinyin #需要双拼的话，安装这个
+# 此时，Rime 的配置文件在 ~/.local/share/fcitx5/rime 下
+export GTK_IM_MODULE=fcitx5
+export QT_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5
+# }}}
+
+# awesome 相关
+# sudo pacman -S alsa-utils feh picom dex dhcped
+# fonts
+# proxychains4 paru -S noto-fonts-sc nerd-fonts-jetbrains-mono ttf-iosevka-nerd
+
+# {{{
+# /etc/dhcpcd.conf 
+# static ip
+# interface enp5s0
+# static ip_address=192.168.125.153/24
+# static routers=192.168.125.3
+# static domain_name_servers=192.168.125.3
+# }}}

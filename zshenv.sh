@@ -157,10 +157,6 @@ export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 # for brew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 
-# export GTK_IM_MODULE=fcitx
-# export XMODIFIERS=@im=fcitx
-# export QT_IM_MODULE=fcitx
-
 # {{{
 # fcitx5
 # https://blog.woshiluo.com/1693.html
@@ -173,9 +169,16 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 # pacman -S librime 
 # pacman -S rime-double-pinyin #需要双拼的话，安装这个
 # 此时，Rime 的配置文件在 ~/.local/share/fcitx5/rime 下
-export GTK_IM_MODULE=fcitx5
-export QT_IM_MODULE=fcitx5
-export XMODIFIERS=@im=fcitx5
+if [[ $MYHOSTNAME == "ubuntu-awesome" ]]; then
+    export GTK_IM_MODULE=fcitx
+    export XMODIFIERS=@im=fcitx
+    export QT_IM_MODULE=fcitx
+else
+    export GTK_IM_MODULE=fcitx5
+    export QT_IM_MODULE=fcitx5
+    export XMODIFIERS=@im=fcitx5
+fi
+
 # }}}
 
 # awesome 相关

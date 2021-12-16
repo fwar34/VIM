@@ -350,6 +350,21 @@ cd autojump
 # linux mount windows disk
 # /dev/sdc1  /mnt/sdc1   ntfs-3g  users,uid=1000,gid=100,fmask=0113,dmask=0002,locale=zh_CN.utf8         0 0
 
+# virtualbox
+# 1、安装基本包
+# sudo pacman -S virtualbox : 选择virtualbox-host-modules-arch模块
+# sudo pacman -S virtualbox-guest-iso
+# 2、加载 VirtualBox 内核模块
+# sudo modprobe vboxdrv vboxnetadp vboxnetflt
+# vboxdrv驱动模块
+# vboxnetadp 桥接网络
+# vboxnetflthost-only 网络
+# vboxpci：若要让虚拟机使用主体机的 PCI 设备，那么就需要这个模块。
+# 3、安装扩展包
+# yay -S virtualbox-ext-oracle
+# 4、把当前用户组添加到vboxusers里面
+# sudo usermod -G vboxusers -a 用户名
+
 echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag

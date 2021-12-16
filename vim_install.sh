@@ -325,6 +325,11 @@ fi
 git clone --recurse-submodules --remote-submodules --depth 1 -j 2 https://github.com/fwar34/awesome-copycats.git ~/mine/awesome-copycats
 ln -sf ~/mine/awesome-copycats ~/.config/awesome
 
+if [[ -f /etc/sddm.conf ]]; then
+    mv /etc/sddm.conf /etc/sddm.conf.bak
+fi
+sudo ln -sf $PWD/sddm.conf /etc/sddm.conf
+
 #if [[ -f ~/.globalrc ]]
 #then
 #mv ~/.globalrc ~/.globalrc.bak

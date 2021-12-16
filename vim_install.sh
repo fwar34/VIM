@@ -347,6 +347,9 @@ git clone git://github.com/joelthelion/autojump.git
 cd autojump
 ./install.py
 
+# linux mount windows disk
+# /dev/sdc1  /mnt/sdc1   ntfs-3g  users,uid=1000,gid=100,fmask=0113,dmask=0002,locale=zh_CN.utf8         0 0
+
 echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag

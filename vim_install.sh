@@ -269,11 +269,13 @@ fi
 # fi
 # ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
 
-# if [[ -f ~/.tmux.conf ]]
-# then
-#     mv ~/.tmux.conf ~/.tmux.conf.bak
-# fi
+if [[ -f ~/.tmux.conf ]]
+then
+    mv ~/.tmux.conf ~/.tmux.conf.bak
+fi
 # ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
+git clone --recursive https://github.com/fwar34/tmux-config.git ~/mine/tmux-config
+cd ~/mine/tmux-config && ./install.sh
 
 if [[ -f ~/.zshrc ]]
 then

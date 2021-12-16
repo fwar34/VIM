@@ -319,6 +319,12 @@ if [[ -f ~/.pip/pip.conf ]]; then
 fi
 ln -s ~/mine/dotfiles/.pip/pip.conf ~/.pip/pip.conf
 
+if [[ -f ~/.config/awesome/rc.lua  ]]; then
+    mv ~/.config/awesome ~/.config/awesome.bak
+fi
+git clone --recurse-submodules --remote-submodules --depth 1 -j 2 https://github.com/fwar34/awesome-copycats.git ~/mine/awesome-copycats
+ln -sf ~/mine/awesome-copycats ~/.config/awesome
+
 #if [[ -f ~/.globalrc ]]
 #then
 #mv ~/.globalrc ~/.globalrc.bak

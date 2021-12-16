@@ -200,3 +200,13 @@ fi
 # static routers=192.168.125.3
 # static domain_name_servers=192.168.125.3
 # }}}
+
+# https://wiki.archlinux.org/title/HiDPI_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)
+# 自从 Qt 5.6 开始，Qt 5 应用程序可以遵守屏幕DPI。设置环境变量QT_AUTO_SCREEN_SCALE_FACTOR以启用这项功能。
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+
+# GTK3
+# 要将UI缩放为两倍大小：
+export GDK_SCALE=2
+# 并同时不影响字体：
+export GDK_DPI_SCALE=0.5

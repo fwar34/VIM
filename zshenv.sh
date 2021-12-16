@@ -10,8 +10,14 @@
 # set -g default-terminal "screen-256color"
 # }}}
 
+# lsp server path
+LSP_SERVERS_PATH=$HOME/.local/share/nvim/lsp_servers
+LSP_SERVERS=$LSP_SERVERS_PATH/pylsp/venv/bin:$LSP_SERVERS_PATH/jedi_language_server/venv/bin
+
 export MYHOSTNAME=$(cat /etc/hostname)
-export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$HOME/.local/share/nvim/lsp_servers/pylsp/venv/bin
+export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$LSP_SERVERS
+
+
 #golang
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:$HOME/.cargo/bin:$HOME/bin/maven/bin

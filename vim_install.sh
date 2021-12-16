@@ -264,16 +264,16 @@ fi
 #    cd ~/${DOWNLOADS_NAME}/ncdu-1.13/ && ./configure && make -j 4 && sudo make install
 #fi
 
-if [[ -f ~/.vimrc ]]; then
-    mv ~/.vimrc ~/.vimrc.bak
-fi
-ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
+# if [[ -f ~/.vimrc ]]; then
+    # mv ~/.vimrc ~/.vimrc.bak
+# fi
+# ln -sf ~/mine/vimfiles/vimrc ~/.vimrc
 
-if [[ -f ~/.tmux.conf ]]
-then
-    mv ~/.tmux.conf ~/.tmux.conf.bak
-fi
-ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
+# if [[ -f ~/.tmux.conf ]]
+# then
+#     mv ~/.tmux.conf ~/.tmux.conf.bak
+# fi
+# ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
 
 if [[ -f ~/.zshrc ]]
 then

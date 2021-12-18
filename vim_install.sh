@@ -78,7 +78,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
          python3-pip cmake autoconf pkg-config fzf ripgrep
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd \
-         thefuck global tig cmake universal-ctags bat tldr python-pip librime
+         thefuck global tig cmake universal-ctags bat tldr python-pip librime thunder
 fi
 
 if [[ ! -d ~/.oh-my-zsh ]]; then
@@ -200,7 +200,7 @@ if [[ ${os} == "ubuntu" ]] && [[ ! -d ~/${DOWNLOADS_NAME}/emacs ]] && [[ ${VERSI
 fi
 
 BIN_CTAGS_FLAG=$(/usr/bin/ctags --version|grep Universal|wc -l)
-LOCAL_BIN_CTAGS_FLAG=$(/usr/local/bin/ctags --version|grep Universal|wc -l)
+# LOCAL_BIN_CTAGS_FLAG=$(/usr/local/bin/ctags --version|grep Universal|wc -l)
 
 if [[ ! -d ~/${DOWNLOADS_NAME}/ctags ]] && \
        [[ ${os} != 'arch' ]] && \

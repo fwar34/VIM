@@ -366,6 +366,10 @@ cd autojump
 # 4、把当前用户组添加到vboxusers里面
 # sudo usermod -G vboxusers -a 用户名
 
+# archlinux 设置默认的浏览器，在 /usr/share/applications 中查找应用程序入口
+# xdg-settings set default-web-browser microsoft-edge-beta.desktop
+# xdg-settings get default-web-browser 显示当前默认浏览器
+
 echo Complete
 
 #sudo apt install build-essential cmake git zsh tmux autojump ctags clang python3-pip python-pip silversearcher-ag

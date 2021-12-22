@@ -85,6 +85,10 @@ elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S picom thunar feh
 fi
 
+if [[ -d ~/.oh-my-zsh ]]; then
+    mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
+fi
+
 if [[ ! -d ~/.oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

@@ -17,7 +17,7 @@ export PATH=$PATH:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin
 LSP_SERVERS_PATH=$HOME/.local/share/nvim/lsp_servers
 LSP_SERVERS=$LSP_SERVERS_PATH/pylsp/venv/bin:$LSP_SERVERS_PATH/jedi_language_server/venv/bin
 LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/go
-# LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/rust
+LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/rust
 
 export MYHOSTNAME=$(cat /etc/hostname)
 export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$LSP_SERVERS

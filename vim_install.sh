@@ -83,6 +83,8 @@ elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim
     # gui
     sudo pacman -S picom thunar feh
+    # vscode sync
+    sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi
 
 if [[ -d ~/.oh-my-zsh ]]; then

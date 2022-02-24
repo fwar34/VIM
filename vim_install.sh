@@ -77,12 +77,12 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
     sudo apt install curl wget build-essential zsh tmux libncurses5-dev \
          python3-pip cmake autoconf pkg-config fzf ripgrep
     # gui
-    sudo apt install thunar feh
+    sudo apt install thunar feh rofi
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd \
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim
     # gui
-    sudo pacman -S picom thunar feh
+    sudo pacman -S picom thunar feh rofi
     # vscode sync
     sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi

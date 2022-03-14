@@ -87,6 +87,10 @@ elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi
 
+# trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ), and compatible with tmux.
+# https://github.com/trzsz/trzsz
+sudo python3 -m pip install trzsz
+
 if [[ -d ~/.oh-my-zsh ]]; then
     mv ~/.oh-my-zsh ~/.oh-my-zsh.bak
 fi

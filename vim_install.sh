@@ -54,6 +54,11 @@ if [[ ! -d ~/.config ]]; then
     mkdir -p ~/.config
 fi
 
+if [[ -d ~/.config/nvim ]]
+then
+    mv ~/.config/nvim ~/.config/nvim.bak
+fi
+
 if [[ ! -d ~/.config/nvim ]]; then
     ln -s ~/mine/nvim.lua ~/.config/nvim
 fi

@@ -310,11 +310,11 @@ ln -s ~/mine/VIM/zshrc.sh ~/.zshrc
 # ln -s $PWD/zshenv ~/.zshenv
 echo '. "$HOME/mine/VIM/zshenv.sh"' >> $HOME/.zshenv
 
-if [[ -f ~/.cargo/config ]]
-then
-    mv ~/.cargo/config ~/.cargo/config.bak
-fi
-ln -s ~/mine/VIM/cargo.config ~/.cargo/config
+# if [[ -f ~/.cargo/config ]]
+# then
+#     mv ~/.cargo/config ~/.cargo/config.bak
+# fi
+# ln -s ~/mine/VIM/cargo.config ~/.cargo/config
 
 # https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b
 if [[ -f ~/.ctags ]]

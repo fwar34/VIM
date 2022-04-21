@@ -162,8 +162,15 @@ export TZ='Asia/Shanghai'
 ## for rust
 # export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
-export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static 
-export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+# export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+# export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
+# export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+# export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
+# 字节跳动源 https://rsproxy.cn/
+export RUSTUP_DIST_SERVER="https://rsproxy.cn"
+export RUSTUP_UPDATE_ROOT="https://rsproxy.cn/rustup"
 
 # for brew
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles

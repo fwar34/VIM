@@ -180,6 +180,7 @@ then
 else
     if [[ -f "/usr/bin/nvim" ]]; then
         alias vi="nvim"
+        alias vim="nvim"
     else
         alias vi='TERM=xterm-256color vim'
     fi

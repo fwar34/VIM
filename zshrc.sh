@@ -460,3 +460,5 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 #     source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh
 # fi
 # }}}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

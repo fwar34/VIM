@@ -464,7 +464,7 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 # {{{ esp8266
 #"esptool.py write_flash -fm qio 0x00000 ~/esp/nodemcu-release-18-modules-2022-05-22-07-05-45-integer.bin" 可以用--port指定串口
-alias esflash="esptool.py write_flash -fm qio 0x00000"
+alias espflash="esptool.py write_flash --erase-all -fm qio 0x00000"
 alias nu="nodemcu-uploader"
 # }}}
 

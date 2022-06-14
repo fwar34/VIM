@@ -222,7 +222,3 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 export GDK_SCALE=2
 # 并同时不影响字体：
 export GDK_DPI_SCALE=0.5
-
-# ESP
-export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
-export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin/

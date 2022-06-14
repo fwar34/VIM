@@ -463,9 +463,16 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 # }}}
 
 # {{{ esp8266
+export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
+export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin/
 #"esptool.py write_flash -fm qio 0x00000 ~/esp/nodemcu-release-18-modules-2022-05-22-07-05-45-integer.bin" 可以用--port指定串口
 alias espflash="esptool.py write_flash --erase-all -fm qio 0x00000"
 alias nu="nodemcu-uploader"
+alias pc="picocom /dev/ttyUSB0 -b115200"
+
+# pyboard.py device
+# https://docs.micropython.org/en/latest/reference/pyboard.py.html
+export PYBOARD_DEVICE=/dev/ttyUSB0
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

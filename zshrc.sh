@@ -173,18 +173,18 @@ alias tmux='tmux -u'
 #alias tmux='TERM=xterm-256color  tmux -2'
 
 alias nv='nvim'
-if [ -f '/usr/local/bin/vim' ]
-then
-    alias vi='TERM=xterm-256color /usr/local/bin/vim'
-    alias vim='TERM=xterm-256color /usr/local/bin/vim'
-else
-    if [[ -f "/usr/bin/nvim" ]]; then
-        alias vi="nvim"
-        alias vim="nvim"
-    else
-        alias vi='TERM=xterm-256color vim'
-    fi
-fi
+# if [ -f '/usr/local/bin/vim' ]
+# then
+#     alias vi='TERM=xterm-256color /usr/local/bin/vim'
+#     alias vim='TERM=xterm-256color /usr/local/bin/vim'
+# else
+#     if [[ -f "/usr/bin/nvim" ]]; then
+#         alias vi="nvim"
+#         alias vim="nvim"
+#     else
+#         alias vi='TERM=xterm-256color vim'
+#     fi
+# fi
 
 if [ -f '/usr/local/bin/emacs' ]
 then
@@ -463,12 +463,13 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 # }}}
 
 # {{{ esp8266
-export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
-export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin/
+# export IDF_PATH=$HOME/esp/ESP8266_RTOS_SDK
+# export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin/
 #"esptool.py write_flash -fm qio 0x00000 ~/esp/nodemcu-release-18-modules-2022-05-22-07-05-45-integer.bin" 可以用--port指定串口
 alias espflash="esptool.py write_flash --erase-all -fm qio 0x00000"
 alias nu="nodemcu-uploader"
 alias pc="picocom /dev/ttyUSB0 -b115200"
+alias am="ampy --port /dev/ttyUSB0"
 
 # pyboard.py device
 # https://docs.micropython.org/en/latest/reference/pyboard.py.html

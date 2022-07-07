@@ -335,7 +335,8 @@ ln -sf ~/mine/vimfiles/_vrapperrc ~/.vrapperrc
 if [[ -f ~/.gitconfig ]]; then
     mv ~/.gitconfig ~/.gitconfig.bak
 fi
-ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+# ln -s ~/mine/vimfiles/gitconfig ~/.gitconfig
+cp ~/mine/vimfiles/gitconfig ~/.gitconfig
 
 if [[ ! -d ~/.pip ]]; then
     mkdir ~/.pip

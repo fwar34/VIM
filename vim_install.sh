@@ -84,7 +84,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
     # gui
     sudo apt install thunar feh rofi
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
-    sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd python go \
+    sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd python go unzip \
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim inetutils rustup ranger
     # gui
     sudo pacman -S picom thunar feh rofi

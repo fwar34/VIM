@@ -44,7 +44,9 @@ services:
     image: rocketmqinc/rocketmq:latest
     container_name: rmqbroker-a
     ports:
+      - 10909:10909
       - 10911:10911
+      - 10912:10912
     volumes:
       - ./logs/broker-a:/root/logs
       - ./store/broker-a:/root/store
@@ -67,7 +69,9 @@ services:
     image: rocketmqinc/rocketmq:latest
     container_name: rmqbroker-a-s
     ports:
-      - 10912:10911
+      - 11909:11909
+      - 11911:11911
+      - 11912:11912
     volumes:
       - ./logs/broker-a-s:/root/logs
       - ./store/broker-a-s:/root/store
@@ -90,7 +94,9 @@ services:
     image: rocketmqinc/rocketmq:latest
     container_name: rmqbroker-b
     ports:
-      - 10913:10911
+      - 12909:12909
+      - 12911:12911
+      - 12912:12912
     volumes:
       - ./logs/broker-b:/root/logs
       - ./store/broker-b:/root/store
@@ -113,7 +119,9 @@ services:
     image: rocketmqinc/rocketmq:latest
     container_name: rmqbroker-b-s
     ports:
-      - 10914:10911
+      - 13909:13909
+      - 13911:13911
+      - 13912:13912
     volumes:
       - ./logs/broker-b-s:/root/logs
       - ./store/broker-b-s:/root/store

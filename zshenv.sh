@@ -229,8 +229,12 @@ fi
 # 自从 Qt 5.6 开始，Qt 5 应用程序可以遵守屏幕DPI。设置环境变量QT_AUTO_SCREEN_SCALE_FACTOR以启用这项功能。
 export QT_AUTO_SCREEN_SCALE_FACTOR=1
 
+# https://wiki.archlinux.org/title/HiDPI#Java_applications
 # GTK3
 # 要将UI缩放为两倍大小：
-export GDK_SCALE=2
+# export GDK_SCALE=2
 # 并同时不影响字体：
-export GDK_DPI_SCALE=0.5
+# export GDK_DPI_SCALE=0.5
+
+# https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
+export AWT_TOOLKIT=MToolkit

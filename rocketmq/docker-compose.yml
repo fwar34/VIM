@@ -1,0 +1,151 @@
+# 原文链接：https://blog.csdn.net/weixin_42410658/article/details/121668061
+
+# 容器名称	IP	与宿主机的端口映射
+# rmqnamesrv-a	rmqnamesrv-a	9876:9876
+# rmqnamesrv-b	rmqnamesrv-b	9876:9877
+# rmqbroker-a	rmqbroker-a	10911:10911
+# rmqbroker-a-s	rmqbroker-a-s	10911:10912
+# rmqbroker-b	rmqbroker-b	10911:10913
+# rmqbroker-b-s	rmqbroker-b-s	10911:10914
+# rmqconsole	rmqconsole	8080:8080
+# 容器内部通信使用自定义网络，IP别名和容器名一样
+
+version: '3.5'
+services:
+  rmqnamesrv-a:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqnamesrv-a
+    ports:
+      - 9876:9876
+    volumes:
+      - ./logs/nameserver-a:/root/logs
+      - ./store/nameserver-a:/root/store
+    command: sh mqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqnamesrv-a
+
+  rmqnamesrv-b:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqnamesrv-b
+    ports:
+      - 9877:9876
+    volumes:
+      - ./store/nameserver-b:/root/store
+      - ./logs/nameserver-b:/root/logs
+    command: sh mqnamesrv
+    networks:
+      rmq:
+        aliases:
+          - rmqnamesrv-b
+
+  rmqbroker-a:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqbroker-a
+    ports:
+      - 10911:10911
+    volumes:
+      - ./logs/broker-a:/root/logs
+      - ./store/broker-a:/root/store
+      - ./conf/broker-a.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rmqnamesrv-a:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - rmqnamesrv-a:rmqnamesrv-a
+      - rmqnamesrv-b:rmqnamesrv-b
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker-a
+
+  rmqbroker-a-s:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqbroker-a-s
+    ports:
+      - 10912:10911
+    volumes:
+      - ./logs/broker-a-s:/root/logs
+      - ./store/broker-a-s:/root/store
+      - ./conf/broker-a-s.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rmqnamesrv-a:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - rmqnamesrv-a:rmqnamesrv-a
+      - rmqnamesrv-b:rmqnamesrv-b
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker-a-s
+
+  rmqbroker-b:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqbroker-b
+    ports:
+      - 10913:10911
+    volumes:
+      - ./logs/broker-b:/root/logs
+      - ./store/broker-b:/root/store
+      - ./conf/broker-b.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rmqnamesrv-a:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - rmqnamesrv-a:rmqnamesrv-a
+      - rmqnamesrv-b:rmqnamesrv-b
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker-b
+
+  rmqbroker-b-s:
+    image: rocketmqinc/rocketmq:latest
+    container_name: rmqbroker-b-s
+    ports:
+      - 10914:10911
+    volumes:
+      - ./logs/broker-b-s:/root/logs
+      - ./store/broker-b-s:/root/store
+      - ./conf/broker-b-s.conf:/opt/rocketmq-4.4.0/conf/broker.conf
+    environment:
+      TZ: Asia/Shanghai
+      NAMESRV_ADDR: "rmqnamesrv-a:9876"
+      JAVA_OPTS: " -Duser.home=/opt"
+      JAVA_OPT_EXT: "-server -Xms128m -Xmx128m -Xmn128m"
+    command: sh mqbroker -c /opt/rocketmq-4.4.0/conf/broker.conf autoCreateTopicEnable=true &
+    links:
+      - rmqnamesrv-a:rmqnamesrv-a
+      - rmqnamesrv-b:rmqnamesrv-b
+    networks:
+      rmq:
+        aliases:
+          - rmqbroker-b-s
+
+  rmqconsole:
+    image: styletang/rocketmq-console-ng:latest
+    container_name: rmqconsole
+    ports:
+      - 8080:8080
+    environment:
+      JAVA_OPTS: -Drocketmq.namesrv.addr=rmqnamesrv-a:9876;rmqnamesrv-b:9877 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+    networks:
+      rmq:
+        aliases:
+          - rmqconsole
+
+# 自定义网络
+networks:
+  rmq:
+    name: rmq
+    driver: bridge

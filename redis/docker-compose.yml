@@ -1,0 +1,131 @@
+# 原文链接：https://blog.csdn.net/weixin_50236329/article/details/109771983
+# 注意：
+# Redis版本需要指定为redis 6 版本
+# 端口需要映射出来两个，一个是服务端口，另一个是集群总线端口，默认为服务端口 + 10000
+# 例如：redis端口为6379，则集群总线端口为16379
+# 所有服务器的点需要开通redis的客户端连接端口和集群总线端口，firewall上要开放集群服务端口和集群总线端口，如果有安全组，也要放开这两个端口
+#
+# redis集群官方提供了配置脚本，4.x和6.x略有不同，以下是以6.x为例；
+# 下边是我自己的环境
+# docker exec -it redis7001 redis-cli -p 7001 -a 123456 --cluster create 192.168.32.228:7001 192.168.32.228:7002 192.168.32.228:7003 192.168.32.228:7004 192.168.32.228:7005 192.168.32.228:7006 --cluster-replicas 1
+
+version: '3.7'
+
+services:
+  redis7001:
+    image: redis
+    container_name: redis7001
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7001/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7001/data:/data
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis7002:
+    image: redis
+    container_name: redis7002
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7002/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7002/data:/data
+    ports:
+      - "7002:7002"
+      - "17002:17002"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis7003:
+    image: redis
+    container_name: redis7003
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7003/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7003/data:/data
+    ports:
+      - "7003:7003"
+      - "17003:17003"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis7004:
+    image: redis
+    container_name: redis7004
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7004/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7004/data:/data
+    ports:
+      - "7004:7004"
+      - "17004:17004"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis7005:
+    image: redis
+    container_name: redis7005
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7005/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7005/data:/data
+    ports:
+      - "7005:7005"
+      - "17005:17005"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis7006:
+    image: redis
+    container_name: redis7006
+    command:
+      ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    volumes:
+      - ./7006/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./7006/data:/data
+    ports:
+      - "7006:7006"
+      - "17006:17006"
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+networks:
+  app_net:
+    external: true

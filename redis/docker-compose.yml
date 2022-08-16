@@ -30,6 +30,10 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7001
 
   redis7002:
     image: redis
@@ -49,6 +53,10 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7002
 
   redis7003:
     image: redis
@@ -68,6 +76,10 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7003
 
   redis7004:
     image: redis
@@ -87,6 +99,10 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7004
 
   redis7005:
     image: redis
@@ -106,6 +122,10 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7005
 
   redis7006:
     image: redis
@@ -125,7 +145,12 @@ services:
       options:
         max-size: '100m'
         max-file: '10'
+    networks:
+      redis:
+        aliases:
+          - redis7006
 
 networks:
-  app_net:
-    external: true
+  redis:
+    name: redis
+    driver: bridge

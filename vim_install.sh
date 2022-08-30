@@ -86,7 +86,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd python go unzip \
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim inetutils rustup ranger archlinux-keyring gvfs \
-         net-tools dnsutils inetutils iproute2
+         net-tools dnsutils inetutils iproute2 tcpdump
     # gui
     sudo pacman -S picom thunar feh rofi
     # vscode sync

@@ -371,7 +371,7 @@ sudo ln -sf $PWD/sddm.conf /etc/sddm.conf
 #ln -s ~/mine/VIM/agignore ~/.agignore
 
 cd ~/Downloads
-git clone git://github.com/joelthelion/autojump.git
+git clone https://github.com/joelthelion/autojump.git
 cd autojump
 ./install.py
 

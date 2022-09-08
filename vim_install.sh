@@ -77,20 +77,20 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
             echo "install ag failed!"
         fi
     else
-        sudo apt install silversearcher-ag
+        sudo apt install -y silversearcher-ag
     fi
-    sudo apt install curl wget build-essential zsh tmux libncurses5-dev \
-         python3-pip cmake autoconf pkg-config fzf ripgrep
+    sudo apt install -y curl wget build-essential zsh tmux libncurses5-dev \
+         python3-pip cmake autoconf pkg-config fzf ripgrep universal-ctags autojump golang
     # gui
-    sudo apt install thunar feh rofi
+    #sudo apt install thunar feh rofi
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
     sudo pacman -Sy base-devel curl wget zsh tmux fzf the_silver_searcher fd figlet ripgrep fd python go unzip \
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim inetutils rustup ranger archlinux-keyring gvfs \
-         net-tools dnsutils inetutils iproute2 tcpdump
+         net-tools dnsutils inetutils iproute2 tcpdump autojump
     # gui
-    sudo pacman -S picom thunar feh rofi
+    #sudo pacman -S picom thunar feh rofi
     # vscode sync
-    sudo pacman -S gnome-keyring libsecret libgnome-keyring
+    #sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi
 
 # trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ), and compatible with tmux.
@@ -295,7 +295,8 @@ then
     mv ~/.tmux.conf ~/.tmux.conf.bak
 fi
 # ln -s ~/mine/VIM/tmux.conf ~/.tmux.conf
-git clone --recursive https://github.com/fwar34/tmux-config.git ~/mine/tmux-config
+# git clone --recursive https://github.com/fwar34/tmux-config.git ~/mine/tmux-config
+git clone https://github.com/fwar34/tmux-config.git ~/mine/tmux-config
 cd ~/mine/tmux-config && ./install.sh
 
 if [[ -f ~/.zshrc ]]
@@ -371,9 +372,9 @@ sudo ln -sf $PWD/sddm.conf /etc/sddm.conf
 #ln -s ~/mine/VIM/agignore ~/.agignore
 
 cd ~/Downloads
-git clone https://github.com/joelthelion/autojump.git
-cd autojump
-./install.py
+# git clone https://github.com/joelthelion/autojump.git
+# cd autojump
+# ./install.py
 
 # linux mount windows disk
 # /dev/sdc1  /mnt/sdc1   ntfs-3g  users,uid=1000,gid=100,fmask=0113,dmask=0002,locale=zh_CN.utf8         0 0

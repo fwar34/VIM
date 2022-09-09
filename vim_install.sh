@@ -44,6 +44,11 @@ if [[ ! -d ~/mine/Other ]]; then
     git clone https://github.com/fwar34/Other.git ~/mine/Other
 fi
 
+if [[ ! -d ~/mine/Python ]]; then
+    git clone https://github.com/fwar34/Python.git ~/mine/Python
+fi
+ln -sf ~/mine/Python/parse_binary.py ~/bin/pb
+
 if [[ ! -d ~/.emacs.d ]]; then
     git clone https://github.com/fwar34/emacs.d.git ~/.emacs.d
     cd ~/.emacs.d/

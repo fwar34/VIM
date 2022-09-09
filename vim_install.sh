@@ -72,7 +72,6 @@ fi
 #if [[ "${os}" = 'MSYS' -o "${os}" = 'CYGWIN' ]]
 #if [[ "${os}" = 'MSYS' ]] || [[ "${os}" = 'CYGWIN' ]]
 if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary" ]]; then
-    sudo apt update
     VERSION_ID=$(cat /etc/os-release|grep VERSION_ID|awk -F= '{print $2}')
     if [[ ${VERSION_ID} == "14.04" ]] && [[ ${os} == "ubuntu" ]] && [[ ! -d ~/{DOWNLOADS_NAME}/ag ]]; then
         git clone https://github.com/ggreer/the_silver_searcher ~/${DOWNLOADS_NAME}/ag
@@ -82,7 +81,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
             echo "install ag failed!"
         fi
     else
-        sudo apt install -y silversearcher-ag
+        sudo apt update && apt install -y silversearcher-ag
     fi
     sudo apt install -y curl wget build-essential zsh tmux libncurses5-dev \
          python3-pip cmake autoconf pkg-config fzf ripgrep universal-ctags autojump golang

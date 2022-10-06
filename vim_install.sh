@@ -44,6 +44,11 @@ if [[ ! -d ~/mine/Other ]]; then
     git clone https://github.com/fwar34/Other.git ~/mine/Other
 fi
 
+if [[ ! -d ~/bin ]]; then
+    mkdir -p ~/bin
+fi
+ln -sf ~/mine/VIM/screenshot ~/bin/screenshot
+
 if [[ ! -d ~/mine/Python ]]; then
     git clone https://github.com/fwar34/Python.git ~/mine/Python
 fi
@@ -92,7 +97,7 @@ elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim inetutils rustup ranger archlinux-keyring gvfs \
          net-tools dnsutils inetutils iproute2 tcpdump autojump
     # gui
-    #sudo pacman -S picom thunar feh rofi
+    #sudo pacman -S picom thunar feh rofi scrot maim
     # vscode sync
     #sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi

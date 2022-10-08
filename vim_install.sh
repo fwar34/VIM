@@ -40,9 +40,9 @@ if [[ ! -d ~/mine/nvim.lua ]]; then
     git clone https://github.com/fwar34/nvim.lua.git ~/mine/nvim.lua
 fi
 
-if [[ ! -d ~/mine/Other ]]; then
-    git clone https://github.com/fwar34/Other.git ~/mine/Other
-fi
+#if [[ ! -d ~/mine/Other ]]; then
+#    git clone https://github.com/fwar34/Other.git ~/mine/Other
+#fi
 
 if [[ ! -d ~/bin ]]; then
     mkdir -p ~/bin
@@ -97,7 +97,7 @@ elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then
          thefuck global tig cmake universal-ctags bat tldr python-pip librime emacs neovim inetutils rustup ranger archlinux-keyring gvfs \
          net-tools dnsutils inetutils iproute2 tcpdump autojump
     # gui
-    #sudo pacman -S picom thunar feh rofi scrot maim
+    sudo pacman -S picom thunar feh rofi scrot maim slock xclip
     # vscode sync
     #sudo pacman -S gnome-keyring libsecret libgnome-keyring
 fi
@@ -176,7 +176,7 @@ function install_my_bin()
     #     fi
     # fi
 
-    ln -sf ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
+    #ln -sf ~/mine/Other/v2ray/foxy.sh ~/bin/foxy.sh
 
     #install manssh (or stormssh)
     #https://github.com/xwjdsh/manssh

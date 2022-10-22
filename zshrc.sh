@@ -215,7 +215,7 @@ elif [ -f '/usr/local/bin/ctags' ]; then
     alias ctags='/usr/local/bin/ctags'
 fi
 
-if [[ -f '/usr/bin/setxkbmap' ]] && [[ ${OS_NAME} != "Arch Linux" ]]
+if [[ -f '/usr/bin/setxkbmap' ]] && [[ ${XDG_SESSION_TYPE} == "x11" ]]
 then
 	setxkbmap -option ctrl:nocaps
 fi

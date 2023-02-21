@@ -18,10 +18,10 @@ LSP_SERVERS_PATH=$HOME/.local/share/nvim/lsp_servers
 LSP_SERVERS=$LSP_SERVERS_PATH/pylsp/venv/bin:$LSP_SERVERS_PATH/jedi_language_server/venv/bin
 LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/go
 LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/rust
-LSP_SERVERS=$HOME/bin/lua-language-server/bin
+LSP_SERVERS=$LSP_SERVERS:$HOME/bin/lua-language-server/bin
 
 export MYHOSTNAME=$(cat /etc/hostname)
-export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$LSP_SERVERS
+export PATH=$PATH:$HOME/bin:/usr/local/bin:/sbin:/usr/bin:/snap/bin:$HOME/.local/bin:$LSP_SERVERS
 
 
 #golang

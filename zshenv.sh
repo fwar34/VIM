@@ -10,6 +10,9 @@
 # set -g default-terminal "screen-256color"
 # }}}
 
+# deno
+export PATH=$PATH:$HOME/.deno/bin
+
 # rustup
 export PATH=$PATH:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin
 

@@ -206,6 +206,13 @@ else
     # export XMODIFIERS=@im=fcitx
     # export GLFW_IM_MODULE=ibus
 
+    # sudo pacman -S fcitx5-im 
+    # sudo pacman -S fcitx5-chinese-addons  fcitx5-rime
+    # 其中
+    # fcitx5-chinese-addons 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等
+    # fcitx5-rime 对经典的 Rime IME 输入法的包装，内置了繁体中文和简体中文的支持。
+    # 下来配置输入法
+    
     export GTK_IM_MODULE=fcitx
     export QT_IM_MODULE=fcitx
     export XMODIFIERS=@im=fcitx

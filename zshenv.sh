@@ -32,18 +32,20 @@ export GOPROXY=https://goproxy.cn
 
 if [ -d /usr/lib/jvm/java-11-openjdk-amd64 ];then
     export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+    export PATH=$PATH:$JAVA_HOME/bin
 elif [ -d /usr/lib/jvm/java-8-openjdk-amd64 ];then
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
     export JRE_HOME=${JAVA_HOME}/jre
     export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+    export PATH=$PATH:$JAVA_HOME/bin
 elif [ -d /usr/lib/jvm/java-8-openjdk ];then
     export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
     export JRE_HOME=${JAVA_HOME}/jre
     export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-else
-    export JAVA_HOME=$HOME/jdk-13.0.2
+    export PATH=$PATH:$JAVA_HOME/bin
+#else
+#    export JAVA_HOME=$HOME/jdk-13.0.2
 fi
-export PATH=$PATH:$JAVA_HOME/bin
 
 export MAVEN_HOME=/usr/share/maven
 export PATH=$PATH:$MAVEN_HOME/bin

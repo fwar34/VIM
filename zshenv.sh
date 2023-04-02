@@ -10,17 +10,22 @@
 # set -g default-terminal "screen-256color"
 # }}}
 
+# deno
+export PATH=$PATH:$HOME/.deno/bin
+
 # rustup
 export PATH=$PATH:$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin
 
 # lsp server path
-LSP_SERVERS_PATH=$HOME/.local/share/nvim/lsp_servers
-LSP_SERVERS=$LSP_SERVERS_PATH/pylsp/venv/bin:$LSP_SERVERS_PATH/jedi_language_server/venv/bin
-LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/go
-LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/rust
+# LSP_SERVERS_PATH=$HOME/.local/share/nvim/lsp_servers
+LSP_SERVERS=$HOME/.local/share/nvim/mason/bin
+# LSP_SERVERS=$LSP_SERVERS_PATH/pylsp/venv/bin:$LSP_SERVERS_PATH/jedi_language_server/venv/bin
+# LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/go
+# LSP_SERVERS=$LSP_SERVERS:$LSP_SERVERS_PATH/rust
+# LSP_SERVERS=$LSP_SERVERS:$HOME/bin/lua-language-server/bin
 
 export MYHOSTNAME=$(cat /etc/hostname)
-export PATH=$HOME/bin:/usr/local/bin:/sbin:/usr/bin:$PATH:/snap/bin:$HOME/.local/bin:$LSP_SERVERS
+export PATH=$PATH:$HOME/bin:/usr/local/bin:/sbin:/usr/bin:/snap/bin:$HOME/.local/bin:$LSP_SERVERS
 
 
 #golang
@@ -203,6 +208,13 @@ else
     # export XMODIFIERS=@im=fcitx
     # export GLFW_IM_MODULE=ibus
 
+    # sudo pacman -S fcitx5-im 
+    # sudo pacman -S fcitx5-chinese-addons  fcitx5-rime
+    # 其中
+    # fcitx5-chinese-addons 包含了大量中文输入方式：拼音、双拼、五笔拼音、自然码、仓颉、冰蟾全息、二笔等
+    # fcitx5-rime 对经典的 Rime IME 输入法的包装，内置了繁体中文和简体中文的支持。
+    # 下来配置输入法
+    
     export GTK_IM_MODULE=fcitx
     export QT_IM_MODULE=fcitx
     export XMODIFIERS=@im=fcitx
@@ -237,6 +249,9 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # export GDK_SCALE=2
 # 并同时不影响字体：
 # export GDK_DPI_SCALE=0.5
+
+# https://hkvim.com/post/windows-setup/
+# export GDK_SCALE=2
 
 # https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export AWT_TOOLKIT=MToolkit

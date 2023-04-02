@@ -93,9 +93,6 @@ if [[ $(uname -r|awk -F- '{print $2}') == "microsoft" ]]; then
         #export DOCKER_HOST=tcp://$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):2375
     fi
 
-    # https://hkvim.com/post/windows-setup/
-    export GDK_SCALE=2
-    
     # fix interop
     fix_wsl2_interop() {
         for i in $(pstree -np -s $$ | grep -o -E '[0-9]+'); do
@@ -215,7 +212,7 @@ elif [ -f '/usr/local/bin/ctags' ]; then
     alias ctags='/usr/local/bin/ctags'
 fi
 
-if [ -f '/usr/bin/setxkbmap' ]
+if [[ -f '/usr/bin/setxkbmap' ]] && [[ ${XDG_SESSION_TYPE} == "x11" ]]
 then
 	setxkbmap -option ctrl:nocaps
 fi

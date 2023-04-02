@@ -241,5 +241,8 @@ export QT_AUTO_SCREEN_SCALE_FACTOR=1
 # 并同时不影响字体：
 # export GDK_DPI_SCALE=0.5
 
+# https://hkvim.com/post/windows-setup/
+# export GDK_SCALE=2
+
 # https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export AWT_TOOLKIT=MToolkit

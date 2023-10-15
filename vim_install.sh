@@ -89,7 +89,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
         sudo apt update && apt install -y silversearcher-ag
     fi
     sudo apt install -y curl wget build-essential zsh tmux libncurses5-dev \
-         python3-pip cmake autoconf pkg-config fzf ripgrep universal-ctags autojump golang
+         python3-pip cmake autoconf pkg-config fzf ripgrep universal-ctags autojump golang lm-sensors
     # gui
     #sudo apt install thunar feh rofi
 elif [[ ${os} == 'ManjaroLinux' ]] || [[ ${os} == 'arch' ]]; then

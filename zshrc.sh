@@ -473,4 +473,4 @@ alias am="ampy --port /dev/ttyUSB0"
 export PYBOARD_DEVICE=/dev/ttyUSB0
 # }}}
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

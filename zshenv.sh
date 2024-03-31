@@ -67,7 +67,7 @@ export ROCKETMQ_HOME=$HOME/rocketMQ/rocketmq-all-4.6.1-bin-release
 # {{{
 # FZF 设置
 # https://www.jianshu.com/p/aeebaee1dd2b
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 exclude1='-E "node_modules" . -E ".svn" -E "debian" -E ".subversion" -E ".deps" -E "*.o" -E "*.lo" -E "doxygen-doc" -E ".local/share/containers" -E "*.pyc" -E "*.pyi"'
 exclude2='-E "*.a" -E "*.so" -E "*.class" -E "*.zip" -E "*.pyo" -E "*.iso" -E "*.swp" -E "*.obj" -E "*.exe" -E "*.pdb" -E "*.lib" -E "__pycache__"'

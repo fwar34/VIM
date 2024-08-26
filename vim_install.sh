@@ -88,7 +88,7 @@ if [[ ${os} == "ubuntu" ]] || [[ ${os} == "debian" ]] || [[ ${os} == "elementary
     else
         sudo apt update && apt install -y silversearcher-ag
     fi
-    sudo apt install -y curl wget build-essential zsh tmux libncurses5-dev lua5.3 libtool \
+    sudo apt install -y curl wget build-essential zsh tmux libncurses5-dev lua5.3 libtool libtool-bin \
          python3-pip cmake autoconf pkg-config fzf ripgrep universal-ctags autojump golang lm-sensors ranger
     # gui
     #sudo apt install thunar feh rofi
